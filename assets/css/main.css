@@ -1,0 +1,24 @@
+/* header */
+header {
+  height: 160px;
+  background-color: #3d8b91;
+}
+
+.navbar__wrapper {
+  display: flex;
+  justify-content: space-between;
+  
+}
+.navbar-list {
+  list-style: none;
+  padding-left: 0px;
+}
+.navbar-item {
+  display: inline-block;
+}
+.navbar-item__link {
+  text-decoration: none;
+  font-size: 1.5rem;
+  margin: 10px;
+  color: var(--white-color);
+}
