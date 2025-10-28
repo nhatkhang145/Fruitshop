@@ -1,0 +1,150 @@
+<!doctype html>
+<html lang="vi">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>FruitShop — Đăng nhập / Đăng ký</title>
+  <link rel="stylesheet" href="assets/css/auth.css"/>
+  <link rel="stylesheet" href="assets/css/main.css"/>
+</head>
+<body>
+    <header class="site-header">
+        <div class="container">
+        <div class="header-left">
+            <img src="./picture/logo.jpg" alt="FruitShop" class="site-logo" />
+        </div>
+        <div class="header-right">
+            <a href="mailto:support@fruitshop.vn" class="help-link">Bạn cần giúp đỡ?</a>
+        </div>
+        </div>
+    </header>
+    <main class="fm-auth">
+        <div class="fm-card">
+        <aside class="fm-left">
+            <div class="fm-logo">FruitShop</div>
+            <h2>Chào mừng đến với FruitShop</h2>
+            <p>Mua trái cây tươi sạch — giao tận nhà nhanh chóng.</p>
+            <div class="fm-illustration" aria-hidden="true"></div>
+        </aside>
+
+        <section class="fm-right">
+            <div class="fm-form-wrap">
+            <div class="fm-tabs" role="tablist" aria-label="Auth tabs">
+                <button id="tab-login" class="fm-tab active" role="tab" aria-selected="true" aria-controls="loginPanel">Đăng nhập</button>
+                <button id="tab-register" class="fm-tab" role="tab" aria-selected="false" aria-controls="registerPanel">Đăng ký</button>
+            </div>
+
+            <!-- LOGIN PANEL -->
+            <div id="loginPanel" class="fm-panel" role="tabpanel" aria-labelledby="tab-login">
+                <form id="loginForm" novalidate>
+                <label class="fm-label">Email
+                    <input id="email" name="email" type="email" required placeholder="Vui lòng nhập email của bạn" />
+                </label>
+
+                <label class="fm-label">Mật khẩu
+                    <input id="password" name="password" type="password" required minlength="6" placeholder="Vui lòng nhập mật khẩu" />
+                </label>
+
+                <div class="fm-row">
+                    <label class="fm-check"><input id="remember" type="checkbox" /> Ghi nhớ tôi</label>
+                    <a class="fm-link" href="#register">Quên mật khẩu?</a>
+                </div>
+
+                <button type="submit" class="fm-btn">Đăng nhập</button>
+
+                <div id="loginMessage" class="fm-message" role="status" aria-live="polite"></div>
+
+                <p class="fm-or">Bạn chưa có tài khoản? <a href="#register" id="gotoRegister">Tạo tài khoản</a></p>
+                </form>
+            </div>
+
+            <!-- REGISTER PANEL -->
+            <div id="registerPanel" class="fm-panel hidden" role="tabpanel" aria-labelledby="tab-register">
+                <form id="registerForm" novalidate>
+                <label class="fm-label">Họ và tên
+                    <input id="name" name="name" type="text" required placeholder="Họ và tên" />
+                </label>
+
+                <label class="fm-label">Email
+                    <input id="regEmail" name="email" type="email" required placeholder="Email" />
+                </label>
+
+                <label class="fm-label">Mật khẩu
+                    <input id="regPassword" name="password" type="password" required minlength="6" placeholder="Mật khẩu" />
+                </label>
+
+                <label class="fm-label">Xác nhận mật khẩu
+                    <input id="confirmPassword" name="confirmPassword" type="password" required placeholder="Xác nhận mật khẩu" />
+                </label>
+
+                <button type="submit" class="fm-btn">Tạo tài khoản</button>
+
+                <div id="registerMessage" class="fm-message" role="status" aria-live="polite"></div>
+
+                <p class="fm-or">Đã có tài khoản? <a href="#login" id="gotoLogin">Đăng nhập</a></p>
+                </form>
+            </div>
+
+            </div>
+        </section>
+        </div>
+    </main>
+    <footer class="footer">
+        <div class="footer-container">
+
+        <div class="footer-column">
+            <h3>Store Information</h3>
+            <p><strong>Address:</strong> 30/8, ấp Nam Thới, xã Thới Tam Thôn, TP.Hồ Chí Minh</p>
+            <p><strong>Call Us:</strong> 0919442994</p>
+            <p><strong>Email Us:</strong> support@company.com</p>
+            <div class="social-icons">
+            <a href="#"><i class="fab fa-facebook-f"></i></a>
+            <a href="#"><i class="fab fa-twitter"></i></a>
+            <a href="#"><i class="fab fa-linkedin-in"></i></a>
+            <a href="#"><i class="fab fa-pinterest"></i></a>
+            <a href="#"><i class="fab fa-instagram"></i></a>
+            </div>
+        </div>
+
+        <div class="footer-column">
+            <h3>Useful Links</h3>
+            <ul>
+            <li><a href="#">About Us</a></li>
+            <li><a href="#">Delivery Information</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms & Conditions</a></li>
+            <li><a href="#">Contact Us</a></li>
+            <li><a href="#">My Account</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Customer Care</h3>
+            <ul>
+            <li><a href="#">Brands</a></li>
+            <li><a href="#">Gift Certificates</a></li>
+            <li><a href="#">Specials</a></li>
+            <li><a href="#">Affiliate</a></li>
+            <li><a href="#">Newsletter</a></li>
+            <li><a href="#">Order History</a></li>
+            </ul>
+        </div>
+
+        <div class="footer-column">
+            <h3>Products</h3>
+            <ul>
+            <li><a href="#">My Account</a></li>
+            <li><a href="#">Order History</a></li>
+            <li><a href="#">Returns</a></li>
+            <li><a href="#">Affiliate</a></li>
+            <li><a href="#">Brands</a></li>
+            <li><a href="#">Site Map</a></li>
+            </ul>
+        </div>
+        </div>
+    </footer>
+
+    <script src="assets/js/tabs.js"></script>
+    <script src="assets/js/auth.js"></script>
+</body>
+</html>
