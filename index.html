@@ -8,31 +8,154 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
     <link rel="stylesheet" href="./assets/css/main.css" />
     <link rel="stylesheet" href="./assets/css/base.css" />
   </head>
   <body>
     <div class="main">
+      <!-- HEADER -->
       <header class="header">
-        <div class="grid">
-          <nav class="navbar">
-            <div class="navbar__wrapper">
+        <nav class="navbar">
+          <div class="navbar__wrapper">
+            <div class="navbar__content">
               <ul class="navbar-list">
-                <li class="navbar-item"><a href="" class="navbar-item__link">CSKH</a></li>
-                <li class="navbar-item"><a href="" class="navbar-item__link">Kết nối</a></li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">CSKH</a>
+                </li>
+                <li class="navbar-item">
+                  Kết nối
+                  <a href="" class="navbar-icon__link">
+                    <i class="navbar-icon fa-brands fa-facebook"></i>
+                  </a>
+                  <a href="" class="navbar-icon__link">
+                    <i class="navbar-icon fa-brands fa-instagram"></i>
+                  </a>
+                </li>
               </ul>
               <ul class="navbar-list">
-                <li class="navbar-item"><a href="" class="navbar-item__link">Thông báo</a></li>
-                <li class="navbar-item"><a href="" class="navbar-item__link">Hổ trợ</a></li>
-                <li class="navbar-item"><a href="" class="navbar-item__link">Đăng ký</a></li>
-                <li class="navbar-item"><a href="" class="navbar-item__link">Đăng nhập</a></li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">
+                    <span class="navbar-icon__link">
+                      <i class="navbar-icon fa-regular fa-bell"></i>
+                    </span>
+                    Thông báo
+                  </a>
+                </li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">
+                    <span class="navbar-icon__link">
+                      <i class="navbar-icon fa-regular fa-circle-question"></i>
+                    </span>
+                    Hổ trợ
+                  </a>
+                </li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">Đăng ký</a>
+                </li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">Đăng nhập</a>
+                </li>
               </ul>
             </div>
+          </div>
 
-            <div class="navbar__container"></div>
-          </nav>
-        </div>
+          <!--  navbar__menu -->
+          <div class="navbar__menu">
+            <div class="navbar__menu-inner">
+              <div class="navbar__menu-logo">
+                <a href="/">
+                  <img
+                    class="navbar__menu-logo-img"
+                    src="https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg"
+                    alt="Primary Logo"
+                  />
+                </a>
+              </div>
+
+              <div class="navbar__menu-search">
+                <form
+                  class="search-form"
+                  action="/shop.html"
+                  method="get"
+                  role="search"
+                >
+                  <select
+                    name="category"
+                    class="search-cat"
+                    aria-label="Category"
+                  >
+                    <option value="all">All Categories</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="vegetables">Vegetables</option>
+                  </select>
+                  <input
+                    name="q"
+                    class="search-input"
+                    type="search"
+                    placeholder="Search here..."
+                    aria-label="Search"
+                  />
+                  <button type="submit" class="search-btn" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </form>
+              </div>
+
+              <div class="navbar__menu-actions">
+                <a
+                  href="/account.html"
+                  class="icon-btn account-btn"
+                  title="My Account"
+                >
+                  <i class="fa-regular fa-user"></i>
+                  <span class="action-label">My Account</span>
+                </a>
+                <a href="/cart.html" class="icon-btn cart-btn" title="My Cart">
+                  <i class="fa-solid fa-basket-shopping"></i>
+                  <span class="action-label">My Cart</span>
+                  <span class="badge">0</span>
+                </a>
+              </div>
+            </div>
+            <!-- /.navbar__menu-inner -->
+          </div>
+
+          <!-- sub navigation (green bar) -->
+          <div class="navbar__subnav" aria-label="Primary navigation">
+            <div class="subnav__inner">
+              <button class="shop-cat-btn" aria-label="Shop By Category">
+                <i class="fa-solid fa-bars"></i>
+                <span>Shop By Category</span>
+                <i class="fa-solid fa-caret-down"></i>
+              </button>
+
+              <ul class="subnav-links">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Bài viết</a></li>
+                <li><a href="#">Ưu đãi</a></li>
+              
+              </ul>
+            </div>
+          </div>
+        </nav>
       </header>
+
+
+      <!-- CONTAINER -->
+      <div class="container">
+        
+      </div>
+
+
+
+      <!-- FOOTER -->
+      <footer class="footer">
+        
+=======
       <div class="container"></div>
       <footer class="footer">
             <div class="footer-container">
@@ -87,7 +210,9 @@
         </ul>
       </div>
     </div>
+>>>>>>> 8fe6efba48c7961da69128878a891303fe85c560
       </footer>
     </div>
+    <script src="./assets/js/main.js"></script>
   </body>
 </html>
