@@ -4,6 +4,15 @@
   --black-color: #000;
   --text-color: #333;
 }
+:root {
+  --topbar-height: 36px;
+  --menu-height: 96px;
+  --subnav-height: 56px;
+  --topbar-bg: #fafafa;
+  --menu-bg: #ffffff;
+  --subnav-bg: #3d8b91; 
+}
+
 * {
   box-sizing: inherit;
 }
