@@ -2,7 +2,9 @@
 :root {
   --white-color: #fff;
   --black-color: #000;
-  --text-color: #333;
+  --text-color: #6e6e6e;
+  --subnav-bg: #3d8b91; 
+  --primary-color: #3d8b91;
 }
 :root {
   --topbar-height: 36px;
@@ -10,7 +12,7 @@
   --subnav-height: 56px;
   --topbar-bg: #fafafa;
   --menu-bg: #ffffff;
-  --subnav-bg: #3d8b91; 
+ 
 }
 
 * {
