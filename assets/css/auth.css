@@ -18,7 +18,7 @@ body {
   font-family: "Segoe UI", Roboto, Arial, sans-serif;
   background: var(--bg);
   color: var(--text);
-  padding: 48px 20px;
+  padding: 0px 20px;
 }
 
 /* layout */
@@ -201,7 +201,7 @@ h1 {
   /* gap:16px; */
 }
 .site-logo {
-  height: 100px;
+  height: 50px;
   width: auto;
   display: block;
 }
