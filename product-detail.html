@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="vi">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>Chi tiết sản phẩm — FruitShop</title>
+    <!-- same head includes as index.html -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <!-- keep page-specific styles after the base files -->
+    <link rel="stylesheet" href="assets/css/shop.css" />
+    <link rel="stylesheet" href="assets/css/auth.css" />
+    <link rel="stylesheet" href="assets/css/product-detail.css" />
+  </head>
+  <body>
+    <div class="main">
+      <!-- HEADER -->
+      <header class="header">
+        <nav class="navbar">
+          <!--  navbar__wrapper -->
+          <div class="navbar__wrapper">
+            <div class="navbar__content">
+              <!--  navbar__list -->
+              <ul class="navbar-list">
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">CSKH</a>
+                </li>
+                <li class="navbar-item">
+                  Kết nối
+                  <a href="" class="navbar-icon__link">
+                    <i class="navbar-icon fa-brands fa-facebook"></i>
+                  </a>
+                  <a href="" class="navbar-icon__link">
+                    <i class="navbar-icon fa-brands fa-instagram"></i>
+                  </a>
+                </li>
+              </ul>
+              <ul class="navbar-list">
+                <li class="navbar-item navbar-item__notify--active">
+                  <a href="" class="navbar-item__link">
+                    <span class="navbar-icon__link">
+                      <i class="navbar-icon fa-regular fa-bell"></i>
+                    </span>
+                    Thông báo
+                  </a>
+                  <div class="navbar-item__notify">
+                    <header class="navbar-item__notify-header">
+                      <h3>Thông Báo Mới Nhận</h3>
+                    </header>
+                    <ul class="navbar-item__notify-list">
+                      <li class="navbar-item__notify-item">
+                        <a href="" class="navbar-item__notify-link">
+                          <img
+                            class="navbar-item__notify-img"
+                            src="./assets/images/chuối.jpg"
+                            alt="Notification"
+                          />
+                          <div class="navbar-item__notify-content">
+                            <span class="navbar-item__notify-name">
+                              Chuối xuất xứ từ Ecuador
+                            </span>
+                            <span class="navbar-item__notify-decoration"
+                              >ưu đãi giảm 20%</span
+                            >
+                          </div>
+                        </a>
+                      </li>
+                      <li
+                        class="navbar-item__notify-item navbar-item__notify-item--viewed"
+                      >
+                        <a href="" class="navbar-item__notify-link">
+                          <img
+                            class="navbar-item__notify-img"
+                            src="./assets/images/chuối.jpg"
+                            alt="Notification"
+                          />
+                          <div class="navbar-item__notify-content">
+                            <span class="navbar-item__notify-name">
+                              Chuối xuất xứ từ Ecuador
+                            </span>
+                            <span class="navbar-item__notify-decoration"
+                              >ưu đãi giảm 20%</span
+                            >
+                          </div>
+                        </a>
+                      </li>
+                      <li
+                        class="navbar-item__notify-item navbar-item__notify-item--viewed"
+                      >
+                        <a href="" class="navbar-item__notify-link">
+                          <img
+                            class="navbar-item__notify-img"
+                            src="./assets/images/chuối.jpg"
+                            alt="Notification"
+                          />
+                          <div class="navbar-item__notify-content">
+                            <span class="navbar-item__notify-name">
+                              Chuối xuất xứ từ Ecuador
+                            </span>
+                            <span class="navbar-item__notify-decoration"
+                              >ưu đãi giảm 20%</span
+                            >
+                          </div>
+                        </a>
+                      </li>
+                    </ul>
+                    <footer class="navbar-item__notify-footer">
+                      <a href="" class="navbar-item__notify-footer-btn"
+                        >Xem tất cả</a
+                      >
+                    </footer>
+                  </div>
+                </li>
+
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">
+                    <span class="navbar-icon__link">
+                      <i class="navbar-icon fa-regular fa-circle-question"></i>
+                    </span>
+                    Hổ trợ
+                  </a>
+                </li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">Đăng ký</a>
+                </li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">Đăng nhập</a>
+                </li>
+              </ul>
+            </div>
+          </div>
+
+          <!--  navbar__menu -->
+          <div class="navbar__menu">
+            <div class="navbar__menu-inner">
+              <!-- logo -->
+              <div class="navbar__menu-logo">
+                <a href="/">
+                  <img
+                    class="navbar__menu-logo-img"
+                    src="https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg"
+                    alt="Primary Logo"
+                  />
+                </a>
+              </div>
+              <!-- search -->
+              <div class="navbar__menu-search">
+                <form
+                  class="search-form"
+                  action="/shop.html"
+                  method="get"
+                  role="search"
+                >
+                  <select
+                    name="category"
+                    class="search-cat"
+                    aria-label="Category"
+                  >
+                    <option value="all">All Categories</option>
+                    <option value="fruits">Fruits</option>
+                    <option value="vegetables">Vegetables</option>
+                  </select>
+                  <input
+                    name="q"
+                    class="search-input"
+                    type="search"
+                    placeholder="Search here..."
+                    aria-label="Search"
+                  />
+                  <button type="submit" class="search-btn" aria-label="Search">
+                    <i class="fa-solid fa-magnifying-glass"></i>
+                  </button>
+                </form>
+              </div>
+              <!-- action -->
+              <div class="navbar__menu-actions">
+                <a
+                  href="/account.html"
+                  class="icon-btn account-btn"
+                  title="My Account"
+                >
+                  <i class="fa-regular fa-user"></i>
+                  <span class="action-label">My Account</span>
+                </a>
+                <a href="/cart.html" class="icon-btn cart-btn" title="My Cart">
+                  <i class="fa-solid fa-basket-shopping"></i>
+                  <span class="action-label">My Cart</span>
+                  <span class="badge">0</span>
+                </a>
+              </div>
+            </div>
+          </div>
+
+          <!-- sub navigation (green bar) -->
+          <div class="navbar__subnav" aria-label="Primary navigation">
+            <div class="subnav__inner">
+              <button class="shop-cat-btn" aria-label="Shop By Category">
+                <i class="fa-solid fa-bars"></i>
+                <span>Shop By Category</span>
+                <i class="fa-solid fa-caret-down"></i>
+              </button>
+
+              <ul class="subnav-links">
+                <li><a href="#">Trang chủ</a></li>
+                <li><a href="#">Bài viết</a></li>
+                <li><a href="#">Ưu đãi</a></li>
+              </ul>
+            </div>
+          </div>
+        </nav>
+      </header>
+    <!-- end header -->
+
+    <main class="main product-detail">
+      <div class="app__container">
+        <div class="grid">
+          <div class="grid__row">
+            <div class="product-detail__inner">
+              <!-- LEFT: gallery -->
+              <div class="product-gallery">
+                <div class="product-gallery__thumbs">
+                  <button class="thumb active" data-src="assets/images/apple.jpg">
+                    <img src="assets/images/apple.jpg" alt="thumb" />
+                  </button>
+                  <button class="thumb" data-src="assets/images/banana.jpg">
+                    <img src="assets/images/banana.jpg" alt="thumb" />
+                  </button>
+                  <button class="thumb" data-src="assets/images/grape.jpg">
+                    <img src="assets/images/grape.jpg" alt="thumb" />
+                  </button>
+                </div>
+
+                <div class="product-gallery__main">
+                  <img id="productMainImg" src="assets/images/apple.jpg" alt="Fruit image" />
+                </div>
+              </div>
+
+              <!-- RIGHT: product info -->
+              <div class="product-info">
+                <h1 class="product-title">Táo Fuji nhập khẩu</h1>
+                <p class="product-sku">Mã: FS-AP-001</p>
+                <div class="product-price">
+                  <span class="price-current">₫120,000</span>
+                  <span class="price-old">₫150,000</span>
+                </div>
+
+                <div class="product-meta">
+                  <label>Trọng lượng:</label>
+                  <select class="product-variant">
+                    <option>500g</option>
+                    <option>1kg</option>
+                    <option>2kg</option>
+                  </select>
+                </div>
+
+                <div class="product-qty-row">
+                  <label>Số lượng</label>
+                  <div class="qty">
+                    <button class="qty-decrease">-</button>
+                    <input type="number" min="1" value="1" class="qty-input" />
+                    <button class="qty-increase">+</button>
+                  </div>
+                </div>
+
+                <div class="product-actions">
+                  <button class="add-to-cart">Thêm vào giỏ</button>
+                  <button class="buy-now">Mua ngay</button>
+                </div>
+
+                <div class="product-short-desc">
+                  <p>Táo Fuji tuyển chọn, giòn, ngọt, nhập khẩu. Giao hàng trong ngày.</p>
+                </div>
+              </div>
+            </div>
+
+            <!-- tabs: description / reviews -->
+            <div class="product-detail__tabs">
+              <nav class="tabs">
+                <button class="tab-btn active" data-target="#desc">Mô tả</button>
+                <button class="tab-btn" data-target="#reviews">Đánh giá</button>
+              </nav>
+              <section id="desc" class="tab-panel active">
+                <h3>Mô tả sản phẩm</h3>
+                <p>
+                  Táo Fuji nhập khẩu, trồng theo tiêu chuẩn, tươi ngon. Thích hợp ăn trực
+                  tiếp và làm salad.
+                </p>
+              </section>
+              <section id="reviews" class="tab-panel">
+                <h3>Đánh giá khách hàng</h3>
+                <p>Chưa có đánh giá.</p>
+              </section>
+            </div>
+          </div>
+        </div>
+      </div>
+    </main>
+
+  <!-- footer reuse -->
+    <footer class="footer">
+      <div class="footer-container">
+        <div class="footer-column">
+          <h3>Store Information</h3>
+          <p><strong>Address:</strong> 30/8, ấp Nam Thới, xã Thới Tam Thôn, TP.HCM</p>
+        </div>
+        <div class="footer-column">
+          <h3>Links</h3>
+          <ul>
+            <li><a href="#">About</a></li>
+            <li><a href="#">Contact</a></li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+
+  </div>
+
+
+
+  <script>
+      // thumbnail click handler: swap main image
+      document.addEventListener('click', function (e) {
+        const t = e.target.closest('.thumb');
+        if (t) {
+          document.querySelectorAll('.thumb').forEach(b => b.classList.remove('active'));
+          t.classList.add('active');
+          const src = t.getAttribute('data-src');
+          const img = document.getElementById('productMainImg');
+          if (img && src) img.src = src;
+        }
+
+        if (e.target.matches('.tab-btn')) {
+          document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+          e.target.classList.add('active');
+          document.querySelectorAll('.tab-panel').forEach(p => p.classList.remove('active'));
+          const target = document.querySelector(e.target.getAttribute('data-target'));
+          if (target) target.classList.add('active');
+        }
+      });
+
+      // qty controls
+      document.addEventListener('click', function (e) {
+        if (e.target.matches('.qty-increase') || e.target.matches('.qty-decrease')) {
+          const wrap = e.target.closest('.qty');
+          const input = wrap.querySelector('.qty-input');
+          let val = parseInt(input.value || '1', 10);
+          if (e.target.matches('.qty-increase')) val++;
+          if (e.target.matches('.qty-decrease') && val > 1) val--;
+          input.value = val;
+        }
+      });
+    </script>
+  </body>
+</html>
