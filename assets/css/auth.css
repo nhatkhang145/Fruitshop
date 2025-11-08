@@ -66,12 +66,13 @@ body {
 .fm-illustration {
   height: 160px;
   border-radius: 8px;
-  background: radial-gradient(
-      circle at 10% 30%,
-      rgba(46, 164, 79, 0.08),
-      transparent 10%
-    ),
-    radial-gradient(circle at 80% 70%, rgba(34, 197, 94, 0.05), transparent 12%);
+  background-image: url('https://larafood24h.com/wp-content/uploads/2024/01/trai-cay-nhap-khau-theo-mua-1400x700.jpg');
+  background-size: cover;       
+  background-position: center;
+  background-repeat: no-repeat;
+
+  background-blend-mode: multiply;
+  background-color: rgba(0, 0, 0, 0.1);
 }
 
 /* tabs */
