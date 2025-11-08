@@ -1,0 +1,358 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Danh Mục Trái Cây</title>
+    <link rel="stylesheet" href="/assets/css/shop.css">
+    <link rel="stylesheet" href="./assets/css/base.css">
+    <link rel="stylesheet" href="./assets/css/main.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+</head>
+
+<body>
+    <div class="main">
+        <!-- HEADER -->
+        <header class="header">
+            <nav class="navbar">
+                <!--  navbar__wrapper -->
+                <div class="navbar__wrapper">
+                    <div class="navbar__content">
+                        <!--  navbar__list -->
+                        <ul class="navbar-list">
+                            <li class="navbar-item">
+                                <a href="" class="navbar-item__link">CSKH</a>
+                            </li>
+                            <li class="navbar-item">
+                                Kết nối
+                                <a href="" class="navbar-icon__link">
+                                    <i class="navbar-icon fa-brands fa-facebook"></i>
+                                </a>
+                                <a href="" class="navbar-icon__link">
+                                    <i class="navbar-icon fa-brands fa-instagram"></i>
+                                </a>
+                            </li>
+                        </ul>
+                        <ul class="navbar-list">
+                            <li class="navbar-item navbar-item__notify--active">
+                                <a href="" class="navbar-item__link">
+                                    <span class="navbar-icon__link">
+                                        <i class="navbar-icon fa-regular fa-bell"></i>
+                                    </span>
+                                    Thông báo
+                                </a>
+                                <div class="navbar-item__notify">
+                                    <header class="navbar-item__notify-header">
+                                        <h3>Thông Báo Mới Nhận</h3>
+                                    </header>
+                                    <ul class="navbar-item__notify-list">
+                                        <li class="navbar-item__notify-item">
+                                            <a href="" class="navbar-item__notify-link">
+                                                <img class="navbar-item__notify-img" src="./assets/images/chuối.jpg"
+                                                    alt="Notification" />
+                                                <div class="navbar-item__notify-content">
+                                                    <span class="navbar-item__notify-name">
+                                                        Chuối xuất xứ từ Ecuador
+                                                    </span>
+                                                    <span class="navbar-item__notify-decoration">ưu đãi giảm 20%</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="navbar-item__notify-item navbar-item__notify-item--viewed">
+                                            <a href="" class="navbar-item__notify-link">
+                                                <img class="navbar-item__notify-img" src="./assets/images/chuối.jpg"
+                                                    alt="Notification" />
+                                                <div class="navbar-item__notify-content">
+                                                    <span class="navbar-item__notify-name">
+                                                        Chuối xuất xứ từ Ecuador
+                                                    </span>
+                                                    <span class="navbar-item__notify-decoration">ưu đãi giảm 20%</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                        <li class="navbar-item__notify-item navbar-item__notify-item--viewed">
+                                            <a href="" class="navbar-item__notify-link">
+                                                <img class="navbar-item__notify-img" src="./assets/images/chuối.jpg"
+                                                    alt="Notification" />
+                                                <div class="navbar-item__notify-content">
+                                                    <span class="navbar-item__notify-name">
+                                                        Chuối xuất xứ từ Ecuador
+                                                    </span>
+                                                    <span class="navbar-item__notify-decoration">ưu đãi giảm 20%</span>
+                                                </div>
+                                            </a>
+                                        </li>
+                                    </ul>
+                                    <footer class="navbar-item__notify-footer">
+                                        <a href="" class="navbar-item__notify-footer-btn">Xem tất cả</a>
+                                    </footer>
+                                </div>
+                            </li>
+
+                            <li class="navbar-item">
+                                <a href="" class="navbar-item__link">
+                                    <span class="navbar-icon__link">
+                                        <i class="navbar-icon fa-regular fa-circle-question"></i>
+                                    </span>
+                                    Hổ trợ
+                                </a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="" class="navbar-item__link">Đăng ký</a>
+                            </li>
+                            <li class="navbar-item">
+                                <a href="" class="navbar-item__link">Đăng nhập</a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!--  navbar__menu -->
+                <div class="navbar__menu">
+                    <div class="navbar__menu-inner">
+                        <!-- logo -->
+                        <div class="navbar__menu-logo">
+                            <a href="/">
+                                <img class="navbar__menu-logo-img"
+                                    src="https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg"
+                                    alt="Primary Logo" />
+                            </a>
+                        </div>
+                        <!-- search -->
+                        <div class="navbar__menu-search">
+                            <form class="search-form" action="/shop.html" method="get" role="search">
+                                <select name="category" class="search-cat" aria-label="Category">
+                                    <option value="all">All Categories</option>
+                                    <option value="fruits">Fruits</option>
+                                    <option value="vegetables">Vegetables</option>
+                                </select>
+                                <input name="q" class="search-input" type="search" placeholder="Search here..."
+                                    aria-label="Search" />
+                                <button type="submit" class="search-btn" aria-label="Search">
+                                    <i class="fa-solid fa-magnifying-glass"></i>
+                                </button>
+                            </form>
+                        </div>
+                        <!-- action -->
+                        <div class="navbar__menu-actions">
+                            <a href="/account.html" class="icon-btn account-btn" title="My Account">
+                                <i class="fa-regular fa-user"></i>
+                                <span class="action-label">My Account</span>
+                            </a>
+                            <a href="/cart.html" class="icon-btn cart-btn" title="My Cart">
+                                <i class="fa-solid fa-basket-shopping"></i>
+                                <span class="action-label">My Cart</span>
+                                <span class="badge">0</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- sub navigation (green bar) -->
+                <div class="navbar__subnav" aria-label="Primary navigation">
+                    <div class="subnav__inner">
+                        <button class="shop-cat-btn" aria-label="Shop By Category">
+                            <i class="fa-solid fa-bars"></i>
+                            <span>Shop By Category</span>
+                            <i class="fa-solid fa-caret-down"></i>
+                        </button>
+
+                        <ul class="subnav-links">
+                            <li><a href="#">Trang chủ</a></li>
+                            <li><a href="#">Bài viết</a></li>
+                            <li><a href="#">Ưu đãi</a></li>
+                        </ul>
+                    </div>
+                </div>
+            </nav>
+        </header>
+
+        <!-- CONTAINER -->
+        <div class="app__container">
+            <div class="grid">
+                <div class="grid__row app__content">
+                    <!-- CỘT 2 -->
+                    <div class="grid__column-2">
+                        <nav class="category">
+                            <h3 class="category_heading">
+                                <i class="category__heading-icon fas fa-list"></i>
+                                Danh Mục
+                            </h3>
+                            <ul class="category-list">
+                                <li class="category-item">
+                                    <details open>
+                                        <summary>Trái Cây Tươi</summary>
+                                        <ul class="subcategory-list">
+                                            <li><a href="#">Táo</a></li>
+                                            <li><a href="#">Cam</a></li>
+                                            <li><a href="#">Chuối</a></li>
+                                            <li><a href="#">Dưa Hấu</a></li>
+                                        </ul>
+                                    </details>
+                                </li>
+
+                                <li class="category-item">
+                                    <details>
+                                        <summary>Trái Cây Nhập Khẩu</summary>
+                                        <ul class="subcategory-list">
+                                            <li><a href="#">Nho Mỹ</a></li>
+                                            <li><a href="#">Kiwi New Zealand</a></li>
+                                            <li><a href="#">Lê Hàn Quốc</a></li>
+                                        </ul>
+                                    </details>
+                                </li>
+
+                                <li class="category-item">
+                                    <details>
+                                        <summary>Trái Cây Theo Mùa</summary>
+                                        <ul class="subcategory-list">
+                                            <li><a href="#">Xoài</a></li>
+                                            <li><a href="#">Mít</a></li>
+                                            <li><a href="#">Sầu Riêng</a></li>
+                                            <li><a href="#">Chôm Chôm</a></li>
+                                        </ul>
+                                    </details>
+                                </li>
+
+                                <li class="category-item">
+                                    <details>
+                                        <summary>Combo Trái Cây</summary>
+                                        <ul class="subcategory-list">
+                                            <li><a href="#">Hộp Quà Trái Cây</a></li>
+                                            <li><a href="#">Combo Gia Đình</a></li>
+                                            <li><a href="#">Combo Văn Phòng</a></li>
+                                        </ul>
+                                    </details>
+                                </li>
+                            </ul>
+                        </nav>
+
+                        <!-- BỘ LỌC -->
+                        <nav class="filter">
+                            <h3 class="category_heading">
+                                <i class="fa-solid fa-filter"></i>
+                                Bộ Lọc Tìm Kiếm
+                            </h3>
+                            <ul class="category-list">
+                                <li class="category-item">
+                                    <details open>
+                                        <summary>Quốc Gia</summary>
+                                        <ul class="subcategory-list">
+                                            <li><a href="#">Mỹ</a></li>
+                                            <li><a href="#">Úc</a></li>
+                                            <li><a href="#">Hàn Quốc</a></li>
+                                            <li><a href="#">New Zealand</a></li>
+                                        </ul>
+                                    </details>
+                                </li>
+
+                                <li class="category-item">
+                                    <details>
+                                        <summary>Mức giá</summary>
+                                        <ul class="subcategory-list">
+                                            <li><a href="#">Dưới 200.000đ/kg</a></li>
+                                            <li><a href="#">200.000đ - 500.000đ/kg</a></li>
+                                            <li><a href="#">500.000đ - 1.000.000đ/kg</a></li>
+                                            <li><a href="#">Trên 1.000.000đ/kg</a></li>
+                                        </ul>
+                                    </details>
+                                </li>
+                            </ul>
+                        </nav>
+                    </div>
+                    <!-- KẾT THÚC CỘT 2 -->
+
+                    <!-- CỘT 10 -->
+                    <div class="grid__column-10">
+                        <div class="sort-filter">
+                            <span class="sort-filter__label">Sắp xếp theo </span>
+                            <button class="sort-filter__btn btn">Phổ biến</button>
+                            <button class="sort-filter__btn btn btn--primary">Mới nhất</button>
+                            <button class="sort-filter__btn btn">Bán chạy</button>
+
+                            <div class="select-cost">
+                                <span class="select-cost__label">Giá</span>
+                                <i class="select-cost__icon fa-solid fa-arrow-down"></i>
+
+                                <ul class="select-cost__list">
+                                    <li class="select-cost__item">
+                                        <a href="" class="select-cost__link">Giá: từ thấp đến cao</a>
+                                    </li>
+                                    <li class="select-cost__item">
+                                        <a href="" class="select-cost__link">Giá: từ cao đến thấp</a>
+                                    </li>
+                                </ul>
+                            </div>
+
+                            <div class="sort-filter__page">
+                                <span class="sort-filter__page-num"></span>
+                                <span class="sort-filter__page-current">1</span>
+                                <span class="sort-filter__page-total">/14
+                                </span>
+
+                                <div class="sort-filter__page-control">
+                                    <a href="" class="sort-filter__page-btn sort-filter__page-btn--disabled">
+                                        <i class="sort-filter__page-icon fa-solid fa-arrow-left"></i>
+                                    </a>
+                                    <a href="" class="sort-filter__page-btn">
+                                        <i class="sort-filter__page-icon fa-solid fa-arrow-right"></i>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="home-product">
+                            <div class="grid__row">
+                                <div class="grid__column-2">
+                                    <!-- Product Item -->
+                                    <div class="home-product-item">
+                                        <div class="home-product-item__img"
+                                            style="background-image: url(https://splashythemes.com/opencart/OPC02/OPC020099/image/cache/catalog/demo/product/19-277x266.jpg);">
+                                        </div>
+                                        <h4 class="home-product-item__name">Cam New Zealand</h4>
+                                        <div class="home-product-item__price">
+                                            <span class="home-product-item__price-old">200.000đ</span>
+                                            <span class="home-product-item__price-current">150.000đ</span>
+                                        </div>
+                                        <div class="home-product-item__action">
+                                            <span class="home-product-item__like home-product-item__like--liked">
+                                                <i class="home-product-item__like-icon-empty far fa-heart"></i>
+                                                <i class="home-product-item__like-icon-fill fas fa-heart"></i>
+                                            </span>
+                                            <div class="home-product-item__rating">
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="home-product-item__star--gold fas fa-star"></i>
+                                                <i class="fas fa-star"></i>
+                                            </div>
+                                        </div>
+                                        <div class="home-product-item__origin">
+                                            <span class="home-product-item__brand">NewFarm</span>
+                                            <span class="home-product-item__origin-name">New Zealand</span>
+                                        </div>
+                                        <div class="home-product-item__favourite">
+                                            <i class="fas fa-check"></i>
+                                            <span>Yêu thích</span>
+                                        </div>
+                                        <div class="home-product-item__sale-off">
+                                            <span class="home-product-item__sale-off-percent">25%</span>
+                                            <span class="home-product-item__sale-off-label">GIẢM</span>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <!-- KẾT THÚC CỘT 10 -->
+                        </div>
+                    </div>
+                </div>
+
+                <script src="./assets/js/main.js"></script>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>

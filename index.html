@@ -124,10 +124,10 @@
                   </a>
                 </li>
                 <li class="navbar-item">
-                  <a href="" class="navbar-item__link">Đăng ký</a>
+                  <a href="register.html" class="navbar-item__link">Đăng ký</a>
                 </li>
                 <li class="navbar-item">
-                  <a href="" class="navbar-item__link">Đăng nhập</a>
+                  <a href="login.html" class="navbar-item__link">Đăng nhập</a>
                 </li>
               </ul>
             </div>
@@ -141,7 +141,7 @@
                 <a href="/">
                   <img
                     class="navbar__menu-logo-img"
-                    src="https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg"
+                    src="./assets/images/logo.jpg"
                     alt="Primary Logo"
                   />
                 </a>
@@ -212,9 +212,325 @@
           </div>
         </nav>
       </header>
-
       <!-- CONTAINER -->
-      <div class="container"></div>
+      <div id="slide">
+        <div class="slide-container">
+          <div class="slide-wrapper">
+            <!-- Slide 1 -->
+            <div class="slide-item">
+              <img
+                src="https://images.unsplash.com/photo-1506905925346-21bda4d32df4?w=900&h=500&fit=crop"
+                alt="Mountain Landscape"
+              />
+              <div class="slide-caption">
+                <h2>Vẻ Đẹp Thiên Nhiên</h2>
+                <p>Khám phá những cảnh quan núi non hùng vĩ</p>
+              </div>
+            </div>
+
+            <!-- Slide 2 -->
+            <div class="slide-item">
+              <img
+                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&h=500&fit=crop"
+                alt="Beach Paradise"
+              />
+              <div class="slide-caption">
+                <h2>Bãi Biển Nhiệt Đới</h2>
+                <p>Thư giãn bên bờ biển xanh ngắt</p>
+              </div>
+            </div>
+
+            <!-- Slide 3 -->
+            <div class="slide-item">
+              <img
+                src="https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=900&h=500&fit=crop"
+                alt="City Lights"
+              />
+              <div class="slide-caption">
+                <h2>Thành Phố Về Đêm</h2>
+                <p>Ánh đèn lung linh của đô thị hiện đại</p>
+              </div>
+            </div>
+
+            <!-- Slide 4 -->
+            <div class="slide-item">
+              <img
+                src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&h=500&fit=crop"
+                alt="Forest Path"
+              />
+              <div class="slide-caption">
+                <h2>Rừng Xanh Mát</h2>
+                <p>Con đường giữa thiên nhiên hoang dã</p>
+              </div>
+            </div>
+
+            <!-- Slide 5 -->
+            <div class="slide-item">
+              <img
+                src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=900&h=500&fit=crop"
+                alt="Sunset View"
+              />
+              <div class="slide-caption">
+                <h2>Hoàng Hôn Tuyệt Đẹp</h2>
+                <p>Khoảnh khắc kỳ diệu cuối ngày</p>
+              </div>
+            </div>
+          </div>
+
+          <!-- Nút Previous -->
+          <button class="nav-button prev-button" onclick="prevSlide()">
+            &#10094;
+          </button>
+
+          <!-- Nút Next -->
+          <button class="nav-button next-button" onclick="nextSlide()">
+            &#10095;
+          </button>
+
+          <!-- Chỉ báo dots -->
+          <div class="slide-indicators">
+            <span class="indicator-dot active" onclick="goToSlide(0)"></span>
+            <span class="indicator-dot" onclick="goToSlide(1)"></span>
+            <span class="indicator-dot" onclick="goToSlide(2)"></span>
+            <span class="indicator-dot" onclick="goToSlide(3)"></span>
+            <span class="indicator-dot" onclick="goToSlide(4)"></span>
+          </div>
+        </div>
+      </div>
+      <section id="main">
+        <section id="content">
+          <section id="top-offers">
+            <div class="container">
+              <div class="section-header">
+                <h2>Top Offers This Week</h2>
+                <div class="header-icons">
+                  <button class="home-icon">
+                    <i class="fas fa-home"></i>
+                  </button>
+                </div>
+              </div>
+
+              <div class="offers-carousel">
+                <button class="arrow prev" aria-label="Previous products">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="arrow next" aria-label="Next products">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+                <div class="carousel-container">
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                        alt="Pomegranate"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <button class="action-btn" title="Add to Wishlist">
+                          <i class="far fa-heart"></i>
+                        </button>
+                        <button class="action-btn" title="Quick View">
+                          <i class="far fa-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Add to Cart">
+                          <i class="fas fa-shopping-basket"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Fruits</div>
+                      <h3>Pomegranate</h3>
+                      <div class="price">
+                        <span class="current">$3.99/Kg</span>
+                        <span class="original">$7.99/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
+                        alt="Pomegranate"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <button class="action-btn" title="Add to Wishlist">
+                          <i class="far fa-heart"></i>
+                        </button>
+                        <button class="action-btn" title="Quick View">
+                          <i class="far fa-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Add to Cart">
+                          <i class="fas fa-shopping-basket"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Fruits</div>
+                      <h3>Pomegranate</h3>
+                      <div class="price">
+                        <span class="current">$2.99/Kg</span>
+                        <span class="original">$7.99/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                        alt="Pomegranate"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <button class="action-btn" title="Add to Wishlist">
+                          <i class="far fa-heart"></i>
+                        </button>
+                        <button class="action-btn" title="Quick View">
+                          <i class="far fa-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Add to Cart">
+                          <i class="fas fa-shopping-basket"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Fruits</div>
+                      <h3>Pomegranate</h3>
+                      <div class="price">
+                        <span class="current">$1.99/Kg</span>
+                        <span class="original">$7.99/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
+                        alt="Pomegranate"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <button class="action-btn" title="Add to Wishlist">
+                          <i class="far fa-heart"></i>
+                        </button>
+                        <button class="action-btn" title="Quick View">
+                          <i class="far fa-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Add to Cart">
+                          <i class="fas fa-shopping-basket"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Fruits</div>
+                      <h3>Pomegranate</h3>
+                      <div class="price">
+                        <span class="current">$5.99/Kg</span>
+                        <span class="original">$7.99/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                        alt="Pomegranate"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <button class="action-btn" title="Add to Wishlist">
+                          <i class="far fa-heart"></i>
+                        </button>
+                        <button class="action-btn" title="Quick View">
+                          <i class="far fa-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Add to Cart">
+                          <i class="fas fa-shopping-basket"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Fruits</div>
+                      <h3>Pomegranate</h3>
+                      <div class="price">
+                        <span class="current">$6.99/Kg</span>
+                        <span class="original">$7.99/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
+                        alt="Pomegranate"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <button class="action-btn" title="Add to Wishlist">
+                          <i class="far fa-heart"></i>
+                        </button>
+                        <button class="action-btn" title="Quick View">
+                          <i class="far fa-eye"></i>
+                        </button>
+                        <button class="action-btn" title="Add to Cart">
+                          <i class="fas fa-shopping-basket"></i>
+                        </button>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Fruits</div>
+                      <h3>Pomegranate</h3>
+                      <div class="price">
+                        <span class="current">$6.99/Kg</span>
+                        <span class="original">$7.99/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+
+          <section id=" weekend-deals">
+            <div class="container">
+              <h2>Weekend-deals</h2>
+              <p class="urgent">Hurry up!!! Limited time offer</p>
+              <div class="deal-list">
+                <button class="arrow prev" aria-label="Previous products">
+                  <i class="fas fa-chevron-left"></i>
+                </button>
+                <button class="arrow next" aria-label="Next products">
+                  <i class="fas fa-chevron-right"></i>
+                </button>
+                <!-- Mỗi sản phẩm là một khối deal-item -->
+                <div class="deal-item">
+                  <div class="countdown">
+                    <span>312 Days</span>
+                    <span>23 Hours</span>
+                    <span>29 Mins</span>
+                    <span>45 Secs</span>
+                  </div>
+                  <div class="deal-item__container-left">
+                    <h2>tên sản phẩm</h2>
+                    <h3 class="product-name">Fresh Watermelon</h3>
+                    <p class="product-description">
+                      Lorem ipsum dolor sit amet...
+                    </p>
+                    <p class="product-price">$19.00</p>
+                    <a href="#" class="shop-now">Shop Now</a>
+                  </div>
+                  <div class="deal-item__container-right">
+                    <img
+                      src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                      alt="Fresh Watermelon"
+                    />
+                  </div>
+                </div>
+              </div>
+            </div>
+          </section>
+        </section>
+      </section>
 
       <!-- FOOTER -->
       <footer class="footer">
@@ -227,7 +543,6 @@
             </p>
             <p><strong>Call Us:</strong> 0919442994</p>
             <p><strong>Email Us:</strong></p>
-
             <div class="social-icons">
               <a href="#"><i class="fab fa-facebook-f"></i></a>
               <a href="#"><i class="fab fa-twitter"></i></a>
@@ -276,5 +591,6 @@
       </footer>
     </div>
     <script src="./assets/js/main.js"></script>
+    <script src="./assets/js/offers.js"></script>
   </body>
 </html>
