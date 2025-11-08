@@ -317,12 +317,15 @@ body.subnav-hidden .navbar__menu {
 }
 
 .footer-container {
-  display: inline-flex;
+  display: flex;
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
   box-sizing: border-box;
   position: relative;
+  width: 100%;
+  padding: 0 20px;
+  font-size: 14px;
 }
 
 .footer-column h3 {
