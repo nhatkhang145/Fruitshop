@@ -1,7 +1,3 @@
-:root {
-    /* approximate footer height so page content doesn't get hidden behind fixed footer */
-    --footer-height: 220px;
-}
 
 .grid__row {
     display: flex;

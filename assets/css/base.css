@@ -8,15 +8,24 @@
 }
 :root {
   --topbar-height: 36px;
-  --menu-height: 96px;
+  --menu-height: 75px;
   --subnav-height: 56px;
   --topbar-bg: #fafafa;
   --menu-bg: #ffffff;
 }
+:root {
+  --bg: #ffffff;
+  --accent: #2ea44f;
+  --muted: #6b7280;
+  --text: #0f1722;
+  --input: #f3f3f3;
+}
 
 * {
   box-sizing: inherit;
+  
 }
+
 html {
   font-size: 62.5%; /* 10px */
   line-height: 1.6rem;
