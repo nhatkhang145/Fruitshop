@@ -1,192 +1,431 @@
-<div class="min-h-screen flex items-center justify-center bg-gray-100 p-4">
-  <footer class="bg-gradient-to-br from-indigo-50 via-blue-50 to-sky-50 relative overflow-hidden">
-    <!-- Animated Background Shapes -->
-    <div class="absolute inset-0 opacity-10">
-      <div
-        class="absolute top-0 left-0 w-72 h-72 bg-gradient-to-r from-sky-400 to-blue-400 rounded-full mix-blend-multiply filter blur-xl animate-blob">
-      </div>
-      <div
-        class="absolute top-0 right-0 w-72 h-72 bg-gradient-to-r from-indigo-400 to-cyan-400 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-2000">
-      </div>
-      <div
-        class="absolute bottom-0 left-1/2 w-72 h-72 bg-gradient-to-r from-teal-400 to-emerald-400 rounded-full mix-blend-multiply filter blur-xl animate-blob animation-delay-4000">
-      </div>
-    </div>
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giới thiệu</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/gioi_thieu.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar__wrapper">
+          <div class="navbar__content">
+            <ul class="navbar-list">
+              <li class="navbar-item navbar-item--no-click">
+                Kết nối :
+                <a href="#" class="navbar-icon__link">
+                  <i class="navbar-icon fa-brands fa-facebook"></i>
+                </a>
+                <a href="#" class="navbar-icon__link">
+                  <i class="navbar-icon fa-brands fa-instagram"></i>
+                </a>
+              </li>
+            </ul>
+            <ul class="navbar-list">
+              <li class="navbar-item navbar-item__notify--active">
+                <a href="#" class="navbar-item__link">
+                  <span class="navbar-icon__link">
+                    <i class="navbar-icon fa-regular fa-bell"></i>
+                  </span>
+                  Thông báo
+                </a>
+                <div class="navbar-item__notify">
+                  <header class="navbar-item__notify-header">
+                    <h3>Thông Báo Mới Nhận</h3>
+                  </header>
+                  <ul class="navbar-item__notify-list">
+                    <li class="navbar-item__notify-item">
+                      <a href="" class="navbar-item__notify-link">
+                        <img
+                          class="navbar-item__notify-img"
+                          src="./assets/images/chuối.jpg"
+                          alt="Notification"
+                        />
+                        <div class="navbar-item__notify-content">
+                          <span class="navbar-item__notify-name">
+                            Chuối xuất xứ từ Ecuador
+                          </span>
+                          <span class="navbar-item__notify-decoration"
+                            >ưu đãi giảm 20%</span
+                          >
+                        </div>
+                      </a>
+                    </li>
+                    <li
+                      class="navbar-item__notify-item navbar-item__notify-item--viewed"
+                    >
+                      <a href="" class="navbar-item__notify-link">
+                        <img
+                          class="navbar-item__notify-img"
+                          src="./assets/images/chuối.jpg"
+                          alt="Notification"
+                        />
+                        <div class="navbar-item__notify-content">
+                          <span class="navbar-item__notify-name">
+                            Chuối xuất xứ từ Ecuador
+                          </span>
+                          <span class="navbar-item__notify-decoration"
+                            >ưu đãi giảm 20%</span
+                          >
+                        </div>
+                      </a>
+                    </li>
+                    <li
+                      class="navbar-item__notify-item navbar-item__notify-item--viewed"
+                    >
+                      <a href="" class="navbar-item__notify-link">
+                        <img
+                          class="navbar-item__notify-img"
+                          src="./assets/images/chuối.jpg"
+                          alt="Notification"
+                        />
+                        <div class="navbar-item__notify-content">
+                          <span class="navbar-item__notify-name">
+                            Chuối xuất xứ từ Ecuador
+                          </span>
+                          <span class="navbar-item__notify-decoration"
+                            >ưu đãi giảm 20%</span
+                          >
+                        </div>
+                      </a>
+                    </li>
+                  </ul>
+                  <footer class="navbar-item__notify-footer">
+                    <a href="" class="navbar-item__notify-footer-btn"
+                      >Xem tất cả</a
+                    >
+                  </footer>
+                </div>
+              </li>
+              <li class="navbar-item">
+                <a href="#" class="navbar-item__link">
+                  <span class="navbar-icon__link">
+                    <i class="navbar-icon fa-regular fa-circle-question"></i>
+                  </span>
+                  Hỗ trợ
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
 
-    <!-- Main Footer Content -->
-    <div class="max-w-7xl mx-auto px-4 sm:px-10 py-16 relative">
-      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8 xl:gap-12">
-        <!-- Company Info -->
-        <div class="space-y-6">
-          <div class="flex items-center space-x-3">
-            <div
-              class="w-12 h-12 bg-gradient-to-tr from-violet-600 to-indigo-600 rounded-xl flex items-center justify-center transform rotate-6 hover:rotate-0 transition-transform duration-300">
-              <span class="text-white text-2xl font-bold">T</span>
+        <div class="navbar__menu">
+          <div class="navbar__menu-inner">
+            <div class="navbar__menu-logo">
+              <a href="/">
+                <img
+                  class="navbar__menu-logo-img"
+                  src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                  alt="Organic Harvest Logo"
+                />
+              </a>
             </div>
-            <h3
-              class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 text-2xl font-bold">
-              Company</h3>
+
+            <ul class="main-nav-links subnav-links">
+              <li><a href="#">Trang chủ</a></li>
+              <li><a href="#">Sản Phẩm</a></li>
+              <li><a href="#">Giới thiệu</a></li>
+              <li><a href="#">Bài viết</a></li>
+              <li><a href="#">Liên hệ</a></li>
+            </ul>
+
+            <div class="navbar__menu-search">
+              <form
+                class="search-form"
+                action="/shop.html"
+                method="get"
+                role="search"
+              >
+                <select
+                  name="category"
+                  class="search-cat"
+                  aria-label="Category"
+                >
+                  <option value="all">Danh mục</option>
+                  <option value="fruits">Fruits</option>
+                  <option value="vegetables">Vegetables</option>
+                </select>
+                <input
+                  name="q"
+                  class="search-input"
+                  type="search"
+                  placeholder="Tìm kiếm sản phẩm..."
+                  aria-label="Search"
+                />
+                <button type="submit" class="search-btn" aria-label="Search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
+            </div>
+
+            <div class="navbar__menu-actions">
+              <a
+                href="/account.html"
+                class="icon-btn account-btn"
+                title="Tài khoản"
+              >
+                <i class="fa-regular fa-user"></i>
+              </a>
+              <a
+                href="/wishlist.html"
+                class="icon-btn wishlist-btn"
+                title="Yêu thích"
+              >
+                <i class="fa-solid fa-heart"></i>
+                <span class="badge">3</span>
+              </a>
+              <a href="/cart.html" class="icon-btn cart-btn" title="Giỏ hàng">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span class="badge">2</span>
+              </a>
+            </div>
           </div>
-          <p class="text-gray-600">Crafting digital experiences that inspire and innovate.</p>
-          <div class="flex space-x-4">
-            <a href="https://www.themedevhub.com" target="_blank"
-              class="transform hover:scale-110 transition-all duration-300">
-              <div
-                class="w-10 h-10 bg-gradient-to-tr from-violet-500 to-fuchsia-500 rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-violet-200">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+        </div>
+
+        <div
+          class="navbar__subnav"
+          aria-label="Primary navigation"
+          style="display: none"
+        ></div>
+      </nav>
+    </header>
+    <!-- CONTAINER -->
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="footer__main">
+        <div class="footer__grid">
+          <!-- Company Info -->
+          <div class="footer__company">
+            <div class="footer__brand">
+              <a href="/">
+                <img
+                  class="navbar__menu-logo-img"
+                  src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                  alt="Organic Harvest Logo"
+                />
+              </a>
+              <!-- <div class="footer__logo">T</div>
+                <h3 class="footer__company-name">Company</h3> -->
+            </div>
+            <p class="footer__description">
+              Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
+            </p>
+            <div class="footer__social">
+              <a
+                href="https://www.themedevhub.com"
+                target="_blank"
+                class="footer__social-link footer__social-link--facebook"
+              >
+                <svg class="footer__social-icon" viewBox="0 0 24 24">
                   <path
-                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                  />
                 </svg>
-              </div>
-            </a>
-            <a href="https://www.themedevhub.com" target="_blank"
-              class="transform hover:scale-110 transition-all duration-300">
-              <div
-                class="w-10 h-10 bg-gradient-to-tr from-teal-500 to-emerald-500 rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-teal-200">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+              </a>
+              <a
+                href="https://www.themedevhub.com"
+                target="_blank"
+                class="footer__social-link footer__social-link--twitter"
+              >
+                <svg class="footer__social-icon" viewBox="0 0 24 24">
                   <path
-                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                  />
                 </svg>
-              </div>
-            </a>
-            <a href="https://www.themedevhub.com" target="_blank"
-              class="transform hover:scale-110 transition-all duration-300">
-              <div
-                class="w-10 h-10 bg-gradient-to-tr from-purple-500 to-rose-500 rounded-lg flex items-center justify-center hover:shadow-lg hover:shadow-purple-200">
-                <svg class="w-5 h-5 text-white" fill="currentColor" viewBox="0 0 24 24">
+              </a>
+              <a
+                href="https://www.themedevhub.com"
+                target="_blank"
+                class="footer__social-link footer__social-link--telegram"
+              >
+                <svg class="footer__social-icon" viewBox="0 0 24 24">
                   <path
-                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z" />
+                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z"
+                  />
                 </svg>
-              </div>
-            </a>
+              </a>
+            </div>
           </div>
-        </div>
 
-        <!-- Quick Links -->
-        <div class="space-y-6">
-          <h3 class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 text-xl font-bold">
-            Quick Links</h3>
-          <ul class="space-y-4">
-            <li>
-              <a href="https://www.themedevhub.com/about-us" target="_blank"
-                class="group flex items-center space-x-2">
-                <div
-                  class="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                </div>
-                <span class="text-gray-600 group-hover:text-violet-600 transition-colors duration-300">About Us</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.themedevhub.com/hire-experts" target="_blank"
-                class="group flex items-center space-x-2">
-                <div
-                  class="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                </div>
-                <span class="text-gray-600 group-hover:text-violet-600 transition-colors duration-300">Services</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.themedevhub.com/themes" target="_blank" class="group flex items-center space-x-2">
-                <div
-                  class="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                </div>
-                <span
-                  class="text-gray-600 group-hover:text-violet-600 transition-colors duration-300">Portfolio</span>
-              </a>
-            </li>
-            <li>
-              <a href="https://www.themedevhub.com/contact" target="_blank" class="group flex items-center space-x-2">
-                <div
-                  class="w-2 h-2 rounded-full bg-gradient-to-r from-violet-500 to-indigo-500 transform scale-0 group-hover:scale-100 transition-transform duration-300">
-                </div>
-                <span class="text-gray-600 group-hover:text-violet-600 transition-colors duration-300">Contact</span>
-              </a>
-            </li>
-          </ul>
-        </div>
+          <!-- Quick Links -->
+          <div class="footer__section">
+            <h3 class="footer__title">Chính sách</h3>
+            <ul class="footer__links">
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/about-us"
+                  target="_blank"
+                  class="footer__link"
+                  >Trang chủ</a
+                >
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/hire-experts"
+                  target="_blank"
+                  class="footer__link"
+                  >Sản phẩm</a
+                >
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/themes"
+                  target="_blank"
+                  class="footer__link"
+                  >Giới thiệu</a
+                >
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/contact"
+                  target="_blank"
+                  class="footer__link"
+                  >Bài viết</a
+                >
+              </li>
+            </ul>
+          </div>
 
-        <!-- Contact Info -->
-        <div class="space-y-6">
-          <h3 class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 text-xl font-bold">
-            Contact Us</h3>
-          <ul class="space-y-4">
-            <li class="group">
-              <div class="flex items-center space-x-3">
-                <div
-                  class="w-10 h-10 rounded-lg bg-gradient-to-tr from-violet-100 to-indigo-100 flex items-center justify-center group-hover:from-violet-200 group-hover:to-indigo-200 transition-colors duration-300 shrink-0">
-                  <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z" />
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M15 11a3 3 0 11-6 0 3 3 0 016 0z" />
-                  </svg>
-                </div>
-                <span class="text-gray-600 group-hover:text-violet-600 transition-colors duration-300">123 Dream
-                  Avenue</span>
-              </div>
-            </li>
-            <li class="group">
-              <div class="flex items-center space-x-3">
-                <div
-                  class="w-10 h-10 rounded-lg bg-gradient-to-tr from-violet-100 to-indigo-100 flex items-center justify-center group-hover:from-violet-200 group-hover:to-indigo-200 transition-colors duration-300 shrink-0">
-                  <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
-                  </svg>
-                </div>
-                <span
-                  class="text-gray-600 group-hover:text-violet-600 transition-colors duration-300">themedevhub@gmail.com</span>
-              </div>
-            </li>
-            <li class="group">
-              <div class="flex items-center space-x-3">
-                <div
-                  class="w-10 h-10 rounded-lg bg-gradient-to-tr from-violet-100 to-indigo-100 flex items-center justify-center group-hover:from-violet-200 group-hover:to-indigo-200 transition-colors duration-300 shrink-0">
-                  <svg class="w-5 h-5 text-violet-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                      d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
-                  </svg>
-                </div>
-                <span class="text-gray-600 group-hover:text-violet-600 transition-colors duration-300">+1 234 567
-                  890</span>
-              </div>
-            </li>
-          </ul>
-        </div>
+          <!-- Hổ trợ khách hàng -->
+          <div class="footer__section">
+            <h3 class="footer__title">Hổ trợ khách hàng</h3>
+            <ul class="footer__links">
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/about-us"
+                  target="_blank"
+                  class="footer__link"
+                  >Tìm kiếm
+                </a>
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/hire-experts"
+                  target="_blank"
+                  class="footer__link"
+                  >Chính sách bảo mật</a
+                >
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/themes"
+                  target="_blank"
+                  class="footer__link"
+                  >Điều khoản dịch vụ</a
+                >
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/contact"
+                  target="_blank"
+                  class="footer__link"
+                  >Hướng dẫn kiểm tra đơn hàng</a
+                >
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/contact"
+                  target="_blank"
+                  class="footer__link"
+                  >Chính sách giao nhận</a
+                >
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/contact"
+                  target="_blank"
+                  class="footer__link"
+                  >Chính sách thanh toán</a
+                >
+              </li>
+              <li class="footer__link-item">
+                <div class="footer__link-dot"></div>
+                <a
+                  href="https://www.themedevhub.com/contact"
+                  target="_blank"
+                  class="footer__link"
+                  >Chính sách đổi trả</a
+                >
+              </li>
+            </ul>
+          </div>
 
-        <!-- Newsletter -->
-        <div class="space-y-6">
-          <h3 class="text-transparent bg-clip-text bg-gradient-to-r from-violet-600 to-indigo-600 text-xl font-bold">
-            Newsletter</h3>
-          <p class="text-gray-600">Join our newsletter for updates and exclusive offers.</p>
-          <form class="space-y-3">
-            <div class="relative group">
-              <input type="email" placeholder="Your email"
-                class="w-full p-4 bg-white rounded-xl border border-gray-200 focus:outline-none focus:ring-2 focus:ring-violet-500 focus:border-transparent transition-all duration-300">
-              <button
-                class="absolute right-2 top-2 px-4 py-2 bg-gradient-to-r from-violet-500 to-indigo-500 text-white rounded-lg transform hover:translate-x-1 transition-all duration-300 hover:shadow-lg hover:shadow-violet-200">
-                Subscribe
+          <!-- Newsletter -->
+          <div class="footer__section">
+            <h3 class="footer__title">Đăng kí nhận tin</h3>
+
+            <form class="footer__newsletter-form">
+              <input
+                type="email"
+                placeholder="Nhập địa chỉ email"
+                class="footer__newsletter-input"
+                required
+              />
+              <button type="submit" class="footer__newsletter-button">
+                Đăng kí
               </button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-
-    <!-- Bottom Bar -->
-    <div class="border-t border-gray-200 bg-white/50 backdrop-blur-sm">
-      <div class="max-w-7xl mx-auto px-4 sm:px-10 py-6">
-        <div class="flex flex-col md:flex-row justify-between items-center space-y-4 md:space-y-0">
-          <p class="text-gray-600">&copy; 2025 Company. All rights reserved.</p>
-          <div class="flex space-x-6">
-            <a href="https://www.themedevhub.com/about-us" target="_blank"
-              class="text-gray-600 hover:text-violet-600 transition-colors duration-300">About us</a>
-            <a href="https://www.themedevhub.com/privacy-policy" target="_blank"
-              class="text-gray-600 hover:text-violet-600 transition-colors duration-300">Terms</a>
-            <a href="https://www.themedevhub.com/terms-and-conditions" target="_blank"
-              class="text-gray-600 hover:text-violet-600 transition-colors duration-300">Privacy</a>
+            </form>
           </div>
         </div>
       </div>
-  </footer>
-</div>
+
+      <!-- Footer Bottom -->
+      <div class="footer__bottom">
+        <div class="footer__bottom-content">
+          <p class="footer__copyright">
+            &copy; 2025 Company. All rights reserved.
+          </p>
+          <ul class="footer__bottom-links">
+            <li>
+              <a
+                href="https://www.themedevhub.com/about-us"
+                target="_blank"
+                class="footer__bottom-link"
+                >About us</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.themedevhub.com/privacy-policy"
+                target="_blank"
+                class="footer__bottom-link"
+                >Terms</a
+              >
+            </li>
+            <li>
+              <a
+                href="https://www.themedevhub.com/terms-and-conditions"
+                target="_blank"
+                class="footer__bottom-link"
+                >Privacy</a
+              >
+            </li>
+          </ul>
+        </div>
+      </div>
+    </footer>
+  </body>
+</html>
