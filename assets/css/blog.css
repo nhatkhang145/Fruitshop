@@ -1,0 +1,10 @@
+.container-blog {
+  display: flex;
+  flex-wrap: wrap;
+}
+.container-left{
+    flex: 1;
+}
+.container-right{
+    flex: 3;
+}

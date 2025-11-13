@@ -3,7 +3,7 @@
   --white-color: #fff;
   --black-color: #000;
   --text-color: #6e6e6e;
-  --subnav-bg: #3d8b91; 
+  --subnav-bg: #3d8b91;
   --primary-color: #3d8b91;
 }
 :root {
@@ -23,7 +23,6 @@
 
 * {
   box-sizing: inherit;
-  
 }
 
 html {
@@ -36,7 +35,6 @@ html {
   width: 1200px;
   max-width: 100%;
   margin: 0 auto;
-  
 }
 .gird__full-width {
   width: 100%;
@@ -46,8 +44,3 @@ html {
   display: flex;
   flex-wrap: wrap;
 }
-
-
-
-
-
