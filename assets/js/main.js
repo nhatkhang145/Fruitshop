@@ -1,91 +1,141 @@
-// js cho navbar
-(function () {
-  function ready(fn) {
-    if (document.readyState !== "loading") fn();
-    else document.addEventListener("DOMContentLoaded", fn);
-  }
+// // ================================
+//         // STICKY MENU ON SCROLL
+//         // ================================
+//         const header = document.querySelector('.header');
+//         const navbarMenu = document.querySelector('.navbar__menu');
+//         const menuPlaceholder = document.querySelector('.menu-placeholder');
+        
+//         // Lấy vị trí ban đầu của menu
+//         const menuOffsetTop = navbarMenu.offsetTop;
+        
+//         // Ngưỡng scroll để kích hoạt sticky (có thể điều chỉnh)
+//         const scrollThreshold = 150; // 150px
+        
+//         let isSticky = false;
+        
+//         window.addEventListener('scroll', () => {
+//             const scrollPosition = window.scrollY;
+            
+//             // Khi scroll vượt qua ngưỡng
+//             if (scrollPosition > scrollThreshold && !isSticky) {
+//                 // Kích hoạt sticky menu
+//                 navbarMenu.classList.add('sticky');
+//                 menuPlaceholder.classList.add('active');
+//                 isSticky = true;
+                
+//                 // Log để debug (có thể xóa sau)
+//                 console.log('Menu is now sticky');
+//             } 
+//             // Khi scroll lên trên ngưỡng
+//             else if (scrollPosition <= scrollThreshold && isSticky) {
+//                 // Hủy sticky menu
+//                 navbarMenu.classList.remove('sticky');
+//                 menuPlaceholder.classList.remove('active');
+//                 isSticky = false;
+                
+//                 console.log('Menu is back to normal');
+//             }
+//         });
 
-  function debounce(fn, wait) {
-    var t;
-    return function () {
-      var ctx = this,
-        args = arguments;
-      clearTimeout(t);
-      t = setTimeout(function () {
-        fn.apply(ctx, args);
-      }, wait);
-    };
-  }
+//         // ================================
+//         // SEARCH FORM ANIMATION
+//         // ================================
+//         const searchInput = document.querySelector('.search-input');
+//         const searchBtn = document.querySelector('.search-btn');
+        
+//         searchInput.addEventListener('focus', () => {
+//             searchBtn.style.transform = 'scale(1.05)';
+//         });
+        
+//         searchInput.addEventListener('blur', () => {
+//             searchBtn.style.transform = 'scale(1)';
+//         });
 
-  // Track scroll direction and speed
-  var lastScrollTop = 0;
-  var scrollSpeed = 0;
-  var lastScrollTime = Date.now();
+//         // ================================
+//         // UPDATE BADGE FUNCTION
+//         // ================================
+//         function updateBadge(selector, count) {
+//             const badge = document.querySelector(selector);
+//             if (badge) {
+//                 badge.textContent = count;
+//                 badge.style.animation = 'pulse 0.5s ease-in-out';
+//                 setTimeout(() => {
+//                     badge.style.animation = '';
+//                 }, 500);
+//             }
+//         }
 
-  ready(function () {
-    var menu = document.querySelector(".navbar__menu");
-    var subnav = document.querySelector(".navbar__subnav");
-    var wrapper = document.querySelector(".navbar__wrapper");
-    if (!menu) return;
+//         // ================================
+//         // DEMO: UPDATE BADGES ON CLICK
+//         // ================================
+//         document.querySelector('.wishlist-btn').addEventListener('click', (e) => {
+//             e.preventDefault();
+//             const currentCount = parseInt(document.querySelector('.wishlist-btn .badge').textContent);
+//             updateBadge('.wishlist-btn .badge', currentCount + 1);
+//         });
 
-    // show the navbar with slide-in animation
-    requestAnimationFrame(function () {
-      menu.classList.add("visible");
-    });
+//         document.querySelector('.cart-btn').addEventListener('click', (e) => {
+//             e.preventDefault();
+//             const currentCount = parseInt(document.querySelector('.cart-btn .badge').textContent);
+//             updateBadge('.cart-btn .badge', currentCount + 1);
+//         });
 
-    // handle scroll direction and speed
-    function handleScroll() {
-      var st = window.scrollY;
-      var now = Date.now();
-      var timeDiff = now - lastScrollTime;
+//         // ================================
+//         // SMOOTH SCROLL FOR NAVIGATION
+//         // ================================
+//         document.querySelectorAll('.main-nav-links a').forEach(link => {
+//             link.addEventListener('click', (e) => {
+//                 // Chỉ áp dụng smooth scroll nếu link có href bắt đầu bằng #
+//                 if (link.getAttribute('href').startsWith('#')) {
+//                     e.preventDefault();
+//                     const targetId = link.getAttribute('href');
+//                     const targetElement = document.querySelector(targetId);
+                    
+//                     if (targetElement) {
+//                         const offsetTop = targetElement.offsetTop - 100; // Trừ đi chiều cao menu
+//                         window.scrollTo({
+//                             top: offsetTop,
+//                             behavior: 'smooth'
+//                         });
+//                     }
+//                 }
+//             });
+//         });
 
-      // Calculate scroll speed (pixels per millisecond)
-      if (timeDiff > 0) {
-        scrollSpeed = Math.abs(st - lastScrollTop) / timeDiff;
-      }
+//         // ================================
+//         // SCROLL TO TOP WHEN CLICK LOGO
+//         // ================================
+//         document.querySelector('.navbar__menu-logo a').addEventListener('click', (e) => {
+//             if (window.scrollY > 0) {
+//                 e.preventDefault();
+//                 window.scrollTo({
+//                     top: 0,
+//                     behavior: 'smooth'
+//                 });
+//             }
+//         });
 
-      // Determine scroll direction and apply classes
-      if (st > 50) {
-        // Only start hiding when scrolled a bit
-        var scrollingDown = st > lastScrollTop;
+//         // ================================
+//         // SHOW/HIDE SCROLL PROGRESS (Optional)
+//         // ================================
+//         function updateScrollProgress() {
+//             const windowHeight = window.innerHeight;
+//             const documentHeight = document.documentElement.scrollHeight;
+//             const scrollTop = window.scrollY;
+//             const scrollPercent = (scrollTop / (documentHeight - windowHeight)) * 100;
+            
+//             // Có thể sử dụng để tạo progress bar
+//             // document.querySelector('.scroll-progress').style.width = scrollPercent + '%';
+//         }
 
-        // Add shadow to menu when scrolled
-        menu.classList.add("scrolled");
+//         window.addEventListener('scroll', updateScrollProgress);
 
-        // Hide everything when scrolling down fast enough
-        if (scrollingDown && scrollSpeed > 0.5) {
-          wrapper.classList.add("hidden");
-          subnav.classList.add("hidden");
-          document.body.classList.add("subnav-hidden");
-          menu.classList.remove("visible");
-        }
-        // Show menu (only) when scrolling up
-        else if (!scrollingDown) {
-          wrapper.classList.add("hidden");
-          subnav.classList.add("hidden");
-          document.body.classList.add("subnav-hidden");
-          menu.classList.add("visible");
-        }
-      } else {
-        // At top - show everything
-        menu.classList.remove("scrolled");
-        wrapper.classList.remove("hidden");
-        subnav.classList.remove("hidden");
-        document.body.classList.remove("subnav-hidden");
-        menu.classList.add("visible");
-      }
-
-      lastScrollTop = st;
-      lastScrollTime = now;
-    }
-
-    var debounced = debounce(handleScroll, 30);
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    // initial check
-    handleScroll();
-  });
-})();
-
+//         // ================================
+//         // INITIALIZATION
+//         // ================================
+//         console.log('Header JavaScript initialized');
+//         console.log('Scroll threshold:', scrollThreshold + 'px');
+// =================================================================================================================================
 // slider chính
 let currentSlide = 0;
 const totalSlides = 5;
@@ -235,4 +285,9 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ----------------------------------------------
+
+
+ 
+
+
 

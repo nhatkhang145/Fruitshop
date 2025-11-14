@@ -3,7 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Về Chúng Tôi — FruitShop</title>
+    <title>Về Chúng Tôi — The Organic Harvest</title>
+    
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -14,7 +15,7 @@
     />
     <link rel="stylesheet" href="./assets/css/main.css" />
     <link rel="stylesheet" href="./assets/css/base.css" />
-    </head>
+  </head>
   <body>
     <div class="main">
       <header class="header">
@@ -22,42 +23,61 @@
           <div class="navbar__wrapper">
             <div class="navbar__content">
               <ul class="navbar-list">
-                <li class="navbar-item">
-                  <a href="" class="navbar-item__link">CSKH</a>
-                </li>
-                <li class="navbar-item">
-                  Kết nối
-                  <a href="" class="navbar-icon__link">
+                <li class="navbar-item navbar-item--no-click">
+                  Kết nối :
+                  <a href="#" class="navbar-icon__link">
                     <i class="navbar-icon fa-brands fa-facebook"></i>
                   </a>
-                  <a href="" class="navbar-icon__link">
+                  <a href="#" class="navbar-icon__link">
                     <i class="navbar-icon fa-brands fa-instagram"></i>
                   </a>
                 </li>
               </ul>
               <ul class="navbar-list">
                 <li class="navbar-item navbar-item__notify--active">
-                  <a href="" class="navbar-item__link">
+                  <a href="#" class="navbar-item__link">
                     <span class="navbar-icon__link">
                       <i class="navbar-icon fa-regular fa-bell"></i>
                     </span>
                     Thông báo
                   </a>
-                  </li>
-
+                  <div class="navbar-item__notify">
+                     <header class="navbar-item__notify-header">
+                       <h3>Thông Báo Mới Nhận</h3>
+                     </header>
+                     <ul class="navbar-item__notify-list">
+                       <li class="navbar-item__notify-item">
+                         <a href="" class="navbar-item__notify-link">
+                           <img
+                             class="navbar-item__notify-img"
+                             src="./assets/images/chuối.jpg"
+                             alt="Notification"
+                           />
+                           <div class="navbar-item__notify-content">
+                             <span class="navbar-item__notify-name">
+                               Chuối xuất xứ từ Ecuador
+                             </span>
+                             <span class="navbar-item__notify-decoration"
+                               >ưu đãi giảm 20%</span
+                             >
+                           </div>
+                         </a>
+                       </li>
+                       </ul>
+                     <footer class="navbar-item__notify-footer">
+                       <a href="" class="navbar-item__notify-footer-btn"
+                         >Xem tất cả</a
+                       >
+                     </footer>
+                   </div>
+                </li>
                 <li class="navbar-item">
-                  <a href="" class="navbar-item__link">
+                  <a href="#" class="navbar-item__link">
                     <span class="navbar-icon__link">
                       <i class="navbar-icon fa-regular fa-circle-question"></i>
                     </span>
-                    Hổ trợ
+                    Hỗ trợ
                   </a>
-                </li>
-                <li class="navbar-item">
-                  <a href="register.html" class="navbar-item__link">Đăng ký</a>
-                </li>
-                <li class="navbar-item">
-                  <a href="login.html" class="navbar-item__link">Đăng nhập</a>
                 </li>
               </ul>
             </div>
@@ -66,14 +86,22 @@
           <div class="navbar__menu">
             <div class="navbar__menu-inner">
               <div class="navbar__menu-logo">
-                <a href="/">
-                  <img
+                <a href="index.html"> <img
                     class="navbar__menu-logo-img"
-                    src="./assets/images/logo.jpg"
-                    alt="Primary Logo"
+                    src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                    alt="Organic Harvest Logo"
                   />
                 </a>
               </div>
+
+              <ul class="main-nav-links subnav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="#">Sản Phẩm</a></li>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="#">Bài viết</a></li>
+                <li><a href="#">Liên hệ</a></li>
+              </ul>
+
               <div class="navbar__menu-search">
                 <form
                   class="search-form"
@@ -86,7 +114,7 @@
                     class="search-cat"
                     aria-label="Category"
                   >
-                    <option value="all">All Categories</option>
+                    <option value="all">Danh mục</option>
                     <option value="fruits">Fruits</option>
                     <option value="vegetables">Vegetables</option>
                   </select>
@@ -94,7 +122,7 @@
                     name="q"
                     class="search-input"
                     type="search"
-                    placeholder="Search here..."
+                    placeholder="Tìm kiếm sản phẩm..."
                     aria-label="Search"
                   />
                   <button type="submit" class="search-btn" aria-label="Search">
@@ -102,40 +130,36 @@
                   </button>
                 </form>
               </div>
+
               <div class="navbar__menu-actions">
                 <a
                   href="/account.html"
                   class="icon-btn account-btn"
-                  title="My Account"
+                  title="Tài khoản"
                 >
                   <i class="fa-regular fa-user"></i>
-                  <span class="action-label">My Account</span>
                 </a>
-                <a href="/cart.html" class="icon-btn cart-btn" title="My Cart">
+                <a
+                  href="/wishlist.html"
+                  class="icon-btn wishlist-btn"
+                  title="Yêu thích"
+                >
+                  <i class="fa-solid fa-heart"></i>
+                  <span class="badge">3</span>
+                </a>
+                <a href="/cart.html" class="icon-btn cart-btn" title="Giỏ hàng">
                   <i class="fa-solid fa-basket-shopping"></i>
-                  <span class="action-label">My Cart</span>
-                  <span class="badge">0</span>
+                  <span class="badge">2</span>
                 </a>
               </div>
             </div>
           </div>
 
-          <div class="navbar__subnav" aria-label="Primary navigation">
-            <div class="subnav__inner">
-              <button class="shop-cat-btn" aria-label="Shop By Category">
-                <i class="fa-solid fa-bars"></i>
-                <span>Shop By Category</span>
-                <i class="fa-solid fa-caret-down"></i>
-              </button>
-
-              <ul class="subnav-links">
-                <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="#">Bài viết</a></li>
-                <li><a href="#">Ưu đãi</a></li>
-                <li><a href="about.html">Về Chúng Tôi</a></li> 
-              </ul>
-            </div>
-          </div>
+          <div
+            class="navbar__subnav"
+            aria-label="Primary navigation"
+            style="display: none"
+          ></div>
         </nav>
       </header>
       <main class="about-page">
@@ -152,10 +176,10 @@
             <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?q=80&w=1974&auto=format&fit=crop" alt="Cửa hàng trái cây">
           </div>
           <div class="about-content">
-            <h1 class="about-title">Câu Chuyện Của FruitShop</h1>
+            <h1 class="about-title">Câu Chuyện Của Organic Harvest</h1>
             <p class="about-subtitle">Mang Nguồn Dinh Dưỡng Tươi Sạch Đến Mọi Nhà</p>
-            <p>FruitShop được thành lập với một niềm tin đơn giản: mọi người đều xứng đáng được thưởng thức những loại trái cây tươi ngon, an toàn và bổ dưỡng nhất. Chúng tôi bắt đầu từ một cửa hàng nhỏ, làm việc trực tiếp với các nông dân địa phương để tuyển chọn những sản phẩm chất lượng nhất.</p>
-            <p>Ngày nay, FruitShop đã phát triển thành một thương hiệu đáng tin cậy, cung cấp trái cây nhập khẩu và nội địa đạt chuẩn, giao hàng nhanh chóng đến tận tay khách hàng. Sứ mệnh của chúng tôi là làm cho việc ăn uống lành mạnh trở nên dễ dàng và thú vị hơn.</p>
+            <p>Organic Harvest được thành lập với một niềm tin đơn giản: mọi người đều xứng đáng được thưởng thức những loại trái cây tươi ngon, an toàn và bổ dưỡng nhất. Chúng tôi bắt đầu từ một cửa hàng nhỏ, làm việc trực tiếp với các nông dân địa phương để tuyển chọn những sản phẩm chất lượng nhất.</p>
+            <p>Ngày nay, Organic Harvest đã phát triển thành một thương hiệu đáng tin cậy, cung cấp trái cây nhập khẩu và nội địa đạt chuẩn, giao hàng nhanh chóng đến tận tay khách hàng. Sứ mệnh của chúng tôi là làm cho việc ăn uống lành mạnh trở nên dễ dàng và thú vị hơn.</p>
           </div>
         </div>
 
@@ -181,65 +205,179 @@
             </div>
           </div>
         </div>
-
-      </main>
-      <footer class="footer">
-        <div class="footer-container grid">
-          <div class="footer-column">
-            <h3>Store Information</h3>
-            <p>
-              <strong>Address:</strong> 30/8, ấp Nam Thới, xã Thới Tam Thôn,
-              TP.Hồ Chí Minh
-            </p>
-            <p><strong>Call Us:</strong> 0919442994</p>
-            <p><strong>Email Us:</strong></p>
-            <div class="social-icons">
-              <a href="#"><i class="fab fa-facebook-f"></i></a>
-              <a href="#"><i class="fab fa-twitter"></i></a>
-              <a href="#"><i class="fab fa-linkedin-in"></i></a>
-              <a href="#"><i class="fab fa-pinterest"></i></a>
-              <a href="#"><i class="fab fa-instagram"></i></a>
+        
+        <section class="team-section">
+          <div class="grid">
+            <h2 class="section-title">Gặp Gỡ Đội Ngũ Của Chúng Tôi</h2>
+            <div class="team-grid">
+              <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=300&h=300&fit=crop&crop=faces" alt="Founder" class="team-image">
+                <h3 class="team-name">Nguyễn Văn A</h3>
+                <span class="team-title">Người Sáng Lập</span>
+                <p class="team-bio">Với niềm đam mê nông sản sạch, anh A đã sáng lập Organic Harvest để mang trái cây tốt nhất đến mọi nhà.</p>
+              </div>
+              <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1494790108377-be9c29b29330?q=80&w=300&h=300&fit=crop&crop=faces" alt="Manager" class="team-image">
+                <h3 class="team-name">Trần Thị B</h3>
+                <span class="team-title">Quản lý Cửa Hàng</span>
+                <p class="team-bio">Chị B đảm bảo mọi đơn hàng đều được xử lý nhanh chóng và sản phẩm luôn đạt chất lượng cao nhất.</p>
+              </div>
+              <div class="team-member">
+                <img src="https://images.unsplash.com/photo-1539571696357-5a69c17a67c6?q=80&w=300&h=300&fit=crop&crop=faces" alt="Farmer" class="team-image">
+                <h3 class="team-name">Lê Văn C</h3>
+                <span class="team-title">Đối tác Nông dân</span>
+                <p class="team-bio">Anh C là một trong nhiều đối tác nông dân của chúng tôi, cam kết canh tác hữu cơ và an toàn.</p>
+              </div>
             </div>
           </div>
+        </section>
 
-          <div class="footer-column">
-            <h3>Useful Links</h3>
-            <ul>
-              <li><a href="about.html">About Us</a></li>
-              <li><a href="#">Delivery Information</a></li>
-              <li><a href="#">Privacy Policy</a></li>
-              <li><a href="#">Terms & Conditions</a></li>
-              <li><a href="#">Contact Us</a></li>
-              <li><a href="#">My Account</a></li>
-            </ul>
+        <section class="testimonial-section">
+          <div class="grid">
+            <h2 class="section-title">Khách Hàng Nói Gì Về Chúng Tôi</h2>
+            <div class="testimonial-grid">
+              <div class="testimonial-item">
+                <p class="testimonial-text">"Trái cây rất tươi và ngon! Dịch vụ giao hàng nhanh không ngờ. Tôi chắc chắn sẽ là khách hàng trung thành của Organic Harvest."</p>
+                <div class="testimonial-author">
+                  <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?q=80&w=100&h=100&fit=crop&crop=faces" alt="Customer 1">
+                  <span>Chị Lan (Quận 1, TP.HCM)</span>
+                </div>
+              </div>
+              <div class="testimonial-item">
+                <p class="testimonial-text">"Tôi rất yên tâm khi mua hàng ở đây vì biết rõ nguồn gốc sản phẩm. Dịch vụ chăm sóc khách hàng cũng rất tuyệt vời."</p>
+                <div class="testimonial-author">
+                  <img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?q=80&w=100&h=100&fit=crop&crop=faces" alt="Customer 2">
+                  <span>Anh Hùng (TP. Thủ Đức)</span>
+                </div>
+              </div>
+            </div>
           </div>
+        </section>
+      </main>
+      <footer class="footer">
+        <div class="footer__main">
+          <div class="footer__grid">
+            <div class="footer__company">
+              <div class="footer__brand">
+                <a href="index.html"> <img
+                    class="navbar__menu-logo-img"
+                    src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                    alt="Organic Harvest Logo"
+                  />
+                </a>
+              </div>
+              <p class="footer__description">
+                Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
+              </p>
+              <div class="footer__social">
+                <a
+                  href="https://www.themedevhub.com"
+                  target="_blank"
+                  class="footer__social-link footer__social-link--facebook"
+                >
+                  <svg class="footer__social-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.themedevhub.com"
+                  target="_blank"
+                  class="footer__social-link footer__social-link--twitter"
+                >
+                  <svg class="footer__social-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.themedevhub.com"
+                  target="_blank"
+                  class="footer__social-link footer__social-link--telegram"
+                >
+                  <svg class="footer__social-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
 
-          <div class="footer-column">
-            <h3>Customer Care</h3>
-            <ul>
-              <li><a href="#">Brands</a></li>
-              <li><a href="#">Gift Certificates</a></li>
-              <li><a href="#">Specials</a></li>
-              <li><a href="#">Affiliate</a></li>
-              <li><a href="#">Newsletter</a></li>
-              <li><a href="#">Order History</a></li>
-            </ul>
+            <div class="footer__section">
+              <h3 class="footer__title">Chính sách</h3>
+              <ul class="footer__links">
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a href="index.html" class="footer__link">Trang chủ</a>
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a href="#" class="footer__link">Sản phẩm</a>
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a href="about.html" class="footer__link">Giới thiệu</a>
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a href="#" class="footer__link">Bài viết</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h3>Useful Links</h3>
+              <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#">Delivery Information</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="#">Contact Us</a></li>
+                <li><a href="#">My Account</a></li>
+              </ul>
+            </div>
+
+            <div class="footer__section">
+              <h3 class="footer__title">Đăng kí nhận tin</h3>
+            
+              <form class="footer__newsletter-form">
+                <input
+                  type="email"
+                  placeholder="Nhập địa chỉ email"
+                  class="footer__newsletter-input"
+                  required
+                />
+                <button type="submit" class="footer__newsletter-button">
+                  Đăng kí
+                </button>
+              </form>
+            </div>
           </div>
+        </div>
 
-          <div class="footer-column">
-            <h3>Products</h3>
-            <ul>
-              <li><a href="#">My Account</a></li>
-              <li><a href="#">Order History</a></li>
-              <li><a href="#">Returns</a></li>
-              <li><a href="#">Affiliate</a></li>
-              <li><a href="#">Brands</a></li>
-              <li><a href="#">Site Map</a></li>
+        <div class="footer__bottom">
+          <div class="footer__bottom-content">
+            <p class="footer__copyright">
+              &copy; 2025 Company. All rights reserved.
+            </p>
+            <ul class="footer__bottom-links">
+              <li>
+                <a href="about.html" class="footer__bottom-link">About us</a>
+              </li>
+              <li>
+                <a href="#" class="footer__bottom-link">Terms</a>
+              </li>
+              <li>
+                <a href="#" class="footer__bottom-link">Privacy</a>
+              </li>
             </ul>
           </div>
         </div>
       </footer>
       </div>
-    <script src="./assets/js/main.js"></script>
+    
     </body>
 </html>
