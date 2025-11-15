@@ -1655,21 +1655,24 @@ ul {
 .blog__meta {
   display: flex;
   gap: 1rem;
-  font-size: 0.75rem;
+  font-size: 1.2rem;
   color: #9ca3af; /* gray */
-  margin-bottom: 0.5rem;
+  margin-bottom: 1rem;
+  font-weight: 500;
 }
 
 .blog__post-title {
-  font-size: 1.125rem;
-  font-weight: 600;
-  margin-bottom: 0.75rem;
+  font-size: 1.7rem;
+  line-height: 1.4;
+  font-weight: 700;
+  margin-bottom: 1rem;
 }
 
 .blog__link {
   display: inline-block;
   color: #16a34a;
-  font-weight: 500;
+  font-size: 1.4rem;
+  font-weight: 600;
   text-decoration: none;
 }
 
@@ -1997,9 +2000,7 @@ ul {
   }
 }
 /*
-============================================================
  STYLES FOR ABOUT US PAGE
-============================================================
 */
 
 /* Breadcrumb (thanh điều hướng nhỏ) */
@@ -2019,7 +2020,7 @@ ul {
 
 .breadcrumb a {
   text-decoration: none;
-  color: var(--primary-color); /* Dùng màu xanh của bạn */
+  color: var(--primary-color);
 }
 .breadcrumb a:hover {
   text-decoration: underline;
@@ -2105,26 +2106,24 @@ ul {
 /* Responsive cho trang About Us */
 @media (max-width: 900px) {
   .about-section {
-    grid-template-columns: 1fr; /* Xếp 1 cột */
+    grid-template-columns: 1fr;
   }
 }
 
 @media (max-width: 768px) {
   .values-grid {
-    grid-template-columns: 1fr; /* Xếp 1 cột */
+    grid-template-columns: 1fr;
   }
   .about-title {
     font-size: 28px;
   }
 }
 /*
-============================================================
  STYLES FOR FAQS PAGE
-============================================================
 */
 .faqs-container {
   padding: 60px 0;
-  max-width: 900px; /* Giới hạn chiều rộng cho dễ đọc */
+  max-width: 900px;
 }
 
 .faq-category {
@@ -2165,7 +2164,7 @@ ul {
   cursor: pointer;
   background-color: #fff;
   position: relative;
-  list-style: none; /* Ẩn dấu tam giác mặc định */
+  list-style: none;
 }
 
 /* Ẩn dấu tam giác trên Chrome/Safari */
@@ -2176,7 +2175,7 @@ ul {
 /* Thêm icon + và - */
 .faq-question::after {
   content: "+";
-  font-family: "Font Awesome 7 Free"; /* Sử dụng font icon */
+  font-family: "Font Awesome 7 Free";
   font-weight: 900;
   position: absolute;
   right: 20px;
@@ -2188,7 +2187,7 @@ ul {
 }
 
 .faq-item[open] .faq-question::after {
-  content: "\f068"; /* Icon "minus" của Font Awesome */
+  content: "\f068";
   transform: translateY(-50%) rotate(0deg);
 }
 
@@ -2213,9 +2212,7 @@ ul {
   margin-top: 10px;
 }
 /*
-============================================================
  STYLES FOR MY ACCOUNT PAGE
-============================================================
 */
 .account-container {
   padding: 60px 0;
@@ -2223,7 +2220,7 @@ ul {
 
 .account-layout {
   display: grid;
-  grid-template-columns: 280px 1fr; /* Cột nav 280px, còn lại cho content */
+  grid-template-columns: 280px 1fr;
   gap: 30px;
 }
 
@@ -2234,7 +2231,7 @@ ul {
   list-style: none;
   border: 1px solid #eee;
   border-radius: 8px;
-  overflow: hidden; /* Để bo góc hoạt động */
+  overflow: hidden;
 }
 
 .account-nav a {
@@ -2254,7 +2251,7 @@ ul {
 
 .account-nav a:hover {
   background: #f8f9fa;
-  color: var(--primary-color); /* Dùng màu xanh của bạn */
+  color: var(--primary-color);
   padding-left: 30px;
 }
 
@@ -2265,7 +2262,7 @@ ul {
   font-weight: 600;
 }
 .account-nav a.active:hover {
-  background: #258a4c; /* Màu xanh đậm hơn khi hover */
+  background: #258a4c;
   padding-left: 25px;
 }
 
@@ -2338,7 +2335,7 @@ ul {
 /* Responsive cho trang Account */
 @media (max-width: 900px) {
   .account-layout {
-    grid-template-columns: 1fr; /* Xếp 1 cột */
+    grid-template-columns: 1fr;
   }
   .account-nav {
     margin-bottom: 20px;
@@ -2347,9 +2344,361 @@ ul {
 
 @media (max-width: 600px) {
   .dashboard-links {
-    grid-template-columns: 1fr; /* 1 cột trên mobile nhỏ */
+    grid-template-columns: 1fr;
   }
   .account-content {
     padding: 20px;
+  }
+}
+/*
+ STYLES FOR BLOG CATEGORY PAGE
+*/
+.blog-layout {
+  display: grid;
+  /* Cột sidebar 300px, cột content chiếm phần còn lại */
+  grid-template-columns: 300px 1fr; 
+  gap: 30px;
+  padding: 60px 0;
+}
+
+/* --- Sidebar (Cột trái) --- */
+.blog-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.widget {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.widget-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Widget: Search */
+.widget-search {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.widget-search input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  outline: none;
+}
+.widget-search button {
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.widget-search button:hover {
+  background: #258a4c;
+}
+
+/* Widget: List (Categories) */
+.widget-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.widget-list a {
+  text-decoration: none;
+  color: #555;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  transition: color 0.2s ease;
+}
+.widget-list a:hover {
+  color: var(--primary-color);
+}
+.widget-list .count {
+  color: #999;
+}
+
+/* Widget: Recent Posts */
+.widget-recent-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.widget-recent-posts li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.widget-recent-posts img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.widget-recent-posts a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+.widget-recent-posts a:hover {
+  color: var(--primary-color);
+}
+.widget-recent-posts .date {
+  font-size: 12px;
+  color: #999;
+  display: block;
+  margin-top: 4px;
+}
+
+/* --- Main Content (Cột phải) --- */
+.blog-main-content {
+  min-width: 0; /* Fix lỗi overflow trong grid */
+}
+
+.blog-page-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  color: #222;
+}
+
+/* Ghi đè class .blog__grid từ trang chủ (trên trang chủ là 3 cột) */
+.blog-page-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+.page-numbers {
+  display: inline-block;
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+.page-numbers:hover {
+  background: #f8f9fa;
+  color: var(--primary-color);
+  border-color: #ccc;
+}
+.page-numbers.current {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .blog-layout {
+    /* Xếp 1 cột trên tablet/mobile */
+    grid-template-columns: 1fr;
+  }
+  .blog-page-grid {
+     /* Vẫn giữ 2 cột trên tablet */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .blog-page-grid {
+    /* 1 cột trên mobile */
+    grid-template-columns: 1fr;
+  }
+}
+/*
+============================================================
+ STYLES FOR BLOG DETAIL PAGE
+============================================================
+*/
+.blog-post-content {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 30px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.post-image {
+  width: 100%;
+  margin-bottom: 25px;
+}
+.post-image img {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+}
+
+.post-title {
+  font-size: 32px;
+  font-weight: 700;
+  color: #333;
+  line-height: 1.3;
+  margin: 0 0 15px 0;
+}
+
+/* Style cho meta (tác giả, ngày...) trên trang chi tiết */
+.post-header .blog__meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 15px;
+  font-size: 14px; /* To hơn meta ở card */
+  color: #888;
+  padding-bottom: 20px;
+  margin-bottom: 25px;
+  border-bottom: 1px solid #f0f0f0;
+}
+.post-header .blog__meta i {
+  margin-right: 5px;
+  color: var(--primary-color);
+}
+
+/* Thân bài viết */
+.post-body {
+  font-size: 16px;
+  line-height: 1.8;
+  color: #555;
+}
+.post-body p {
+  margin-bottom: 20px;
+}
+.post-body h3 {
+  font-size: 22px;
+  font-weight: 600;
+  color: #333;
+  margin: 25px 0 15px 0;
+}
+.post-body ul {
+  list-style: disc;
+  padding-left: 25px;
+  margin-bottom: 20px;
+}
+.post-body li {
+  margin-bottom: 10px;
+}
+
+/* Blockquote */
+.post-body blockquote {
+  margin: 25px 0;
+  padding: 25px;
+  background: #f8f9fa;
+  border-left: 4px solid var(--primary-color);
+}
+.post-body blockquote p {
+  font-size: 18px;
+  font-style: italic;
+  color: #333;
+  font-weight: 500;
+  margin: 0;
+}
+.post-body blockquote span {
+  display: block;
+  font-size: 14px;
+  color: #777;
+  margin-top: 10px;
+}
+
+/* Footer bài viết (Share, Author Bio) */
+.post-footer {
+  margin-top: 30px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+.post-share {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+.post-share strong {
+  font-size: 16px;
+  color: #333;
+}
+.post-share .social-icon {
+  width: 35px;
+  height: 35px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: #fff;
+  text-decoration: none;
+  font-size: 14px;
+  transition: opacity 0.2s ease;
+}
+.post-share .social-icon:hover {
+  opacity: 0.8;
+}
+.post-share .social-icon.fb { background: #1877f2; }
+.post-share .social-icon.tw { background: #1da1f2; }
+.post-share .social-icon.pi { background: #e60023; }
+
+.post-author-bio {
+  display: flex;
+  gap: 20px;
+  background: #f8f9fa;
+  padding: 20px;
+  border-radius: 8px;
+}
+.post-author-bio img {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+}
+.author-info h4 {
+  margin: 0 0 5px 0;
+  font-size: 18px;
+  color: #333;
+}
+.author-info p {
+  margin: 0;
+  font-size: 15px;
+  color: #555;
+  line-height: 1.6;
+}
+
+/* Responsive */
+@media (max-width: 600px) {
+  .post-title {
+    font-size: 26px;
+  }
+  .post-author-bio {
+    flex-direction: column;
+    text-align: center;
+    align-items: center;
   }
 }
