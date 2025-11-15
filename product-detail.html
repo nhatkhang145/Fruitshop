@@ -3,43 +3,36 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Chi tiết sản phẩm — FruitShop</title>
-    <!-- same head includes as index.html -->
+    <title>Chi tiết sản phẩm — Organic Harvest</title>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="./assets/css/main.css" />
     <link rel="stylesheet" href="./assets/css/base.css" />
-    <!-- keep page-specific styles after the base files -->
     <link rel="stylesheet" href="assets/css/shop.css" />
     <link rel="stylesheet" href="assets/css/auth.css" />
     <link rel="stylesheet" href="assets/css/product-detail.css" />
   </head>
   <body>
     <div class="main">
-      <!-- HEADER -->
       <header class="header">
         <nav class="navbar">
-          <!--  navbar__wrapper -->
           <div class="navbar__wrapper">
             <div class="navbar__content">
-              <!--  navbar__list -->
               <ul class="navbar-list">
-                <li class="navbar-item">
-                  <a href="" class="navbar-item__link">CSKH</a>
-                </li>
-                <li class="navbar-item">
-                  Kết nối
-                  <a href="" class="navbar-icon__link">
+                <li class="navbar-item navbar-item--no-click">
+                  Kết nối :
+                  <a href="#" class="navbar-icon__link">
                     <i class="navbar-icon fa-brands fa-facebook"></i>
                   </a>
-                  <a href="" class="navbar-icon__link">
+                  <a href="#" class="navbar-icon__link">
                     <i class="navbar-icon fa-brands fa-instagram"></i>
                   </a>
                 </li>
               </ul>
               <ul class="navbar-list">
                 <li class="navbar-item navbar-item__notify--active">
-                  <a href="" class="navbar-item__link">
+                  <a href="#" class="navbar-item__link">
                     <span class="navbar-icon__link">
                       <i class="navbar-icon fa-regular fa-bell"></i>
                     </span>
@@ -67,44 +60,6 @@
                           </div>
                         </a>
                       </li>
-                      <li
-                        class="navbar-item__notify-item navbar-item__notify-item--viewed"
-                      >
-                        <a href="" class="navbar-item__notify-link">
-                          <img
-                            class="navbar-item__notify-img"
-                            src="./assets/images/chuối.jpg"
-                            alt="Notification"
-                          />
-                          <div class="navbar-item__notify-content">
-                            <span class="navbar-item__notify-name">
-                              Chuối xuất xứ từ Ecuador
-                            </span>
-                            <span class="navbar-item__notify-decoration"
-                              >ưu đãi giảm 20%</span
-                            >
-                          </div>
-                        </a>
-                      </li>
-                      <li
-                        class="navbar-item__notify-item navbar-item__notify-item--viewed"
-                      >
-                        <a href="" class="navbar-item__notify-link">
-                          <img
-                            class="navbar-item__notify-img"
-                            src="./assets/images/chuối.jpg"
-                            alt="Notification"
-                          />
-                          <div class="navbar-item__notify-content">
-                            <span class="navbar-item__notify-name">
-                              Chuối xuất xứ từ Ecuador
-                            </span>
-                            <span class="navbar-item__notify-decoration"
-                              >ưu đãi giảm 20%</span
-                            >
-                          </div>
-                        </a>
-                      </li>
                     </ul>
                     <footer class="navbar-item__notify-footer">
                       <a href="" class="navbar-item__notify-footer-btn"
@@ -113,39 +68,36 @@
                     </footer>
                   </div>
                 </li>
-
                 <li class="navbar-item">
-                  <a href="" class="navbar-item__link">
-                    <span class="navbar-icon__link">
+                  <a href="faqs.html" class="navbar-item__link"> <span class="navbar-icon__link">
                       <i class="navbar-icon fa-regular fa-circle-question"></i>
                     </span>
-                    Hổ trợ
+                    Hỗ trợ
                   </a>
-                </li>
-                <li class="navbar-item">
-                  <a href="" class="navbar-item__link">Đăng ký</a>
-                </li>
-                <li class="navbar-item">
-                  <a href="" class="navbar-item__link">Đăng nhập</a>
                 </li>
               </ul>
             </div>
           </div>
 
-          <!--  navbar__menu -->
           <div class="navbar__menu">
             <div class="navbar__menu-inner">
-              <!-- logo -->
               <div class="navbar__menu-logo">
-                <a href="/">
-                  <img
+                <a href="index.html"> <img
                     class="navbar__menu-logo-img"
-                    src="https://cdn6.agoda.net/images/kite-js/logo/agoda/color-default.svg"
-                    alt="Primary Logo"
+                    src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                    alt="Organic Harvest Logo"
                   />
                 </a>
               </div>
-              <!-- search -->
+
+              <ul class="main-nav-links subnav-links">
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="#">Sản Phẩm</a></li>
+                <li><a href="about.html">Giới thiệu</a></li>
+                <li><a href="blog.html">Bài viết</a></li>
+                <li><a href="#">Liên hệ</a></li>
+              </ul>
+
               <div class="navbar__menu-search">
                 <form
                   class="search-form"
@@ -158,7 +110,7 @@
                     class="search-cat"
                     aria-label="Category"
                   >
-                    <option value="all">All Categories</option>
+                    <option value="all">Danh mục</option>
                     <option value="fruits">Fruits</option>
                     <option value="vegetables">Vegetables</option>
                   </select>
@@ -166,7 +118,7 @@
                     name="q"
                     class="search-input"
                     type="search"
-                    placeholder="Search here..."
+                    placeholder="Tìm kiếm sản phẩm..."
                     aria-label="Search"
                   />
                   <button type="submit" class="search-btn" aria-label="Search">
@@ -174,219 +126,244 @@
                   </button>
                 </form>
               </div>
-              <!-- action -->
+
               <div class="navbar__menu-actions">
                 <a
-                  href="/account.html"
+                  href="account.html"
                   class="icon-btn account-btn"
-                  title="My Account"
+                  title="Tài khoản"
                 >
                   <i class="fa-regular fa-user"></i>
-                  <span class="action-label">My Account</span>
                 </a>
-                <a href="/cart.html" class="icon-btn cart-btn" title="My Cart">
+                <a
+                  href="/wishlist.html"
+                  class="icon-btn wishlist-btn"
+                  title="Yêu thích"
+                >
+                  <i class="fa-solid fa-heart"></i>
+                  <span class="badge">3</span>
+                </a>
+                <a href="/cart.html" class="icon-btn cart-btn" title="Giỏ hàng">
                   <i class="fa-solid fa-basket-shopping"></i>
-                  <span class="action-label">My Cart</span>
-                  <span class="badge">0</span>
+                  <span class="badge">2</span>
                 </a>
               </div>
-            </div>
-          </div>
-
-          <!-- sub navigation (green bar) -->
-          <div class="navbar__subnav" aria-label="Primary navigation">
-            <div class="subnav__inner">
-              <button class="shop-cat-btn" aria-label="Shop By Category">
-                <i class="fa-solid fa-bars"></i>
-                <span>Shop By Category</span>
-                <i class="fa-solid fa-caret-down"></i>
-              </button>
-
-              <ul class="subnav-links">
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Bài viết</a></li>
-                <li><a href="#">Ưu đãi</a></li>
-              </ul>
             </div>
           </div>
         </nav>
       </header>
-    <!-- end header -->
+      <main class="main product-detail">
+        <div class="app__container">
+          <div class="grid">
+            <div class="grid__row">
+              <div class="product-detail__inner">
+                <div class="product-gallery">
+                  <div class="product-gallery__thumbs">
+                    <button class="thumb active" data-src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983">
+                      <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983" alt="Măng cụt" />
+                    </button>  
+                  </div>
 
-    <main class="main product-detail">
-      <div class="app__container">
-        <div class="grid">
-          <div class="grid__row">
-            <div class="product-detail__inner">
-              <!-- LEFT: gallery -->
-              <div class="product-gallery">
-                <div class="product-gallery__thumbs">
-                  <button class="thumb active" data-src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983">
-                    <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983" alt="Măng cụt" />
-                  </button>  
+                  <div class="product-gallery__main">
+                    <img id="productMainImg" src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983" alt="Măng cụt tươi ngon" />
+                  </div>
                 </div>
 
-                <div class="product-gallery__main">
-                  <img id="productMainImg" src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983" alt="Măng cụt tươi ngon" />
+                <div class="product-info">
+                  <h1 class="product-title">Măng cụt Thái Lan loại 1</h1>
+                  <p class="product-sku">Mã: FS-MC-001</p>
+                  <div class="product-price">
+                    <span class="price-current">120,000₫</span>
+                    <span class="price-old">150,000₫</span>
+                  </div>
+
+                  <div class="product-meta">
+                    <label>Trọng lượng:</label>
+                    <select class="product-variant">
+                      <option>500g</option>
+                      <option>1kg</option>
+                      <option>2kg</option>
+                    </select>
+                  </div>
+
+                  <div class="product-qty-row">
+                    <label>Số lượng</label>
+                    <div class="qty">
+                      <button class="qty-decrease">-</button>
+                      <input type="number" min="1" value="1" class="qty-input" />
+                      <button class="qty-increase">+</button>
+                    </div>
+                  </div>
+
+                  <div class="product-action">
+                    <button class="add-to-cart">Thêm vào giỏ</button>
+                    <button class="buy-now">Mua ngay</button>
+                  </div>
+
+                  <div class="product-short-desc">
+                    <p>Măng cụt tươi loại 1, chọn lọc từ các vườn đạt chuẩn. Vị ngọt thanh, mọng nước, cùi trắng dày.
+                        Phù hợp ăn trực tiếp hoặc làm món tráng miệng. Giao hàng nhanh trong ngày.</p>
+                  </div>
                 </div>
               </div>
 
-              <!-- RIGHT: product info -->
-              <div class="product-info">
-                <h1 class="product-title">Măng cụt Thái Lan loại 1</h1>
-                <p class="product-sku">Mã: FS-MC-001</p>
-                <div class="product-price">
-                  <span class="price-current">120,000₫</span>
-                  <span class="price-old">150,000₫</span>
-                </div>
+              <div class="product-detail__tabs">
+                <nav class="tabs">
+                  <button class="tab-btn active" data-target="#desc">Mô tả</button>
+                  <button class="tab-btn" data-target="#reviews">Đánh giá </button>
+                </nav>
 
-                <div class="product-meta">
-                  <label>Trọng lượng:</label>
-                  <select class="product-variant">
-                    <option>500g</option>
-                    <option>1kg</option>
-                    <option>2kg</option>
-                  </select>
-                </div>
-
-                <div class="product-qty-row">
-                  <label>Số lượng</label>
-                  <div class="qty">
-                    <button class="qty-decrease">-</button>
-                    <input type="number" min="1" value="1" class="qty-input" />
-                    <button class="qty-increase">+</button>
+                <section id="desc" class="tab-panel active">
+                  <h3>Mô tả sản phẩm</h3>
+                  <p>
+                    Măng cụt tươi loại 1, chọn lọc từ các vườn đạt chuẩn. Vị ngọt thanh, mọng nước, cùi trắng dày.
+                    Phù hợp ăn trực tiếp hoặc làm món tráng miệng. Giao hàng nhanh trong ngày.
+                  </p>
+                  <div class="related-products">
+                    <h2 class="related-title">Sản phẩm tương tự</h2>
+                    <div class="related-list">
+                      </div>
                   </div>
-                </div>
+                </section>
 
-                <div class="product-action">
-                  <button class="add-to-cart">Thêm vào giỏ</button>
-                  <button class="buy-now">Mua ngay</button>
-                </div>
-
-                <div class="product-short-desc">
-                  <p>Măng cụt tươi loại 1, chọn lọc từ các vườn đạt chuẩn. Vị ngọt thanh, mọng nước, cùi trắng dày.
-                      Phù hợp ăn trực tiếp hoặc làm món tráng miệng. Giao hàng nhanh trong ngày.</p>
-                </div>
+                <section id="reviews" class="tab-panel">
+                  <div class="review-list">
+                    </div>
+                  <form class-="review-form">
+                    </form>
+                </section>
               </div>
-            </div>
-
-            <!-- tabs: description / reviews -->
-            <div class="product-detail__tabs">
-              <nav class="tabs">
-                <button class="tab-btn active" data-target="#desc">Mô tả</button>
-                <button class="tab-btn" data-target="#reviews">Đánh giá </button>
-              </nav>
-
-              <section id="desc" class="tab-panel active">
-                <h3>Mô tả sản phẩm</h3>
-                <p>
-                  Măng cụt tươi loại 1, chọn lọc từ các vườn đạt chuẩn. Vị ngọt thanh, mọng nước, cùi trắng dày.
-                  Phù hợp ăn trực tiếp hoặc làm món tráng miệng. Giao hàng nhanh trong ngày.
-                </p>
-
-                <div class="related-products">
-                  <h2 class="related-title">Sản phẩm tương tự</h2>
-                  <div class="related-list">
-                    <div class="product-card">
-                      <div class="product-image">
-                        <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231" alt="Coconut" />
-                        <div class="product-actions">
-                          <button class="action-btn" title="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                        </div>
-                      </div>
-                      <div class="product-info">
-                        <h3>Dừa sáp</h3>
-                        <div class="price"><span class="current">100,000₫</span></div>
-                        <button class="btn-card-add">Thêm vào giỏ</button>
-                      </div>
-                    </div>
-
-                    <div class="product-card">
-                      <div class="product-image">
-                        <img src="./assets/images/apple.jpg" alt="Apple" />
-                        <div class="product-actions">
-                          <button class="action-btn" title="Wishlist"><i class="fa-regular fa-heart"></i></button>
-                        </div>
-                      </div>
-                      <div class="product-info">
-                        <h3>Táo Fuji Nhật Bản</h3>
-                        <div class="price"><span class="current">200,000₫</span></div>
-                        <button class="btn-card-add">Thêm vào giỏ</button>
-                      </div>
-                    </div>
-
-                    </div>
-                </div>
-              </section>
-
-              <section id="reviews" class="tab-panel">
-                
-                <div class="review-list">
-                  <div class="review-item">
-                    <div class="review-header">
-                      <strong>Adrian</strong>
-                      <span>09/06/2019</span>
-                    </div>
-                    <div class="review-body">
-                      <p>The website made it easy to trace a battery that matches the performance and physical dimension requirements of my (unusual) car. Ordering was easy and the unit was delivered next day. So far so good.</p>
-                    </div>
-                  </div>
-                </div>
-
-                <form class-="review-form">
-                  <h3>Viết đánh giá</h3>
-                  <div class="form-group">
-                    <label for="rev-name">Tên của bạn</label>
-                    <input type="text" id="rev-name" class="form-control" required />
-                  </div>
-                  <div class="form-group">
-                    <label for="rev-text">Đánh giá của bạn</label>
-                    <textarea id="rev-text" rows="5" class="form-control" required></textarea>
-                    <small>Note: HTML is not translated!</small>
-                  </div>
-                  <div class="form-group rating-group">
-                    <label>Đánh giá</label>
-                    <div class="rating-inputs">
-                      <span>Tệ</span>
-                      <input type="radio" name="rating" id="r1" value="1" /><label for="r1"></label>
-                      <input type="radio" name="rating" id="r2" value="2" /><label for="r2"></label>
-                      <input type="radio" name="rating" id="r3" value="3" /><label for="r3"></label>
-                      <input type="radio" name="rating" id="r4" value="4" /><label for="r4"></label>
-                      <input type="radio" name="rating" id="r5" value="5" /><label for="r5"></label>
-                      <span>Tốt</span>
-                    </div>
-                  </div>
-                  <div class="form-actions">
-                    <button type="submit" class="btn-continue">Tiếp tục</button>
-                  </div>
-                </form>
-
-              </section>
             </div>
           </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <footer class="footer">
+        <div class="footer__main">
+          <div class="footer__grid">
+            <div class="footer__company">
+              <div class="footer__brand">
+                <a href="index.html">
+                  <img
+                    class="navbar__menu-logo-img"
+                    src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                    alt="Organic Harvest Logo"
+                  />
+                </a>
+              </div>
+              <p class="footer__description">
+                Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
+              </p>
+              <div class="footer__social">
+                <a
+                  href="https://www.themedevhub.com"
+                  target="_blank"
+                  class="footer__social-link footer__social-link--facebook"
+                >
+                  <svg class="footer__social-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.themedevhub.com"
+                  target="_blank"
+                  class="footer__social-link footer__social-link--twitter"
+                >
+                  <svg class="footer__social-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
+                    />
+                  </svg>
+                </a>
+                <a
+                  href="https://www.themedevhub.com"
+                  target="_blank"
+                  class="footer__social-link footer__social-link--telegram"
+                >
+                  <svg class="footer__social-icon" viewBox="0 0 24 24">
+                    <path
+                      d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z"
+                    />
+                  </svg>
+                </a>
+              </div>
+            </div>
 
-  <!-- footer reuse -->
-    <footer class="footer">
-      <div class="footer-container">
-        <div class="footer-column">
-          <h3>Thông tin cửa hàng</h3>
-          <p><strong>Địa chỉ:</strong> 30/8, ấp Nam Thới, xã Thới Tam Thôn, TP.HCM</p>
+            <div class="footer__section">
+              <h3 class="footer__title">Chính sách</h3>
+              <ul class="footer__links">
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a href="index.html" class="footer__link">Trang chủ</a>
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a href="#" class="footer__link">Sản phẩm</a>
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a href="about.html" class="footer__link">Giới thiệu</a>
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a href="blog.html" class="footer__link">Bài viết</a>
+                </li>
+              </ul>
+            </div>
+
+            <div class="footer-column">
+              <h3>Useful Links</h3>
+              <ul>
+                <li><a href="about.html">About Us</a></li>
+                <li><a href="#">Delivery Information</a></li>
+                <li><a href="#">Privacy Policy</a></li>
+                <li><a href="#">Terms & Conditions</a></li>
+                <li><a href="faqs.html">Contact Us</a></li>
+                <li><a href="account.html">My Account</a></li>
+              </ul>
+            </div>
+
+            <div class="footer__section">
+              <h3 class="footer__title">Đăng kí nhận tin</h3>
+            
+              <form class="footer__newsletter-form">
+                <input
+                  type="email"
+                  placeholder="Nhập địa chỉ email"
+                  class="footer__newsletter-input"
+                  required
+                />
+                <button type="submit" class="footer__newsletter-button">
+                  Đăng kí
+                </button>
+              </form>
+            </div>
+          </div>
         </div>
-        <div class="footer-column">
-          <h3>Liên kết</h3>
-          <ul>
-            <li><a href="#">Giới thiệu</a></li>
-            <li><a href="#">Liên hệ</a></li>
-          </ul>
+
+        <div class="footer__bottom">
+          <div class="footer__bottom-content">
+            <p class="footer__copyright">
+              &copy; 2025 Company. All rights reserved.
+            </p>
+            <ul class="footer__bottom-links">
+              <li>
+                <a href="about.html" class="footer__bottom-link">About us</a>
+              </li>
+              <li>
+                <a href="#" class="footer__bottom-link">Terms</a>
+              </li>
+              <li>
+                <a href="#" class="footer__bottom-link">Privacy</a>
+              </li>
+            </ul>
+          </div>
         </div>
+      </footer>
       </div>
-    </footer>
-  </div>
-  
-  <script>
+    
+    <script>
       // thumbnail click handler: swap main image
       document.addEventListener('click', function (e) {
         const t = e.target.closest('.thumb');
