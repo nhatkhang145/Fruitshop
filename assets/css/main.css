@@ -5,7 +5,7 @@
   --text-dark: #333333;
   --text-light: #666666;
   --border-color: #e5e5e5;
-  --bg-light: #f8f9fa;
+  --bg-light: #eee;
   --white: #ffffff;
   --shadow-sm: 0 2px 8px rgba(0, 0, 0, 0.08);
   --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -128,7 +128,12 @@ ul {
            MAIN MENU
         ================================ */
 .navbar__menu {
-  background: var(--white);
+  background-image: radial-gradient(
+    /* Giữ nguyên hình dạng và vị trí */ circle at top left,
+    /* 1. Điểm bắt đầu (Màu Xanh) */ rgba(189, 222, 219, 0.599),
+    /* 2. Điểm giữa (Màu Trắng/Trong suốt) */ transparent 70%,
+    /* 3. Điểm kết thúc (Màu Xanh lặp lại) */ rgba(191, 220, 218, 0.599) 100%
+  );
   padding: 20px 0;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
   transition: var(--transition);
@@ -210,6 +215,7 @@ ul {
   transition: var(--transition);
   position: relative;
   padding: 8px 0;
+  white-space: nowrap;
 }
 
 .main-nav-links a::after {
@@ -328,7 +334,6 @@ ul {
   align-items: center;
   justify-content: center;
   border-radius: 50%;
-  background: var(--white);
   color: var(--text-dark);
   transition: var(--transition);
   font-size: 18px;
@@ -1695,7 +1700,7 @@ ul {
   inset: 0;
   background-image: radial-gradient(
     circle at top left,
-    rgba(56, 193, 182, 0.5),
+    rgba(136, 212, 207, 0.5),
     transparent 70%
   );
   filter: blur(80px);

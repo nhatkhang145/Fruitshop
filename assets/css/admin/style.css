@@ -20,7 +20,7 @@
 }
 
 .bx {
-  font-size: 1.7rem;
+  font-size: 2.4rem;
 }
 
 a {
@@ -93,7 +93,7 @@ body {
 
 .sidebar .side-menu {
   width: 100%;
-  margin-top: 48px;
+  margin-top: 10px;
 }
 
 .sidebar .side-menu li {
@@ -332,6 +332,7 @@ body {
   display: flex;
   align-items: center;
   grid-gap: 16px;
+  margin-top: 15px;
 }
 
 .content main .header .left .breadcrumb li {
@@ -363,13 +364,13 @@ body {
 
 .content main .insights {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
   grid-gap: 24px;
   margin-top: 36px;
 }
 
 .content main .insights li {
-  padding: 24px;
+  padding: 20px;
   background: var(--light);
   border-radius: 20px;
   display: flex;
@@ -379,8 +380,8 @@ body {
 }
 
 .content main .insights li .bx {
-  width: 80px;
-  height: 80px;
+  width: 70px;
+  height: 70px;
   border-radius: 10px;
   font-size: 36px;
   display: flex;
@@ -416,6 +417,8 @@ body {
 
 .content main .insights li .info p {
   color: var(--dark);
+  margin-left: 4px;
+  margin-top: 5px;
 }
 
 .content main .bottom-data {
@@ -560,6 +563,17 @@ body {
   margin-bottom: 0;
 }
 
+.btn-submit{
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+
 @media screen and (max-width: 768px) {
   .sidebar {
     width: 200px;
@@ -617,4 +631,1467 @@ body {
   .content main .bottom-data .reminders .task-list {
     min-width: 340px;
   }
+}
+
+/* =================================== */
+/* === CSS CHO TRANG QUẢN LÝ ĐƠN HÀNG === */
+/* =================================== */
+
+/* === Tùy chỉnh Insights cho đơn hàng === */
+.content main .insights li .bx.bx-loader-circle {
+  background: var(--light-warning);
+  color: var(--warning);
+}
+.content main .insights li .bx.bx-package {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bxs-truck {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bx-check-circle {
+  background: var(--light-success);
+  color: var(--success);
+}
+
+/* === Tùy chỉnh Bảng đơn hàng === */
+
+/* Căn chỉnh bộ lọc */
+.content main .bottom-data .orders .header .filters {
+  display: flex;
+  align-items: center;
+  grid-gap: 10px;
+}
+.content main .bottom-data .orders .header .filters input[type="date"] {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--grey);
+  background: var(--light);
+  color: var(--dark);
+  outline: none;
+  font-size: 14px;
+}
+
+/* Các trạng thái (Status) mới cho đơn hàng */
+.content main .bottom-data .orders table tr td .status.pending {
+  background: var(--warning);
+}
+.content main .bottom-data .orders table tr td .status.processing {
+  background: var(--primary);
+}
+.content main .bottom-data .orders table tr td .status.shipped {
+  background: var(--primary);
+  opacity: 0.8;
+}
+.content main .bottom-data .orders table tr td .status.completed {
+  background: var(--success);
+}
+.content main .bottom-data .orders table tr td .status.cancelled {
+  background: var(--danger);
+}
+
+/* Nút hành động (Xem chi tiết) */
+.content main .bottom-data .orders table td .action-btn.view {
+  background: var(--primary);
+  color: var(--light);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  grid-gap: 5px;
+  transition: opacity 0.3s ease;
+}
+.content main .bottom-data .orders table td .action-btn.view .bx {
+  font-size: 1.2rem;
+}
+.content main .bottom-data .orders table td .action-btn.view:hover {
+  opacity: 0.8;
+}
+
+/* Căn chỉnh các cột trong bảng */
+.content main .bottom-data .orders table td {
+  vertical-align: middle;
+  padding: 14px 0;
+}
+.content main .bottom-data .orders table th,
+.content main .bottom-data .orders table td {
+  padding-left: 6px; /* Thêm padding trái cho dễ nhìn */
+}
+
+/* =================================== */
+/* === CSS CHO TRANG QUẢN LÝ DANH MỤC === */
+/* =================================== */
+
+/* === Bố cục 2 cột === */
+/* Tùy chỉnh .bottom-data để hỗ trợ 2 cột rõ ràng hơn */
+.content main .bottom-data {
+  align-items: flex-start; /* Căn các cột lên trên cùng */
+}
+
+/* Cột trái: Form */
+.content main .bottom-data .add-category-form {
+  flex-basis: 350px; /* Chiều rộng cơ sở */
+  flex-grow: 1; /* Tự động co giãn */
+  min-width: 300px; /* Chiều rộng tối thiểu */
+
+  /* Áp dụng style giống .orders */
+  background: var(--light);
+  border-radius: 20px;
+  padding: 24px;
+}
+
+/* Cột phải: Bảng danh sách */
+.content main .bottom-data .category-list {
+  flex-basis: 400px; /* Chiều rộng cơ sở */
+  flex-grow: 2; /* Chiếm nhiều không gian hơn form */
+}
+
+/* === Style cho Form (Tận dụng từ CSS modal) === */
+/* Chúng ta chỉ cần định nghĩa lại các style form cơ bản 
+   (phòng trường hợp bạn chưa sao chép từ modal) */
+
+.add-category-form .form-group {
+  margin-bottom: 16px;
+}
+
+.add-category-form .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.add-category-form .form-group input[type="text"],
+.add-category-form .form-group input[type="file"],
+.add-category-form .form-group select,
+.add-category-form .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--grey);
+  background: var(--grey); /* Giống input tìm kiếm */
+  border-radius: 6px;
+  color: var(--dark);
+  outline: none;
+  font-size: 14px;
+}
+.add-category-form .form-group input[type="file"] {
+  background: var(--light);
+  padding: 10px;
+}
+.add-category-form .form-group textarea {
+  resize: vertical;
+}
+
+.add-category-form .btn-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  margin-top: 10px;
+}
+.add-category-form .btn-submit:hover {
+  opacity: 0.9;
+}
+
+/* === Style Bảng (Hiển thị phân cấp) === */
+.category-list table td strong {
+  color: var(--dark);
+  font-weight: 600;
+}
+.category-list table .indent-1 {
+  padding-left: 25px;
+  color: var(--dark-grey);
+}
+.category-list table .indent-2 {
+  padding-left: 50px;
+  color: var(--dark-grey);
+}
+
+/* Căn giữa các nút hành động */
+.category-list table td {
+  vertical-align: middle;
+}
+
+/* Điều chỉnh header của bảng cho gọn gàng */
+.category-list .header {
+  margin-bottom: 20px;
+}
+
+/* =================================== */
+/* === CSS CHO TRANG QUẢN LÝ SẢN PHẨM === */
+/* =================================== */
+
+/* === Tùy chỉnh Insights cho sản phẩm === */
+.content main .insights li .bx.bx-box {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bx-show {
+  background: var(--light-success);
+  color: var(--success);
+}
+.content main .insights li .bx.bx-hide {
+  background: var(--light-warning);
+  color: var(--warning);
+}
+.content main .insights li .bx.bxs-error-circle {
+  background: var(--light-danger);
+  color: var(--danger);
+}
+
+/* === Tùy chỉnh Bảng sản phẩm === */
+.content main .bottom-data .orders .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.content main .bottom-data .orders .header .filters {
+  display: flex;
+  align-items: center;
+  grid-gap: 10px;
+}
+
+.content main .bottom-data .orders .header .filters select {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--grey);
+  background: var(--light);
+  color: var(--dark);
+  outline: none;
+  font-size: 14px;
+}
+
+.content main .bottom-data .orders .header .filters .bx {
+  font-size: 1.5rem;
+}
+
+/* Căn chỉnh nội dung bảng */
+.content main .bottom-data .orders table td {
+  vertical-align: middle;
+  padding: 14px 0; /* Tăng khoảng cách một chút */
+}
+
+.content main .bottom-data .orders table td img {
+  width: 40px;
+  height: 40px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+/* Thêm các trạng thái mới */
+.content main .bottom-data .orders table tr td .status.active {
+  background: var(--success);
+}
+.content main .bottom-data .orders table tr td .status.low-stock {
+  background: var(--warning);
+}
+.content main .bottom-data .orders table tr td .status.hidden {
+  background: var(--dark-grey);
+}
+
+/* Nút hành động (Sửa, Xóa) */
+.content main .bottom-data .orders table td .action-btn {
+  display: inline-flex; /* Sử dụng inline-flex để căn giữa icon */
+  align-items: center;
+  justify-content: center;
+  padding: 6px 8px;
+  border-radius: 6px;
+  margin-right: 5px;
+  font-size: 1.2rem;
+  color: var(--light);
+  transition: opacity 0.3s ease;
+}
+.content main .bottom-data .orders table td .action-btn:hover {
+  opacity: 0.8;
+}
+.content main .bottom-data .orders table td .action-btn.edit {
+  background: var(--primary);
+}
+.content main .bottom-data .orders table td .action-btn.delete {
+  background: var(--danger);
+}
+
+/* === Phân trang (Pagination) === */
+.content main .bottom-data .pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+.content main .bottom-data .pagination .page-btn {
+  padding: 8px 14px;
+  background: var(--light);
+  color: var(--dark);
+  margin: 0 4px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.content main .bottom-data .pagination .page-btn:hover,
+.content main .bottom-data .pagination .page-btn.active {
+  background: var(--primary);
+  color: var(--light);
+}
+.content main .bottom-data .pagination .page-btn.disabled {
+  pointer-events: none;
+  color: var(--dark-grey);
+}
+
+/* =================================== */
+/* === CSS CHO MODAL (Cửa sổ bật lên) === */
+/* =================================== */
+
+.modal {
+  display: none; /* Ẩn mặc định */
+  position: fixed; /* Giữ cố định trên màn hình */
+  z-index: 2100; /* Cao hơn sidebar (2000) */
+  left: 0;
+  top: 0;
+  width: 100%;
+  height: 100%;
+  overflow: auto; /* Cho phép cuộn nếu nội dung dài */
+  background-color: rgba(0, 0, 0, 0.5); /* Lớp nền mờ */
+}
+
+.modal-content {
+  background-color: var(--light);
+  margin: 10vh auto; /* 10% từ trên xuống và tự động căn giữa */
+  padding: 24px;
+  border-radius: 10px;
+  width: 90%;
+  max-width: 600px; /* Chiều rộng tối đa */
+  position: relative;
+  animation: slide-down 0.3s ease-out;
+}
+
+/* Animation cho modal */
+@keyframes slide-down {
+  from {
+    transform: translateY(-50px);
+    opacity: 0;
+  }
+  to {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.modal-content .close-btn {
+  color: var(--dark-grey);
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+  cursor: pointer;
+}
+.modal-content .close-btn:hover {
+  color: var(--dark);
+}
+
+.modal-content h2 {
+  margin-bottom: 24px;
+  color: var(--dark);
+}
+
+/* CSS cho Form */
+.modal-content .form-group {
+  margin-bottom: 16px;
+}
+
+.modal-content .form-group label {
+  display: block;
+  margin-bottom: 6px;
+  font-weight: 500;
+  color: var(--dark);
+}
+
+.modal-content .form-group input[type="text"],
+.modal-content .form-group input[type="number"],
+.modal-content .form-group input[type="file"],
+.modal-content .form-group select,
+.modal-content .form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--grey);
+  background: var(--grey); /* Giống input tìm kiếm */
+  border-radius: 6px;
+  color: var(--dark);
+  outline: none;
+  font-size: 14px;
+}
+.modal-content .form-group input[type="file"] {
+  background: var(--light);
+  padding: 10px;
+}
+.modal-content .form-group textarea {
+  resize: vertical; /* Cho phép thay đổi chiều cao textarea */
+}
+
+/* Căn hàng cho các trường ngắn */
+.modal-content .form-group-row {
+  display: flex;
+  grid-gap: 16px;
+  flex-wrap: wrap; /* Xuống hàng trên di động */
+}
+.modal-content .form-group-row .form-group {
+  flex: 1; /* Chia đều không gian */
+  min-width: 200px; /* Chiều rộng tối thiểu trước khi xuống hàng */
+}
+
+.modal-content .btn-submit {
+  width: 100%;
+  padding: 12px;
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  margin-top: 10px;
+}
+.modal-content .btn-submit:hover {
+  opacity: 0.9;
+}
+
+/* =================================== */
+/* === CSS CHO TRANG QUẢN LÝ KHÁCH HÀNG === */
+/* =================================== */
+
+/* === Tùy chỉnh Insights cho khách hàng === */
+.content main .insights li .bx.bx-group {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bx-user-plus {
+  background: var(--light-success);
+  color: var(--success);
+}
+.content main .insights li .bx.bx-star {
+  background: var(--light-warning);
+  color: var(--warning);
+}
+.content main .insights li .bx.bx-user-x {
+  background: var(--light-danger);
+  color: var(--danger);
+}
+
+/* === Tùy chỉnh Bảng khách hàng === */
+
+/* Hiển thị avatar và tên trên cùng một hàng */
+.content main .bottom-data .orders table td:first-child {
+  display: flex;
+  align-items: center;
+  grid-gap: 12px;
+  padding-left: 6px;
+}
+
+.content main .bottom-data .orders table td img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+/* Căn giữa nội dung bảng */
+.content main .bottom-data .orders table td {
+  vertical-align: middle;
+}
+
+/* Trạng thái (Status) mới */
+.content main .bottom-data .orders table tr td .status.active {
+  background: var(--success);
+}
+.content main .bottom-data .orders table tr td .status.banned {
+  background: var(--danger);
+}
+
+/* =================================== */
+/* === CSS CHO TRANG THỐNG KÊ === */
+/* =================================== */
+
+/* === Bộ lọc ngày (Date Filter) === */
+.content main .header .date-range-filter {
+  display: flex;
+  align-items: center;
+  grid-gap: 8px;
+  background: var(--light);
+  padding: 8px 12px;
+  border-radius: 20px;
+}
+.content main .header .date-range-filter i {
+  font-size: 1.2rem;
+}
+.content main .header .date-range-filter input[type="date"] {
+  border: 1px solid var(--grey);
+  background: var(--grey);
+  padding: 5px;
+  border-radius: 6px;
+  color: var(--dark);
+  outline: none;
+}
+.content main .header .date-range-filter span {
+  color: var(--dark-grey);
+}
+.content main .header .date-range-filter .btn-primary {
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+}
+.content main .header .date-range-filter .btn-primary:hover {
+  opacity: 0.9;
+}
+
+/* === Tùy chỉnh Insights === */
+.content main .insights li .bx.bx-dollar-circle {
+  background: var(--light-success);
+  color: var(--success);
+}
+.content main .insights li .bx.bx-receipt {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bx-line-chart {
+  background: var(--light-warning);
+  color: var(--warning);
+}
+.content main .insights li .bx.bx-user-plus {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+
+/* === Chart Containers === */
+.content main .chart-container {
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+}
+
+/* Box nhỏ cho biểu đồ tròn */
+.content main .bottom-data .chart-box-small {
+  /* Tái sử dụng class .reminders */
+  flex-grow: 1;
+  flex-basis: 300px;
+  padding: 24px;
+  border-radius: 20px;
+  background: var(--light);
+  /* Cần định nghĩa lại header cho nó */
+}
+.content main .bottom-data .chart-box-small .header {
+  display: flex;
+  align-items: center;
+  margin-bottom: 24px;
+}
+.content main .bottom-data .chart-box-small .header h3 {
+  margin-right: auto;
+  font-size: 20px; /* Nhỏ hơn h3 của .orders */
+  font-weight: 600;
+}
+.content main .bottom-data .chart-box-small .header .bx {
+  cursor: pointer;
+}
+
+/* Đảm bảo biểu đồ tròn căn giữa và có kích thước hợp lý */
+.content main .chart-container.pie-chart {
+  max-height: 350px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Tái sử dụng style avatar/ảnh sản phẩm cho bảng */
+.content main .bottom-data .orders table td:first-child {
+  display: flex;
+  align-items: center;
+  grid-gap: 12px;
+  padding-left: 6px;
+}
+.content main .bottom-data .orders table td img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px; /* Vuông cho sản phẩm */
+  object-fit: cover;
+}
+/* Style riêng cho avatar khách hàng (nếu muốn) */
+.content main .bottom-data .orders table td img.avatar {
+  border-radius: 50%; /* Tròn cho avatar */
+}
+
+/* === Responsive === */
+@media screen and (max-width: 768px) {
+  /* Cho header xếp chồng lên nhau */
+  .content main .header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+  .content main .header .date-range-filter {
+    width: 100%;
+    margin-top: 15px;
+    flex-wrap: wrap; /* Cho phép bộ lọc xuống hàng */
+  }
+}
+
+/* =================================== */
+/* === CSS CHO TRANG TIN NHẮN (2 CỘT) === */
+/* =================================== */
+
+/* Container chính cho bố cục 2 cột */
+.content main .bottom-data .message-container {
+  display: flex;
+  width: 100%;
+  height: calc(
+    100vh - 56px - 36px - 24px - 46px
+  ); /* (100vh - nav - header - padding - breadcrumb) */
+  min-height: 600px;
+  background: var(--light);
+  border-radius: 20px;
+  overflow: hidden;
+  /* Bỏ qua flex-wrap để 2 cột luôn nằm ngang */
+}
+
+/* === CỘT TRÁI: INBOX PANE === */
+.message-container .inbox-pane {
+  width: 35%;
+  min-width: 300px;
+  border-right: 1px solid var(--grey);
+  display: flex;
+  flex-direction: column;
+}
+
+.inbox-pane .inbox-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--grey);
+}
+.inbox-pane .inbox-header h3 {
+  color: var(--dark);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.inbox-pane .inbox-search {
+  position: relative;
+}
+.inbox-pane .inbox-search input {
+  width: 100%;
+  padding: 10px 15px 10px 40px; /* Thêm padding trái cho icon */
+  border-radius: 6px;
+  border: 1px solid var(--grey);
+  background: var(--grey);
+  color: var(--dark);
+  outline: none;
+}
+.inbox-pane .inbox-search .bx {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dark-grey);
+  font-size: 1.2rem;
+}
+
+/* Danh sách tin nhắn */
+.inbox-pane .message-list {
+  flex-grow: 1; /* Lấp đầy không gian còn lại */
+  overflow-y: auto; /* Cho phép cuộn */
+}
+.inbox-pane .message-item {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--grey);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.inbox-pane .message-item:hover {
+  background: var(--grey);
+}
+.inbox-pane .message-item.active {
+  background: var(--light-primary); /* Màu nền khi được chọn */
+  border-right: 4px solid var(--primary);
+}
+
+.message-item .message-sender {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.message-item .message-sender strong {
+  color: var(--dark);
+  font-size: 1rem;
+}
+.message-item .message-sender .message-time {
+  font-size: 0.8rem;
+  color: var(--dark-grey);
+}
+.message-item .message-subject {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--dark-grey);
+  margin-bottom: 4px;
+  /* Cắt ngắn 1 dòng */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.message-item .message-preview {
+  font-size: 0.85rem;
+  color: var(--dark-grey);
+  /* Cắt ngắn 1 dòng */
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+/* Tin nhắn CHƯA ĐỌC */
+.message-item.unread .message-sender strong,
+.message-item.unread .message-subject {
+  color: var(--dark);
+  font-weight: 700;
+}
+
+/* === CỘT PHẢI: MESSAGE VIEW PANE === */
+.message-container .message-view-pane {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+
+/* Thanh hành động */
+.message-view-pane .message-actions {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--grey);
+  display: flex;
+  flex-wrap: wrap; /* Cho phép xuống hàng trên di động */
+  grid-gap: 10px;
+}
+.message-view-pane .action-btn {
+  display: inline-flex;
+  align-items: center;
+  grid-gap: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: var(--grey);
+  color: var(--dark);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+.message-view-pane .action-btn:hover {
+  opacity: 0.8;
+}
+.message-view-pane .action-btn .bx {
+  font-size: 1.2rem;
+}
+.message-view-pane .action-btn.reply {
+  background: var(--primary);
+  color: var(--light);
+}
+.message-view-pane .action-btn.delete {
+  background: var(--light-danger);
+  color: var(--danger);
+}
+
+/* Nội dung tin nhắn */
+.message-view-pane .message-content {
+  flex-grow: 1;
+  padding: 24px;
+  overflow-y: auto;
+  color: var(--dark);
+}
+.message-view-pane .message-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.message-view-pane .message-header p {
+  font-size: 0.9rem;
+  color: var(--dark-grey);
+  margin-bottom: 4px;
+}
+.message-view-pane .message-header p strong {
+  color: var(--dark);
+  font-weight: 500;
+  min-width: 50px;
+  display: inline-block;
+}
+.message-view-pane hr {
+  border: none;
+  border-top: 1px solid var(--grey);
+  margin: 20px 0;
+}
+.message-view-pane .message-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.message-view-pane .message-body p {
+  margin-bottom: 15px;
+}
+
+/* === Responsive cho di động === */
+@media screen and (max-width: 768px) {
+  .content main .bottom-data .message-container {
+    flex-direction: column; /* Xếp chồng 2 cột */
+    height: auto; /* Chiều cao tự động */
+  }
+  .message-container .inbox-pane {
+    width: 100%;
+    height: 400px; /* Giới hạn chiều cao */
+    border-right: none;
+    border-bottom: 1px solid var(--grey);
+  }
+  .message-container .message-view-pane {
+    width: 100%;
+  }
+}
+
+/* =================================== */
+/* === CSS CHO TRANG PHÂN QUYỀN (ROLES) === */
+/* =================================== */
+
+/* === Tùy chỉnh Insights === */
+.content main .insights li .bx.bx-shield-quarter {
+  background: var(--light-danger);
+  color: var(--danger);
+}
+.content main .insights li .bx.bx-user-check {
+  background: var(--light-success);
+  color: var(--success);
+}
+
+/* Nút Xóa bị vô hiệu hóa (cho vai trò Admin) */
+.content main .bottom-data .orders table td .action-btn.disabled {
+  background: var(--grey);
+  color: var(--dark-grey);
+  pointer-events: none;
+}
+
+/* === CSS CHO MODAL PHÂN QUYỀN === */
+
+/* Làm cho modal này RỘNG HƠN modal sản phẩm */
+.modal#roleModal .modal-content {
+  max-width: 800px;
+}
+
+/* Ma trận quyền hạn */
+.permission-matrix {
+  margin-top: 24px;
+  margin-bottom: 24px;
+  border-top: 1px solid var(--grey);
+  padding-top: 15px;
+}
+.permission-matrix h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 15px;
+}
+
+/* Nhóm quyền */
+.permission-group {
+  margin-bottom: 20px;
+  border: 1px solid var(--grey);
+  border-radius: 8px;
+  padding: 16px;
+}
+.permission-group h4 {
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--primary);
+  margin-bottom: 16px;
+  border-bottom: 1px solid var(--grey);
+  padding-bottom: 10px;
+}
+
+/* Danh sách checkbox */
+.permission-group .permission-list {
+  display: grid;
+  /* Hiển thị 2 hoặc 3 cột tùy độ rộng */
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: 15px;
+}
+.permission-group .permission-list li {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.permission-group .permission-list li input[type="checkbox"] {
+  width: 18px;
+  height: 18px;
+  /* Thay đổi màu dấu check */
+  accent-color: var(--primary);
+}
+.permission-group .permission-list li label {
+  font-size: 0.95rem;
+  color: var(--dark);
+  cursor: pointer;
+}
+
+/* =================================== */
+/* === CSS CHO TRANG TÀI KHOẢN ADMIN === */
+/* =================================== */
+
+/* === Tùy chỉnh Insights === */
+.content main .insights li .bx.bx-user-check {
+  background: var(--light-success);
+  color: var(--success);
+}
+.content main .insights li .bx.bx-user {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bx-user-x {
+  background: var(--light-danger);
+  color: var(--danger);
+}
+.content main .insights li .bx.bx-user-shield {
+  background: var(--light-warning);
+  color: var(--warning);
+}
+
+/* Tái sử dụng style avatar cho bảng */
+.content main .bottom-data .orders table td:first-child {
+  display: flex;
+  align-items: center;
+  grid-gap: 12px;
+  padding-left: 6px;
+}
+.content main .bottom-data .orders table td img {
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+
+.form-group #adminEmail, #adminPassword {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--grey);
+  background: var(--grey);
+  border-radius: 6px;
+  color: var(--dark);
+  outline: none;
+  font-size: 14px;
+}
+
+
+
+
+/* =================================== */
+/* === CSS CHO TRANG TỔNG QUAN (INDEX) === */
+/* =================================== */
+
+/* Tùy chỉnh Insights cho Tổng quan */
+.content main .insights li .bx.bx-dollar-circle {
+  background: var(--light-success);
+  color: var(--success);
+}
+.content main .insights li .bx.bx-receipt {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bx-loader-circle {
+  background: var(--light-warning);
+  color: var(--warning);
+}
+.content main .insights li .bx.bx-user-plus {
+  background: var(--light-success);
+  color: var(--success);
+}
+
+/* Nút "Xem tất cả" trong header của box */
+.content main .bottom-data .header .view-all {
+  font-size: 14px;
+  color: var(--primary);
+  display: flex;
+  align-items: center;
+  gap: 5px;
+  transition: opacity 0.3s ease;
+}
+.content main .bottom-data .header .view-all:hover {
+  opacity: 0.7;
+}
+
+/* Khung chứa biểu đồ nhỏ */
+.content main .chart-container-sm {
+  width: 100%;
+  position: relative;
+  margin-top: 20px;
+  min-height: 250px; /* Đảm bảo có chiều cao tối thiểu */
+}
+
+/* Tùy chỉnh danh sách .reminders cho "Sắp hết hàng" */
+.content main .bottom-data .reminders .task-list li {
+  padding: 14px 10px;
+  background: var(--light); /* Nền mặc định */
+  border-left: 10px solid var(--success); /* Mặc định: Còn hàng (completed) */
+}
+.content main .bottom-data .reminders .task-list li.low-stock {
+  background: var(--light-warning);
+  border-left-color: var(--warning);
+}
+.content main .bottom-data .reminders .task-list li .task-title {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.content main .bottom-data .reminders .task-list li .task-title img {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+.content main .bottom-data .reminders .task-list li .stock-count {
+  font-weight: 600;
+  color: var(--dark);
+}
+.content main .bottom-data .reminders .task-list li.low-stock .stock-count {
+  color: var(--danger);
+}
+
+/* Thêm style cho trạng thái đơn hàng (nếu chưa có) */
+.content main .bottom-data .orders table tr td .status.pending {
+  background: var(--warning);
+}
+.content main .bottom-data .orders table tr td .status.processing {
+  background: var(--primary);
+}
+
+
+
+
+/* =================================== */
+/* === CSS CHO NOTIFICATION DROPDOWN === */
+/* =================================== */
+
+/* Wrapper (Bắt buộc) */
+.notification-wrapper {
+  position: relative;
+  /* Đảm bảo nó nằm cạnh các mục nav khác */
+  display: flex; 
+  align-items: center;
+}
+/* Tái định vị lại .notif */
+.content nav .notif {
+  position: relative; /* Bỏ `relative` khỏi đây nếu bạn muốn `absolute` */
+}
+
+.notification-dropdown {
+  position: absolute;
+  top: calc(100% + 15px); /* Vị trí dưới chuông */
+  right: -20px;
+  width: 320px;
+  background: var(--light);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--grey);
+  z-index: 2000; /* Cao hơn mọi thứ */
+  overflow: hidden;
+
+  /* Ẩn mặc định & Thêm animation */
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+/* MODIFIER: Hiển thị dropdown */
+.notification-dropdown.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header */
+.notification-dropdown .dropdown-header {
+  padding: 16px;
+  font-size: 1rem;
+  font-weight: 600;
+  color: var(--dark);
+  border-bottom: 1px solid var(--grey);
+}
+
+/* Danh sách */
+.notification-dropdown .notification-list {
+  max-height: 350px;
+  overflow-y: auto;
+}
+
+/* Từng mục */
+.notification-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 16px;
+  border-bottom: 1px solid var(--grey);
+  transition: background 0.3s ease;
+}
+.notification-item:hover {
+  background: var(--grey);
+}
+.notification-item:last-child {
+  border-bottom: none;
+}
+
+/* Icon của mục */
+.notification-item .item-icon {
+  font-size: 1.5rem;
+  width: 40px;
+  height: 40px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: var(--light-primary);
+  color: var(--primary);
+}
+/* Màu icon khác nhau */
+.notification-item.unread .item-icon {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.notification-item .item-icon.bx-user-plus {
+  background: var(--light-success);
+  color: var(--success);
+}
+.notification-item .item-icon.bxs-error-circle {
+  background: var(--light-danger);
+  color: var(--danger);
+}
+
+/* Nội dung */
+.item-content p {
+  font-size: 0.9rem;
+  color: var(--dark);
+  margin-bottom: 4px;
+}
+.item-content span {
+  font-size: 0.85rem;
+  color: var(--dark-grey);
+}
+.item-content small {
+  font-size: 0.75rem;
+  color: var(--dark-grey);
+  margin-top: 5px;
+  display: block;
+}
+
+/* Mục chưa đọc */
+.notification-item.unread {
+  background: var(--light-primary);
+}
+.notification-item.unread:hover {
+  background: #cce1ff; /* Tối hơn một chút */
+}
+
+/* Footer */
+.notification-dropdown .dropdown-footer {
+  padding: 12px 16px;
+  text-align: center;
+  border-top: 1px solid var(--grey);
+  background: var(--light);
+}
+.notification-dropdown .dropdown-footer a {
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: var(--primary);
+}
+
+
+
+
+
+
+/* =================================== */
+/* === CSS TRANG LỊCH SỬ THÔNG BÁO === */
+/* =================================== */
+
+/* Tùy chỉnh header của .orders */
+.content main .bottom-data .orders .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+/* Nút "Đánh dấu" */
+.content main .bottom-data .orders .header .btn-primary {
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.content main .bottom-data .orders .header .btn-primary:hover {
+  opacity: 0.9;
+}
+.content main .bottom-data .orders .header .btn-primary .bx {
+  font-size: 1.2rem;
+}
+
+/* Danh sách log */
+.notification-log {
+  width: 100%;
+  margin-top: 20px;
+}
+
+.log-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border-bottom: 1px solid var(--grey);
+  transition: background 0.3s ease;
+}
+.log-item:last-child {
+  border-bottom: none;
+}
+.log-item:hover {
+  background: var(--grey);
+}
+
+/* Mục chưa đọc */
+.log-item.unread {
+  background: var(--light-primary);
+}
+
+/* Icon */
+.log-item .item-icon {
+  font-size: 1.6rem;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--light);
+}
+
+/* Màu icon khác nhau */
+.log-item .item-icon.bx-cart-add { background: var(--primary); }
+.log-item .item-icon.bx-cart { background: var(--success); }
+.log-item .item-icon.bx-user-plus { background: var(--success); }
+.log-item .item-icon.bxs-error-circle { background: var(--danger); }
+.log-item .item-icon.bx-message-detail { background: var(--warning); }
+
+
+/* Nội dung log */
+.log-item .item-content p {
+  font-size: 1rem;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.log-item .item-content small {
+  font-size: 0.85rem;
+  color: var(--dark-grey);
+}
+.log-item.unread .item-content p {
+  font-weight: 600;
+}
+
+/* Tái sử dụng style Phân trang (nếu đã có thì không cần) */
+.content main .bottom-data .pagination {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding-top: 20px;
+}
+.content main .bottom-data .pagination .page-btn {
+  padding: 8px 14px;
+  background: var(--light);
+  color: var(--dark);
+  margin: 0 4px;
+  border-radius: 6px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+}
+.content main .bottom-data .pagination .page-btn:hover,
+.content main .bottom-data .pagination .page-btn.active {
+  background: var(--primary);
+  color: var(--light);
+}
+.content main .bottom-data .pagination .page-btn.disabled {
+  pointer-events: none;
+  color: var(--dark-grey);
+}
+
+
+
+
+
+
+
+
+
+/* =================================== */
+/* === CSS CHO PROFILE DROPDOWN === */
+/* =================================== */
+
+/* Wrapper (Bắt buộc) */
+.profile-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+.content nav .profile img {
+  border: 2px solid var(--primary); /* Thêm viền cho đẹp */
+}
+
+.profile-dropdown {
+  position: absolute;
+  top: calc(100% + 15px);
+  right: 0;
+  width: 220px; /* Hẹp hơn dropdown thông báo */
+  background: var(--light);
+  border-radius: 10px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  border: 1px solid var(--grey);
+  z-index: 2000;
+  overflow: hidden;
+
+  /* Ẩn mặc định & Thêm animation */
+  display: none;
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease;
+}
+/* MODIFIER: Hiển thị dropdown */
+.profile-dropdown.show {
+  display: block;
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Header */
+.profile-dropdown .dropdown-header {
+  padding: 12px 16px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--dark-grey);
+  border-bottom: 1px solid var(--grey);
+}
+
+/* Menu */
+.profile-dropdown .profile-menu {
+  list-style: none;
+  padding: 10px 0;
+}
+.profile-dropdown .profile-menu li {
+  margin: 0;
+}
+.profile-dropdown .profile-menu li a {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--dark);
+  transition: background 0.3s ease;
+}
+.profile-dropdown .profile-menu li a:hover {
+  background: var(--grey);
+}
+.profile-dropdown .profile-menu li a .bx {
+  font-size: 1.3rem;
+  color: var(--dark-grey);
+}
+/* Màu cho Đăng xuất */
+.profile-dropdown .profile-menu li a.logout,
+.profile-dropdown .profile-menu li a.logout .bx {
+  color: var(--danger);
+}
+
+.profile-dropdown .profile-menu hr {
+  border: none;
+  border-top: 1px solid var(--grey);
+  margin: 8px 0;
+}
+
+
+
+
+
+
+
+
+/* =================================== */
+/* === CSS TOGGLE SÁNG/TỐI (TRONG DROPDOWN) === */
+/* =================================== */
+
+/* Hàng <li> chứa nút gạt */
+.profile-dropdown .profile-menu li.profile-menu-toggle {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--dark);
+  /* Ngăn <li> tự đóng dropdown khi click */
+  cursor: default; 
+}
+
+/* Căn chỉnh icon và text */
+.profile-dropdown .profile-menu li.profile-menu-toggle .bx {
+  font-size: 1.3rem;
+  color: var(--dark-grey);
+}
+.profile-dropdown .profile-menu li.profile-menu-toggle span {
+  flex-grow: 1; /* Đẩy nút gạt sang phải */
+}
+
+/* Nút gạt (style mới, nhỏ hơn) */
+.theme-toggle-dropdown {
+  display: block;
+  min-width: 40px;
+  height: 20px;
+  background: var(--grey);
+  cursor: pointer;
+  position: relative;
+  border-radius: 20px;
+}
+
+.theme-toggle-dropdown::before {
+  content: "";
+  position: absolute;
+  top: 2px;
+  left: 2px;
+  bottom: 2px;
+  width: calc(20px - 4px); /* 16px */
+  background: var(--light); /* Màu nút gạt */
+  border-radius: 50%;
+  transition: all 0.3s ease;
+}
+
+/* input (vẫn ẩn) + label */
+input#theme-toggle:checked + .theme-toggle-dropdown {
+  background-color: var(--primary); /* Nền khi bật */
+}
+
+input#theme-toggle:checked + .theme-toggle-dropdown::before {
+  transform: translateX(20px); /* Di chuyển (40 - 20) */
+  background-color: var(--light);
 }

@@ -49,13 +49,8 @@
           >
         </li>
         <li>
-          <a href="/admin/Inventory.html"
-            ><i class="bx bx-box"></i>Quản lý kho hàng</a
-          >
-        </li>
-        <li>
-          <a href="/admin/reports.html"
-            ><i class="bx bx-line-chart"></i>Thống kê</a
+          <a href="/admin/notifications.html"
+            ><i class="bx bx-bell"></i>Lịch sử Thông báo</a
           >
         </li>
         <li>
@@ -63,21 +58,15 @@
             ><i class="bx bx-message-detail"></i>Tin nhắn</a
           >
         </li>
+
         <li>
-          <a href="/admin/Roles.html"
-            ><i class="bx bx-shield-quarter"></i>Phân quyền</a
+          <a href="/admin/reports.html"
+            ><i class="bx bx-line-chart"></i>Thống kê</a
           >
         </li>
+
         <li>
           <a href="/admin/Settings.html"><i class="bx bx-cog"></i>Cài đặt</a>
-        </li>
-      </ul>
-      <ul class="side-menu">
-        <li>
-          <a href="#" class="logout">
-            <i class="bx bx-log-out-circle"></i>
-            Logout
-          </a>
         </li>
       </ul>
     </div>
@@ -96,15 +85,84 @@
             </button>
           </div>
         </form>
-        <input type="checkbox" id="theme-toggle" hidden />
-        <label for="theme-toggle" class="theme-toggle"></label>
-        <a href="#" class="notif">
-          <i class="bx bx-bell"></i>
-          <span class="count">12</span>
-        </a>
-        <a href="#" class="profile">
-          <img src="images/logo.png" />
-        </a>
+
+        <div class="notification-wrapper">
+          <a href="#" class="notif" id="notifBtn">
+            <i class="bx bx-bell"></i>
+            <span class="count">12</span>
+          </a>
+
+          <div class="notification-dropdown" id="notifDropdown">
+            <h3 class="dropdown-header">Thông báo mới</h3>
+            <ul class="notification-list">
+              <li class="notification-item unread">
+                <i class="bx bx-cart-add item-icon"></i>
+                <div class="item-content">
+                  <p><strong>Đơn hàng mới</strong></p>
+                  <span>Bạn có đơn hàng #12350 từ Nguyễn Văn A.</span>
+                  <small>2 phút trước</small>
+                </div>
+              </li>
+              <li class="notification-item unread">
+                <i class="bx bx-user-plus item-icon"></i>
+                <div class="item-content">
+                  <p><strong>Khách hàng mới</strong></p>
+                  <span>Trần Thị B vừa đăng ký tài khoản.</span>
+                  <small>1 giờ trước</small>
+                </div>
+              </li>
+              <li class="notification-item">
+                <i class="bx bxs-error-circle item-icon"></i>
+                <div class="item-content">
+                  <p><strong>Hết hàng</strong></p>
+                  <span>Sản phẩm "Dâu tây Hàn Quốc" đã hết hàng.</span>
+                  <small>Hôm qua</small>
+                </div>
+              </li>
+            </ul>
+            <div class="dropdown-footer">
+              <a href="#">Xem tất cả thông báo</a>
+            </div>
+          </div>
+        </div>
+        <div class="profile-wrapper">
+          <a href="#" class="profile" id="profileBtn">
+            <img src="images/logo.png" />
+          </a>
+
+          <div class="profile-dropdown" id="profileDropdown">
+            <h3 class="dropdown-header">Tài khoản</h3>
+            <ul class="profile-menu">
+              <li>
+                <a href="/admin/profile.html">
+                  <i class="bx bxs-user-circle"></i>
+                  <span>Hồ sơ của tôi</span>
+                </a>
+              </li>
+              <li>
+                <a href="/admin/profile.html#changepassword">
+                  <i class="bx bxs-lock-alt"></i>
+                  <span>Đổi mật khẩu</span>
+                </a>
+              </li>
+
+              <li class="profile-menu-toggle">
+                <i class="bx bx-moon"></i>
+                <span>Chế độ Tối</span>
+
+                <input type="checkbox" id="theme-toggle" hidden />
+                <label for="theme-toggle" class="theme-toggle-dropdown"></label>
+              </li>
+              <hr />
+              <li>
+                <a href="#" class="logout">
+                  <i class="bx bx-log-out-circle"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
       </nav>
 
       <!-- End of Navbar -->
@@ -112,131 +170,129 @@
       <main>
         <div class="header">
           <div class="left">
-            <h1>Dashboard</h1>
+            <h1>Tổng quan</h1>
             <ul class="breadcrumb">
-              <li><a href="#"> Analytics </a></li>
-              /
-              <li><a href="#" class="active">Shop</a></li>
+              <li><a href="#">Quản lý</a></li>
+              <li>/</li>
+              <li><a href="#" class="active">Tổng quan</a></li>
             </ul>
           </div>
-          <a href="#" class="report">
-            <i class="bx bx-cloud-download"></i>
-            <span>Download CSV</span>
-          </a>
         </div>
 
-        <!-- Insights -->
         <ul class="insights">
-          <li>
-            <i class="bx bx-calendar-check"></i>
-            <span class="info">
-              <h3>1,074</h3>
-              <p>Paid Order</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-show-alt"></i>
-            <span class="info">
-              <h3>3,944</h3>
-              <p>Site Visit</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-line-chart"></i>
-            <span class="info">
-              <h3>14,721</h3>
-              <p>Searches</p>
-            </span>
-          </li>
           <li>
             <i class="bx bx-dollar-circle"></i>
             <span class="info">
-              <h3>$6,742</h3>
-              <p>Total Sales</p>
+              <h3>1,250,000đ</h3>
+              <p>Doanh thu Hôm nay</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bx-receipt"></i>
+            <span class="info">
+              <h3>15</h3>
+              <p>Đơn hàng Hôm nay</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bx-loader-circle"></i>
+            <span class="info">
+              <h3>8</h3>
+              <p>Chờ xử lý</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bx-user-plus"></i>
+            <span class="info">
+              <h3>22</h3>
+              <p>Khách hàng Mới (Tuần này)</p>
             </span>
           </li>
         </ul>
-        <!-- End of Insights -->
 
         <div class="bottom-data">
           <div class="orders">
             <div class="header">
-              <i class="bx bx-receipt"></i>
-              <h3>Recent Orders</h3>
-              <i class="bx bx-filter"></i>
-              <i class="bx bx-search"></i>
+              <h3>Đơn hàng mới nhất (Cần xử lý)</h3>
+              <a href="/admin/orders.html" class="view-all"
+                >Xem tất cả <i class="bx bx-right-arrow-alt"></i
+              ></a>
             </div>
             <table>
               <thead>
                 <tr>
-                  <th>User</th>
-                  <th>Order Date</th>
-                  <th>Status</th>
+                  <th>Mã Đơn Hàng</th>
+                  <th>Khách hàng</th>
+                  <th>Tổng tiền</th>
+                  <th>Trạng thái</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>
-                    <img src="images/profile-1.jpg" />
-                    <p>John Doe</p>
-                  </td>
-                  <td>14-08-2023</td>
-                  <td><span class="status completed">Completed</span></td>
+                  <td>#12350</td>
+                  <td>Nguyễn Văn A</td>
+                  <td>320,000đ</td>
+                  <td><span class="status pending">Chờ xử lý</span></td>
                 </tr>
                 <tr>
-                  <td>
-                    <img src="images/profile-1.jpg" />
-                    <p>John Doe</p>
-                  </td>
-                  <td>14-08-2023</td>
-                  <td><span class="status pending">Pending</span></td>
+                  <td>#12349</td>
+                  <td>Trần Thị B</td>
+                  <td>1,500,000đ</td>
+                  <td><span class="status pending">Chờ xử lý</span></td>
                 </tr>
                 <tr>
-                  <td>
-                    <img src="images/profile-1.jpg" />
-                    <p>John Doe</p>
-                  </td>
-                  <td>14-08-2023</td>
-                  <td><span class="status process">Processing</span></td>
+                  <td>#12348</td>
+                  <td>Lê Văn C</td>
+                  <td>450,000đ</td>
+                  <td><span class="status processing">Đang xử lý</span></td>
                 </tr>
               </tbody>
             </table>
           </div>
 
-          <!-- Reminders -->
+          <div class="orders">
+            <div class="header">
+              <h3>Doanh thu 7 ngày qua</h3>
+              <a href="/admin/reports.html" class="view-all"
+                >Xem báo cáo <i class="bx bx-right-arrow-alt"></i
+              ></a>
+            </div>
+            <div class="chart-container-sm">
+              <canvas id="salesChart7Days"></canvas>
+            </div>
+          </div>
+
           <div class="reminders">
             <div class="header">
-              <i class="bx bx-note"></i>
-              <h3>Remiders</h3>
-              <i class="bx bx-filter"></i>
-              <i class="bx bx-plus"></i>
+              <h3>Sản phẩm sắp hết hàng</h3>
+              <a href="/admin/products.html" class="view-all"
+                >Xem tất cả <i class="bx bx-right-arrow-alt"></i
+              ></a>
             </div>
             <ul class="task-list">
-              <li class="completed">
+              <li class="low-stock">
                 <div class="task-title">
-                  <i class="bx bx-check-circle"></i>
-                  <p>Start Our Meeting</p>
+                  <img src="https://via.placeholder.com/36x36" alt="Dâu" />
+                  <p>Dâu tây Hàn Quốc (Hộp 500g)</p>
                 </div>
-                <i class="bx bx-dots-vertical-rounded"></i>
+                <span class="stock-count">Còn 5</span>
+              </li>
+              <li class="low-stock">
+                <div class="task-title">
+                  <img src="https://via.placeholder.com/36x36" alt="Cam" />
+                  <p>Cam Vàng Mỹ</p>
+                </div>
+                <span class="stock-count">Còn 8</span>
               </li>
               <li class="completed">
                 <div class="task-title">
-                  <i class="bx bx-check-circle"></i>
-                  <p>Analyse Our Site</p>
+                  <img src="https://via.placeholder.com/36x36" alt="Táo" />
+                  <p>Táo Envy New Zealand</p>
                 </div>
-                <i class="bx bx-dots-vertical-rounded"></i>
-              </li>
-              <li class="not-completed">
-                <div class="task-title">
-                  <i class="bx bx-x-circle"></i>
-                  <p>Play Footbal</p>
-                </div>
-                <i class="bx bx-dots-vertical-rounded"></i>
+                <span class="stock-count">Còn 120</span>
               </li>
             </ul>
           </div>
-
-          <!-- End of Reminders-->
         </div>
       </main>
     </div>

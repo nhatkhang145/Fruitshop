@@ -23,7 +23,7 @@
         />
       </a>
       <ul class="side-menu">
-        <li>
+        <li class="">
           <a href="/admin/index.html"
             ><i class="bx bxs-dashboard"></i>Tổng quan</a
           >
@@ -49,13 +49,8 @@
           >
         </li>
         <li>
-          <a href="/admin/Inventory.html"
-            ><i class="bx bx-box"></i>Quản lý kho hàng</a
-          >
-        </li>
-        <li>
-          <a href="/admin/reports.html"
-            ><i class="bx bx-line-chart"></i>Thống kê</a
+          <a href="/admin/notifications.html"
+            ><i class="bx bx-bell"></i>Lịch sử Thông báo</a
           >
         </li>
         <li class="active">
@@ -63,21 +58,15 @@
             ><i class="bx bx-message-detail"></i>Tin nhắn</a
           >
         </li>
+
         <li>
-          <a href="/admin/Roles.html"
-            ><i class="bx bx-shield-quarter"></i>Phân quyền</a
+          <a href="/admin/reports.html"
+            ><i class="bx bx-line-chart"></i>Thống kê</a
           >
         </li>
+
         <li>
           <a href="/admin/Settings.html"><i class="bx bx-cog"></i>Cài đặt</a>
-        </li>
-      </ul>
-      <ul class="side-menu">
-        <li>
-          <a href="#" class="logout">
-            <i class="bx bx-log-out-circle"></i>
-            Logout
-          </a>
         </li>
       </ul>
     </div>
@@ -108,7 +97,111 @@
       </nav>
 
       <!-- End of Navbar -->
-      <main></main>
+      <main>
+        <div class="header">
+          <div class="left">
+            <h1>Tin nhắn</h1>
+            <ul class="breadcrumb">
+              <li><a href="#">Quản lý</a></li>
+              <li>/</li>
+              <li><a href="#" class="active">Tin nhắn</a></li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="bottom-data">
+          <div class="message-container">
+            <div class="inbox-pane">
+              <div class="inbox-header">
+                <h3>Hòm thư (2 tin chưa đọc)</h3>
+                <div class="inbox-search">
+                  <input type="search" placeholder="Tìm tin nhắn..." />
+                  <i class="bx bx-search"></i>
+                </div>
+              </div>
+              <ul class="message-list">
+                <li class="message-item unread active">
+                  <div class="message-sender">
+                    <strong>Nguyễn Văn A</strong>
+                    <span class="message-time">10:30 Sáng</span>
+                  </div>
+                  <div class="message-subject">Hỏi về đơn hàng #12345</div>
+                  <div class="message-preview">
+                    Chào shop, tôi muốn hỏi về tình trạng đơn hàng...
+                  </div>
+                </li>
+                <li class="message-item unread">
+                  <div class="message-sender">
+                    <strong>Trần Thị B (Hỗ trợ)</strong>
+                    <span class="message-time">Hôm qua</span>
+                  </div>
+                  <div class="message-subject">
+                    Yêu cầu báo giá trái cây nhập khẩu
+                  </div>
+                  <div class="message-preview">
+                    Vui lòng báo giá cho tôi 10kg Táo Envy...
+                  </div>
+                </li>
+                <li class="message-item">
+                  <div class="message-sender">
+                    <strong>Lê Văn C</strong>
+                    <span class="message-time">12-11-2025</span>
+                  </div>
+                  <div class="message-subject">Góp ý về giao diện</div>
+                  <div class="message-preview">
+                    Website của bạn rất đẹp, tuy nhiên...
+                  </div>
+                </li>
+                <li class="message-item">
+                  <div class="message-sender">
+                    <strong>Phạm Hữu D</strong>
+                    <span class="message-time">11-11-2025</span>
+                  </div>
+                  <div class="message-subject">Cảm ơn</div>
+                  <div class="message-preview">
+                    Trái cây rất tươi ngon, cảm ơn shop.
+                  </div>
+                </li>
+              </ul>
+            </div>
+
+            <div class="message-view-pane">
+              <div class="message-actions">
+                <a href="mailto:nguyenvana@gmail.com" class="action-btn reply"
+                  ><i class="bx bx-reply"></i> Phản hồi</a
+                >
+                <a href="#" class="action-btn delete"
+                  ><i class="bx bx-trash"></i> Xóa</a
+                >
+                <a href="#" class="action-btn"
+                  ><i class="bx bx-envelope"></i> Đánh dấu chưa đọc</a
+                >
+              </div>
+
+              <div class="message-content">
+                <div class="message-header">
+                  <h2>Hỏi về đơn hàng #12345</h2>
+                  <p>
+                    <strong>Từ:</strong> Nguyễn Văn A (nguyenvana@gmail.com)
+                  </p>
+                  <p><strong>SĐT:</strong> 0905.123.456</p>
+                  <p><strong>Ngày:</strong> 10:30 Sáng, 15-11-2025</p>
+                </div>
+                <hr />
+                <div class="message-body">
+                  <p>Chào shop,</p>
+                  <p>
+                    Tôi muốn hỏi về tình trạng đơn hàng #12345 đặt ngày hôm qua.
+                    Hiện tại tôi thấy trạng thái vẫn là "Đang xử lý". Shop có
+                    thể kiểm tra giúp tôi xem khi nào có thể giao hàng không?
+                  </p>
+                  <p>Cảm ơn shop.</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
     </div>
 
     <script src="../assets/js/admin/index.js"></script>

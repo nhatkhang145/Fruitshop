@@ -22,8 +22,8 @@
           alt="Organic Harvest Logo"
         />
       </a>
-      <ul class="side-menu">
-        <li >
+     <ul class="side-menu">
+        <li class="">
           <a href="/admin/index.html"
             ><i class="bx bxs-dashboard"></i>Tổng quan</a
           >
@@ -49,13 +49,8 @@
           >
         </li>
         <li>
-          <a href="/admin/Inventory.html"
-            ><i class="bx bx-box"></i>Quản lý kho hàng</a
-          >
-        </li>
-    <li class="active">
-          <a href="/admin/reports.html"
-            ><i class="bx bx-line-chart"></i>Thống kê</a
+          <a href="/admin/notifications.html"
+            ><i class="bx bx-bell"></i>Lịch sử Thông báo</a
           >
         </li>
         <li>
@@ -63,23 +58,18 @@
             ><i class="bx bx-message-detail"></i>Tin nhắn</a
           >
         </li>
-        <li>
-          <a href="/admin/Roles.html"
-            ><i class="bx bx-shield-quarter"></i>Phân quyền</a
+
+        <li class="active">
+          <a href="/admin/reports.html"
+            ><i class="bx bx-line-chart"></i>Thống kê</a
           >
         </li>
+
         <li>
           <a href="/admin/Settings.html"><i class="bx bx-cog"></i>Cài đặt</a>
         </li>
       </ul>
-      <ul class="side-menu">
-        <li>
-          <a href="#" class="logout">
-            <i class="bx bx-log-out-circle"></i>
-            Logout
-          </a>
-        </li>
-      </ul>
+  
     </div>
     <!-- End of Sidebar -->
 
@@ -108,7 +98,169 @@
       </nav>
 
       <!-- End of Navbar -->
-         <main></main>
+         <main>
+  <div class="header">
+    <div class="left">
+      <h1>Thống kê</h1>
+      <ul class="breadcrumb">
+        <li><a href="#">Quản lý</a></li>
+        <li>/</li>
+        <li><a href="#" class="active">Thống kê</a></li>
+      </ul>
+    </div>
+    <div class="date-range-filter">
+      <i class="bx bx-calendar"></i>
+      <input type="date" id="dateStart" />
+      <span>đến</span>
+      <input type="date" id="dateEnd" />
+      <button class="btn-primary">Lọc</button>
+    </div>
+  </div>
+
+  <ul class="insights">
+    <li>
+      <i class="bx bx-dollar-circle"></i>
+      <span class="info">
+        <h3>15,230,000đ</h3>
+        <p>Tổng Doanh thu</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bx-receipt"></i>
+      <span class="info">
+        <h3>1,020</h3>
+        <p>Tổng Đơn hàng</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bx-line-chart"></i>
+      <span class="info">
+        <h3>14,931đ</h3>
+        <p>Giá trị TB / Đơn</p>
+      </span>
+    </li>
+    <li>
+      <i class="bx bx-user-plus"></i>
+      <span class="info">
+        <h3>120</h3>
+        <p>Khách hàng mới</p>
+      </span>
+    </li>
+  </ul>
+
+  <div class="bottom-data">
+    <div class="orders">
+      <div class="header">
+        <h3>Doanh thu theo thời gian</h3>
+        <i class="bx bx-refresh"></i>
+      </div>
+      <div class="chart-container">
+        <canvas id="salesChart"></canvas>
+      </div>
+    </div>
+
+    <div class="reminders chart-box-small">
+      <div class="header">
+        <h3>Doanh thu theo Danh mục</h3>
+        <i class="bx bx-dots-vertical-rounded"></i>
+      </div>
+      <div class="chart-container pie-chart">
+        <canvas id="categoryChart"></canvas>
+      </div>
+    </div>
+
+    <div class="orders">
+      <div class="header">
+        <h3>Top sản phẩm bán chạy</h3>
+        <i class="bx bx-download"></i>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Sản phẩm</th>
+            <th>Số lượng bán</th>
+            <th>Doanh thu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <img
+                src="https://via.placeholder.com/36x36"
+                alt="Táo"
+              />
+              <p>Táo Envy New Zealand</p>
+            </td>
+            <td>120</td>
+            <td>30,000,000đ</td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://via.placeholder.com/36x36"
+                alt="Nho"
+              />
+              <p>Nho không hạt Úc</p>
+            </td>
+            <td>95</td>
+            <td>28,500,000đ</td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://via.placeholder.com/36x36"
+                alt="Dâu"
+              />
+              <p>Dâu tây Hàn Quốc</p>
+            </td>
+            <td>80</td>
+            <td>25,000,000đ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="orders">
+      <div class="header">
+        <h3>Top khách hàng chi tiêu</h3>
+        <i class="bx bx-download"></i>
+      </div>
+      <table>
+        <thead>
+          <tr>
+            <th>Khách hàng</th>
+            <th>Số đơn hàng</th>
+            <th>Tổng chi tiêu</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>
+              <img
+                src="https://via.placeholder.com/36x36"
+                alt="Avatar"
+              />
+              <p>Nguyễn Văn A</p>
+            </td>
+            <td>25</td>
+            <td>15,200,000đ</td>
+          </tr>
+          <tr>
+            <td>
+              <img
+                src="https://via.placeholder.com/36x36"
+                alt="Avatar"
+              />
+              <p>Trần Thị B</p>
+            </td>
+            <td>18</td>
+            <td>11,050,000đ</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+</main>
     </div>
 
     <script src="../assets/js/admin/index.js"></script>
