@@ -1,0 +1,88 @@
+/* =================================== */
+/* === CSS TRANG LỊCH SỬ THÔNG BÁO === */
+/* =================================== */
+
+.content main .bottom-data .orders .header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.content main .bottom-data .orders .header .btn-primary {
+  background: var(--primary);
+  color: var(--light);
+  border: none;
+  padding: 8px 14px;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: opacity 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+.content main .bottom-data .orders .header .btn-primary:hover {
+  opacity: 0.9;
+}
+.content main .bottom-data .orders .header .btn-primary .bx {
+  font-size: 1.2rem;
+}
+.notification-log {
+  width: 100%;
+  margin-top: 20px;
+}
+.log-item {
+  display: flex;
+  align-items: flex-start;
+  gap: 16px;
+  padding: 20px;
+  border-bottom: 1px solid var(--grey);
+  transition: background 0.3s ease;
+}
+.log-item:last-child {
+  border-bottom: none;
+}
+.log-item:hover {
+  background: var(--grey);
+}
+.log-item.unread {
+  background: var(--light-primary);
+}
+.log-item .item-icon {
+  font-size: 1.6rem;
+  width: 45px;
+  height: 45px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  color: var(--light);
+}
+.log-item .item-icon.bx-cart-add {
+  background: var(--primary);
+}
+.log-item .item-icon.bx-cart {
+  background: var(--success);
+}
+.log-item .item-icon.bx-user-plus {
+  background: var(--success);
+}
+.log-item .item-icon.bxs-error-circle {
+  background: var(--danger);
+}
+.log-item .item-icon.bx-message-detail {
+  background: var(--warning);
+}
+.log-item .item-content p {
+  font-size: 1rem;
+  color: var(--dark);
+  margin-bottom: 6px;
+  line-height: 1.5;
+}
+.log-item .item-content small {
+  font-size: 0.85rem;
+  color: var(--dark-grey);
+}
+.log-item.unread .item-content p {
+  font-weight: 600;
+}

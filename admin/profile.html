@@ -9,8 +9,9 @@
     />
     <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/admin/style.css" />
-    <link rel="stylesheet" href="/assets/css/admin/contact.css" />
-    <title>Tin nhắn</title>
+    <link rel="stylesheet" href="../assets/css/admin/profile.css" />
+
+    <title>Hồ sơ của tôi</title>
   </head>
 
   <body>
@@ -24,7 +25,7 @@
         />
       </a>
       <ul class="side-menu">
-        <li class="">
+        <li class="active">
           <a href="/admin/index.html"
             ><i class="bx bxs-dashboard"></i>Tổng quan</a
           >
@@ -49,23 +50,22 @@
             ><i class="bx bx-group"></i>Quản lý khách hàng</a
           >
         </li>
-        <li>
-          <a href="/admin/notifications.html"
-            ><i class="bx bx-bell"></i>Lịch sử Thông báo</a
-          >
-        </li>
-        <li class="active">
-          <a href="/admin/Contact.html"
-            ><i class="bx bx-message-detail"></i>Tin nhắn</a
-          >
-        </li>
 
         <li>
           <a href="/admin/reports.html"
             ><i class="bx bx-line-chart"></i>Thống kê</a
           >
         </li>
-
+        <li>
+          <a href="/admin/Contact.html"
+            ><i class="bx bx-message-detail"></i>Tin nhắn</a
+          >
+        </li>
+        <li>
+          <a href="/admin/Roles.html"
+            ><i class="bx bx-shield-quarter"></i>Phân quyền</a
+          >
+        </li>
         <li>
           <a href="/admin/Settings.html"><i class="bx bx-cog"></i>Cài đặt</a>
         </li>
@@ -167,105 +167,109 @@
       </nav>
 
       <!-- End of Navbar -->
+
       <main>
         <div class="header">
           <div class="left">
-            <h1>Tin nhắn</h1>
+            <h1>Hồ sơ của tôi</h1>
             <ul class="breadcrumb">
-              <li><a href="#">Quản lý</a></li>
+              <li><a href="#">Tài khoản</a></li>
               <li>/</li>
-              <li><a href="#" class="active">Tin nhắn</a></li>
+              <li><a href="#" class="active">Hồ sơ</a></li>
             </ul>
           </div>
         </div>
 
         <div class="bottom-data">
-          <div class="message-container">
-            <div class="inbox-pane">
-              <div class="inbox-header">
-                <h3>Hòm thư (2 tin chưa đọc)</h3>
-                <div class="inbox-search">
-                  <input type="search" placeholder="Tìm tin nhắn..." />
-                  <i class="bx bx-search"></i>
-                </div>
+          <div class="profile-page">
+            <div class="profile-page__main">
+              <div class="profile-page__card">
+                <legend class="profile-page__legend">Thông tin Hồ sơ</legend>
+                <form id="profileInfoForm">
+                  <div class="profile-page__form-group">
+                    <label for="adminName" class="profile-page__label"
+                      >Họ và Tên</label
+                    >
+                    <input
+                      type="text"
+                      id="adminName"
+                      class="profile-page__input"
+                      value="Admin Master"
+                    />
+                  </div>
+                  <div class="profile-page__form-group">
+                    <label for="adminEmail" class="profile-page__label"
+                      >Email (Không thể thay đổi)</label
+                    >
+                    <input
+                      type="email"
+                      id="adminEmail"
+                      class="profile-page__input"
+                      value="admin@shop.com"
+                      disabled
+                    />
+                  </div>
+                  <button type="submit" class="btn-submit">
+                    Cập nhật Hồ sơ
+                  </button>
+                </form>
               </div>
-              <ul class="message-list">
-                <li class="message-item unread active">
-                  <div class="message-sender">
-                    <strong>Nguyễn Văn A</strong>
-                    <span class="message-time">10:30 Sáng</span>
+
+              <div class="profile-page__card" id="changepassword">
+                <legend class="profile-page__legend">Đổi Mật khẩu</legend>
+                <form id="changePasswordForm">
+                  <div class="profile-page__form-group">
+                    <label for="oldPassword" class="profile-page__label"
+                      >Mật khẩu cũ</label
+                    >
+                    <input
+                      type="password"
+                      id="oldPassword"
+                      class="profile-page__input"
+                      required
+                    />
                   </div>
-                  <div class="message-subject">Hỏi về đơn hàng #12345</div>
-                  <div class="message-preview">
-                    Chào shop, tôi muốn hỏi về tình trạng đơn hàng...
+                  <div class="profile-page__form-group">
+                    <label for="newPassword" class="profile-page__label"
+                      >Mật khẩu mới</label
+                    >
+                    <input
+                      type="password"
+                      id="newPassword"
+                      class="profile-page__input"
+                      required
+                    />
                   </div>
-                </li>
-                <li class="message-item unread">
-                  <div class="message-sender">
-                    <strong>Trần Thị B (Hỗ trợ)</strong>
-                    <span class="message-time">Hôm qua</span>
+                  <div class="profile-page__form-group">
+                    <label for="confirmPassword" class="profile-page__label"
+                      >Xác nhận Mật khẩu mới</label
+                    >
+                    <input
+                      type="password"
+                      id="confirmPassword"
+                      class="profile-page__input"
+                      required
+                    />
                   </div>
-                  <div class="message-subject">
-                    Yêu cầu báo giá trái cây nhập khẩu
-                  </div>
-                  <div class="message-preview">
-                    Vui lòng báo giá cho tôi 10kg Táo Envy...
-                  </div>
-                </li>
-                <li class="message-item">
-                  <div class="message-sender">
-                    <strong>Lê Văn C</strong>
-                    <span class="message-time">12-11-2025</span>
-                  </div>
-                  <div class="message-subject">Góp ý về giao diện</div>
-                  <div class="message-preview">
-                    Website của bạn rất đẹp, tuy nhiên...
-                  </div>
-                </li>
-                <li class="message-item">
-                  <div class="message-sender">
-                    <strong>Phạm Hữu D</strong>
-                    <span class="message-time">11-11-2025</span>
-                  </div>
-                  <div class="message-subject">Cảm ơn</div>
-                  <div class="message-preview">
-                    Trái cây rất tươi ngon, cảm ơn shop.
-                  </div>
-                </li>
-              </ul>
+                  <button type="submit" class="btn-submit">
+                    Thay đổi Mật khẩu
+                  </button>
+                </form>
+              </div>
             </div>
 
-            <div class="message-view-pane">
-              <div class="message-actions">
-                <a href="mailto:nguyenvana@gmail.com" class="action-btn reply"
-                  ><i class="bx bx-reply"></i> Phản hồi</a
-                >
-                <a href="#" class="action-btn delete"
-                  ><i class="bx bx-trash"></i> Xóa</a
-                >
-                <a href="#" class="action-btn"
-                  ><i class="bx bx-envelope"></i> Đánh dấu chưa đọc</a
-                >
-              </div>
-
-              <div class="message-content">
-                <div class="message-header">
-                  <h2>Hỏi về đơn hàng #12345</h2>
-                  <p>
-                    <strong>Từ:</strong> Nguyễn Văn A (nguyenvana@gmail.com)
-                  </p>
-                  <p><strong>SĐT:</strong> 0905.123.456</p>
-                  <p><strong>Ngày:</strong> 10:30 Sáng, 15-11-2025</p>
-                </div>
-                <hr />
-                <div class="message-body">
-                  <p>Chào shop,</p>
-                  <p>
-                    Tôi muốn hỏi về tình trạng đơn hàng #12345 đặt ngày hôm qua.
-                    Hiện tại tôi thấy trạng thái vẫn là "Đang xử lý". Shop có
-                    thể kiểm tra giúp tôi xem khi nào có thể giao hàng không?
-                  </p>
-                  <p>Cảm ơn shop.</p>
+            <div class="profile-page__sidebar">
+              <div class="profile-page__card">
+                <legend class="profile-page__legend">Ảnh đại diện</legend>
+                <div class="profile-page__avatar-uploader">
+                  <img
+                    src="images/logo.png"
+                    alt="Ảnh đại diện"
+                    id="avatarPreview"
+                  />
+                  <input type="file" id="avatarUpload" accept="image/*" />
+                  <a href="#" id="uploadAvatarLink">Tải ảnh mới</a>
+                  <small>Ảnh sẽ được hiển thị ở góc trên bên phải.</small>
                 </div>
               </div>
             </div>
