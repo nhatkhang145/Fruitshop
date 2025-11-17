@@ -1,0 +1,93 @@
+/*
+ STYLES FOR FAQS PAGE
+*/
+.faqs-container {
+  padding: 60px 0;
+  max-width: 900px;
+}
+
+.faq-category {
+  font-size: 24px;
+  font-weight: 600;
+  color: #333;
+  margin-top: 40px;
+  margin-bottom: 20px;
+  border-bottom: 2px solid var(--primary-color);
+  padding-bottom: 10px;
+}
+
+.faq-list {
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+
+.faq-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+}
+
+.faq-item[open] {
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.07);
+  border-color: var(--primary-color);
+}
+
+.faq-question {
+  display: block;
+  width: 100%;
+  padding: 20px;
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  cursor: pointer;
+  background-color: #fff;
+  position: relative;
+  list-style: none;
+}
+
+/* Ẩn dấu tam giác trên Chrome/Safari */
+.faq-question::-webkit-details-marker {
+  display: none;
+}
+
+/* Thêm icon + và - */
+.faq-question::after {
+  content: "+";
+  font-family: "Font Awesome 7 Free";
+  font-weight: 900;
+  position: absolute;
+  right: 20px;
+  top: 50%;
+  transform: translateY(-50%) rotate(0deg);
+  font-size: 16px;
+  color: var(--primary-color);
+  transition: transform 0.3s ease;
+}
+
+.faq-item[open] .faq-question::after {
+  content: "\f068";
+  transform: translateY(-50%) rotate(0deg);
+}
+
+.faq-answer {
+  padding: 0 20px 20px 20px;
+  font-size: 16px;
+  line-height: 1.7;
+  color: #555;
+  background: #fdfdfd;
+}
+
+.faq-answer p,
+.faq-answer ul {
+  margin: 0;
+  padding-top: 15px;
+  border-top: 1px dashed #eee;
+}
+
+.faq-answer ul {
+  padding-left: 20px;
+  list-style: disc;
+  margin-top: 10px;
+}
