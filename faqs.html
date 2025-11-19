@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html lang="vi">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Chi tiết sản phẩm — Organic Harvest</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Hỗ Trợ & FAQs — The Organic Harvest</title>
 
     <link
       rel="stylesheet"
@@ -15,7 +15,7 @@
     />
     <link rel="stylesheet" href="./assets/css/main.css" />
     <link rel="stylesheet" href="./assets/css/base.css" />
-    <link rel="stylesheet" href="assets/css/product-detail.css" />
+    <link rel="stylesheet" href="./assets/css/faqs.css" />
   </head>
   <body>
     <div class="main">
@@ -129,119 +129,92 @@
          
         </nav>
       </header>
-      <!--  -->
-
-      <main class="main product-detail">
-        <!--  -->
+      <main class="faqs-page">
         <div class="breadcrumb">
           <div class="grid">
-            <a href="shop.html">Sản phẩm</a>
+            <a href="index.html">Trang chủ</a>
             <i class="fa-solid fa-angle-right"></i>
-            <span>Chi tiết sản phẩm</span>
+            <span>Hỗ Trợ & FAQs</span>
           </div>
         </div>
-        <!--  -->
-        <div class="app__container">
-          <div class="grid">
-            <div class="grid__row">
-              <div class="product-detail__inner">
-                <div class="product-gallery">
-                  <div class="product-gallery__thumbs">
-                    <button
-                      class="thumb active"
-                      data-src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                    >
-                      <img
-                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                        alt="Măng cụt"
-                      />
-                    </button>
-                  </div>
 
-                  <div class="product-gallery__main">
-                    <img
-                      id="productMainImg"
-                      src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                      alt="Măng cụt tươi ngon"
-                    />
-                  </div>
-                </div>
+        <div class="faqs-container grid">
+          <h1 class="section-title">Câu Hỏi Thường Gặp (FAQs)</h1>
 
-                <div class="product-info">
-                  <h1 class="product-title">Măng cụt Thái Lan loại 1</h1>
-                  <p class="product-sku">Mã: FS-MC-001</p>
-                  <div class="product-price">
-                    <span class="price-current">120,000₫</span>
-                    <span class="price-old">150,000₫</span>
-                  </div>
-
-                  <div class="product-meta">
-                    <label>Trọng lượng:</label>
-                    <select class="product-variant">
-                      <option>500g</option>
-                      <option>1kg</option>
-                      <option>2kg</option>
-                    </select>
-                  </div>
-
-                  <div class="product-qty-row">
-                    <label>Số lượng</label>
-                    <div class="qty">
-                      <button class="qty-decrease">-</button>
-                      <input
-                        type="number"
-                        min="1"
-                        value="1"
-                        class="qty-input"
-                      />
-                      <button class="qty-increase">+</button>
-                    </div>
-                  </div>
-
-                  <div class="product-action">
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                    <button class="buy-now">Mua ngay</button>
-                  </div>
-
-                  <div class="product-short-desc">
-                    <p>
-                      Măng cụt tươi loại 1, chọn lọc từ các vườn đạt chuẩn. Vị
-                      ngọt thanh, mọng nước, cùi trắng dày. Phù hợp ăn trực tiếp
-                      hoặc làm món tráng miệng. Giao hàng nhanh trong ngày.
-                    </p>
-                  </div>
-                </div>
+          <h2 class="faq-category">Về Đặt Hàng & Thanh Toán</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary class="faq-question">
+                Làm thế nào để đặt hàng qua website?
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Bạn chỉ cần chọn sản phẩm, thêm vào giỏ hàng, và điền thông
+                  tin nhận hàng tại trang thanh toán. Chúng tôi sẽ gọi điện xác
+                  nhận đơn hàng của bạn ngay sau đó.
+                </p>
               </div>
-
-              <div class="product-detail__tabs">
-                <nav class="tabs">
-                  <button class="tab-btn active" data-target="#desc">
-                    Mô tả
-                  </button>
-                  <button class="tab-btn" data-target="#reviews">
-                    Đánh giá
-                  </button>
-                </nav>
-
-                <section id="desc" class="tab-panel active">
-                  <h3>Mô tả sản phẩm</h3>
-                  <p>
-                    Măng cụt tươi loại 1, chọn lọc từ các vườn đạt chuẩn. Vị
-                    ngọt thanh, mọng nước, cùi trắng dày. Phù hợp ăn trực tiếp
-                    hoặc làm món tráng miệng. Giao hàng nhanh trong ngày.
-                  </p>
-                  <div class="related-products">
-                    <h2 class="related-title">Sản phẩm tương tự</h2>
-                    <div class="related-list"></div>
-                  </div>
-                </section>
-
-                <section id="reviews" class="tab-panel">
-                  <div class="review-list"></div>
-                  <form class-="review-form"></form>
-                </section>
+            </details>
+            <details class="faq-item">
+              <summary class="faq-question">
+                Shop chấp nhận những hình thức thanh toán nào?
+              </summary>
+              <div class="faq-answer">
+                <p>Chúng tôi chấp nhận 2 hình thức thanh toán chính:</p>
+                <ul>
+                  <li>Thanh toán khi nhận hàng (COD).</li>
+                  <li>
+                    Chuyển khoản ngân hàng (Vui lòng ghi mã đơn hàng trong nội
+                    dung chuyển khoản).
+                  </li>
+                </ul>
               </div>
-            </div>
+            </details>
+          </div>
+
+          <h2 class="faq-category">Vận Chuyển & Giao Hàng</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary class="faq-question">
+                Thời gian giao hàng mất bao lâu?
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Đối với các đơn hàng nội thành TP.HCM, chúng tôi hỗ trợ giao
+                  hỏa tốc trong 2 giờ. Đối với các tỉnh thành khác, thời gian
+                  giao hàng dự kiến từ 2-4 ngày làm việc.
+                </p>
+              </div>
+            </details>
+            <details class="faq-item">
+              <summary class="faq-question">
+                Phí vận chuyển được tính như thế nào?
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Chúng tôi miễn phí vận chuyển cho các đơn hàng từ 500.000đ.
+                  Với các đơn hàng dưới 500.000đ, phí vận chuyển đồng giá
+                  25.000đ cho nội thành và 35.000đ cho các khu vực khác.
+                </p>
+              </div>
+            </details>
+          </div>
+
+          <h2 class="faq-category">Chính Sách Đổi Trả</h2>
+          <div class="faq-list">
+            <details class="faq-item">
+              <summary class="faq-question">
+                Tôi có thể đổi trả sản phẩm nếu không hài lòng không?
+              </summary>
+              <div class="faq-answer">
+                <p>
+                  Vì trái cây là mặt hàng tươi sống, chúng tôi chỉ chấp nhận đổi
+                  trả trong vòng 24 giờ nếu sản phẩm bị dập, hỏng hoặc không
+                  đúng chất lượng như cam kết. Vui lòng chụp ảnh sản phẩm và
+                  liên hệ ngay với fanpage hoặc hotline để được hỗ trợ.
+                </p>
+              </div>
+            </details>
           </div>
         </div>
       </main>
@@ -469,50 +442,5 @@
         </div>
       </footer>
     </div>
-
-    <script>
-      // thumbnail click handler: swap main image
-      document.addEventListener("click", function (e) {
-        const t = e.target.closest(".thumb");
-        if (t) {
-          document
-            .querySelectorAll(".thumb")
-            .forEach((b) => b.classList.remove("active"));
-          t.classList.add("active");
-          const src = t.getAttribute("data-src");
-          const img = document.getElementById("productMainImg");
-          if (img && src) img.src = src;
-        }
-
-        if (e.target.matches(".tab-btn")) {
-          document
-            .querySelectorAll(".tab-btn")
-            .forEach((b) => b.classList.remove("active"));
-          e.target.classList.add("active");
-          document
-            .querySelectorAll(".tab-panel")
-            .forEach((p) => p.classList.remove("active"));
-          const target = document.querySelector(
-            e.target.getAttribute("data-target")
-          );
-          if (target) target.classList.add("active");
-        }
-      });
-
-      // qty controls
-      document.addEventListener("click", function (e) {
-        if (
-          e.target.matches(".qty-increase") ||
-          e.target.matches(".qty-decrease")
-        ) {
-          const wrap = e.target.closest(".qty");
-          const input = wrap.querySelector(".qty-input");
-          let val = parseInt(input.value || "1", 10);
-          if (e.target.matches(".qty-increase")) val++;
-          if (e.target.matches(".qty-decrease") && val > 1) val--;
-          input.value = val;
-        }
-      });
-    </script>
   </body>
 </html>

@@ -12,8 +12,10 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="./assets/css/base.css" />
+    <head>
+      <link rel="stylesheet" href="./assets/css/base.css" />
+      <link rel="stylesheet" href="./assets/css/main.css" />
+    </head>
   </head>
   <body>
     <div class="main">
@@ -34,88 +36,19 @@
                 </li>
               </ul>
               <ul class="navbar-list">
-                <li class="navbar-item navbar-item__notify--active">
-                  <a href="#" class="navbar-item__link">
-                    <span class="navbar-icon__link">
-                      <i class="navbar-icon fa-regular fa-bell"></i>
-                    </span>
-                    Thông báo
-                  </a>
-                  <div class="navbar-item__notify">
-                    <header class="navbar-item__notify-header">
-                      <h3>Thông Báo Mới Nhận</h3>
-                    </header>
-                    <ul class="navbar-item__notify-list">
-                      <li class="navbar-item__notify-item">
-                        <a href="" class="navbar-item__notify-link">
-                          <img
-                            class="navbar-item__notify-img"
-                            src="./assets/images/chuối.jpg"
-                            alt="Notification"
-                          />
-                          <div class="navbar-item__notify-content">
-                            <span class="navbar-item__notify-name">
-                              Chuối xuất xứ từ Ecuador
-                            </span>
-                            <span class="navbar-item__notify-decoration"
-                              >ưu đãi giảm 20%</span
-                            >
-                          </div>
-                        </a>
-                      </li>
-                      <li
-                        class="navbar-item__notify-item navbar-item__notify-item--viewed"
-                      >
-                        <a href="" class="navbar-item__notify-link">
-                          <img
-                            class="navbar-item__notify-img"
-                            src="./assets/images/chuối.jpg"
-                            alt="Notification"
-                          />
-                          <div class="navbar-item__notify-content">
-                            <span class="navbar-item__notify-name">
-                              Chuối xuất xứ từ Ecuador
-                            </span>
-                            <span class="navbar-item__notify-decoration"
-                              >ưu đãi giảm 20%</span
-                            >
-                          </div>
-                        </a>
-                      </li>
-                      <li
-                        class="navbar-item__notify-item navbar-item__notify-item--viewed"
-                      >
-                        <a href="" class="navbar-item__notify-link">
-                          <img
-                            class="navbar-item__notify-img"
-                            src="./assets/images/chuối.jpg"
-                            alt="Notification"
-                          />
-                          <div class="navbar-item__notify-content">
-                            <span class="navbar-item__notify-name">
-                              Chuối xuất xứ từ Ecuador
-                            </span>
-                            <span class="navbar-item__notify-decoration"
-                              >ưu đãi giảm 20%</span
-                            >
-                          </div>
-                        </a>
-                      </li>
-                    </ul>
-                    <footer class="navbar-item__notify-footer">
-                      <a href="" class="navbar-item__notify-footer-btn"
-                        >Xem tất cả</a
-                      >
-                    </footer>
-                  </div>
-                </li>
                 <li class="navbar-item">
-                  <a href="#" class="navbar-item__link">
+                  <a href="faqs.html" class="navbar-item__link">
                     <span class="navbar-icon__link">
                       <i class="navbar-icon fa-regular fa-circle-question"></i>
                     </span>
                     Hỗ trợ
                   </a>
+                </li>
+                <li class="navbar-item">
+                  <a href="register.html" class="navbar-item__link">Đăng ký</a>
+                </li>
+                <li class="navbar-item">
+                  <a href="login.html" class="navbar-item__link">Đăng nhập</a>
                 </li>
               </ul>
             </div>
@@ -124,7 +57,7 @@
           <div class="navbar__menu">
             <div class="navbar__menu-inner">
               <div class="navbar__menu-logo">
-                <a href="/">
+                <a href="/index.html">
                   <img
                     class="navbar__menu-logo-img"
                     src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
@@ -134,11 +67,11 @@
               </div>
 
               <ul class="main-nav-links subnav-links">
-                <li><a href="#">Trang chủ</a></li>
-                <li><a href="#">Sản Phẩm</a></li>
-                <li><a href="#">Giới thiệu</a></li>
-                <li><a href="#">Bài viết</a></li>
-                <li><a href="#">Liên hệ</a></li>
+                <li><a href="index.html">Trang chủ</a></li>
+                <li><a href="/shop.html">Sản Phẩm</a></li>
+                <li><a href="/about.html">Giới thiệu</a></li>
+                <li><a href="blog.html">Bài viết</a></li>
+                <li><a href="/contact.html">Liên hệ</a></li>
               </ul>
 
               <div class="navbar__menu-search">
@@ -154,8 +87,8 @@
                     aria-label="Category"
                   >
                     <option value="all">Danh mục</option>
-                    <option value="fruits">Fruits</option>
-                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Trái cây</option>
+                    <option value="vegetables">táo</option>
                   </select>
                   <input
                     name="q"
@@ -172,13 +105,6 @@
 
               <div class="navbar__menu-actions">
                 <a
-                  href="/account.html"
-                  class="icon-btn account-btn"
-                  title="Tài khoản"
-                >
-                  <i class="fa-regular fa-user"></i>
-                </a>
-                <a
                   href="/wishlist.html"
                   class="icon-btn wishlist-btn"
                   title="Yêu thích"
@@ -190,15 +116,65 @@
                   <i class="fa-solid fa-basket-shopping"></i>
                   <span class="badge">2</span>
                 </a>
+                <div class="header__account">
+                  <a
+                    
+                    class="icon-btn account-btn"
+                    title="Tài khoản"
+                  >
+                    <i class="fa-regular fa-user"></i>
+                  </a>
+
+                  <div class="account-dropdown">
+                    <div class="account-user">
+                      <div class="user-info">
+                        <img
+                          src="https://via.placeholder.com/100"
+                          alt="User Avatar"
+                          class="user-avatar"
+                        />
+                        <div class="user-details">
+                          <span class="user-name">Nguyễn Văn A</span>
+                          <span class="user-email">nguyenvana@gmail.com</span>
+                        </div>
+                      </div>
+
+                      <ul class="account-menu">
+                        <li>
+                          <a href="/profile.html">
+                            <i class="fa-regular fa-id-card"></i> Hồ sơ của tôi
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/orders.html">
+                            <i class="fa-solid fa-box-open"></i> Đơn mua
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/wishlist.html">
+                            <i class="fa-regular fa-heart"></i> Sản phẩm yêu
+                            thích
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/change-password.html">
+                            <i class="fa-solid fa-key"></i> Đổi mật khẩu
+                          </a>
+                        </li>
+
+                        <li class="border-top">
+                          <a href="#" class="text-danger">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Đăng xuất
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-          <div
-            class="navbar__subnav"
-            aria-label="Primary navigation"
-            style="display: none"
-          ></div>
         </nav>
       </header>
       <!-- slide -->
@@ -208,36 +184,36 @@
             <!-- Slide 1 -->
             <div class="slide-item">
               <img
-                src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/slide/slide2_E6XmnZJwu?updatedAt=1762891401156"
-                alt="Mountain Landscape"
+                src="https://i.pinimg.com/1200x/25/54/15/255415908ab241b565a5dbe42795519f.jpg"
+                alt="Fresh Fruit"
               />
               <div class="slide-caption">
-                <h2>Vẻ Đẹp Thiên Nhiên</h2>
-                <p>Khám phá những cảnh quan núi non hùng vĩ</p>
+                <h2>Trái Cây Nhập Khẩu</h2>
+                <p>Những loại trái cây tươi ngon từ khắp nơi trên thế giới</p>
               </div>
             </div>
 
             <!-- Slide 2 -->
             <div class="slide-item">
               <img
-                src="https://images.unsplash.com/photo-1507525428034-b723cf961d3e?w=900&h=500&fit=crop"
-                alt="Beach Paradise"
+                src="https://i.pinimg.com/736x/ba/cc/a7/bacca77883505e3fa726612bb78951ee.jpg"
+                alt="Clear Origin"
               />
               <div class="slide-caption">
-                <h2>Bãi Biển Nhiệt Đới</h2>
-                <p>Thư giãn bên bờ biển xanh ngắt</p>
+                <h2>Nguồn Gốc Rõ Ràng</h2>
+                <p>Trái cây có nguồn gốc rõ ràng và minh bạch</p>
               </div>
             </div>
 
             <!-- Slide 3 -->
             <div class="slide-item">
               <img
-                src="https://images.unsplash.com/photo-1511593358241-7eea1f3c84e5?w=900&h=500&fit=crop"
+                src="https://bloganchoi.com/wp-content/uploads/2018/06/cac-loai-trai-cay.jpg"
                 alt="City Lights"
               />
               <div class="slide-caption">
-                <h2>Thành Phố Về Đêm</h2>
-                <p>Ánh đèn lung linh của đô thị hiện đại</p>
+                <h2>Trái Cây Tươi Sạch</h2>
+                <p>Cam kết mang đến sản phẩm sạch và an toàn cho sức khỏe</p>
               </div>
             </div>
 
@@ -292,7 +268,7 @@
           <section id="top-offers">
             <div class="container">
               <div class="section-header">
-                <h2>Top Offers This Week</h2>
+                <h2>Ưu đãi trong tuần này</h2>
                 <div class="header-icons">
                   <button class="home-icon">
                     <i class="fas fa-home"></i>
@@ -312,55 +288,30 @@
                     <div class="product-image">
                       <img
                         src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                        alt="Pomegranate"
+                        alt="Dưa"
                       />
                       <div class="product-badge sale">-10%</div>
                       <div class="product-actions">
-                        <button class="action-btn" title="Add to Wishlist">
-                          <i class="far fa-heart"></i>
-                        </button>
-                        <button class="action-btn" title="Quick View">
-                          <i class="far fa-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Add to Cart">
-                          <i class="fas fa-shopping-basket"></i>
-                        </button>
+                        <a href="/wishlist.html">
+                          <button class="action-btn">
+                            <i class="far fa-heart"></i></button
+                        ></a>
+                        <a href="/product-detail.html">
+                          <button class="action-btn">
+                            <i class="far fa-eye"></i></button
+                        ></a>
+                        <a href="/cart.html"
+                          ><button class="action-btn">
+                            <i class="fas fa-shopping-basket"></i></button
+                        ></a>
                       </div>
                     </div>
                     <div class="product-info">
-                      <div class="category">Fruits</div>
-                      <h3>Pomegranate</h3>
+                      <div class="category">Trái cây nhập khẩu</div>
+                      <h3>Dừa</h3>
                       <div class="price">
-                        <span class="current">$3.99/Kg</span>
-                        <span class="original">$7.99/Kg</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-card">
-                    <div class="product-image">
-                      <img
-                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                        alt="Pomegranate"
-                      />
-                      <div class="product-badge sale">-10%</div>
-                      <div class="product-actions">
-                        <button class="action-btn" title="Add to Wishlist">
-                          <i class="far fa-heart"></i>
-                        </button>
-                        <button class="action-btn" title="Quick View">
-                          <i class="far fa-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Add to Cart">
-                          <i class="fas fa-shopping-basket"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="product-info">
-                      <div class="category">Fruits</div>
-                      <h3>Pomegranate</h3>
-                      <div class="price">
-                        <span class="current">$2.99/Kg</span>
-                        <span class="original">$7.99/Kg</span>
+                        <span class="current">120,000đ/Kg</span>
+                        <span class="original">200,000đ/Kg</span>
                       </div>
                     </div>
                   </div>
@@ -368,55 +319,30 @@
                     <div class="product-image">
                       <img
                         src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                        alt="Pomegranate"
+                        alt="Dưa"
                       />
                       <div class="product-badge sale">-10%</div>
                       <div class="product-actions">
-                        <button class="action-btn" title="Add to Wishlist">
-                          <i class="far fa-heart"></i>
-                        </button>
-                        <button class="action-btn" title="Quick View">
-                          <i class="far fa-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Add to Cart">
-                          <i class="fas fa-shopping-basket"></i>
-                        </button>
+                        <a href="/wishlist.html">
+                          <button class="action-btn">
+                            <i class="far fa-heart"></i></button
+                        ></a>
+                        <a href="/product-detail.html">
+                          <button class="action-btn">
+                            <i class="far fa-eye"></i></button
+                        ></a>
+                        <a href="/cart.html"
+                          ><button class="action-btn">
+                            <i class="fas fa-shopping-basket"></i></button
+                        ></a>
                       </div>
                     </div>
                     <div class="product-info">
-                      <div class="category">Fruits</div>
-                      <h3>Pomegranate</h3>
+                      <div class="category">Trái cây nhập khẩu</div>
+                      <h3>Dừa</h3>
                       <div class="price">
-                        <span class="current">$1.99/Kg</span>
-                        <span class="original">$7.99/Kg</span>
-                      </div>
-                    </div>
-                  </div>
-                  <div class="product-card">
-                    <div class="product-image">
-                      <img
-                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                        alt="Pomegranate"
-                      />
-                      <div class="product-badge sale">-10%</div>
-                      <div class="product-actions">
-                        <button class="action-btn" title="Add to Wishlist">
-                          <i class="far fa-heart"></i>
-                        </button>
-                        <button class="action-btn" title="Quick View">
-                          <i class="far fa-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Add to Cart">
-                          <i class="fas fa-shopping-basket"></i>
-                        </button>
-                      </div>
-                    </div>
-                    <div class="product-info">
-                      <div class="category">Fruits</div>
-                      <h3>Pomegranate</h3>
-                      <div class="price">
-                        <span class="current">$5.99/Kg</span>
-                        <span class="original">$7.99/Kg</span>
+                        <span class="current">120,000đ/Kg</span>
+                        <span class="original">200,000đ/Kg</span>
                       </div>
                     </div>
                   </div>
@@ -424,55 +350,154 @@
                     <div class="product-image">
                       <img
                         src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                        alt="Pomegranate"
+                        alt="Dưa"
                       />
                       <div class="product-badge sale">-10%</div>
                       <div class="product-actions">
-                        <button class="action-btn" title="Add to Wishlist">
-                          <i class="far fa-heart"></i>
-                        </button>
-                        <button class="action-btn" title="Quick View">
-                          <i class="far fa-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Add to Cart">
-                          <i class="fas fa-shopping-basket"></i>
-                        </button>
+                        <a href="/wishlist.html">
+                          <button class="action-btn">
+                            <i class="far fa-heart"></i></button
+                        ></a>
+                        <a href="/product-detail.html">
+                          <button class="action-btn">
+                            <i class="far fa-eye"></i></button
+                        ></a>
+                        <a href="/cart.html"
+                          ><button class="action-btn">
+                            <i class="fas fa-shopping-basket"></i></button
+                        ></a>
                       </div>
                     </div>
                     <div class="product-info">
-                      <div class="category">Fruits</div>
-                      <h3>Pomegranate</h3>
+                      <div class="category">Trái cây nhập khẩu</div>
+                      <h3>Dừa</h3>
                       <div class="price">
-                        <span class="current">$6.99/Kg</span>
-                        <span class="original">$7.99/Kg</span>
+                        <span class="current">120,000đ/Kg</span>
+                        <span class="original">200,000đ/Kg</span>
                       </div>
                     </div>
                   </div>
                   <div class="product-card">
                     <div class="product-image">
                       <img
-                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                        alt="Pomegranate"
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                        alt="Dưa"
                       />
                       <div class="product-badge sale">-10%</div>
                       <div class="product-actions">
-                        <button class="action-btn" title="Add to Wishlist">
-                          <i class="far fa-heart"></i>
-                        </button>
-                        <button class="action-btn" title="Quick View">
-                          <i class="far fa-eye"></i>
-                        </button>
-                        <button class="action-btn" title="Add to Cart">
-                          <i class="fas fa-shopping-basket"></i>
-                        </button>
+                        <a href="/wishlist.html">
+                          <button class="action-btn">
+                            <i class="far fa-heart"></i></button
+                        ></a>
+                        <a href="/product-detail.html">
+                          <button class="action-btn">
+                            <i class="far fa-eye"></i></button
+                        ></a>
+                        <a href="/cart.html"
+                          ><button class="action-btn">
+                            <i class="fas fa-shopping-basket"></i></button
+                        ></a>
                       </div>
                     </div>
                     <div class="product-info">
-                      <div class="category">Fruits</div>
-                      <h3>Pomegranate</h3>
+                      <div class="category">Trái cây nhập khẩu</div>
+                      <h3>Dừa</h3>
                       <div class="price">
-                        <span class="current">$6.99/Kg</span>
-                        <span class="original">$7.99/Kg</span>
+                        <span class="current">120,000đ/Kg</span>
+                        <span class="original">200,000đ/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                        alt="Dưa"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <a href="/wishlist.html">
+                          <button class="action-btn">
+                            <i class="far fa-heart"></i></button
+                        ></a>
+                        <a href="/product-detail.html">
+                          <button class="action-btn">
+                            <i class="far fa-eye"></i></button
+                        ></a>
+                        <a href="/cart.html"
+                          ><button class="action-btn">
+                            <i class="fas fa-shopping-basket"></i></button
+                        ></a>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Trái cây nhập khẩu</div>
+                      <h3>Dừa</h3>
+                      <div class="price">
+                        <span class="current">120,000đ/Kg</span>
+                        <span class="original">200,000đ/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                        alt="Dưa"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <a href="/wishlist.html">
+                          <button class="action-btn">
+                            <i class="far fa-heart"></i></button
+                        ></a>
+                        <a href="/product-detail.html">
+                          <button class="action-btn">
+                            <i class="far fa-eye"></i></button
+                        ></a>
+                        <a href="/cart.html"
+                          ><button class="action-btn">
+                            <i class="fas fa-shopping-basket"></i></button
+                        ></a>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Trái cây nhập khẩu</div>
+                      <h3>Dừa</h3>
+                      <div class="price">
+                        <span class="current">120,000đ/Kg</span>
+                        <span class="original">200,000đ/Kg</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="product-card">
+                    <div class="product-image">
+                      <img
+                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                        alt="Dưa"
+                      />
+                      <div class="product-badge sale">-10%</div>
+                      <div class="product-actions">
+                        <a href="/wishlist.html">
+                          <button class="action-btn">
+                            <i class="far fa-heart"></i></button
+                        ></a>
+                        <a href="/product-detail.html">
+                          <button class="action-btn">
+                            <i class="far fa-eye"></i></button
+                        ></a>
+                        <a href="/cart.html"
+                          ><button class="action-btn">
+                            <i class="fas fa-shopping-basket"></i></button
+                        ></a>
+                      </div>
+                    </div>
+                    <div class="product-info">
+                      <div class="category">Trái cây nhập khẩu</div>
+                      <h3>Dừa</h3>
+                      <div class="price">
+                        <span class="current">120,000đ/Kg</span>
+                        <span class="original">200,000đ/Kg</span>
                       </div>
                     </div>
                   </div>
@@ -488,35 +513,32 @@
               <!-- Countdown -->
               <div class="countdown">
                 <div>
-                  <span>703</span>
-                  <p>Days</p>
+                  <span>0</span>
+                  <p>Ngày</p>
                 </div>
                 <div>
                   <span>19</span>
-                  <p>Hours</p>
+                  <p>Giờ</p>
                 </div>
                 <div>
                   <span>50</span>
-                  <p>Mins</p>
+                  <p>Phút</p>
                 </div>
                 <div>
                   <span>57</span>
-                  <p>Secs</p>
+                  <p>Giây</p>
                 </div>
               </div>
 
               <!-- Deal item -->
               <div class="deal-item">
                 <div class="deal-left">
-                  <p class="sub-title">WEEKEN DEALS</p>
-                  <h2 class="product-title">Fresh Coconut</h2>
-                  <p class="product-desc">
-                    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-                    Maecenas sed dui tempor eros porttitor.
-                  </p>
-                  <p class="product-price">$10.00</p>
+                  <p class="sub-title">Ưu đãi cuối tuần</p>
+                  <h2 class="product-title">Dừa sáp</h2>
+                  <p class="product-desc">Thơm ngon mọng nước</p>
+                  <p class="product-price">10.000 Đ</p>
                   <a href="#" class="shop-now">
-                    SHOP NOW <span class="arrow">→</span>
+                    MUA NGAY <span class="arrow">→</span>
                   </a>
                 </div>
 
@@ -536,7 +558,7 @@
           <section id="top-trending">
             <div class="container">
               <div class="section-header">
-                <h2>Top Trending</h2>
+                <h2>Xu hướng</h2>
                 <div class="header-icons">
                   <button class="home-icon">
                     <i class="fas fa-fire"></i>
@@ -554,23 +576,26 @@
                     />
                     <div class="product-badge sale">-10%</div>
                     <div class="product-actions">
-                      <button class="action-btn">
-                        <i class="far fa-heart"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="far fa-eye"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="fas fa-shopping-basket"></i>
-                      </button>
+                      <a href="/wishlist.html">
+                        <button class="action-btn">
+                          <i class="far fa-heart"></i></button
+                      ></a>
+                      <a href="/product-detail.html">
+                        <button class="action-btn">
+                          <i class="far fa-eye"></i></button
+                      ></a>
+                      <a href="/cart.html"
+                        ><button class="action-btn">
+                          <i class="fas fa-shopping-basket"></i></button
+                      ></a>
                     </div>
                   </div>
                   <div class="product-info">
-                    <div class="category">Fruits</div>
-                    <h3>Pomegranate</h3>
+                    <div class="category">Trái cây nhập khẩu</div>
+                    <h3>Dừa</h3>
                     <div class="price">
-                      <span class="current">$3.99/Kg</span>
-                      <span class="original">$7.99/Kg</span>
+                      <span class="current">120,000đ/Kg</span>
+                      <span class="original">200,000đ/Kg</span>
                     </div>
                   </div>
                 </div>
@@ -582,23 +607,26 @@
                     />
                     <div class="product-badge sale">-10%</div>
                     <div class="product-actions">
-                      <button class="action-btn">
-                        <i class="far fa-heart"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="far fa-eye"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="fas fa-shopping-basket"></i>
-                      </button>
+                      <a href="/wishlist.html">
+                        <button class="action-btn">
+                          <i class="far fa-heart"></i></button
+                      ></a>
+                      <a href="/product-detail.html">
+                        <button class="action-btn">
+                          <i class="far fa-eye"></i></button
+                      ></a>
+                      <a href="/cart.html"
+                        ><button class="action-btn">
+                          <i class="fas fa-shopping-basket"></i></button
+                      ></a>
                     </div>
                   </div>
                   <div class="product-info">
-                    <div class="category">Fruits</div>
-                    <h3>Pomegranate</h3>
+                    <div class="category">Trái cây nhập khẩu</div>
+                    <h3>Dừa</h3>
                     <div class="price">
-                      <span class="current">$3.99/Kg</span>
-                      <span class="original">$7.99/Kg</span>
+                      <span class="current">120,000đ/Kg</span>
+                      <span class="original">200,000đ/Kg</span>
                     </div>
                   </div>
                 </div>
@@ -610,23 +638,26 @@
                     />
                     <div class="product-badge sale">-10%</div>
                     <div class="product-actions">
-                      <button class="action-btn">
-                        <i class="far fa-heart"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="far fa-eye"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="fas fa-shopping-basket"></i>
-                      </button>
+                      <a href="/wishlist.html">
+                        <button class="action-btn">
+                          <i class="far fa-heart"></i></button
+                      ></a>
+                      <a href="/product-detail.html">
+                        <button class="action-btn">
+                          <i class="far fa-eye"></i></button
+                      ></a>
+                      <a href="/cart.html"
+                        ><button class="action-btn">
+                          <i class="fas fa-shopping-basket"></i></button
+                      ></a>
                     </div>
                   </div>
                   <div class="product-info">
-                    <div class="category">Fruits</div>
-                    <h3>Pomegranate</h3>
+                    <div class="category">Trái cây nhập khẩu</div>
+                    <h3>Dừa</h3>
                     <div class="price">
-                      <span class="current">$3.99/Kg</span>
-                      <span class="original">$7.99/Kg</span>
+                      <span class="current">120,000đ/Kg</span>
+                      <span class="original">200,000đ/Kg</span>
                     </div>
                   </div>
                 </div>
@@ -638,51 +669,26 @@
                     />
                     <div class="product-badge sale">-10%</div>
                     <div class="product-actions">
-                      <button class="action-btn">
-                        <i class="far fa-heart"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="far fa-eye"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="fas fa-shopping-basket"></i>
-                      </button>
+                      <a href="/wishlist.html">
+                        <button class="action-btn">
+                          <i class="far fa-heart"></i></button
+                      ></a>
+                      <a href="/product-detail.html">
+                        <button class="action-btn">
+                          <i class="far fa-eye"></i></button
+                      ></a>
+                      <a href="/cart.html"
+                        ><button class="action-btn">
+                          <i class="fas fa-shopping-basket"></i></button
+                      ></a>
                     </div>
                   </div>
                   <div class="product-info">
-                    <div class="category">Fruits</div>
-                    <h3>Pomegranate</h3>
+                    <div class="category">Trái cây nhập khẩu</div>
+                    <h3>Dừa</h3>
                     <div class="price">
-                      <span class="current">$3.99/Kg</span>
-                      <span class="original">$7.99/Kg</span>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-card">
-                  <div class="product-image">
-                    <img
-                      src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                      alt="Dưa"
-                    />
-                    <div class="product-badge sale">-10%</div>
-                    <div class="product-actions">
-                      <button class="action-btn">
-                        <i class="far fa-heart"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="far fa-eye"></i>
-                      </button>
-                      <button class="action-btn">
-                        <i class="fas fa-shopping-basket"></i>
-                      </button>
-                    </div>
-                  </div>
-                  <div class="product-info">
-                    <div class="category">Fruits</div>
-                    <h3>Pomegranate</h3>
-                    <div class="price">
-                      <span class="current">$3.99/Kg</span>
-                      <span class="original">$7.99/Kg</span>
+                      <span class="current">120,000đ/Kg</span>
+                      <span class="original">200,000đ/Kg</span>
                     </div>
                   </div>
                 </div>
@@ -712,8 +718,8 @@
       <section class="blog">
         <div class="blog__container">
           <!-- Tiêu đề section -->
-          <span class="blog__subtitle">Latest News</span>
-          <h2 class="blog__title">From Our Blog</h2>
+          <span class="blog__subtitle">Tin mới nhất</span>
+          <h2 class="blog__title">Bài viết</h2>
 
           <!-- Grid bài viết -->
           <div class="blog__grid">
@@ -726,13 +732,13 @@
               />
               <div class="blog__content">
                 <div class="blog__meta">
-                  <span class="blog__author">By Admin</span>
-                  <span class="blog__date">16th Nov 2022</span>
+                  <span class="blog__author">Đăng bởi Admin</span>
+                  <span class="blog__date">7/3/2025</span>
                 </div>
                 <h3 class="blog__post-title">
-                  12 Healthy Fruits and Vegetables Must-Haves t...
+                  12 loại trái cây và rau củ bạn nhất định nên có...
                 </h3>
-                <a href="#" class="blog__link">Read more →</a>
+                <a href="#" class="blog__link">Xem thêm →</a>
               </div>
             </div>
 
@@ -745,13 +751,13 @@
               />
               <div class="blog__content">
                 <div class="blog__meta">
-                  <span class="blog__author">By Admin</span>
-                  <span class="blog__date">16th Nov 2022</span>
+                  <span class="blog__author">Đăng bởi Admin</span>
+                  <span class="blog__date">29/6/2025</span>
                 </div>
                 <h3 class="blog__post-title">
-                  Orange Fresh Juice Nutrition Facts, Calories...
+                  Dinh dưỡng & calo trong nước cam tươi...
                 </h3>
-                <a href="#" class="blog__link">Read more →</a>
+                <a href="#" class="blog__link">Xem thêm →</a>
               </div>
             </div>
 
@@ -764,13 +770,13 @@
               />
               <div class="blog__content">
                 <div class="blog__meta">
-                  <span class="blog__author">By Admin</span>
-                  <span class="blog__date">16th Nov 2022</span>
+                  <span class="blog__author">Đăng bởi Admin</span>
+                  <span class="blog__date">16/11/2025</span>
                 </div>
                 <h3 class="blog__post-title">
-                  Great bulk recipes to help use all your organic...
+                  Những công thức nấu ăn số lượng lớn giúp bạn...
                 </h3>
-                <a href="#" class="blog__link">Read more →</a>
+                <a href="#" class="blog__link">Xem thêm →</a>
               </div>
             </div>
           </div>

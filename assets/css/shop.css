@@ -1,4 +1,3 @@
-
 .grid__row {
     display: flex;
     flex-wrap: wrap;
@@ -30,6 +29,7 @@
 /* app container */
 .app__container {
     background-color: white;
+    margin-bottom: 30px;
 }
 
 .app__content {

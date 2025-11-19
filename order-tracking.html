@@ -1,24 +1,25 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
   <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <title>Chi tiết sản phẩm — Organic Harvest</title>
-
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-    />
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Giới thiệu</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="./assets/css/base.css" />
-    <link rel="stylesheet" href="assets/css/product-detail.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/tracking.css" />
   </head>
+
   <body>
     <div class="main">
+      <!-- HEADER -->
       <header class="header">
         <nav class="navbar">
           <div class="navbar__wrapper">
@@ -126,125 +127,79 @@
             </div>
           </div>
 
-         
+        
         </nav>
       </header>
       <!--  -->
-
-      <main class="main product-detail">
-        <!--  -->
-        <div class="breadcrumb">
+       <div class="breadcrumb">
           <div class="grid">
-            <a href="shop.html">Sản phẩm</a>
+            <a href="index.html">Trang chủ</a>
             <i class="fa-solid fa-angle-right"></i>
-            <span>Chi tiết sản phẩm</span>
+            <span>Về Chúng Tôi</span>
           </div>
         </div>
-        <!--  -->
-        <div class="app__container">
-          <div class="grid">
-            <div class="grid__row">
-              <div class="product-detail__inner">
-                <div class="product-gallery">
-                  <div class="product-gallery__thumbs">
-                    <button
-                      class="thumb active"
-                      data-src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                    >
-                      <img
-                        src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                        alt="Măng cụt"
-                      />
-                    </button>
-                  </div>
+      <div class="container-tracking">
+        
+        <!-- Order Tracking Form -->
+        <div class="track-order">
+          <h1 class="track-order__title">Theo Dõi Đơn Hàng Của Bạn</h1>
+          <p class="track-order__description">
+            Để theo dõi đơn hàng, vui lòng nhập Mã Đơn Hàng của bạn vào ô bên
+            dưới và nhấn nút "Theo dõi". Mã này đã được cung cấp cho bạn trên
+            hóa đơn và trong email xác nhận bạn đã nhận được.
+          </p>
 
-                  <div class="product-gallery__main">
-                    <img
-                      id="productMainImg"
-                      src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                      alt="Măng cụt tươi ngon"
-                    />
-                  </div>
-                </div>
-
-                <div class="product-info">
-                  <h1 class="product-title">Măng cụt Thái Lan loại 1</h1>
-                  <p class="product-sku">Mã: FS-MC-001</p>
-                  <div class="product-price">
-                    <span class="price-current">120,000₫</span>
-                    <span class="price-old">150,000₫</span>
-                  </div>
-
-                  <div class="product-meta">
-                    <label>Trọng lượng:</label>
-                    <select class="product-variant">
-                      <option>500g</option>
-                      <option>1kg</option>
-                      <option>2kg</option>
-                    </select>
-                  </div>
-
-                  <div class="product-qty-row">
-                    <label>Số lượng</label>
-                    <div class="qty">
-                      <button class="qty-decrease">-</button>
-                      <input
-                        type="number"
-                        min="1"
-                        value="1"
-                        class="qty-input"
-                      />
-                      <button class="qty-increase">+</button>
-                    </div>
-                  </div>
-
-                  <div class="product-action">
-                    <button class="add-to-cart">Thêm vào giỏ</button>
-                    <button class="buy-now">Mua ngay</button>
-                  </div>
-
-                  <div class="product-short-desc">
-                    <p>
-                      Măng cụt tươi loại 1, chọn lọc từ các vườn đạt chuẩn. Vị
-                      ngọt thanh, mọng nước, cùi trắng dày. Phù hợp ăn trực tiếp
-                      hoặc làm món tráng miệng. Giao hàng nhanh trong ngày.
-                    </p>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-detail__tabs">
-                <nav class="tabs">
-                  <button class="tab-btn active" data-target="#desc">
-                    Mô tả
-                  </button>
-                  <button class="tab-btn" data-target="#reviews">
-                    Đánh giá
-                  </button>
-                </nav>
-
-                <section id="desc" class="tab-panel active">
-                  <h3>Mô tả sản phẩm</h3>
-                  <p>
-                    Măng cụt tươi loại 1, chọn lọc từ các vườn đạt chuẩn. Vị
-                    ngọt thanh, mọng nước, cùi trắng dày. Phù hợp ăn trực tiếp
-                    hoặc làm món tráng miệng. Giao hàng nhanh trong ngày.
-                  </p>
-                  <div class="related-products">
-                    <h2 class="related-title">Sản phẩm tương tự</h2>
-                    <div class="related-list"></div>
-                  </div>
-                </section>
-
-                <section id="reviews" class="tab-panel">
-                  <div class="review-list"></div>
-                  <form class-="review-form"></form>
-                </section>
-              </div>
+          <div class="status-tracker">
+            <div class="status-tracker__step">
+              <i class="status-tracker__icon fas fa-box"></i>
+            </div>
+            <div class="status-tracker__step">
+              <i class="status-tracker__icon fas fa-truck"></i>
+            </div>
+            <div class="status-tracker__step">
+              <i class="status-tracker__icon fas fa-box-open"></i>
+            </div>
+            <div class="status-tracker__step">
+              <i class="status-tracker__icon fas fa-check-circle"></i>
             </div>
           </div>
+
+          <form class="tracking-form">
+            <div class="tracking-form__group">
+              <label for="order-id" class="tracking-form__label"
+                >Mã Đơn Hàng</label
+              >
+              <div class="tracking-form__input-wrapper">
+                <input type="text" id="order-id" class="tracking-form__input" />
+                <span class="tracking-form__hint"
+                  >Tìm thấy ở trong Email xác nhận đơn hàng.</span
+                >
+              </div>
+            </div>
+
+            <div class="tracking-form__group">
+              <label for="billing-email" class="tracking-form__label"
+                >Email thanh toán</label
+              >
+              <div class="tracking-form__input-wrapper">
+                <input
+                  type="email"
+                  id="billing-email"
+                  class="tracking-form__input"
+                />
+                <span class="tracking-form__hint"
+                  >Email bạn sử dụng khi thanh toán.</span
+                >
+              </div>
+            </div>
+
+            <button type="submit" class="tracking-form__button">
+              Kiểm tra
+            </button>
+          </form>
         </div>
-      </main>
+      </div>
+      <!-- FOOTER -->
       <footer class="footer">
         <div class="footer__main">
           <div class="footer__grid">
@@ -468,51 +423,8 @@
           </div>
         </div>
       </footer>
+
+      <script src="./assets/js/main.js"></script>
     </div>
-
-    <script>
-      // thumbnail click handler: swap main image
-      document.addEventListener("click", function (e) {
-        const t = e.target.closest(".thumb");
-        if (t) {
-          document
-            .querySelectorAll(".thumb")
-            .forEach((b) => b.classList.remove("active"));
-          t.classList.add("active");
-          const src = t.getAttribute("data-src");
-          const img = document.getElementById("productMainImg");
-          if (img && src) img.src = src;
-        }
-
-        if (e.target.matches(".tab-btn")) {
-          document
-            .querySelectorAll(".tab-btn")
-            .forEach((b) => b.classList.remove("active"));
-          e.target.classList.add("active");
-          document
-            .querySelectorAll(".tab-panel")
-            .forEach((p) => p.classList.remove("active"));
-          const target = document.querySelector(
-            e.target.getAttribute("data-target")
-          );
-          if (target) target.classList.add("active");
-        }
-      });
-
-      // qty controls
-      document.addEventListener("click", function (e) {
-        if (
-          e.target.matches(".qty-increase") ||
-          e.target.matches(".qty-decrease")
-        ) {
-          const wrap = e.target.closest(".qty");
-          const input = wrap.querySelector(".qty-input");
-          let val = parseInt(input.value || "1", 10);
-          if (e.target.matches(".qty-increase")) val++;
-          if (e.target.matches(".qty-decrease") && val > 1) val--;
-          input.value = val;
-        }
-      });
-    </script>
   </body>
 </html>

@@ -14,256 +14,189 @@
     />
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/cart.css" />
+    <link rel="stylesheet" href="assets/css/contact.css" />
   </head>
 
   <body>
-    <div class="main">
-      <!-- HEADER -->
-      <header class="header">
-        <nav class="navbar">
-          <div class="navbar__wrapper">
-            <div class="navbar__content">
-              <ul class="navbar-list">
-                <li class="navbar-item navbar-item--no-click">
-                  Kết nối :
-                  <a href="#" class="navbar-icon__link">
-                    <i class="navbar-icon fa-brands fa-facebook"></i>
-                  </a>
-                  <a href="#" class="navbar-icon__link">
-                    <i class="navbar-icon fa-brands fa-instagram"></i>
-                  </a>
-                </li>
-              </ul>
-              <ul class="navbar-list">
-                <li class="navbar-item">
-                  <a href="faqs.html" class="navbar-item__link">
-                    <span class="navbar-icon__link">
-                      <i class="navbar-icon fa-regular fa-circle-question"></i>
-                    </span>
-                    Hỗ trợ
-                  </a>
-                </li>
-                <li class="navbar-item">
-                  <a href="" class="navbar-item__link">Đăng ký</a>
-                </li>
-                <li class="navbar-item">
-                  <a href="" class="navbar-item__link">Đăng nhập</a>
-                </li>
-              </ul>
-            </div>
+    <!-- Header -->
+    <header class="header">
+      <nav class="navbar">
+        <div class="navbar__wrapper">
+          <div class="navbar__content">
+            <ul class="navbar-list">
+              <li class="navbar-item navbar-item--no-click">
+                Kết nối :
+                <a href="#" class="navbar-icon__link">
+                  <i class="navbar-icon fa-brands fa-facebook"></i>
+                </a>
+                <a href="#" class="navbar-icon__link">
+                  <i class="navbar-icon fa-brands fa-instagram"></i>
+                </a>
+              </li>
+            </ul>
+            <ul class="navbar-list">
+              <li class="navbar-item">
+                <a href="faqs.html" class="navbar-item__link">
+                  <span class="navbar-icon__link">
+                    <i class="navbar-icon fa-regular fa-circle-question"></i>
+                  </span>
+                  Hỗ trợ
+                </a>
+              </li>
+              <li class="navbar-item">
+                <a href="" class="navbar-item__link">Đăng ký</a>
+              </li>
+              <li class="navbar-item">
+                <a href="" class="navbar-item__link">Đăng nhập</a>
+              </li>
+            </ul>
           </div>
-
-          <div class="navbar__menu">
-            <div class="navbar__menu-inner">
-              <div class="navbar__menu-logo">
-                <a href="/index.html">
-                  <img
-                    class="navbar__menu-logo-img"
-                    src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-                    alt="Organic Harvest Logo"
-                  />
-                </a>
-              </div>
-
-              <ul class="main-nav-links subnav-links">
-                <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="/shop.html">Sản Phẩm</a></li>
-                <li><a href="/about.html">Giới thiệu</a></li>
-                <li><a href="blog.html">Bài viết</a></li>
-                <li><a href="/contact.html">Liên hệ</a></li>
-              </ul>
-
-              <div class="navbar__menu-search">
-                <form
-                  class="search-form"
-                  action="/shop.html"
-                  method="get"
-                  role="search"
-                >
-                  <select
-                    name="category"
-                    class="search-cat"
-                    aria-label="Category"
-                  >
-                    <option value="all">Danh mục</option>
-                    <option value="fruits">Trái cây</option>
-                    <option value="vegetables">táo</option>
-                  </select>
-                  <input
-                    name="q"
-                    class="search-input"
-                    type="search"
-                    placeholder="Tìm kiếm sản phẩm..."
-                    aria-label="Search"
-                  />
-                  <button type="submit" class="search-btn" aria-label="Search">
-                    <i class="fa-solid fa-magnifying-glass"></i>
-                  </button>
-                </form>
-              </div>
-
-              <div class="navbar__menu-actions">
-                <a
-                  href="/wishlist.html"
-                  class="icon-btn wishlist-btn"
-                  title="Yêu thích"
-                >
-                  <i class="fa-solid fa-heart"></i>
-                  <span class="badge">3</span>
-                </a>
-                <a href="/cart.html" class="icon-btn cart-btn" title="Giỏ hàng">
-                  <i class="fa-solid fa-basket-shopping"></i>
-                  <span class="badge">2</span>
-                </a>
-                <a
-                  href="/account.html"
-                  class="icon-btn account-btn"
-                  title="Tài khoản"
-                >
-                  <i class="fa-regular fa-user"></i>
-                </a>
-              </div>
-            </div>
-          </div>
-
-         
-        </nav>
-      </header>
-      <!-- Page Title -->
-      <div class="breadcrumb">
-        <div class="grid">
-          <a href="index.html">Trang chủ</a>
-          <i class="fa-solid fa-angle-right"></i>
-          <span>Giỏ hàng</span>
         </div>
-      </div>
-      <!-- Cart-Content -->
-      <div class="page-container">
-        <main class="cart-wrapper">
-          <div class="cart-main">
-            <div class="shipping-progress-bar">
-              <p>
-                Mua thêm <strong>69.000đ</strong> nữa để được
-                <strong>miễn phí vận chuyển</strong>
-              </p>
-              <div class="progress-track">
-                <div class="progress-filled" style="width: 54%"></div>
-              </div>
+
+        <div class="navbar__menu">
+          <div class="navbar__menu-inner">
+            <div class="navbar__menu-logo">
+              <a href="/index.html">
+                <img
+                  class="navbar__menu-logo-img"
+                  src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                  alt="Organic Harvest Logo"
+                />
+              </a>
             </div>
 
-            <table class="cart-table">
-              <thead>
-                <tr>
-                  <th class="product-col">Sản Phẩm</th>
-                  <th class="price-col">Giá</th>
-                  <th class="quantity-col">Số Lượng</th>
-                  <th class="subtotal-col">Thành Tiền</th>
-                  <th class="remove-col">&nbsp;</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="product-cell">
-                    <img
-                      src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                      alt="Măng Cụt"
-                    />
-                    <span>Măng cụt</span>
-                  </td>
-                  <td>33.000đ</td>
-                  <td>
-                    <div class="quantity-selector">
-                      <button class="quantity-btn">-</button>
-                      <input type="number" value="2" min="1" />
-                      <button class="quantity-btn">+</button>
-                    </div>
-                  </td>
-                  <td><strong>66.000đ</strong></td>
-                  <td>
-                    <button class="remove-btn">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td>
-                </tr>
+            <ul class="main-nav-links subnav-links">
+              <li><a href="index.html">Trang chủ</a></li>
+              <li><a href="/shop.html">Sản Phẩm</a></li>
+              <li><a href="/about.html">Giới thiệu</a></li>
+              <li><a href="blog.html">Bài viết</a></li>
+              <li><a href="/contact.html">Liên hệ</a></li>
+            </ul>
 
-                <tr>
-                  <td class="product-cell">
-                    <img
-                      src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/mangcut?updatedAt=1762463418983"
-                      alt="Măng Cụt"
-                    />
-                    <span>Măng Cụt</span>
-                  </td>
-                  <td>15.000đ</td>
-                  <td>
-                    <div class="quantity-selector">
-                      <button class="quantity-btn">-</button>
-                      <input type="number" value="1" min="1" />
-                      <button class="quantity-btn">+</button>
-                    </div>
-                  </td>
-                  <td><strong>15.000đ</strong></td>
-                  <td>
-                    <button class="remove-btn">
-                      <i class="fa-solid fa-trash-can"></i>
-                    </button>
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-
-            <div class="cart-actions">
-              <div class="coupon-area">
+            <div class="navbar__menu-search">
+              <form
+                class="search-form"
+                action="/shop.html"
+                method="get"
+                role="search"
+              >
+                <select
+                  name="category"
+                  class="search-cat"
+                  aria-label="Category"
+                >
+                  <option value="all">Danh mục</option>
+                  <option value="fruits">Trái cây</option>
+                  <option value="vegetables">táo</option>
+                </select>
                 <input
-                  type="text"
-                  class="coupon-input"
-                  placeholder="Mã giảm giá"
+                  name="q"
+                  class="search-input"
+                  type="search"
+                  placeholder="Tìm kiếm sản phẩm..."
+                  aria-label="Search"
                 />
-                <button class="apply-coupon-btn">ÁP DỤNG MÃ GIẢM GIÁ</button>
-              </div>
-              <button class="update-cart-btn">CẬP NHẬT GIỎ HÀNG</button>
+                <button type="submit" class="search-btn" aria-label="Search">
+                  <i class="fa-solid fa-magnifying-glass"></i>
+                </button>
+              </form>
+            </div>
+
+            <div class="navbar__menu-actions">
+              <a
+                href="/wishlist.html"
+                class="icon-btn wishlist-btn"
+                title="Yêu thích"
+              >
+                <i class="fa-solid fa-heart"></i>
+                <span class="badge">3</span>
+              </a>
+              <a href="/cart.html" class="icon-btn cart-btn" title="Giỏ hàng">
+                <i class="fa-solid fa-basket-shopping"></i>
+                <span class="badge">2</span>
+              </a>
+              <a
+                href="/account.html"
+                class="icon-btn account-btn"
+                title="Tài khoản"
+              >
+                <i class="fa-regular fa-user"></i>
+              </a>
             </div>
           </div>
+        </div>
 
-          <aside class="cart-sidebar">
-            <div class="cart-totals">
-              <h2>THÀNH TIỀN</h2>
-
-              <div class="totals-row">
-                <span>Tạm tính</span>
-                <span>81.000đ</span>
-              </div>
-
-              <div class="shipping-section">
-                <h3>Phương Thức Vận Chuyển</h3>
-                <label class="shipping-option">
-                  <input type="radio" name="shipping" checked />
-                  Giao Hoả Tốc: <strong>50.000đ</strong>
-                </label>
-                <label class="shipping-option">
-                  <input type="radio" name="shipping" />
-                  Giao Nhanh: <strong>30.000đ</strong>
-                </label>
-                <p class="shipping-note">
-                  Phương thức giao hàng sẽ được cập nhật khi thanh toán.
-                </p>
-                <a href="#" class="calculate-shipping">Cập nhật chi phí</a>
-              </div>
-
-              <div class="totals-row final-total">
-                <span>Tổng cộng</span>
-                <span>131.000đ</span>
-              </div>
-              <a href="/checkout.html">
-                <button class="checkout-btn">THANH TOÁN</button></a
-              >
-            </div>
-          </aside>
-        </main>
+       
+      </nav>
+    </header>
+    <!-- CONTAINER -->
+    <div class="breadcrumb">
+      <div class="grid">
+        <a href="index.html">Trang chủ</a>
+        <i class="fa-solid fa-angle-right"></i>
+        <span>Liên hệ</span>
       </div>
     </div>
-    <!-- FOOTER -->
+    <section class="contact-wrapper">
+      <div class="contact-box">
+        <!-- Form liên hệ -->
+        <div class="form-container">
+          <form>
+            <div class="row">
+              <div class="input-group">
+                <label>Họ</label>
+                <input type="text" placeholder="Nhập họ của bạn" />
+              </div>
+
+              <div class="input-group">
+                <label>Tên</label>
+                <input type="text" placeholder="Nhập tên của bạn" />
+              </div>
+            </div>
+
+            <div class="row">
+              <div class="input-group">
+                <label>Email</label>
+                <input type="email" placeholder="Nhập email" />
+              </div>
+
+              <div class="input-group">
+                <label>Số điện thoại</label>
+                <input type="text" placeholder="Nhập số điện thoại" />
+              </div>
+            </div>
+
+            <div class="input-group">
+              <label>Nội dung cần liên hệ</label>
+              <textarea placeholder="Vui lòng nhập nội dung..."></textarea>
+            </div>
+
+            <button type="submit" class="btn-submit">Gửi liên hệ</button>
+          </form>
+        </div>
+
+        <!-- Info liên hệ -->
+        <div class="info-container">
+          <h2>Liên hệ với chúng tôi</h2>
+          <p>
+            Vui lòng để lại thông tin và nội dung liên hệ, chúng tôi sẽ phản hồi
+            sớm nhất có thể.
+          </p>
+
+          <div class="contact-info">
+            <p><b>Số điện thoại:</b> +84 123 456 789</p>
+            <p><b>Email:</b> contact@company.com</p>
+            <p><b>Địa chỉ:</b> Đại học Nông Lâm TP.HCM</p>
+          </div>
+
+          <div class="follow-us">
+            <b>Theo dõi chúng tôi:</b>
+            <p>Facebook — Instagram — Twitter — Google</p>
+          </div>
+        </div>
+      </div>
+    </section>
+    <!-- Footer -->
     <footer class="footer">
       <div class="footer__main">
         <div class="footer__grid">
@@ -487,6 +420,5 @@
         </div>
       </div>
     </footer>
-    <script src="./assets/js/main.js"></script>
   </body>
 </html>

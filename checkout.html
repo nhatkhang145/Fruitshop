@@ -3,21 +3,22 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sản phẩm yêu thích - Organic Harvest</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-    />
+    <title>Giới thiệu</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
     />
-    <link rel="stylesheet" href="./assets/css/base.css" />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="./assets/css/profile.css" />
-    <link rel="stylesheet" href="./assets/css/wishlist.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
+    />
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/checkout.css" />
   </head>
+
   <body>
+    <!-- Header -->
     <header class="header">
       <nav class="navbar">
         <div class="navbar__wrapper">
@@ -43,10 +44,10 @@
                 </a>
               </li>
               <li class="navbar-item">
-                <a href="register.html" class="navbar-item__link">Đăng ký</a>
+                <a href="" class="navbar-item__link">Đăng ký</a>
               </li>
               <li class="navbar-item">
-                <a href="login.html" class="navbar-item__link">Đăng nhập</a>
+                <a href="" class="navbar-item__link">Đăng nhập</a>
               </li>
             </ul>
           </div>
@@ -114,200 +115,242 @@
                 <i class="fa-solid fa-basket-shopping"></i>
                 <span class="badge">2</span>
               </a>
-              <div class="header__account">
-                <a class="icon-btn account-btn" title="Tài khoản">
-                  <i class="fa-regular fa-user"></i>
-                </a>
-
-                <div class="account-dropdown">
-                  <div class="account-user">
-                    <div class="user-info">
-                      <img
-                        src="https://via.placeholder.com/100"
-                        alt="User Avatar"
-                        class="user-avatar"
-                      />
-                      <div class="user-details">
-                        <span class="user-name">Nguyễn Văn A</span>
-                        <span class="user-email">nguyenvana@gmail.com</span>
-                      </div>
-                    </div>
-
-                    <ul class="account-menu">
-                      <li>
-                        <a href="/profile.html">
-                          <i class="fa-regular fa-id-card"></i> Hồ sơ của tôi
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/orders.html">
-                          <i class="fa-solid fa-box-open"></i> Đơn mua
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/wishlist.html">
-                          <i class="fa-regular fa-heart"></i> Sản phẩm yêu thích
-                        </a>
-                      </li>
-                      <li>
-                        <a href="/change-password.html">
-                          <i class="fa-solid fa-key"></i> Đổi mật khẩu
-                        </a>
-                      </li>
-
-                      <li class="border-top">
-                        <a href="#" class="text-danger">
-                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
-                          Đăng xuất
-                        </a>
-                      </li>
-                    </ul>
-                  </div>
-                </div>
-              </div>
+              <a
+                href="/account.html"
+                class="icon-btn account-btn"
+                title="Tài khoản"
+              >
+                <i class="fa-regular fa-user"></i>
+              </a>
             </div>
           </div>
         </div>
+
+       
       </nav>
     </header>
-    <div class="breadcrumb">
-      <div class="container">
-        <a href="/">Trang chủ</a> &gt;
-        <a href="/profile.html">Tài khoản</a> &gt; <span>Yêu thích</span>
-      </div>
-    </div>
+    <!-- Page Title -->
+     <div class="breadcrumb">
+          <div class="grid">
+            <a href="cart.html">Giỏ hàng</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>thanh toán</span>
+          </div>
+        </div>
+    <!-- CONTAINER -->
+    <div class="container-checkout">
+      <div class="checkout-layout">
+        <div class="checkout-layout__form-wrapper">
+          <form class="billing-form">
+            <h2 class="billing-form__title">Chi tiết thanh toán</h2>
 
-    <section class="profile-section">
-      <div class="container">
-        <div class="profile-container">
-          <aside class="profile-sidebar">
-            <div class="profile-user-brief">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                alt="Avatar"
-                class="brief-avatar"
+            <div class="billing-form__row">
+              <div class="billing-form__group billing-form__group--half">
+                <label class="billing-form__label" for="first-name"
+                  >Tên *</label
+                >
+                <input
+                  class="billing-form__input"
+                  type="text"
+                  id="first-name"
+                  required
+                />
+              </div>
+
+              <div class="billing-form__group billing-form__group--half">
+                <label class="billing-form__label" for="last-name">Họ *</label>
+                <input
+                  class="billing-form__input"
+                  type="text"
+                  id="last-name"
+                  required
+                />
+              </div>
+            </div>
+
+            <div class="billing-form__group">
+              <label class="billing-form__label" for="company"
+                >Tên công ty (tùy chọn)</label
+              >
+              <input class="billing-form__input" type="text" id="company" />
+            </div>
+
+            <div class="billing-form__group">
+              <label class="billing-form__label" for="address">Địa chỉ *</label>
+              <input
+                class="billing-form__input"
+                type="text"
+                id="address"
+                placeholder="Số nhà, tên đường"
+                required
               />
-              <div class="brief-info">
-                <span class="brief-name">Nguyễn Văn A</span>
-                <a href="/profile.html" class="brief-edit"
-                  ><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a
-                >
-              </div>
             </div>
 
-            <ul class="profile-menu">
-              <li class="profile-menu-item">
-                <a href="/profile.html"
-                  ><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a
-                >
-              </li>
-              <li class="profile-menu-item">
-                <a href="/orders.html"
-                  ><i class="fa-solid fa-box-open"></i> Đơn mua</a
-                >
-              </li>
-              <li class="profile-menu-item">
-                <a href="/addresses.html"
-                  ><i class="fa-solid fa-location-dot"></i> Địa chỉ</a
-                >
-              </li>
-              <li class="profile-menu-item">
-                <a href="/change-password.html"
-                  ><i class="fa-solid fa-key"></i> Đổi mật khẩu</a
-                >
-              </li>
-              <li class="profile-menu-item active">
-                <a href="/wishlist.html"
-                  ><i class="fa-regular fa-heart"></i> Yêu thích</a
-                >
-              </li>
-            </ul>
-          </aside>
-
-          <main class="profile-content">
-            <div class="wishlist-header">
-              <h3>Sản phẩm yêu thích</h3>
-              <span class="wishlist-count">3 sản phẩm</span>
+            <div class="billing-form__group">
+              <label class="billing-form__label" for="city"
+                >Tỉnh / Thành phố *</label
+              >
+              <input
+                class="billing-form__input"
+                type="text"
+                id="city"
+                required
+              />
             </div>
 
-            <div class="wishlist-grid">
-              <div class="wishlist-item">
-                <button class="btn-remove" title="Xóa khỏi yêu thích">
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="wishlist-img">
-                  <img
-                    src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                    alt="Dừa"
+            <div class="billing-form__group">
+              <label class="billing-form__label" for="phone"
+                >Số điện thoại *</label
+              >
+              <input
+                class="billing-form__input"
+                type="tel"
+                id="phone"
+                required
+              />
+            </div>
+
+            <div class="billing-form__group">
+              <label class="billing-form__label" for="email"
+                >Địa chỉ email *</label
+              >
+              <input
+                class="billing-form__input"
+                type="email"
+                id="email"
+                required
+              />
+            </div>
+
+            <div class="billing-form__group">
+              <label class="billing-form__label" for="order-notes"
+                >Ghi chú đơn hàng (tùy chọn)</label
+              >
+              <textarea
+                class="billing-form__input billing-form__input--textarea"
+                id="order-notes"
+                placeholder="Ghi chú về đơn hàng của bạn, ví dụ: thời gian giao hàng..."
+              ></textarea>
+            </div>
+          </form>
+        </div>
+        <!-- checkout layout -->
+        <div class="checkout-layout__summary-wrapper">
+          <div class="order-summary">
+            <h2 class="order-summary__title">Đơn hàng của bạn</h2>
+
+            <table class="order-summary__table">
+              <thead class="thead-border">
+                <tr class="order-summary__row order-summary__row--header">
+                  <th class="order-summary__cell order-summary__cell--header">
+                    Sản phẩm
+                  </th>
+                  <th class="order-summary__cell order-summary__cell--header">
+                    Tạm tính
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr class="order-summary__row__item">
+                  <td class="order-summary__cell">
+                    <span class="order-summary__product-name">Măng cụt</span>
+                    &times; 2
+                  </td>
+                  <td class="order-summary__cell">
+                    <span class="order-summary__price">66.000 ₫</span>
+                  </td>
+                </tr>
+                <tr class="order-summary__row__item">
+                  <td class="order-summary__cell">
+                    <span class="order-summary__product-name">Chuối</span>
+                    &times; 1
+                  </td>
+                  <td class="order-summary__cell">
+                    <span class="order-summary__price">15.000 ₫</span>
+                  </td>
+                </tr>
+              </tbody>
+
+              <tfoot>
+                <tr class="order-summary__row order-summary__row--footer">
+                  <th class="order-summary__cell order-summary__cell--label">
+                    Tạm tính
+                  </th>
+                  <td class="order-summary__cell">
+                    <span class="order-summary__price">81.000 ₫</span>
+                  </td>
+                </tr>
+                <tr class="order-summary__row order-summary__row--footer">
+                  <th class="order-summary__cell order-summary__cell--label">
+                    Giao hàng
+                  </th>
+                  <td class="order-summary__cell">
+                    <span class="order-summary__price--shipping">50.000 ₫</span>
+                  </td>
+                </tr>
+                <tr class="order-summary__row order-summary__row--footer">
+                  <th class="order-summary__cell order-summary__cell--label">
+                    Tổng cộng
+                  </th>
+                  <td class="order-summary__cell">
+                    <span
+                      class="order-summary__price order-summary__price--total"
+                      >131.000 ₫</span
+                    >
+                  </td>
+                </tr>
+              </tfoot>
+            </table>
+
+            <div class="payment">
+              <ul class="payment__list">
+                <li class="payment__option">
+                  <input
+                    class="payment__radio"
+                    type="radio"
+                    name="payment-method"
+                    id="payment-cod"
+                    checked
                   />
-                  <span class="badge-sale">-10%</span>
-                </div>
-                <div class="wishlist-info">
-                  <a href="#" class="wishlist-name"
-                    >Dừa sáp Trà Vinh loại 1 thơm ngon béo ngậy</a
+                  <label class="payment__label" for="payment-cod"
+                    >Trả tiền mặt khi nhận hàng (COD)</label
                   >
-                  <div class="wishlist-price">
-                    <span class="new">120.000đ</span>
-                    <span class="old">200.000đ</span>
+                  <div class="payment__description">
+                    Thanh toán bằng tiền mặt khi giao hàng.
                   </div>
-                  <div class="wishlist-status in-stock">
-                    <i class="fa-solid fa-check"></i> Còn hàng
-                  </div>
-                  <button class="btn btn-cart">
-                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
-                  </button>
-                </div>
-              </div>
-
-              <div class="wishlist-item">
-                <button class="btn-remove" title="Xóa khỏi yêu thích">
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="wishlist-img">
-                  <img
-                    src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png"
-                    alt="Cam"
+                </li>
+                <li class="payment__option">
+                  <input
+                    class="payment__radio"
+                    type="radio"
+                    name="payment-method"
+                    id="payment-bank"
                   />
-                </div>
-                <div class="wishlist-info">
-                  <a href="#" class="wishlist-name">Cam Sành Vĩnh Long</a>
-                  <div class="wishlist-price">
-                    <span class="new">30.000đ</span>
+                  <label class="payment__label" for="payment-bank"
+                    >Chuyển khoản ngân hàng</label
+                  >
+                  <div class="payment__description">
+                    Nội dung: [Tên] + [Mã đơn hàng] STK: 123456789 Ngân hàng:
+                    Vietcombank
                   </div>
-                  <div class="wishlist-status in-stock">
-                    <i class="fa-solid fa-check"></i> Còn hàng
-                  </div>
-                  <button class="btn btn-cart">
-                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
-                  </button>
-                </div>
-              </div>
+                </li>
+              </ul>
 
-              <div class="wishlist-item disabled">
-                <button class="btn-remove" title="Xóa khỏi yêu thích">
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="wishlist-img">
-                  <img src="https://via.placeholder.com/200" alt="Nho" />
-                  <div class="overlay-out">Hết hàng</div>
-                </div>
-                <div class="wishlist-info">
-                  <a href="#" class="wishlist-name">Nho Mẫu Đơn Hàn Quốc</a>
-                  <div class="wishlist-price">
-                    <span class="new">450.000đ</span>
-                  </div>
-                  <div class="wishlist-status out-stock">
-                    <i class="fa-solid fa-circle-xmark"></i> Hết hàng
-                  </div>
-                  <button class="btn btn-cart" disabled>Hết hàng</button>
-                </div>
-              </div>
+              <p class="payment__privacy-text">
+                Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng, hỗ
+                trợ trải nghiệm của bạn trên trang web này và cho các mục đích
+                khác được mô tả trong chính sách riêng tư của chúng tôi.
+              </p>
+
+              <button class="button button--primary button--fullwidth">
+                Đặt hàng
+              </button>
             </div>
-          </main>
+          </div>
         </div>
       </div>
-    </section>
-    <!-- FOOTER -->
+    </div>
+    <!-- Footer -->
     <footer class="footer">
       <div class="footer__main">
         <div class="footer__grid">
@@ -531,6 +574,5 @@
         </div>
       </div>
     </footer>
-    <script src="./assets/js/main.js"></script>
   </body>
 </html>

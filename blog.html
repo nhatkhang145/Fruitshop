@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Giới thiệu</title>
+    <title>Blog — The Organic Harvest</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
@@ -14,11 +14,9 @@
     />
     <link rel="stylesheet" href="assets/css/base.css" />
     <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/blog.css">
-    <link rel="stylesheet" href="assets/css/gioi_thieu.css" />
+    <link rel="stylesheet" href="assets/css/blog.css" />
   </head>
   <body>
-    <!-- Header -->
     <header class="header">
       <nav class="navbar">
         <div class="navbar__wrapper">
@@ -35,88 +33,19 @@
               </li>
             </ul>
             <ul class="navbar-list">
-              <li class="navbar-item navbar-item__notify--active">
-                <a href="#" class="navbar-item__link">
-                  <span class="navbar-icon__link">
-                    <i class="navbar-icon fa-regular fa-bell"></i>
-                  </span>
-                  Thông báo
-                </a>
-                <div class="navbar-item__notify">
-                  <header class="navbar-item__notify-header">
-                    <h3>Thông Báo Mới Nhận</h3>
-                  </header>
-                  <ul class="navbar-item__notify-list">
-                    <li class="navbar-item__notify-item">
-                      <a href="" class="navbar-item__notify-link">
-                        <img
-                          class="navbar-item__notify-img"
-                          src="./assets/images/chuối.jpg"
-                          alt="Notification"
-                        />
-                        <div class="navbar-item__notify-content">
-                          <span class="navbar-item__notify-name">
-                            Chuối xuất xứ từ Ecuador
-                          </span>
-                          <span class="navbar-item__notify-decoration"
-                            >ưu đãi giảm 20%</span
-                          >
-                        </div>
-                      </a>
-                    </li>
-                    <li
-                      class="navbar-item__notify-item navbar-item__notify-item--viewed"
-                    >
-                      <a href="" class="navbar-item__notify-link">
-                        <img
-                          class="navbar-item__notify-img"
-                          src="./assets/images/chuối.jpg"
-                          alt="Notification"
-                        />
-                        <div class="navbar-item__notify-content">
-                          <span class="navbar-item__notify-name">
-                            Chuối xuất xứ từ Ecuador
-                          </span>
-                          <span class="navbar-item__notify-decoration"
-                            >ưu đãi giảm 20%</span
-                          >
-                        </div>
-                      </a>
-                    </li>
-                    <li
-                      class="navbar-item__notify-item navbar-item__notify-item--viewed"
-                    >
-                      <a href="" class="navbar-item__notify-link">
-                        <img
-                          class="navbar-item__notify-img"
-                          src="./assets/images/chuối.jpg"
-                          alt="Notification"
-                        />
-                        <div class="navbar-item__notify-content">
-                          <span class="navbar-item__notify-name">
-                            Chuối xuất xứ từ Ecuador
-                          </span>
-                          <span class="navbar-item__notify-decoration"
-                            >ưu đãi giảm 20%</span
-                          >
-                        </div>
-                      </a>
-                    </li>
-                  </ul>
-                  <footer class="navbar-item__notify-footer">
-                    <a href="" class="navbar-item__notify-footer-btn"
-                      >Xem tất cả</a
-                    >
-                  </footer>
-                </div>
-              </li>
               <li class="navbar-item">
-                <a href="#" class="navbar-item__link">
+                <a href="faqs.html" class="navbar-item__link">
                   <span class="navbar-icon__link">
                     <i class="navbar-icon fa-regular fa-circle-question"></i>
                   </span>
                   Hỗ trợ
                 </a>
+              </li>
+              <li class="navbar-item">
+                <a href="" class="navbar-item__link">Đăng ký</a>
+              </li>
+              <li class="navbar-item">
+                <a href="" class="navbar-item__link">Đăng nhập</a>
               </li>
             </ul>
           </div>
@@ -125,7 +54,7 @@
         <div class="navbar__menu">
           <div class="navbar__menu-inner">
             <div class="navbar__menu-logo">
-              <a href="/">
+              <a href="/index.html">
                 <img
                   class="navbar__menu-logo-img"
                   src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
@@ -135,11 +64,11 @@
             </div>
 
             <ul class="main-nav-links subnav-links">
-              <li><a href="#">Trang chủ</a></li>
-              <li><a href="#">Sản Phẩm</a></li>
-              <li><a href="#">Giới thiệu</a></li>
-              <li><a href="#">Bài viết</a></li>
-              <li><a href="#">Liên hệ</a></li>
+              <li><a href="index.html">Trang chủ</a></li>
+              <li><a href="/shop.html">Sản Phẩm</a></li>
+              <li><a href="/about.html">Giới thiệu</a></li>
+              <li><a href="blog.html">Bài viết</a></li>
+              <li><a href="/contact.html">Liên hệ</a></li>
             </ul>
 
             <div class="navbar__menu-search">
@@ -155,8 +84,8 @@
                   aria-label="Category"
                 >
                   <option value="all">Danh mục</option>
-                  <option value="fruits">Fruits</option>
-                  <option value="vegetables">Vegetables</option>
+                  <option value="fruits">Trái cây</option>
+                  <option value="vegetables">táo</option>
                 </select>
                 <input
                   name="q"
@@ -173,13 +102,6 @@
 
             <div class="navbar__menu-actions">
               <a
-                href="/account.html"
-                class="icon-btn account-btn"
-                title="Tài khoản"
-              >
-                <i class="fa-regular fa-user"></i>
-              </a>
-              <a
                 href="/wishlist.html"
                 class="icon-btn wishlist-btn"
                 title="Yêu thích"
@@ -191,21 +113,207 @@
                 <i class="fa-solid fa-basket-shopping"></i>
                 <span class="badge">2</span>
               </a>
+              <a
+                href="/account.html"
+                class="icon-btn account-btn"
+                title="Tài khoản"
+              >
+                <i class="fa-regular fa-user"></i>
+              </a>
             </div>
           </div>
         </div>
 
-        <div
-          class="navbar__subnav"
-          aria-label="Primary navigation"
-          style="display: none"
-        ></div>
+      
       </nav>
     </header>
-    <!-- CONTAINER -->
-    
+    <!--  -->
+    <main class="blog-page-container">
+      <div class="breadcrumb">
+        <div class="grid">
+          <a href="index.html">Trang chủ</a>
+          <i class="fa-solid fa-angle-right"></i>
+          <span>Bài viết</span>
+        </div>
+      </div>
 
-    <!-- Footer -->
+      <div class="blog-layout grid">
+        <aside class="blog-sidebar">
+          <div class="widget">
+            <h3 class="widget-title">Tìm kiếm</h3>
+            <form class="widget-search">
+              <input type="search" placeholder="Nhập từ khóa..." />
+              <button type="submit">
+                <i class="fa-solid fa-magnifying-glass"></i>
+              </button>
+            </form>
+          </div>
+
+          <div class="widget">
+            <h3 class="widget-title">Danh mục</h3>
+            <ul class="widget-list">
+              <li>
+                <a href="#"
+                  >Dinh dưỡng (Nutrition) <span class="count">(5)</span></a
+                >
+              </li>
+              <li>
+                <a href="#"
+                  >Công thức (Recipes) <span class="count">(3)</span></a
+                >
+              </li>
+              <li>
+                <a href="#">Sức khỏe (Health) <span class="count">(8)</span></a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="widget">
+            <h3 class="widget-title">Bài viết mới</h3>
+            <ul class="widget-recent-posts">
+              <li>
+                <img
+                  src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                  alt="Post 1"
+                />
+                <div>
+                  <a href="#">12 Healthy Fruits and Vegetables Must-Haves</a>
+                  <span class="date">16th Nov 2022</span>
+                </div>
+              </li>
+              <li>
+                <img
+                  src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                  alt="Post 2"
+                />
+                <div>
+                  <a href="#">Orange Fresh Juice Nutrition Facts</a>
+                  <span class="date">15th Nov 2022</span>
+                </div>
+              </li>
+            </ul>
+          </div>
+        </aside>
+
+        <section class="blog-main-content">
+          <div class="blog__grid blog-page-grid">
+            <div class="blog__item">
+              <img
+                src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                alt="Blog 1"
+                class="blog__image"
+              />
+              <div class="blog__content">
+                <div class="blog__meta">
+                  <span class="blog__author">By Admin</span>
+                  <span class="blog__date">16th Nov 2022</span>
+                </div>
+                <h3 class="blog__post-title">
+                  12 Healthy Fruits and Vegetables Must-Haves t...
+                </h3>
+                <a href="blog-detail.html" class="blog__link">Read more →</a>
+              </div>
+            </div>
+
+            <div class="blog__item">
+              <img
+                src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                alt="Blog 2"
+                class="blog__image"
+              />
+              <div class="blog__content">
+                <div class="blog__meta">
+                  <span class="blog__author">By Admin</span>
+                  <span class="blog__date">16th Nov 2022</span>
+                </div>
+                <h3 class="blog__post-title">
+                  Orange Fresh Juice Nutrition Facts, Calories...
+                </h3>
+                <a href="#" class="blog__link">Read more →</a>
+              </div>
+            </div>
+
+            <div class="blog__item">
+              <img
+                src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                alt="Blog 3"
+                class="blog__image"
+              />
+              <div class="blog__content">
+                <div class="blog__meta">
+                  <span class="blog__author">By Admin</span>
+                  <span class="blog__date">16th Nov 2022</span>
+                </div>
+                <h3 class="blog__post-title">
+                  Great bulk recipes to help use all your organic...
+                </h3>
+                <a href="#" class="blog__link">Read more →</a>
+              </div>
+            </div>
+
+            <div class="blog__item">
+              <img
+                src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                alt="Blog 4"
+                class="blog__image"
+              />
+              <div class="blog__content">
+                <div class="blog__meta">
+                  <span class="blog__author">By Admin</span>
+                  <span class="blog__date">15th Nov 2022</span>
+                </div>
+                <h3 class="blog__post-title">
+                  Exploring the Benefits of Local Produce
+                </h3>
+                <a href="#" class="blog__link">Read more →</a>
+              </div>
+            </div>
+
+            <div class="blog__item">
+              <img
+                src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                alt="Blog 5"
+                class="blog__image"
+              />
+              <div class="blog__content">
+                <div class="blog__meta">
+                  <span class="blog__author">By Admin</span>
+                  <span class="blog__date">14th Nov 2022</span>
+                </div>
+                <h3 class="blog__post-title">
+                  Simple Smoothie Recipes for a Quick Boost
+                </h3>
+                <a href="#" class="blog__link">Read more →</a>
+              </div>
+            </div>
+
+            <div class="blog__item">
+              <img
+                src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                alt="Blog 6"
+                class="blog__image"
+              />
+              <div class="blog__content">
+                <div class="blog__meta">
+                  <span class="blog__author">By Admin</span>
+                  <span class="blog__date">13th Nov 2022</span>
+                </div>
+                <h3 class="blog__post-title">
+                  Why Organic Farming Matters for Your Health
+                </h3>
+                <a href="#" class="blog__link">Read more →</a>
+              </div>
+            </div>
+          </div>
+
+          <nav class="pagination">
+            <span class="page-numbers current">1</span>
+            <a class="page-numbers" href="#">2</a>
+            <a class="next page-numbers" href="#">Next →</a>
+          </nav>
+        </section>
+      </div>
+    </main>
     <footer class="footer">
       <div class="footer__main">
         <div class="footer__grid">

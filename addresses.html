@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sản phẩm yêu thích - Organic Harvest</title>
+    <title>Sổ địa chỉ - Organic Harvest</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="./assets/css/base.css" />
     <link rel="stylesheet" href="./assets/css/main.css" />
     <link rel="stylesheet" href="./assets/css/profile.css" />
-    <link rel="stylesheet" href="./assets/css/wishlist.css" />
+    <link rel="stylesheet" href="./assets/css/addresses.css" />
   </head>
   <body>
     <header class="header">
@@ -173,7 +173,7 @@
     <div class="breadcrumb">
       <div class="container">
         <a href="/">Trang chủ</a> &gt;
-        <a href="/profile.html">Tài khoản</a> &gt; <span>Yêu thích</span>
+        <a href="/profile.html">Tài khoản</a> &gt; <span>Địa chỉ</span>
       </div>
     </div>
 
@@ -206,7 +206,7 @@
                   ><i class="fa-solid fa-box-open"></i> Đơn mua</a
                 >
               </li>
-              <li class="profile-menu-item">
+              <li class="profile-menu-item active">
                 <a href="/addresses.html"
                   ><i class="fa-solid fa-location-dot"></i> Địa chỉ</a
                 >
@@ -216,7 +216,7 @@
                   ><i class="fa-solid fa-key"></i> Đổi mật khẩu</a
                 >
               </li>
-              <li class="profile-menu-item active">
+              <li class="profile-menu-item">
                 <a href="/wishlist.html"
                   ><i class="fa-regular fa-heart"></i> Yêu thích</a
                 >
@@ -225,81 +225,64 @@
           </aside>
 
           <main class="profile-content">
-            <div class="wishlist-header">
-              <h3>Sản phẩm yêu thích</h3>
-              <span class="wishlist-count">3 sản phẩm</span>
+            <div class="address-header">
+              <h3>Địa chỉ của tôi</h3>
+              <button class="btn btn-primary" id="btnAddAddress">
+                <i class="fa-solid fa-plus"></i> Thêm địa chỉ mới
+              </button>
             </div>
 
-            <div class="wishlist-grid">
-              <div class="wishlist-item">
-                <button class="btn-remove" title="Xóa khỏi yêu thích">
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="wishlist-img">
-                  <img
-                    src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                    alt="Dừa"
-                  />
-                  <span class="badge-sale">-10%</span>
+            <div class="address-list">
+              <div class="address-card default">
+                <div class="address-info">
+                  <div class="info-row">
+                    <span class="info-name">Nguyễn Văn A</span>
+                    <span class="info-divider">|</span>
+                    <span class="info-phone">0905.123.456</span>
+                  </div>
+                  <div class="info-address">
+                    <p>123 Đường ABC</p>
+                    <p>Phường 1, Quận 2, TP. Hồ Chí Minh</p>
+                  </div>
+                  <div class="info-tags">
+                    <span class="tag tag-default">Mặc định</span>
+                    <span class="tag tag-type">Nhà riêng</span>
+                  </div>
                 </div>
-                <div class="wishlist-info">
-                  <a href="#" class="wishlist-name"
-                    >Dừa sáp Trà Vinh loại 1 thơm ngon béo ngậy</a
-                  >
-                  <div class="wishlist-price">
-                    <span class="new">120.000đ</span>
-                    <span class="old">200.000đ</span>
+                <div class="address-actions">
+                  <div class="action-links">
+                    <button class="btn-text">Cập nhật</button>
+                    <button class="btn-text disabled" disabled>Xóa</button>
                   </div>
-                  <div class="wishlist-status in-stock">
-                    <i class="fa-solid fa-check"></i> Còn hàng
-                  </div>
-                  <button class="btn btn-cart">
-                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                  <button class="btn btn-outline btn-sm disabled" disabled>
+                    Thiết lập mặc định
                   </button>
                 </div>
               </div>
 
-              <div class="wishlist-item">
-                <button class="btn-remove" title="Xóa khỏi yêu thích">
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="wishlist-img">
-                  <img
-                    src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png"
-                    alt="Cam"
-                  />
+              <div class="address-card">
+                <div class="address-info">
+                  <div class="info-row">
+                    <span class="info-name">Nguyễn Văn A (Văn phòng)</span>
+                    <span class="info-divider">|</span>
+                    <span class="info-phone">0912.345.678</span>
+                  </div>
+                  <div class="info-address">
+                    <p>Tòa nhà Bitexco, Số 2 Hải Triều</p>
+                    <p>Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</p>
+                  </div>
+                  <div class="info-tags">
+                    <span class="tag tag-type">Văn phòng</span>
+                  </div>
                 </div>
-                <div class="wishlist-info">
-                  <a href="#" class="wishlist-name">Cam Sành Vĩnh Long</a>
-                  <div class="wishlist-price">
-                    <span class="new">30.000đ</span>
+                <div class="address-actions">
+                  <div class="action-links">
+                    <button class="btn-text">Cập nhật</button>
+                    <button class="btn-text text-danger">Xóa</button>
                   </div>
-                  <div class="wishlist-status in-stock">
-                    <i class="fa-solid fa-check"></i> Còn hàng
-                  </div>
-                  <button class="btn btn-cart">
-                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                  <button class="btn btn-outline btn-sm">
+                    Thiết lập mặc định
                   </button>
-                </div>
-              </div>
-
-              <div class="wishlist-item disabled">
-                <button class="btn-remove" title="Xóa khỏi yêu thích">
-                  <i class="fa-solid fa-xmark"></i>
-                </button>
-                <div class="wishlist-img">
-                  <img src="https://via.placeholder.com/200" alt="Nho" />
-                  <div class="overlay-out">Hết hàng</div>
-                </div>
-                <div class="wishlist-info">
-                  <a href="#" class="wishlist-name">Nho Mẫu Đơn Hàn Quốc</a>
-                  <div class="wishlist-price">
-                    <span class="new">450.000đ</span>
-                  </div>
-                  <div class="wishlist-status out-stock">
-                    <i class="fa-solid fa-circle-xmark"></i> Hết hàng
-                  </div>
-                  <button class="btn btn-cart" disabled>Hết hàng</button>
                 </div>
               </div>
             </div>
@@ -307,6 +290,76 @@
         </div>
       </div>
     </section>
+
+    <div class="modal" id="addressModal">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h3>Địa chỉ mới</h3>
+          <span class="close-modal">&times;</span>
+        </div>
+        <div class="modal-body">
+          <form class="address-form">
+            <div class="form-row">
+              <input
+                type="text"
+                class="form-input"
+                placeholder="Họ và tên"
+                required
+              />
+              <input
+                type="text"
+                class="form-input"
+                placeholder="Số điện thoại"
+                required
+              />
+            </div>
+            <div class="form-group">
+              <input
+                type="text"
+                class="form-input"
+                placeholder="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"
+                readonly
+                style="cursor: pointer"
+              />
+            </div>
+            <div class="form-group">
+              <textarea
+                class="form-input"
+                placeholder="Địa chỉ cụ thể (Số nhà, tên đường...)"
+                rows="2"
+              ></textarea>
+            </div>
+
+            <div class="form-group">
+              <label class="checkbox-label">
+                <input type="checkbox" checked /> Đặt làm địa chỉ mặc định
+              </label>
+            </div>
+
+            <div class="form-type">
+              <p>Loại địa chỉ:</p>
+              <div class="type-options">
+                <label
+                  ><input type="radio" name="addrType" value="home" checked />
+                  Nhà riêng</label
+                >
+                <label
+                  ><input type="radio" name="addrType" value="office" /> Văn
+                  phòng</label
+                >
+              </div>
+            </div>
+
+            <div class="modal-footer">
+              <button type="button" class="btn btn-outline close-modal-btn">
+                Trở lại
+              </button>
+              <button type="submit" class="btn btn-primary">Hoàn thành</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
     <!-- FOOTER -->
     <footer class="footer">
       <div class="footer__main">
@@ -531,6 +584,33 @@
         </div>
       </div>
     </footer>
+
     <script src="./assets/js/main.js"></script>
+
+    <script>
+      const modal = document.getElementById("addressModal");
+      const btn = document.getElementById("btnAddAddress");
+      const span = document.getElementsByClassName("close-modal")[0];
+      const btnClose = document.getElementsByClassName("close-modal-btn")[0];
+
+      // Mở modal
+      btn.onclick = function () {
+        modal.style.display = "flex";
+      };
+
+      // Đóng modal
+      const closeModal = () => {
+        modal.style.display = "none";
+      };
+      span.onclick = closeModal;
+      btnClose.onclick = closeModal;
+
+      // Click ra ngoài thì đóng
+      window.onclick = function (event) {
+        if (event.target == modal) {
+          closeModal();
+        }
+      };
+    </script>
   </body>
 </html>
