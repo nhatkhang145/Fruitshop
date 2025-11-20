@@ -1,0 +1,174 @@
+/* =================================== */
+/* === CSS CHO TRANG TIN NHẮN (2 CỘT) === */
+/* =================================== */
+
+.content main .bottom-data .message-container {
+  display: flex;
+  width: 100%;
+  height: calc(100vh - 56px - 36px - 24px - 46px);
+  min-height: 600px;
+  background: var(--light);
+  border-radius: 20px;
+  overflow: hidden;
+}
+.message-container .inbox-pane {
+  width: 35%;
+  min-width: 300px;
+  border-right: 1px solid var(--grey);
+  display: flex;
+  flex-direction: column;
+}
+.inbox-pane .inbox-header {
+  padding: 24px;
+  border-bottom: 1px solid var(--grey);
+}
+.inbox-pane .inbox-header h3 {
+  color: var(--dark);
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.inbox-pane .inbox-search {
+  position: relative;
+}
+.inbox-pane .inbox-search input {
+  width: 100%;
+  padding: 10px 15px 10px 40px;
+  border-radius: 6px;
+  border: 1px solid var(--grey);
+  background: var(--grey);
+  color: var(--dark);
+  outline: none;
+}
+.inbox-pane .inbox-search .bx {
+  position: absolute;
+  left: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: var(--dark-grey);
+  font-size: 1.2rem;
+}
+.inbox-pane .message-list {
+  flex-grow: 1;
+  overflow-y: auto;
+}
+.inbox-pane .message-item {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--grey);
+  cursor: pointer;
+  transition: background 0.3s ease;
+}
+.inbox-pane .message-item:hover {
+  background: var(--grey);
+}
+.inbox-pane .message-item.active {
+  background: var(--light-primary);
+  border-right: 4px solid var(--primary);
+}
+.message-item .message-sender {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+.message-item .message-sender strong {
+  color: var(--dark);
+  font-size: 1rem;
+}
+.message-item .message-sender .message-time {
+  font-size: 0.8rem;
+  color: var(--dark-grey);
+}
+.message-item .message-subject {
+  font-size: 0.9rem;
+  font-weight: 500;
+  color: var(--dark-grey);
+  margin-bottom: 4px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.message-item .message-preview {
+  font-size: 0.85rem;
+  color: var(--dark-grey);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.message-item.unread .message-sender strong,
+.message-item.unread .message-subject {
+  color: var(--dark);
+  font-weight: 700;
+}
+.message-container .message-view-pane {
+  width: 65%;
+  display: flex;
+  flex-direction: column;
+}
+.message-view-pane .message-actions {
+  padding: 16px 24px;
+  border-bottom: 1px solid var(--grey);
+  display: flex;
+  flex-wrap: wrap;
+  grid-gap: 10px;
+}
+.message-view-pane .action-btn {
+  display: inline-flex;
+  align-items: center;
+  grid-gap: 8px;
+  padding: 8px 14px;
+  border-radius: 6px;
+  background: var(--grey);
+  color: var(--dark);
+  font-size: 0.9rem;
+  font-weight: 500;
+  transition: opacity 0.3s ease;
+}
+.message-view-pane .action-btn:hover {
+  opacity: 0.8;
+}
+.message-view-pane .action-btn .bx {
+  font-size: 1.2rem;
+}
+.message-view-pane .action-btn.reply {
+  background: var(--primary);
+  color: var(--light);
+}
+.message-view-pane .action-btn.delete {
+  background: var(--light-danger);
+  color: var(--danger);
+}
+.message-view-pane .message-content {
+  flex-grow: 1;
+  padding: 24px;
+  overflow-y: auto;
+  color: var(--dark);
+}
+.message-view-pane .message-header h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  margin-bottom: 16px;
+}
+.message-view-pane .message-header p {
+  font-size: 0.9rem;
+  color: var(--dark-grey);
+  margin-bottom: 4px;
+}
+.message-view-pane .message-header p strong {
+  color: var(--dark);
+  font-weight: 500;
+  min-width: 50px;
+  display: inline-block;
+}
+.message-view-pane hr {
+  border: none;
+  border-top: 1px solid var(--grey);
+  margin: 20px 0;
+}
+.message-view-pane .message-body {
+  font-size: 1rem;
+  line-height: 1.7;
+}
+.message-view-pane .message-body p {
+  margin-bottom: 15px;
+}

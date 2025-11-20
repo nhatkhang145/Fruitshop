@@ -9,8 +9,8 @@
     />
     <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/admin/style.css" />
-    <link rel="stylesheet" href="/assets/css/admin/Order.css" />
-    <title>Quản lý đơn hàng</title>
+    <link rel="stylesheet" href="/assets/css/admin/settings.css" />
+    <title>Cài đặt</title>
   </head>
 
   <body>
@@ -39,7 +39,7 @@
             ><i class="bx bx-category"></i>Quản lý danh mục</a
           >
         </li>
-        <li class="active">
+        <li>
           <a href="/admin/orders.html"
             ><i class="bx bx-receipt"></i>Quản lý đơn hàng</a
           >
@@ -66,7 +66,7 @@
           >
         </li>
 
-        <li>
+        <li class="active">
           <a href="/admin/Settings.html"><i class="bx bx-cog"></i>Cài đặt</a>
         </li>
       </ul>
@@ -170,150 +170,159 @@
       <main>
         <div class="header">
           <div class="left">
-            <h1>Quản lý đơn hàng</h1>
+            <h1>Cài đặt</h1>
             <ul class="breadcrumb">
               <li><a href="#">Quản lý</a></li>
               <li>/</li>
-              <li><a href="#" class="active">Đơn hàng</a></li>
+              <li><a href="#" class="active">Cài đặt</a></li>
             </ul>
           </div>
         </div>
 
-        <ul class="insights">
-          <li>
-            <i class="bx bx-loader-circle"></i>
-            <span class="info">
-              <h3>15</h3>
-              <p>Chờ xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-package"></i>
-            <span class="info">
-              <h3>8</h3>
-              <p>Đang xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bxs-truck"></i>
-            <span class="info">
-              <h3>22</h3>
-              <p>Đang giao</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-check-circle"></i>
-            <span class="info">
-              <h3>1,020</h3>
-              <p>Đã hoàn thành</p>
-            </span>
-          </li>
-        </ul>
-
         <div class="bottom-data">
-          <div class="orders">
-            <div class="header">
-              <h3>Danh sách đơn hàng</h3>
-              <div class="filters">
-                <i class="bx bx-filter"></i>
-                <select id="statusFilter">
-                  <option value="">Tất cả trạng thái</option>
-                  <option value="pending">Chờ xử lý</option>
-                  <option value="processing">Đang xử lý</option>
-                  <option value="shipped">Đang giao</option>
-                  <option value="completed">Hoàn thành</option>
-                  <option value="cancelled">Đã hủy</option>
-                </select>
-                <input type="date" id="dateFilter" />
-              </div>
+          <div class="settings-page">
+            <div class="settings-page__header">
+              <h3>Thiết lập Cửa hàng</h3>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Mã Đơn Hàng</th>
-                  <th>Khách hàng</th>
-                  <th>Ngày đặt</th>
-                  <th>Tổng tiền</th>
-                  <th>Trạng thái</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#12345</td>
-                  <td>Nguyễn Văn A</td>
-                  <td>15-11-2025</td>
-                  <td>450,000đ</td>
-                  <td><span class="status completed">Hoàn thành</span></td>
-                  <td>
-                    <a href="/admin/order-detail.html" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12344</td>
-                  <td>Trần Thị B</td>
-                  <td>15-11-2025</td>
-                  <td>1,200,000đ</td>
-                  <td><span class="status shipped">Đang giao</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12343</td>
-                  <td>Lê Văn C</td>
-                  <td>14-11-2025</td>
-                  <td>780,000đ</td>
-                  <td><span class="status processing">Đang xử lý</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12342</td>
-                  <td>Phạm Hữu D</td>
-                  <td>14-11-2025</td>
-                  <td>320,000đ</td>
-                  <td><span class="status pending">Chờ xử lý</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12341</td>
-                  <td>Hoàng Thị E</td>
-                  <td>13-11-2025</td>
-                  <td>500,000đ</td>
-                  <td><span class="status cancelled">Đã hủy</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
-          <div class="pagination">
-            <a href="#" class="page-btn disabled">&laquo;</a>
-            <a href="#" class="page-btn active">1</a>
-            <a href="#" class="page-btn">2</a>
-            <a href="#" class="page-btn">3</a>
-            <a href="#" class="page-btn">&raquo;</a>
+            <form id="settingsForm" class="settings-page__form">
+              <fieldset class="settings-page__group">
+                <legend class="settings-page__legend">Cài đặt chung</legend>
+
+                <div class="settings-page__form-group">
+                  <label for="storeName" class="settings-page__label"
+                    >Tên cửa hàng</label
+                  >
+                  <input
+                    type="text"
+                    id="storeName"
+                    value="Organic Harvest"
+                    class="settings-page__input"
+                  />
+                </div>
+
+                <div class="settings-page__form-group">
+                  <label for="storeSlogan" class="settings-page__label"
+                    >Slogan (Khẩu hiệu)</label
+                  >
+                  <input
+                    type="text"
+                    id="storeSlogan"
+                    value="Trái cây nhập khẩu"
+                    class="settings-page__input"
+                  />
+                </div>
+
+                <div class="settings-page__form-group">
+                  <label for="storeEmail" class="settings-page__label"
+                    >Email liên hệ</label
+                  >
+                  <input
+                    type="email"
+                    id="storeEmail"
+                    value="contact@shop.com"
+                    class="settings-page__input"
+                  />
+                </div>
+
+                <div class="settings-page__form-group">
+                  <label for="storeLogo" class="settings-page__label"
+                    >Tải lên Logo</label
+                  >
+                  <input
+                    type="file"
+                    id="storeLogo"
+                    class="settings-page__file-input"
+                  />
+                </div>
+              </fieldset>
+
+              <fieldset class="settings-page__group">
+                <legend class="settings-page__legend">Cổng thanh toán</legend>
+
+                <div class="settings-page__form-group-toggle">
+                  <label class="settings-page__label"
+                    >Thanh toán khi nhận hàng (COD)</label
+                  >
+                  <label class="toggle-switch">
+                    <input
+                      type="checkbox"
+                      class="toggle-switch__input"
+                      checked
+                    />
+                    <span class="toggle-switch__slider"></span>
+                  </label>
+                </div>
+
+                <div class="settings-page__form-group-toggle">
+                  <label class="settings-page__label"
+                    >Chuyển khoản Ngân hàng</label
+                  >
+                  <label class="toggle-switch">
+                    <input
+                      type="checkbox"
+                      class="toggle-switch__input"
+                      checked
+                    />
+                    <span class="toggle-switch__slider"></span>
+                  </label>
+                </div>
+
+                <div class="settings-page__form-group">
+                  <label for="bankInstructions" class="settings-page__label"
+                    >Hướng dẫn Chuyển khoản</label
+                  >
+                  <textarea
+                    id="bankInstructions"
+                    rows="4"
+                    class="settings-page__textarea"
+                  >
+Nội dung: [Tên] + [Mã đơn hàng]
+STK: 123456789
+Ngân hàng: Vietcombank
+</textarea
+                  >
+                </div>
+              </fieldset>
+
+              <fieldset class="settings-page__group">
+                <legend class="settings-page__legend">Vận chuyển</legend>
+
+                <div class="settings-page__form-group">
+                  <label for="shippingFee" class="settings-page__label"
+                    >Phí vận chuyển đồng giá (VNĐ)</label
+                  >
+                  <input
+                    type="number"
+                    id="shippingFee"
+                    value="30000"
+                    class="settings-page__input"
+                  />
+                </div>
+
+                <div class="settings-page__form-group">
+                  <label for="freeShippingMin" class="settings-page__label"
+                    >Miễn phí cho đơn hàng trên (VNĐ)</label
+                  >
+                  <input
+                    type="number"
+                    id="freeShippingMin"
+                    value="500000"
+                    class="settings-page__input"
+                  />
+                </div>
+              </fieldset>
+
+              <div class="settings-page__footer">
+                <button type="submit" class="btn-submit">Lưu Cài đặt</button>
+              </div>
+            </form>
           </div>
         </div>
       </main>
     </div>
 
     <script src="../assets/js/admin/main.js"></script>
+    <script src="../assets/js/admin/settings.js"></script>
   </body>
 </html>

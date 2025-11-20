@@ -7,10 +7,10 @@
       href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
       rel="stylesheet"
     />
-    <link rel="stylesheet" href="/assets/css/base.css" />
+      <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/admin/style.css" />
-    <link rel="stylesheet" href="/assets/css/admin/Order.css" />
-    <title>Quản lý đơn hàng</title>
+    <link rel="stylesheet" href="/assets/css/admin/Categories.css" />
+    <title>Quản lý danh mục</title>
   </head>
 
   <body>
@@ -24,7 +24,7 @@
         />
       </a>
       <ul class="side-menu">
-        <li class="">
+        <li>
           <a href="/admin/index.html"
             ><i class="bx bxs-dashboard"></i>Tổng quan</a
           >
@@ -34,12 +34,12 @@
             ><i class="bx bx-basket"></i>Quản lý sản phẩm</a
           >
         </li>
-        <li>
+        <li class="active">
           <a href="/admin/Categories.html"
             ><i class="bx bx-category"></i>Quản lý danh mục</a
           >
         </li>
-        <li class="active">
+        <li>
           <a href="/admin/orders.html"
             ><i class="bx bx-receipt"></i>Quản lý đơn hàng</a
           >
@@ -170,145 +170,153 @@
       <main>
         <div class="header">
           <div class="left">
-            <h1>Quản lý đơn hàng</h1>
+            <h1>Quản lý danh mục</h1>
             <ul class="breadcrumb">
               <li><a href="#">Quản lý</a></li>
               <li>/</li>
-              <li><a href="#" class="active">Đơn hàng</a></li>
+              <li><a href="#" class="active">Danh mục</a></li>
             </ul>
           </div>
         </div>
 
-        <ul class="insights">
-          <li>
-            <i class="bx bx-loader-circle"></i>
-            <span class="info">
-              <h3>15</h3>
-              <p>Chờ xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-package"></i>
-            <span class="info">
-              <h3>8</h3>
-              <p>Đang xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bxs-truck"></i>
-            <span class="info">
-              <h3>22</h3>
-              <p>Đang giao</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-check-circle"></i>
-            <span class="info">
-              <h3>1,020</h3>
-              <p>Đã hoàn thành</p>
-            </span>
-          </li>
-        </ul>
-
         <div class="bottom-data">
-          <div class="orders">
+          <div class="add-category-form">
             <div class="header">
-              <h3>Danh sách đơn hàng</h3>
-              <div class="filters">
-                <i class="bx bx-filter"></i>
-                <select id="statusFilter">
-                  <option value="">Tất cả trạng thái</option>
-                  <option value="pending">Chờ xử lý</option>
-                  <option value="processing">Đang xử lý</option>
-                  <option value="shipped">Đang giao</option>
-                  <option value="completed">Hoàn thành</option>
-                  <option value="cancelled">Đã hủy</option>
-                </select>
-                <input type="date" id="dateFilter" />
+              <h3>Thêm danh mục mới</h3>
+            </div>
+            <form id="categoryForm">
+              <div class="form-group">
+                <label for="categoryName">Tên danh mục</label>
+                <input
+                  type="text"
+                  id="categoryName"
+                  placeholder="Ví dụ: Táo New Zealand"
+                  required
+                />
               </div>
+
+              <div class="form-group">
+                <label for="categorySlug">Đường dẫn (Slug)</label>
+                <input
+                  type="text"
+                  id="categorySlug"
+                  placeholder="Tự động tạo nếu để trống"
+                />
+              </div>
+
+              <div class="form-group">
+                <label for="categoryParent">Danh mục cha</label>
+                <select id="categoryParent">
+                  <option value="0">— Không có —</option>
+                  <option value="1">Trái cây</option>
+                  <option value="2">&nbsp;&nbsp;— Trái cây nhập khẩu</option>
+                  <option value="5">&nbsp;&nbsp;— Trái cây Việt Nam</option>
+                  <option value="6">Rau củ</option>
+                </select>
+              </div>
+
+              <div class="form-group">
+                <label for="categoryDesc">Mô tả</label>
+                <textarea
+                  id="categoryDesc"
+                  rows="4"
+                  placeholder="Mô tả ngắn về danh mục..."
+                ></textarea>
+              </div>
+
+              <div class="form-group">
+                <label for="categoryImage">Hình ảnh</label>
+                <input type="file" id="categoryImage" accept="image/*" />
+              </div>
+
+              <button type="submit" class="btn-submit">Thêm danh mục</button>
+            </form>
+          </div>
+
+          <div class="orders category-list">
+            <div class="header">
+              <h3>Danh sách danh mục</h3>
+              <i class="bx bx-search"></i>
             </div>
             <table>
               <thead>
                 <tr>
-                  <th>Mã Đơn Hàng</th>
-                  <th>Khách hàng</th>
-                  <th>Ngày đặt</th>
-                  <th>Tổng tiền</th>
-                  <th>Trạng thái</th>
+                  <th>Tên</th>
+                  <th>Slug</th>
+                  <th>Số lượng</th>
                   <th>Hành động</th>
                 </tr>
               </thead>
               <tbody>
                 <tr>
-                  <td>#12345</td>
-                  <td>Nguyễn Văn A</td>
-                  <td>15-11-2025</td>
-                  <td>450,000đ</td>
-                  <td><span class="status completed">Hoàn thành</span></td>
+                  <td><strong>Trái cây</strong></td>
+                  <td>trai-cay</td>
+                  <td>15</td>
                   <td>
-                    <a href="/admin/order-detail.html" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
+                    <a href="#" class="action-btn edit"
+                      ><i class="bx bx-edit"></i
+                    ></a>
+                    <a href="#" class="action-btn delete"
+                      ><i class="bx bx-trash"></i
+                    ></a>
                   </td>
                 </tr>
                 <tr>
-                  <td>#12344</td>
-                  <td>Trần Thị B</td>
-                  <td>15-11-2025</td>
-                  <td>1,200,000đ</td>
-                  <td><span class="status shipped">Đang giao</span></td>
                   <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
+                    <span class="indent-1">— Trái cây nhập khẩu</span>
+                  </td>
+                  <td>trai-cay-nhap-khau</td>
+                  <td>10</td>
+                  <td>
+                    <a href="#" class="action-btn edit"
+                      ><i class="bx bx-edit"></i
+                    ></a>
+                    <a href="#" class="action-btn delete"
+                      ><i class="bx bx-trash"></i
+                    ></a>
                   </td>
                 </tr>
                 <tr>
-                  <td>#12343</td>
-                  <td>Lê Văn C</td>
-                  <td>14-11-2025</td>
-                  <td>780,000đ</td>
-                  <td><span class="status processing">Đang xử lý</span></td>
+                  <td><span class="indent-2">— — Táo</span></td>
+                  <td>tao</td>
+                  <td>7</td>
                   <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
+                    <a href="#" class="action-btn edit"
+                      ><i class="bx bx-edit"></i
+                    ></a>
+                    <a href="#" class="action-btn delete"
+                      ><i class="bx bx-trash"></i
+                    ></a>
                   </td>
                 </tr>
                 <tr>
-                  <td>#12342</td>
-                  <td>Phạm Hữu D</td>
-                  <td>14-11-2025</td>
-                  <td>320,000đ</td>
-                  <td><span class="status pending">Chờ xử lý</span></td>
+                  <td><span class="indent-1">— Trái cây Việt Nam</span></td>
+                  <td>trai-cay-viet-nam</td>
+                  <td>5</td>
                   <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
+                    <a href="#" class="action-btn edit"
+                      ><i class="bx bx-edit"></i
+                    ></a>
+                    <a href="#" class="action-btn delete"
+                      ><i class="bx bx-trash"></i
+                    ></a>
                   </td>
                 </tr>
                 <tr>
-                  <td>#12341</td>
-                  <td>Hoàng Thị E</td>
-                  <td>13-11-2025</td>
-                  <td>500,000đ</td>
-                  <td><span class="status cancelled">Đã hủy</span></td>
+                  <td><strong>Rau củ</strong></td>
+                  <td>rau-cu</td>
+                  <td>12</td>
                   <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
+                    <a href="#" class="action-btn edit"
+                      ><i class="bx bx-edit"></i
+                    ></a>
+                    <a href="#" class="action-btn delete"
+                      ><i class="bx bx-trash"></i
+                    ></a>
                   </td>
                 </tr>
               </tbody>
             </table>
-          </div>
-
-          <div class="pagination">
-            <a href="#" class="page-btn disabled">&laquo;</a>
-            <a href="#" class="page-btn active">1</a>
-            <a href="#" class="page-btn">2</a>
-            <a href="#" class="page-btn">3</a>
-            <a href="#" class="page-btn">&raquo;</a>
           </div>
         </div>
       </main>

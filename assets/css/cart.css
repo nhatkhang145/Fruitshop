@@ -1,51 +1,7 @@
 /* ===================================
    Page Title
    =================================== */
-.page-title {
-    background: linear-gradient(135deg, #F8FAF5 0%, #E8F5E8 100%);
-    padding: 5rem 0 3rem;
-    text-align: center;
-}
 
-.page-title__container {
-    max-width: 1280px;
-    margin: 0 auto;
-    padding: 0 2rem;
-}
-
-.page-title__heading {
-    font-family: 'Georgia', serif;
-    font-size: 3rem;
-    color: #2C3E1F;
-    margin-bottom: 2rem;
-    font-weight: 700;
-}
-
-.breadcrumb {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 0.5rem;
-    font-size: 0.875rem;
-    color: #5A6C57;
-}
-
-.breadcrumb__link {
-    transition: all 0.3s ease;
-}
-
-.breadcrumb__link:hover {
-    color: #6B8E23;
-}
-
-.breadcrumb__separator {
-    color: #5A6C57;
-}
-
-.breadcrumb__current {
-    color: #6B8E23;
-    font-weight: 600;
-}
 
 /* --- BỐ CỤC CHUNG --- */
 .page-container {

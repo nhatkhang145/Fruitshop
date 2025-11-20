@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Về Chúng Tôi — The Organic Harvest</title>
-    
+
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
@@ -35,43 +35,6 @@
                 </li>
               </ul>
               <ul class="navbar-list">
-                <li class="navbar-item navbar-item__notify--active">
-                  <a href="#" class="navbar-item__link">
-                    <span class="navbar-icon__link">
-                      <i class="navbar-icon fa-regular fa-bell"></i>
-                    </span>
-                    Thông báo
-                  </a>
-                  <div class="navbar-item__notify">
-                     <header class="navbar-item__notify-header">
-                       <h3>Thông Báo Mới Nhận</h3>
-                     </header>
-                     <ul class="navbar-item__notify-list">
-                       <li class="navbar-item__notify-item">
-                         <a href="" class="navbar-item__notify-link">
-                           <img
-                             class="navbar-item__notify-img"
-                             src="./assets/images/chuối.jpg"
-                             alt="Notification"
-                           />
-                           <div class="navbar-item__notify-content">
-                             <span class="navbar-item__notify-name">
-                               Chuối xuất xứ từ Ecuador
-                             </span>
-                             <span class="navbar-item__notify-decoration"
-                               >ưu đãi giảm 20%</span
-                             >
-                           </div>
-                         </a>
-                       </li>
-                       </ul>
-                     <footer class="navbar-item__notify-footer">
-                       <a href="" class="navbar-item__notify-footer-btn"
-                         >Xem tất cả</a
-                       >
-                     </footer>
-                   </div>
-                </li>
                 <li class="navbar-item">
                   <a href="faqs.html" class="navbar-item__link">
                     <span class="navbar-icon__link">
@@ -80,6 +43,12 @@
                     Hỗ trợ
                   </a>
                 </li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">Đăng ký</a>
+                </li>
+                <li class="navbar-item">
+                  <a href="" class="navbar-item__link">Đăng nhập</a>
+                </li>
               </ul>
             </div>
           </div>
@@ -87,7 +56,8 @@
           <div class="navbar__menu">
             <div class="navbar__menu-inner">
               <div class="navbar__menu-logo">
-                <a href="index.html"> <img
+                <a href="/index.html">
+                  <img
                     class="navbar__menu-logo-img"
                     src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
                     alt="Organic Harvest Logo"
@@ -97,10 +67,10 @@
 
               <ul class="main-nav-links subnav-links">
                 <li><a href="index.html">Trang chủ</a></li>
-                <li><a href="#">Sản Phẩm</a></li>
-                <li><a href="about.html">Giới thiệu</a></li>
-                <li><a href="#">Bài viết</a></li>
-                <li><a href="#">Liên hệ</a></li>
+                <li><a href="/shop.html">Sản Phẩm</a></li>
+                <li><a href="/about.html">Giới thiệu</a></li>
+                <li><a href="blog.html">Bài viết</a></li>
+                <li><a href="/contact.html">Liên hệ</a></li>
               </ul>
 
               <div class="navbar__menu-search">
@@ -116,8 +86,8 @@
                     aria-label="Category"
                   >
                     <option value="all">Danh mục</option>
-                    <option value="fruits">Fruits</option>
-                    <option value="vegetables">Vegetables</option>
+                    <option value="fruits">Trái cây</option>
+                    <option value="vegetables">táo</option>
                   </select>
                   <input
                     name="q"
@@ -134,13 +104,6 @@
 
               <div class="navbar__menu-actions">
                 <a
-                  href="/account.html"
-                  class="icon-btn account-btn"
-                  title="Tài khoản"
-                >
-                  <i class="fa-regular fa-user"></i>
-                </a>
-                <a
                   href="/wishlist.html"
                   class="icon-btn wishlist-btn"
                   title="Yêu thích"
@@ -152,35 +115,56 @@
                   <i class="fa-solid fa-basket-shopping"></i>
                   <span class="badge">2</span>
                 </a>
+                <a
+                  href="/account.html"
+                  class="icon-btn account-btn"
+                  title="Tài khoản"
+                >
+                  <i class="fa-regular fa-user"></i>
+                </a>
               </div>
             </div>
           </div>
 
-          <div
-            class="navbar__subnav"
-            aria-label="Primary navigation"
-            style="display: none"
-          ></div>
+         
         </nav>
       </header>
+      <!-- end header -->
+
       <main class="about-page">
         <div class="breadcrumb">
           <div class="grid">
             <a href="index.html">Trang chủ</a>
             <i class="fa-solid fa-angle-right"></i>
-            <span>Về Chúng Tôi</span>
+            <span>Giới thiệu</span>
           </div>
         </div>
 
         <div class="about-section grid">
           <div class="about-image">
-            <img src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?q=80&w=1974&auto=format&fit=crop" alt="Cửa hàng trái cây">
+            <img
+              src="https://images.unsplash.com/photo-1550258987-190a2d41a8ba?q=80&w=1974&auto=format&fit=crop"
+              alt="Cửa hàng trái cây"
+            />
           </div>
           <div class="about-content">
             <h1 class="about-title">Câu Chuyện Của Organic Harvest</h1>
-            <p class="about-subtitle">Mang Nguồn Dinh Dưỡng Tươi Sạch Đến Mọi Nhà</p>
-            <p>Organic Harvest được thành lập với một niềm tin đơn giản: mọi người đều xứng đáng được thưởng thức những loại trái cây tươi ngon, an toàn và bổ dưỡng nhất. Chúng tôi bắt đầu từ một cửa hàng nhỏ, làm việc trực tiếp với các nông dân địa phương để tuyển chọn những sản phẩm chất lượng nhất.</p>
-            <p>Ngày nay, Organic Harvest đã phát triển thành một thương hiệu đáng tin cậy, cung cấp trái cây nhập khẩu và nội địa đạt chuẩn, giao hàng nhanh chóng đến tận tay khách hàng. Sứ mệnh của chúng tôi là làm cho việc ăn uống lành mạnh trở nên dễ dàng và thú vị hơn.</p>
+            <p class="about-subtitle">
+              Mang Nguồn Dinh Dưỡng Tươi Sạch Đến Mọi Nhà
+            </p>
+            <p>
+              Organic Harvest được thành lập với một niềm tin đơn giản: mọi
+              người đều xứng đáng được thưởng thức những loại trái cây tươi
+              ngon, an toàn và bổ dưỡng nhất. Chúng tôi bắt đầu từ một cửa hàng
+              nhỏ, làm việc trực tiếp với các nông dân địa phương để tuyển chọn
+              những sản phẩm chất lượng nhất.
+            </p>
+            <p>
+              Ngày nay, Organic Harvest đã phát triển thành một thương hiệu đáng
+              tin cậy, cung cấp trái cây nhập khẩu và nội địa đạt chuẩn, giao
+              hàng nhanh chóng đến tận tay khách hàng. Sứ mệnh của chúng tôi là
+              làm cho việc ăn uống lành mạnh trở nên dễ dàng và thú vị hơn.
+            </p>
           </div>
         </div>
 
@@ -191,17 +175,26 @@
               <div class="value-item">
                 <i class="fa-solid fa-leaf"></i>
                 <h3>100% Tươi Sạch</h3>
-                <p>Chúng tôi cam kết trái cây luôn tươi mới khi đến tay bạn, được bảo quản trong điều kiện tối ưu.</p>
+                <p>
+                  Chúng tôi cam kết trái cây luôn tươi mới khi đến tay bạn, được
+                  bảo quản trong điều kiện tối ưu.
+                </p>
               </div>
               <div class="value-item">
                 <i class="fa-solid fa-truck-fast"></i>
                 <h3>Giao Hàng Nhanh</h3>
-                <p>Hệ thống giao hàng hỏa tốc đảm bảo bạn nhận được sản phẩm chỉ trong vài giờ đặt hàng.</p>
+                <p>
+                  Hệ thống giao hàng hỏa tốc đảm bảo bạn nhận được sản phẩm chỉ
+                  trong vài giờ đặt hàng.
+                </p>
               </div>
               <div class="value-item">
                 <i class="fa-solid fa-shield-halved"></i>
                 <h3>An Toàn Vệ Sinh</h3>
-                <p>Tất cả sản phẩm đều có nguồn gốc rõ ràng, tuân thủ nghiêm ngặt các tiêu chuẩn an toàn thực phẩm.</p>
+                <p>
+                  Tất cả sản phẩm đều có nguồn gốc rõ ràng, tuân thủ nghiêm ngặt
+                  các tiêu chuẩn an toàn thực phẩm.
+                </p>
               </div>
             </div>
           </div>
@@ -210,14 +203,18 @@
       <footer class="footer">
         <div class="footer__main">
           <div class="footer__grid">
+            <!-- Company Info -->
             <div class="footer__company">
               <div class="footer__brand">
-                <a href="index.html"> <img
+                <a href="/">
+                  <img
                     class="navbar__menu-logo-img"
                     src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
                     alt="Organic Harvest Logo"
                   />
                 </a>
+                <!-- <div class="footer__logo">T</div>
+                <h3 class="footer__company-name">Company</h3> -->
               </div>
               <p class="footer__description">
                 Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
@@ -259,43 +256,123 @@
               </div>
             </div>
 
+            <!-- Quick Links -->
             <div class="footer__section">
               <h3 class="footer__title">Chính sách</h3>
               <ul class="footer__links">
                 <li class="footer__link-item">
                   <div class="footer__link-dot"></div>
-                  <a href="index.html" class="footer__link">Trang chủ</a>
+                  <a
+                    href="https://www.themedevhub.com/about-us"
+                    target="_blank"
+                    class="footer__link"
+                    >Trang chủ</a
+                  >
                 </li>
                 <li class="footer__link-item">
                   <div class="footer__link-dot"></div>
-                  <a href="#" class="footer__link">Sản phẩm</a>
+                  <a
+                    href="https://www.themedevhub.com/hire-experts"
+                    target="_blank"
+                    class="footer__link"
+                    >Sản phẩm</a
+                  >
                 </li>
                 <li class="footer__link-item">
                   <div class="footer__link-dot"></div>
-                  <a href="about.html" class="footer__link">Giới thiệu</a>
+                  <a
+                    href="https://www.themedevhub.com/themes"
+                    target="_blank"
+                    class="footer__link"
+                    >Giới thiệu</a
+                  >
                 </li>
                 <li class="footer__link-item">
                   <div class="footer__link-dot"></div>
-                  <a href="#" class="footer__link">Bài viết</a>
+                  <a
+                    href="https://www.themedevhub.com/contact"
+                    target="_blank"
+                    class="footer__link"
+                    >Bài viết</a
+                  >
                 </li>
               </ul>
             </div>
 
-            <div class="footer-column">
-              <h3>Useful Links</h3>
-              <ul>
-                <li><a href="about.html">About Us</a></li>
-                <li><a href="#">Delivery Information</a></li>
-                <li><a href="#">Privacy Policy</a></li>
-                <li><a href="#">Terms & Conditions</a></li>
-                <li><a href="#">Contact Us</a></li>
-                <li><a href="#">My Account</a></li>
+            <!-- Hổ trợ khách hàng -->
+            <div class="footer__section">
+              <h3 class="footer__title">Hổ trợ khách hàng</h3>
+              <ul class="footer__links">
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a
+                    href="https://www.themedevhub.com/about-us"
+                    target="_blank"
+                    class="footer__link"
+                    >Tìm kiếm
+                  </a>
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a
+                    href="https://www.themedevhub.com/hire-experts"
+                    target="_blank"
+                    class="footer__link"
+                    >Chính sách bảo mật</a
+                  >
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a
+                    href="https://www.themedevhub.com/themes"
+                    target="_blank"
+                    class="footer__link"
+                    >Điều khoản dịch vụ</a
+                  >
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a
+                    href="https://www.themedevhub.com/contact"
+                    target="_blank"
+                    class="footer__link"
+                    >Hướng dẫn kiểm tra đơn hàng</a
+                  >
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a
+                    href="https://www.themedevhub.com/contact"
+                    target="_blank"
+                    class="footer__link"
+                    >Chính sách giao nhận</a
+                  >
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a
+                    href="https://www.themedevhub.com/contact"
+                    target="_blank"
+                    class="footer__link"
+                    >Chính sách thanh toán</a
+                  >
+                </li>
+                <li class="footer__link-item">
+                  <div class="footer__link-dot"></div>
+                  <a
+                    href="https://www.themedevhub.com/contact"
+                    target="_blank"
+                    class="footer__link"
+                    >Chính sách đổi trả</a
+                  >
+                </li>
               </ul>
             </div>
 
+            <!-- Newsletter -->
             <div class="footer__section">
               <h3 class="footer__title">Đăng kí nhận tin</h3>
-            
+
               <form class="footer__newsletter-form">
                 <input
                   type="email"
@@ -311,6 +388,7 @@
           </div>
         </div>
 
+        <!-- Footer Bottom -->
         <div class="footer__bottom">
           <div class="footer__bottom-content">
             <p class="footer__copyright">
@@ -318,19 +396,33 @@
             </p>
             <ul class="footer__bottom-links">
               <li>
-                <a href="about.html" class="footer__bottom-link">About us</a>
+                <a
+                  href="https://www.themedevhub.com/about-us"
+                  target="_blank"
+                  class="footer__bottom-link"
+                  >About us</a
+                >
               </li>
               <li>
-                <a href="#" class="footer__bottom-link">Terms</a>
+                <a
+                  href="https://www.themedevhub.com/privacy-policy"
+                  target="_blank"
+                  class="footer__bottom-link"
+                  >Terms</a
+                >
               </li>
               <li>
-                <a href="#" class="footer__bottom-link">Privacy</a>
+                <a
+                  href="https://www.themedevhub.com/terms-and-conditions"
+                  target="_blank"
+                  class="footer__bottom-link"
+                  >Privacy</a
+                >
               </li>
             </ul>
           </div>
         </div>
       </footer>
-      </div>
-    
-    </body>
+    </div>
+  </body>
 </html>

@@ -1,21 +1,21 @@
 <!DOCTYPE html>
-<html lang="vi">
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>12 Loại Rau Củ Quả Lành Mạnh Cần Có...</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    />
+    <title>Đơn mua - Organic Harvest</title>
     <link
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
     />
-    <link rel="stylesheet" href="assets/css/base.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/blog.css" />
-    <link rel="stylesheet" href="assets/css/blog-detail.css" />
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
+    />
+    <link rel="stylesheet" href="./assets/css/base.css" />
+    <link rel="stylesheet" href="./assets/css/main.css" />
+    <link rel="stylesheet" href="./assets/css/profile.css" />
+    <link rel="stylesheet" href="./assets/css/orders.css" />
   </head>
   <body>
     <header class="header">
@@ -43,10 +43,10 @@
                 </a>
               </li>
               <li class="navbar-item">
-                <a href="" class="navbar-item__link">Đăng ký</a>
+                <a href="register.html" class="navbar-item__link">Đăng ký</a>
               </li>
               <li class="navbar-item">
-                <a href="" class="navbar-item__link">Đăng nhập</a>
+                <a href="login.html" class="navbar-item__link">Đăng nhập</a>
               </li>
             </ul>
           </div>
@@ -114,175 +114,280 @@
                 <i class="fa-solid fa-basket-shopping"></i>
                 <span class="badge">2</span>
               </a>
-              <a
-                href="/account.html"
-                class="icon-btn account-btn"
-                title="Tài khoản"
-              >
-                <i class="fa-regular fa-user"></i>
-              </a>
-            </div>
-          </div>
-        </div>
+              <div class="header__account">
+                <a class="icon-btn account-btn" title="Tài khoản">
+                  <i class="fa-regular fa-user"></i>
+                </a>
 
-      
-      </nav>
-    </header>
+                <div class="account-dropdown">
+                  <div class="account-user">
+                    <div class="user-info">
+                      <img
+                        src="https://via.placeholder.com/100"
+                        alt="User Avatar"
+                        class="user-avatar"
+                      />
+                      <div class="user-details">
+                        <span class="user-name">Nguyễn Văn A</span>
+                        <span class="user-email">nguyenvana@gmail.com</span>
+                      </div>
+                    </div>
 
-    <!--  -->
-    <main class="blog-detail-page">
-      <div class="breadcrumb">
-        <div class="grid">
-          
-          <a href="blog.html">Bài viết</a>
-          <i class="fa-solid fa-angle-right"></i>
-          <span>12 Loại Rau Củ Quả Lành Mạnh...</span>
-        </div>
-      </div>
+                    <ul class="account-menu">
+                      <li>
+                        <a href="/profile.html">
+                          <i class="fa-regular fa-id-card"></i> Hồ sơ của tôi
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/orders.html">
+                          <i class="fa-solid fa-box-open"></i> Đơn mua
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/wishlist.html">
+                          <i class="fa-regular fa-heart"></i> Sản phẩm yêu thích
+                        </a>
+                      </li>
+                      <li>
+                        <a href="/change-password.html">
+                          <i class="fa-solid fa-key"></i> Đổi mật khẩu
+                        </a>
+                      </li>
 
-      <div class="blog-layout grid">
-        <aside class="blog-sidebar">
-          <div class="widget">
-            <h3 class="widget-title">Tìm kiếm</h3>
-            <form class="widget-search">
-              <input type="search" placeholder="Nhập từ khóa..." />
-              <button type="submit">
-                <i class="fa-solid fa-magnifying-glass"></i>
-              </button>
-            </form>
-          </div>
-
-          <div class="widget">
-            <h3 class="widget-title">Danh mục</h3>
-            <ul class="widget-list">
-              <li>
-                <a href="#">Dinh dưỡng <span class="count">(5)</span></a>
-              </li>
-              <li>
-                <a href="#">Công thức <span class="count">(3)</span></a>
-              </li>
-              <li>
-                <a href="#">Sức khỏe <span class="count">(8)</span></a>
-              </li>
-            </ul>
-          </div>
-
-          <div class="widget">
-            <h3 class="widget-title">Bài viết mới</h3>
-            <ul class="widget-recent-posts">
-              <li>
-                <img
-                  src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                  alt="Post 1"
-                />
-                <div>
-                  <a href="#">12 Loại Rau Củ Quả Tốt Cho Sức Khỏe</a>
-                  <span class="date">16 Tháng 11, 2022</span>
+                      <li class="border-top">
+                        <a href="#" class="text-danger">
+                          <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                          Đăng xuất
+                        </a>
+                      </li>
+                    </ul>
+                  </div>
                 </div>
-              </li>
-              <li>
-                <img
-                  src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                  alt="Post 2"
-                />
-                <div>
-                  <a href="#">Dinh Dưỡng Từ Nước Ép Cam Tươi</a>
-                  <span class="date">15 Tháng 11, 2022</span>
-                </div>
-              </li>
-            </ul>
-          </div>
-        </aside>
-
-        <article class="blog-post-content">
-          <div class="post-image">
-            <img
-              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-              alt="Blog 1"
-            />
-          </div>
-
-          <header class="post-header">
-            <h1 class="post-title">
-              12 Loại Rau Củ Quả Lành Mạnh Cần Có Trong Tủ Lạnh Của Bạn
-            </h1>
-            <div class="blog__meta">
-              <span><i class="fa-regular fa-user"></i> Đăng bởi Admin</span>
-              <span
-                ><i class="fa-regular fa-calendar-days"></i> 16 Tháng 11,
-                2022</span
-              >
-              <span><i class="fa-regular fa-folder"></i> Dinh dưỡng</span>
-            </div>
-          </header>
-
-          <div class="post-body">
-            <p>
-              Việc duy trì một chế độ ăn uống giàu rau củ quả là vô cùng quan
-              trọng để cung cấp đủ vitamin, khoáng chất và chất xơ cho cơ thể.
-            </p>
-            <p>
-              Mỗi loại trái cây, rau củ đều mang lại những lợi ích riêng biệt.
-              Ví dụ, các loại quả mọng rất giàu chất chống oxy hóa, trong khi
-              các loại rau lá xanh đậm lại cung cấp dồi dào canxi và vitamin K.
-              Việc đa dạng hóa các loại thực phẩm trong bữa ăn hàng ngày sẽ giúp
-              bạn tối ưu hóa lợi ích sức khỏe.
-            </p>
-
-            <blockquote>
-              <p>
-                "Dinh dưỡng là nền tảng của sức khỏe. Ăn uống lành mạnh hôm nay
-                là bạn đang đầu tư cho tương lai của chính mình."
-              </p>
-              <span>— Chuyên gia Dinh dưỡng</span>
-            </blockquote>
-
-            <h3>Lợi ích của việc ăn nhiều rau xanh</h3>
-            <p>
-              Rau xanh không chỉ cung cấp vitamin và khoáng chất thiết yếu, mà
-              còn chứa chất xơ giúp hệ tiêu hóa hoạt động trơn tru. Các chất
-              chống oxy hóa trong rau xanh giúp bảo vệ cơ thể khỏi các gốc tự
-              do, giảm nguy cơ mắc các bệnh mãn tính.
-            </p>
-
-            <ul>
-              <li>Giàu Vitamin C & K</li>
-              <li>Nguồn cung cấp chất xơ dồi dào</li>
-              <li>Giúp tăng cường hệ miễn dịch</li>
-            </ul>
-          </div>
-
-          <footer class="post-footer">
-            <div class="post-share">
-              <strong>Chia sẻ:</strong>
-              <a href="#" class="social-icon fb"
-                ><i class="fa-brands fa-facebook-f"></i
-              ></a>
-              <a href="#" class="social-icon tw"
-                ><i class="fa-brands fa-twitter"></i
-              ></a>
-              <a href="#" class="social-icon pi"
-                ><i class="fa-brands fa-pinterest"></i
-              ></a>
-            </div>
-
-            <div class="post-author-bio">
-              <img
-                src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?q=80&w=100&h=100&fit=crop&crop=faces"
-                alt="Admin"
-              />
-              <div class="author-info">
-                <h4>Đăng bởi Admin</h4>
-                <p>
-                  Quản trị viên của Organic Harvest, người đam mê chia sẻ kiến
-                  thức về lối sống lành mạnh và thực phẩm hữu cơ.
-                </p>
               </div>
             </div>
-          </footer>
-        </article>
+          </div>
+        </div>
+      </nav>
+    </header>
+    <div class="breadcrumb">
+      <div class="container">
+        <a href="/">Trang chủ</a> &gt;
+        <a href="/profile.html">Tài khoản</a> &gt; <span>Đơn mua</span>
       </div>
-    </main>
+    </div>
+
+    <section class="profile-section">
+      <div class="container">
+        <div class="profile-container">
+          <aside class="profile-sidebar">
+            <div class="profile-user-brief">
+              <img
+                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
+                alt="Avatar"
+                class="brief-avatar"
+              />
+              <div class="brief-info">
+                <span class="brief-name">Nguyễn Văn A</span>
+                <a href="/profile.html" class="brief-edit"
+                  ><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a
+                >
+              </div>
+            </div>
+
+            <ul class="profile-menu">
+              <li class="profile-menu-item">
+                <a href="/profile.html"
+                  ><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a
+                >
+              </li>
+              <li class="profile-menu-item active">
+                <a href="/orders.html"
+                  ><i class="fa-solid fa-box-open"></i> Đơn mua</a
+                >
+              </li>
+              <li class="profile-menu-item">
+                <a href="/addresses.html"
+                  ><i class="fa-solid fa-location-dot"></i> Địa chỉ</a
+                >
+              </li>
+              <li class="profile-menu-item">
+                <a href="/change-password.html"
+                  ><i class="fa-solid fa-key"></i> Đổi mật khẩu</a
+                >
+              </li>
+              <li class="profile-menu-item">
+                <a href="/wishlist.html"
+                  ><i class="fa-regular fa-heart"></i> Yêu thích</a
+                >
+              </li>
+            </ul>
+          </aside>
+
+          <main class="profile-content order-content">
+            <div class="order-tabs">
+              <a href="#" class="order-tab active">Tất cả</a>
+              <a href="#" class="order-tab">Chờ thanh toán</a>
+              <a href="#" class="order-tab">Vận chuyển</a>
+              <a href="#" class="order-tab">Hoàn thành</a>
+              <a href="#" class="order-tab">Đã hủy</a>
+            </div>
+
+            <div class="order-search-bar">
+              <i class="fa-solid fa-magnifying-glass"></i>
+              <input
+                type="text"
+                placeholder="Tìm kiếm theo ID đơn hàng hoặc Tên sản phẩm"
+              />
+            </div>
+
+            <div class="order-list">
+              <div class="order-card">
+                <div class="order-card__header">
+                  <div class="shop-info">
+                    <span class="shop-name">Organic Harvest</span>
+                    <button class="btn-chat">
+                      <i class="fa-regular fa-comment"></i> Chat
+                    </button>
+                  </div>
+                  <span class="order-status status-completed">HOÀN THÀNH</span>
+                </div>
+
+                <div class="order-card__body">
+                  <div class="order-item">
+                    <img
+                      src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                      alt="Product"
+                      class="item-thumb"
+                    />
+                    <div class="item-info">
+                      <h4 class="item-name">
+                        Dừa sáp Trà Vinh (Loại 1) - Thơm ngon béo ngậy
+                      </h4>
+                      <p class="item-variant">Phân loại: Trái to</p>
+                      <p class="item-qty">x2</p>
+                    </div>
+                    <div class="item-price">
+                      <span class="old-price">200.000đ</span>
+                      <span class="new-price">150.000đ</span>
+                    </div>
+                  </div>
+                  <div class="order-item">
+                    <img
+                      src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png"
+                      alt="Product"
+                      class="item-thumb"
+                    />
+                    <div class="item-info">
+                      <h4 class="item-name">Cam Sành Vĩnh Long mọng nước</h4>
+                      <p class="item-variant">Phân loại: Túi 1kg</p>
+                      <p class="item-qty">x1</p>
+                    </div>
+                    <div class="item-price">
+                      <span class="new-price">30.000đ</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="order-card__footer">
+                  <div class="total-money">
+                    Thành tiền: <span>330.000đ</span>
+                  </div>
+                  <div class="action-buttons">
+                    <a href="#" class="btn btn-primary">Mua lại</a>
+                    <a href="#" class="btn btn-outline">Xem chi tiết</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-card">
+                <div class="order-card__header">
+                  <div class="shop-info">
+                    <span class="shop-name">Organic Harvest</span>
+                    <button class="btn-chat">
+                      <i class="fa-regular fa-comment"></i> Chat
+                    </button>
+                  </div>
+                  <span class="order-status status-shipping"
+                    ><i class="fa-solid fa-truck"></i> ĐANG GIAO HÀNG</span
+                  >
+                </div>
+
+                <div class="order-card__body">
+                  <div class="order-item">
+                    <img
+                      src="https://via.placeholder.com/80"
+                      alt="Product"
+                      class="item-thumb"
+                    />
+                    <div class="item-info">
+                      <h4 class="item-name">Táo Envy Mỹ nhập khẩu size lớn</h4>
+                      <p class="item-variant">Phân loại: 1kg</p>
+                      <p class="item-qty">x1</p>
+                    </div>
+                    <div class="item-price">
+                      <span class="new-price">120.000đ</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="order-card__footer">
+                  <div class="total-money">
+                    Thành tiền: <span>120.000đ</span>
+                  </div>
+                  <div class="action-buttons">
+                    <button class="btn btn-disabled" disabled>
+                      Đã nhận được hàng
+                    </button>
+                    <a href="#" class="btn btn-outline">Xem chi tiết</a>
+                  </div>
+                </div>
+              </div>
+
+              <div class="order-card">
+                <div class="order-card__header">
+                  <div class="shop-info">
+                    <span class="shop-name">Organic Harvest</span>
+                  </div>
+                  <span class="order-status status-cancelled">ĐÃ HỦY</span>
+                </div>
+
+                <div class="order-card__body">
+                  <div class="order-item">
+                    <img
+                      src="https://via.placeholder.com/80"
+                      alt="Product"
+                      class="item-thumb"
+                    />
+                    <div class="item-info">
+                      <h4 class="item-name">
+                        Nho Mẫu Đơn Hàn Quốc (Shine Muscat)
+                      </h4>
+                      <p class="item-variant">Phân loại: Hộp 500g</p>
+                      <p class="item-qty">x1</p>
+                    </div>
+                    <div class="item-price">
+                      <span class="new-price">450.000đ</span>
+                    </div>
+                  </div>
+                </div>
+
+                <div class="order-card__footer">
+                  <div class="total-money">
+                    Thành tiền: <span>450.000đ</span>
+                  </div>
+                  <div class="action-buttons">
+                    <a href="#" class="btn btn-primary">Mua lại</a>
+                    <a href="#" class="btn btn-outline">Xem chi tiết</a>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </main>
+        </div>
+      </div>
+    </section>
+    <!-- FOOTER -->
     <footer class="footer">
       <div class="footer__main">
         <div class="footer__grid">
@@ -506,5 +611,6 @@
         </div>
       </div>
     </footer>
+    <script src="./assets/js/main.js"></script>
   </body>
 </html>

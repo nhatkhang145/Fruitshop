@@ -1,0 +1,277 @@
+/* =========================================
+   ORDER HISTORY STYLES
+   ========================================= */
+
+/* Reset Padding cho trang đơn hàng để full width */
+.order-content {
+  padding: 0;
+  background: transparent;
+  box-shadow: none;
+}
+
+/* --- 1. TABS --- */
+.order-tabs {
+  display: flex;
+  background: #fff;
+  margin-bottom: 12px;
+  border-radius: 2px;
+  overflow-x: auto; /* Cho phép cuộn ngang trên mobile */
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.05);
+}
+
+.order-tab {
+  flex: 1;
+  text-align: center;
+  padding: 16px 0;
+  font-size: 1.4rem;
+  color: var(--text-dark);
+  border-bottom: 2px solid transparent;
+  transition: color 0.3s, border-color 0.3s;
+  white-space: nowrap;
+  padding: 16px 20px;
+}
+
+.order-tab:hover,
+.order-tab.active {
+  color: var(--primary-color);
+  border-bottom-color: var(--primary-color);
+}
+
+/* --- 2. SEARCH BAR --- */
+.order-search-bar {
+  position: relative;
+  background: #eaeaea;
+  padding: 12px;
+  margin-bottom: 12px;
+  border-radius: 2px;
+}
+
+.order-search-bar i {
+  position: absolute;
+  left: 25px;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #999;
+  font-size: 1.4rem;
+}
+
+.order-search-bar input {
+  width: 100%;
+  padding: 10px 10px 10px 45px;
+  border: 1px solid transparent;
+  border-radius: 2px;
+  outline: none;
+  font-size: 1.4rem;
+}
+
+.order-search-bar input:focus {
+  border-color: #ccc;
+}
+
+/* --- 3. ORDER CARD (Từng đơn hàng) --- */
+.order-card {
+  background: #fff;
+  margin-bottom: 12px;
+  border-radius: 2px;
+  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.05);
+}
+
+/* Header Card */
+.order-card__header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 24px;
+  border-bottom: 1px solid #eaeaea;
+}
+
+.shop-info {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.shop-name {
+  font-weight: 600;
+  font-size: 1.4rem;
+}
+
+.btn-chat {
+  background: #3d8b91;
+  color: #fff;
+  border: none;
+  padding: 4px 10px;
+  border-radius: 2px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.order-status {
+  font-size: 1.4rem;
+  text-transform: uppercase;
+}
+
+/* Màu sắc trạng thái */
+.status-completed { color: #2fb45a; } /* Xanh lá */
+.status-shipping { color: #26aa99; }  /* Xanh ngọc */
+.status-cancelled { color: #ee4d2d; } /* Đỏ cam */
+
+/* Body Card */
+.order-card__body {
+  padding: 0 24px;
+}
+
+.order-item {
+  display: flex;
+  padding: 15px 0;
+  border-bottom: 1px solid #eaeaea;
+  align-items: center;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.item-thumb {
+  width: 80px;
+  height: 80px;
+  object-fit: cover;
+  border: 1px solid #e1e1e1;
+  margin-right: 15px;
+}
+
+.item-info {
+  flex: 1;
+}
+
+.item-name {
+  font-size: 1.5rem;
+  color: var(--text-dark);
+  margin: 0 0 5px;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.item-variant {
+  font-size: 1.3rem;
+  color: #888;
+  margin: 0 0 5px;
+}
+
+.item-qty {
+  font-size: 1.3rem;
+  color: var(--text-dark);
+  margin: 0;
+}
+
+.item-price {
+  text-align: right;
+}
+
+.old-price {
+  display: block;
+  text-decoration: line-through;
+  color: #888;
+  font-size: 1.3rem;
+  margin-bottom: 4px;
+}
+
+.new-price {
+  display: block;
+  color: var(--primary-brand-color);
+  font-size: 1.4rem;
+  font-weight: 600;
+}
+
+/* Footer Card */
+.order-card__footer {
+  padding: 24px;
+  background: #fffdf8; /* Màu nền nhẹ cho footer */
+  border-top: 1px solid #eaeaea;
+}
+
+.total-money {
+  text-align: right;
+  font-size: 1.4rem;
+  margin-bottom: 20px;
+}
+
+.total-money span {
+  font-size: 2rem;
+  color: var(--primary-brand-color);
+  font-weight: 600;
+  margin-left: 10px;
+}
+
+.action-buttons {
+  display: flex;
+  justify-content: flex-end;
+  gap: 10px;
+}
+
+/* Buttons Styles (Ghi đè hoặc thêm mới) */
+.btn {
+  min-width: 140px;
+  padding: 10px 0;
+  text-align: center;
+  border-radius: 4px;
+  font-size: 1.4rem;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-block;
+  transition: all 0.2s;
+}
+
+.btn-primary {
+  background-color: var(--primary-color);
+  color: #fff;
+  border: 1px solid var(--primary-color);
+}
+.btn-primary:hover {
+  opacity: 0.9;
+}
+
+.btn-outline {
+  background-color: #fff;
+  color: #555;
+  border: 1px solid #dbdbdb;
+}
+.btn-outline:hover {
+  background-color: #f8f8f8;
+  border-color: #ccc;
+}
+
+.btn-disabled {
+  background-color: #ccc;
+  color: #fff;
+  border: none;
+  cursor: not-allowed;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .order-item {
+    flex-direction: column;
+    align-items: flex-start;
+    position: relative;
+  }
+  
+  .item-thumb {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 10px;
+  }
+
+  .item-price {
+    text-align: left;
+    margin-top: 5px;
+  }
+
+  .action-buttons {
+    flex-direction: column;
+  }
+  
+  .btn {
+    width: 100%;
+  }
+}

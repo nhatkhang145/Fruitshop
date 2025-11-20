@@ -9,8 +9,8 @@
     />
     <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/admin/style.css" />
-    <link rel="stylesheet" href="/assets/css/admin/Order.css" />
-    <title>Quản lý đơn hàng</title>
+    <link rel="stylesheet" href="/assets/css/admin/notifications.css" />
+    <title>Thông báo</title>
   </head>
 
   <body>
@@ -39,7 +39,7 @@
             ><i class="bx bx-category"></i>Quản lý danh mục</a
           >
         </li>
-        <li class="active">
+        <li>
           <a href="/admin/orders.html"
             ><i class="bx bx-receipt"></i>Quản lý đơn hàng</a
           >
@@ -49,7 +49,7 @@
             ><i class="bx bx-group"></i>Quản lý khách hàng</a
           >
         </li>
-        <li>
+        <li class="active">
           <a href="/admin/notifications.html"
             ><i class="bx bx-bell"></i>Lịch sử Thông báo</a
           >
@@ -170,145 +170,88 @@
       <main>
         <div class="header">
           <div class="left">
-            <h1>Quản lý đơn hàng</h1>
+            <h1>Lịch sử Thông báo</h1>
             <ul class="breadcrumb">
               <li><a href="#">Quản lý</a></li>
               <li>/</li>
-              <li><a href="#" class="active">Đơn hàng</a></li>
+              <li><a href="#" class="active">Thông báo</a></li>
             </ul>
           </div>
         </div>
 
-        <ul class="insights">
-          <li>
-            <i class="bx bx-loader-circle"></i>
-            <span class="info">
-              <h3>15</h3>
-              <p>Chờ xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-package"></i>
-            <span class="info">
-              <h3>8</h3>
-              <p>Đang xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bxs-truck"></i>
-            <span class="info">
-              <h3>22</h3>
-              <p>Đang giao</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-check-circle"></i>
-            <span class="info">
-              <h3>1,020</h3>
-              <p>Đã hoàn thành</p>
-            </span>
-          </li>
-        </ul>
-
         <div class="bottom-data">
           <div class="orders">
             <div class="header">
-              <h3>Danh sách đơn hàng</h3>
-              <div class="filters">
-                <i class="bx bx-filter"></i>
-                <select id="statusFilter">
-                  <option value="">Tất cả trạng thái</option>
-                  <option value="pending">Chờ xử lý</option>
-                  <option value="processing">Đang xử lý</option>
-                  <option value="shipped">Đang giao</option>
-                  <option value="completed">Hoàn thành</option>
-                  <option value="cancelled">Đã hủy</option>
-                </select>
-                <input type="date" id="dateFilter" />
-              </div>
+              <h3>Tất cả Thông báo</h3>
+              <a href="#" class="btn-primary" id="markAllAsReadBtn">
+                <i class="bx bx-check-double"></i>
+                <span>Đánh dấu tất cả là đã đọc</span>
+              </a>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Mã Đơn Hàng</th>
-                  <th>Khách hàng</th>
-                  <th>Ngày đặt</th>
-                  <th>Tổng tiền</th>
-                  <th>Trạng thái</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#12345</td>
-                  <td>Nguyễn Văn A</td>
-                  <td>15-11-2025</td>
-                  <td>450,000đ</td>
-                  <td><span class="status completed">Hoàn thành</span></td>
-                  <td>
-                    <a href="/admin/order-detail.html" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12344</td>
-                  <td>Trần Thị B</td>
-                  <td>15-11-2025</td>
-                  <td>1,200,000đ</td>
-                  <td><span class="status shipped">Đang giao</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12343</td>
-                  <td>Lê Văn C</td>
-                  <td>14-11-2025</td>
-                  <td>780,000đ</td>
-                  <td><span class="status processing">Đang xử lý</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12342</td>
-                  <td>Phạm Hữu D</td>
-                  <td>14-11-2025</td>
-                  <td>320,000đ</td>
-                  <td><span class="status pending">Chờ xử lý</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12341</td>
-                  <td>Hoàng Thị E</td>
-                  <td>13-11-2025</td>
-                  <td>500,000đ</td>
-                  <td><span class="status cancelled">Đã hủy</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
 
-          <div class="pagination">
-            <a href="#" class="page-btn disabled">&laquo;</a>
-            <a href="#" class="page-btn active">1</a>
-            <a href="#" class="page-btn">2</a>
-            <a href="#" class="page-btn">3</a>
-            <a href="#" class="page-btn">&raquo;</a>
+            <ul class="notification-log">
+              <li class="log-item unread">
+                <i class="bx bx-cart-add item-icon"></i>
+                <div class="item-content">
+                  <p>
+                    <strong>Đơn hàng mới:</strong> Bạn có đơn hàng
+                    <strong>#12350</strong> từ Nguyễn Văn A.
+                  </p>
+                  <small>2 phút trước</small>
+                </div>
+              </li>
+
+              <li class="log-item unread">
+                <i class="bx bx-user-plus item-icon"></i>
+                <div class="item-content">
+                  <p>
+                    <strong>Khách hàng mới:</strong> Trần Thị B vừa đăng ký tài
+                    khoản.
+                  </p>
+                  <small>1 giờ trước</small>
+                </div>
+              </li>
+
+              <li class="log-item">
+                <i class="bx bxs-error-circle item-icon"></i>
+                <div class="item-content">
+                  <p>
+                    <strong>Hết hàng:</strong> Sản phẩm
+                    <strong>"Dâu tây Hàn Quốc"</strong> đã hết hàng.
+                  </p>
+                  <small>Hôm qua</small>
+                </div>
+              </li>
+
+              <li class="log-item">
+                <i class="bx bx-cart item-icon"></i>
+                <div class="item-content">
+                  <p>
+                    <strong>Đơn hàng đã hoàn thành:</strong> Đơn hàng
+                    <strong>#12344</strong> đã được giao thành công.
+                  </p>
+                  <small>2 ngày trước</small>
+                </div>
+              </li>
+
+              <li class="log-item">
+                <i class="bx bx-message-detail item-icon"></i>
+                <div class="item-content">
+                  <p>
+                    <strong>Tin nhắn mới:</strong> Bạn có tin nhắn mới từ Lê Văn
+                    C.
+                  </p>
+                  <small>3 ngày trước</small>
+                </div>
+              </li>
+            </ul>
+
+            <div class="pagination">
+              <a href="#" class="page-btn disabled">&laquo;</a>
+              <a href="#" class="page-btn active">1</a>
+              <a href="#" class="page-btn">2</a>
+              <a href="#" class="page-btn">&raquo;</a>
+            </div>
           </div>
         </div>
       </main>

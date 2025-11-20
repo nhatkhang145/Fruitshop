@@ -9,8 +9,8 @@
     />
     <link rel="stylesheet" href="/assets/css/base.css" />
     <link rel="stylesheet" href="../assets/css/admin/style.css" />
-    <link rel="stylesheet" href="/assets/css/admin/Order.css" />
-    <title>Quản lý đơn hàng</title>
+    <link rel="stylesheet" href="/assets/css/admin/user-detail.css" />
+    <title>Khách hàng</title>
   </head>
 
   <body>
@@ -39,12 +39,12 @@
             ><i class="bx bx-category"></i>Quản lý danh mục</a
           >
         </li>
-        <li class="active">
+        <li>
           <a href="/admin/orders.html"
             ><i class="bx bx-receipt"></i>Quản lý đơn hàng</a
           >
         </li>
-        <li>
+        <li class="active">
           <a href="/admin/users.html"
             ><i class="bx bx-group"></i>Quản lý khách hàng</a
           >
@@ -168,150 +168,157 @@
 
       <!-- End of Navbar -->
       <main>
-        <div class="header">
-          <div class="left">
-            <h1>Quản lý đơn hàng</h1>
-            <ul class="breadcrumb">
-              <li><a href="#">Quản lý</a></li>
-              <li>/</li>
-              <li><a href="#" class="active">Đơn hàng</a></li>
-            </ul>
-          </div>
+  <div class="header">
+    <div class="left">
+      <h1 id="pageTitle">Nguyễn Văn A</h1>
+      <ul class="breadcrumb">
+        <li><a href="/admin/users.html">Khách hàng</a></li>
+        <li>/</li>
+        <li><a href="#" class="active" id="breadcrumbTitle">Nguyễn Văn A</a></li>
+      </ul>
+    </div>
+  </div>
+
+  <div class="bottom-data">
+    <div class="user-detail">
+      <div class="user-detail__main">
+        <div class="user-detail__card">
+          <legend class="user-detail__legend">Lịch sử Đơn hàng</legend>
+          <table class="user-detail__order-table">
+            <thead>
+              <tr>
+                <th>Mã Đơn hàng</th>
+                <th>Ngày</th>
+                <th>Trạng thái</th>
+                <th>Tổng tiền</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>#12345</strong></td>
+                <td>15-11-2025</td>
+                <td><span class="status completed">Hoàn thành</span></td>
+                <td>450,000đ</td>
+                <td>
+                  <a
+                    href="/admin/order-detail.html?id=12345"
+                    class="action-btn view"
+                    ><i class="bx bx-show"></i
+                  ></a>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>#12301</strong></td>
+                <td>05-11-2025</td>
+                <td><span class="status completed">Hoàn thành</span></td>
+                <td>1,200,000đ</td>
+                <td>
+                  <a
+                    href="/admin/order-detail.html?id=12301"
+                    class="action-btn view"
+                    ><i class="bx bx-show"></i
+                  ></a>
+                </td>
+              </tr>
+              <tr>
+                <td><strong>#12250</strong></td>
+                <td>20-10-2025</td>
+                <td><span class="status cancelled">Đã hủy</span></td>
+                <td>300,000đ</td>
+                <td>
+                  <a
+                    href="/admin/order-detail.html?id=12250"
+                    class="action-btn view"
+                    ><i class="bx bx-show"></i
+                  ></a>
+                </td>
+              </tr>
+            </tbody>
+          </table>
         </div>
 
-        <ul class="insights">
-          <li>
-            <i class="bx bx-loader-circle"></i>
-            <span class="info">
-              <h3>15</h3>
-              <p>Chờ xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-package"></i>
-            <span class="info">
-              <h3>8</h3>
-              <p>Đang xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bxs-truck"></i>
-            <span class="info">
-              <h3>22</h3>
-              <p>Đang giao</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-check-circle"></i>
-            <span class="info">
-              <h3>1,020</h3>
-              <p>Đã hoàn thành</p>
-            </span>
-          </li>
-        </ul>
-
-        <div class="bottom-data">
-          <div class="orders">
-            <div class="header">
-              <h3>Danh sách đơn hàng</h3>
-              <div class="filters">
-                <i class="bx bx-filter"></i>
-                <select id="statusFilter">
-                  <option value="">Tất cả trạng thái</option>
-                  <option value="pending">Chờ xử lý</option>
-                  <option value="processing">Đang xử lý</option>
-                  <option value="shipped">Đang giao</option>
-                  <option value="completed">Hoàn thành</option>
-                  <option value="cancelled">Đã hủy</option>
-                </select>
-                <input type="date" id="dateFilter" />
-              </div>
+        <div class="user-detail__card">
+          <legend class="user-detail__legend">Ghi chú Nội bộ</legend>
+          <div class="user-detail__notes-list">
+            <div class="note-item">
+              <p>Khách hàng VIP, cần ưu tiên hỗ trợ.</p>
+              <small>Admin A - 15/11/2025</small>
             </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Mã Đơn Hàng</th>
-                  <th>Khách hàng</th>
-                  <th>Ngày đặt</th>
-                  <th>Tổng tiền</th>
-                  <th>Trạng thái</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#12345</td>
-                  <td>Nguyễn Văn A</td>
-                  <td>15-11-2025</td>
-                  <td>450,000đ</td>
-                  <td><span class="status completed">Hoàn thành</span></td>
-                  <td>
-                    <a href="/admin/order-detail.html" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12344</td>
-                  <td>Trần Thị B</td>
-                  <td>15-11-2025</td>
-                  <td>1,200,000đ</td>
-                  <td><span class="status shipped">Đang giao</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12343</td>
-                  <td>Lê Văn C</td>
-                  <td>14-11-2025</td>
-                  <td>780,000đ</td>
-                  <td><span class="status processing">Đang xử lý</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12342</td>
-                  <td>Phạm Hữu D</td>
-                  <td>14-11-2025</td>
-                  <td>320,000đ</td>
-                  <td><span class="status pending">Chờ xử lý</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-                <tr>
-                  <td>#12341</td>
-                  <td>Hoàng Thị E</td>
-                  <td>13-11-2025</td>
-                  <td>500,000đ</td>
-                  <td><span class="status cancelled">Đã hủy</span></td>
-                  <td>
-                    <a href="#" class="action-btn view"
-                      ><i class="bx bx-show"></i> Xem</a
-                    >
-                  </td>
-                </tr>
-              </tbody>
-            </table>
           </div>
+          <form class="user-detail__note-form">
+            <textarea
+              id="internalNote"
+              class="user-detail__textarea"
+              rows="3"
+              placeholder="Thêm ghi chú (khách không thấy)..."
+            ></textarea>
+            <button class="btn-submit user-detail__save-btn">
+              Lưu Ghi chú
+            </button>
+          </form>
+        </div>
+      </div>
 
-          <div class="pagination">
-            <a href="#" class="page-btn disabled">&laquo;</a>
-            <a href="#" class="page-btn active">1</a>
-            <a href="#" class="page-btn">2</a>
-            <a href="#" class="page-btn">3</a>
-            <a href="#" class="page-btn">&raquo;</a>
+      <div class="user-detail__sidebar">
+        <div class="user-detail__card text-center">
+          <img
+            src="https://via.placeholder.com/100x100"
+            alt="Avatar"
+            class="user-detail__avatar"
+          />
+          <h3 class="user-detail__name">Nguyễn Văn A</h3>
+          <p class="user-detail__member-since">
+            Là khách hàng từ 10-01-2024
+          </p>
+        </div>
+
+        <div class="user-detail__card">
+          <legend class="user-detail__legend">Thống kê</legend>
+          <ul class="user-detail__stats">
+            <li>
+              <span>Tổng chi tiêu</span>
+              <strong>15,200,000đ</strong>
+            </li>
+            <li>
+              <span>Tổng số đơn</span>
+              <strong>25</strong>
+            </li>
+          </ul>
+        </div>
+
+        <div class="user-detail__card">
+          <legend class="user-detail__legend">Thông tin Liên hệ</legend>
+          <div class="user-detail__contact">
+            <p><strong>Email:</strong> nguyenvana@gmail.com</p>
+            <p><strong>Phone:</strong> 0905.123.456</p>
+            <hr />
+            <p>
+              <strong>Địa chỉ:</strong><br />
+              123 Đường ABC, Phường 1, Quận 2, TP. Hồ Chí Minh
+            </p>
           </div>
         </div>
-      </main>
+        
+        <div class="user-detail__card">
+          <legend class="user-detail__legend">Hành động</legend>
+           <ul class="user-detail__actions">
+              <li>
+                <a href="#" class="action-link">
+                  <i class="bx bx-mail-send"></i> Gửi email Đặt lại Mật khẩu
+                </a>
+              </li>
+              <li>
+                <a href="#" class="action-link action-link--danger">
+                  <i class="bx bx-lock"></i> Khóa Tài khoản
+                </a>
+              </li>
+           </ul>
+        </div>
+      </div>
+    </div>
+    </div>
+</main>
     </div>
 
     <script src="../assets/js/admin/main.js"></script>

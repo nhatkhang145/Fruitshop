@@ -1,0 +1,178 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Chi tiết đơn hàng #12345 - Organic Harvest</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+  <link rel="stylesheet" href="./assets/css/base.css" />
+  <link rel="stylesheet" href="./assets/css/main.css" />
+  <link rel="stylesheet" href="./assets/css/profile.css" />
+  <link rel="stylesheet" href="./assets/css/orders.css" />
+  <link rel="stylesheet" href="./assets/css/order-history-detail.css" />
+</head>
+<body>
+
+  <div class="breadcrumb">
+    <div class="container">
+      <a href="/">Trang chủ</a> &gt; <a href="/profile.html">Tài khoản</a> &gt; <a href="/orders.html">Đơn mua</a> &gt; <span>Chi tiết đơn hàng</span>
+    </div>
+  </div>
+
+  <section class="profile-section">
+    <div class="container">
+      <div class="profile-container">
+        
+        <aside class="profile-sidebar">
+          <div class="profile-user-brief">
+            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="brief-avatar">
+            <div class="brief-info">
+              <span class="brief-name">Nguyễn Văn A</span>
+              <a href="/profile.html" class="brief-edit"><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a>
+            </div>
+          </div>
+          
+          <ul class="profile-menu">
+            <li class="profile-menu-item">
+              <a href="/profile.html"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
+            </li>
+            <li class="profile-menu-item active">
+              <a href="/orders.html"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
+            </li>
+            <li class="profile-menu-item">
+              <a href="/addresses.html"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
+            </li>
+            <li class="profile-menu-item">
+              <a href="/change-password.html"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
+            </li>
+             <li class="profile-menu-item">
+              <a href="/wishlist.html"><i class="fa-regular fa-heart"></i> Yêu thích</a>
+            </li>
+          </ul>
+        </aside>
+
+        <main class="profile-content order-detail-content">
+          
+          <div class="detail-header">
+            <div class="header-left">
+              <a href="/orders.html" class="btn-back"><i class="fa-solid fa-chevron-left"></i> Trở lại</a>
+              <span class="detail-id">Đơn hàng #12345</span>
+              <span class="detail-divider">|</span>
+              <span class="detail-status status-completed">Hoàn thành</span>
+            </div>
+          </div>
+
+          <div class="order-stepper">
+            <div class="step-item completed">
+              <div class="step-icon"><i class="fa-solid fa-file-invoice"></i></div>
+              <div class="step-text">
+                <p>Đơn hàng đã đặt</p>
+                <small>15:00 12/11/2025</small>
+              </div>
+            </div>
+            <div class="step-item completed">
+              <div class="step-icon"><i class="fa-solid fa-box-open"></i></div>
+              <div class="step-text">
+                <p>Đã đóng gói</p>
+                <small>09:00 13/11/2025</small>
+              </div>
+            </div>
+            <div class="step-item completed">
+              <div class="step-icon"><i class="fa-solid fa-truck-fast"></i></div>
+              <div class="step-text">
+                <p>Đang giao hàng</p>
+                <small>10:30 13/11/2025</small>
+              </div>
+            </div>
+            <div class="step-item completed active">
+              <div class="step-icon"><i class="fa-solid fa-star"></i></div>
+              <div class="step-text">
+                <p>Đánh giá</p>
+                <small>17:00 14/11/2025</small>
+              </div>
+            </div>
+          </div>
+
+          <div class="detail-info-grid">
+            <div class="info-card">
+              <h4>Địa chỉ nhận hàng</h4>
+              <div class="info-content">
+                <p class="name">Nguyễn Văn A</p>
+                <p class="phone">0905.123.456</p>
+                <p class="address">123 Đường ABC, Phường 1, Quận 2, TP. Hồ Chí Minh</p>
+              </div>
+            </div>
+            <div class="info-card">
+              <h4>Hình thức giao hàng</h4>
+              <div class="info-content">
+                <p>Giao hàng tiêu chuẩn</p>
+                <p class="shipping-carrier">Đơn vị: Giao Hàng Nhanh</p>
+                <p class="tracking-code">Mã vận đơn: GHN123456789</p>
+              </div>
+            </div>
+          </div>
+
+          <div class="order-card detail-product-list">
+            <div class="order-card__body" style="padding-top: 10px; padding-bottom: 10px;">
+              <div class="order-item">
+                <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231" alt="Product" class="item-thumb">
+                <div class="item-info">
+                  <h4 class="item-name">Dừa sáp Trà Vinh (Loại 1)</h4>
+                  <p class="item-variant">Phân loại: Trái to</p>
+                  <p class="item-qty">x2</p>
+                </div>
+                <div class="item-price">
+                  <span class="old-price">200.000đ</span>
+                  <span class="new-price">150.000đ</span>
+                </div>
+              </div>
+              <div class="order-item">
+                 <img src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png" alt="Product" class="item-thumb">
+                 <div class="item-info">
+                   <h4 class="item-name">Cam Sành Vĩnh Long</h4>
+                   <p class="item-variant">Phân loại: Túi 1kg</p>
+                   <p class="item-qty">x1</p>
+                 </div>
+                 <div class="item-price">
+                   <span class="new-price">30.000đ</span>
+                 </div>
+               </div>
+            </div>
+          </div>
+
+          <div class="detail-summary">
+            <div class="summary-row">
+              <span>Tổng tiền hàng</span>
+              <span>330.000đ</span>
+            </div>
+            <div class="summary-row">
+              <span>Phí vận chuyển</span>
+              <span>30.000đ</span>
+            </div>
+            <div class="summary-row">
+              <span>Giảm giá</span>
+              <span>-10.000đ</span>
+            </div>
+            <div class="summary-row total">
+              <span>Thành tiền</span>
+              <span class="total-price">350.000đ</span>
+            </div>
+            <div class="payment-method">
+              <i class="fa-solid fa-money-bill-wave"></i> Phương thức thanh toán: Thanh toán khi nhận hàng (COD)
+            </div>
+          </div>
+
+          <div class="detail-actions">
+            <button class="btn btn-outline">Liên hệ Shop</button>
+            <button class="btn btn-primary">Mua lại</button>
+          </div>
+
+        </main>
+      </div>
+    </div>
+  </section>
+
+  <script src="./assets/js/main.js"></script>
+</body>
+</html>

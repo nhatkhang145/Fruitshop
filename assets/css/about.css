@@ -2,28 +2,6 @@
  STYLES FOR ABOUT US PAGE
 */
 
-/* Breadcrumb (thanh điều hướng nhỏ) */
-.breadcrumb {
-  background-color: #f8f8f8;
-  padding: 15px 0;
-  font-size: 14px;
-  color: #666;
-  border-bottom: 1px solid #eee;
-}
-
-.breadcrumb .grid {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.breadcrumb a {
-  text-decoration: none;
-  color: var(--primary-color);
-}
-.breadcrumb a:hover {
-  text-decoration: underline;
-}
 
 /* Phần giới thiệu chính */
 .about-section {
