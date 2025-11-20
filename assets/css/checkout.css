@@ -239,3 +239,85 @@
 .button--fullwidth {
     width: 100%;
 }
+
+/* --- Address Selection Styles --- */
+
+.address-selection {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+/* Card chứa địa chỉ */
+.address-card {
+  display: flex;
+  align-items: flex-start;
+  padding: 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  background-color: #fff;
+}
+
+.address-card:hover {
+  border-color: #3d8b91; /* Primary Color */
+  background-color: #f9fcfb;
+}
+
+/* Khi được chọn (Class này sẽ được thêm bằng JS hoặc CSS :has) */
+.address-card.selected, 
+.address-card:has(input:checked) {
+  border-color: #3d8b91;
+  background-color: #f0fdf4; /* Nền xanh rất nhạt */
+  box-shadow: 0 0 0 1px #3d8b91;
+}
+
+.address-card__radio {
+  margin-right: 12px;
+  margin-top: 2px;
+}
+
+.address-card__radio input {
+  accent-color: #3d8b91;
+  transform: scale(1.2);
+  cursor: pointer;
+}
+
+.address-card__content {
+  flex: 1;
+}
+
+.address-card__header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 4px;
+}
+
+.address-card__name {
+  font-weight: 700;
+  color: #333;
+  font-size: 1rem;
+}
+
+.address-card__phone {
+  color: #666;
+  font-size: 0.9rem;
+  border-left: 1px solid #ccc;
+  padding-left: 10px;
+}
+
+.address-card__badge {
+  font-size: 0.75rem;
+  background-color: #3d8b91;
+  color: #fff;
+  padding: 2px 6px;
+  border-radius: 4px;
+}
+
+.address-card__body {
+  font-size: 0.95rem;
+  color: #555;
+  line-height: 1.4;
+}

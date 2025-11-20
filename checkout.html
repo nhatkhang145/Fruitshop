@@ -125,114 +125,169 @@
             </div>
           </div>
         </div>
-
-       
       </nav>
     </header>
     <!-- Page Title -->
-     <div class="breadcrumb">
-          <div class="grid">
-            <a href="cart.html">Giỏ hàng</a>
-            <i class="fa-solid fa-angle-right"></i>
-            <span>thanh toán</span>
-          </div>
-        </div>
+    <div class="breadcrumb">
+      <div class="grid">
+        <a href="cart.html">Giỏ hàng</a>
+        <i class="fa-solid fa-angle-right"></i>
+        <span>thanh toán</span>
+      </div>
+    </div>
     <!-- CONTAINER -->
     <div class="container-checkout">
       <div class="checkout-layout">
         <div class="checkout-layout__form-wrapper">
-          <form class="billing-form">
-            <h2 class="billing-form__title">Chi tiết thanh toán</h2>
+          <div class="checkout-section">
+            <h2 class="billing-form__title">Địa chỉ nhận hàng</h2>
 
-            <div class="billing-form__row">
-              <div class="billing-form__group billing-form__group--half">
-                <label class="billing-form__label" for="first-name"
-                  >Tên *</label
+            <div class="address-selection">
+              <label class="address-card selected">
+                <div class="address-card__radio">
+                  <input
+                    type="radio"
+                    name="shipping_address"
+                    value="addr_1"
+                    checked
+                    onchange="toggleAddressForm(false)"
+                  />
+                </div>
+                <div class="address-card__content">
+                  <div class="address-card__header">
+                    <span class="address-card__name">Nguyễn Văn A</span>
+                    <span class="address-card__phone">0905.123.456</span>
+                    <span class="address-card__badge">Mặc định</span>
+                  </div>
+                  <div class="address-card__body">
+                    123 Đường ABC, Phường 1, Quận 2, TP. Hồ Chí Minh
+                  </div>
+                </div>
+              </label>
+
+              <label class="address-card">
+                <div class="address-card__radio">
+                  <input
+                    type="radio"
+                    name="shipping_address"
+                    value="addr_2"
+                    onchange="toggleAddressForm(false)"
+                  />
+                </div>
+                <div class="address-card__content">
+                  <div class="address-card__header">
+                    <span class="address-card__name"
+                      >Nguyễn Văn A (Văn phòng)</span
+                    >
+                    <span class="address-card__phone">0912.345.678</span>
+                  </div>
+                  <div class="address-card__body">
+                    Tòa nhà Bitexco, Số 2 Hải Triều, Phường Bến Nghé, Quận 1,
+                    TP. Hồ Chí Minh
+                  </div>
+                </div>
+              </label>
+
+              <label class="address-card">
+                <div class="address-card__radio">
+                  <input
+                    type="radio"
+                    name="shipping_address"
+                    value="new_addr"
+                    id="newAddressRadio"
+                    onchange="toggleAddressForm(true)"
+                  />
+                </div>
+                <div class="address-card__content">
+                  <span class="address-card__name"
+                    >Sử dụng địa chỉ khác / Thêm mới</span
+                  >
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div
+            id="new-address-form"
+            style="
+              display: none;
+              margin-top: 20px;
+              border-top: 1px dashed #ddd;
+              padding-top: 20px;
+            "
+          >
+            <h3 class="billing-form__title" style="font-size: 1.4rem">
+              Thông tin giao hàng mới
+            </h3>
+            <form class="billing-form">
+              <div class="billing-form__row">
+                <div class="billing-form__group billing-form__group--half">
+                  <label class="billing-form__label" for="first-name"
+                    >Tên *</label
+                  >
+                  <input
+                    class="billing-form__input"
+                    type="text"
+                    id="first-name"
+                  />
+                </div>
+                <div class="billing-form__group billing-form__group--half">
+                  <label class="billing-form__label" for="last-name"
+                    >Họ *</label
+                  >
+                  <input
+                    class="billing-form__input"
+                    type="text"
+                    id="last-name"
+                  />
+                </div>
+              </div>
+
+              <div class="billing-form__group">
+                <label class="billing-form__label" for="address"
+                  >Địa chỉ *</label
                 >
                 <input
                   class="billing-form__input"
                   type="text"
-                  id="first-name"
-                  required
+                  id="address"
+                  placeholder="Số nhà, tên đường"
                 />
               </div>
 
-              <div class="billing-form__group billing-form__group--half">
-                <label class="billing-form__label" for="last-name">Họ *</label>
-                <input
-                  class="billing-form__input"
-                  type="text"
-                  id="last-name"
-                  required
-                />
+              <div class="billing-form__group">
+                <label class="billing-form__label" for="city"
+                  >Tỉnh / Thành phố *</label
+                >
+                <input class="billing-form__input" type="text" id="city" />
               </div>
-            </div>
 
-            <div class="billing-form__group">
-              <label class="billing-form__label" for="company"
-                >Tên công ty (tùy chọn)</label
-              >
-              <input class="billing-form__input" type="text" id="company" />
-            </div>
+              <div class="billing-form__group">
+                <label class="billing-form__label" for="phone"
+                  >Số điện thoại *</label
+                >
+                <input class="billing-form__input" type="tel" id="phone" />
+              </div>
 
-            <div class="billing-form__group">
-              <label class="billing-form__label" for="address">Địa chỉ *</label>
-              <input
-                class="billing-form__input"
-                type="text"
-                id="address"
-                placeholder="Số nhà, tên đường"
-                required
-              />
-            </div>
+              <div class="billing-form__group">
+                <label class="billing-form__label" for="email"
+                  >Địa chỉ email *</label
+                >
+                <input class="billing-form__input" type="email" id="email" />
+              </div>
+            </form>
+          </div>
 
-            <div class="billing-form__group">
-              <label class="billing-form__label" for="city"
-                >Tỉnh / Thành phố *</label
-              >
-              <input
-                class="billing-form__input"
-                type="text"
-                id="city"
-                required
-              />
-            </div>
-
-            <div class="billing-form__group">
-              <label class="billing-form__label" for="phone"
-                >Số điện thoại *</label
-              >
-              <input
-                class="billing-form__input"
-                type="tel"
-                id="phone"
-                required
-              />
-            </div>
-
-            <div class="billing-form__group">
-              <label class="billing-form__label" for="email"
-                >Địa chỉ email *</label
-              >
-              <input
-                class="billing-form__input"
-                type="email"
-                id="email"
-                required
-              />
-            </div>
-
-            <div class="billing-form__group">
-              <label class="billing-form__label" for="order-notes"
-                >Ghi chú đơn hàng (tùy chọn)</label
-              >
-              <textarea
-                class="billing-form__input billing-form__input--textarea"
-                id="order-notes"
-                placeholder="Ghi chú về đơn hàng của bạn, ví dụ: thời gian giao hàng..."
-              ></textarea>
-            </div>
-          </form>
+          <div class="billing-form__group" style="margin-top: 20px">
+            <label class="billing-form__label" for="order-notes"
+              >Ghi chú đơn hàng (tùy chọn)</label
+            >
+            <textarea
+              class="billing-form__input billing-form__input--textarea"
+              id="order-notes"
+              placeholder="Ví dụ: Giao hàng trong giờ hành chính..."
+            ></textarea>
+          </div>
         </div>
         <!-- checkout layout -->
         <div class="checkout-layout__summary-wrapper">
