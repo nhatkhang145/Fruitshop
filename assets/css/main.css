@@ -2,8 +2,7 @@
    1. HEADER & NAVIGATION
    ========================================================= */
 
-
-   header {
+header {
   width: 100%;
   height: auto;
 }
@@ -393,13 +392,13 @@
   box-shadow: 0 5px 20px rgba(0, 0, 0, 0.15);
   padding: 0;
   z-index: 1000;
-  
+
   /* Ẩn mặc định */
   opacity: 0;
   visibility: hidden;
   transform: translateY(10px);
   transition: all 0.3s ease;
-  
+
   /* Mũi tên tam giác ở trên (trang trí) */
   border: 1px solid var(--border-color);
 }
@@ -479,7 +478,6 @@
 .btn--outline:hover {
   background-color: var(--bg-light);
 }
-
 
 /* --- STYLE: ĐÃ ĐĂNG NHẬP --- */
 .account-user {
@@ -604,6 +602,10 @@
   font-size: 28px;
   margin-bottom: 10px;
   text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
+}
+
+.slide-caption p{
+margin-bottom: 20px;
 }
 
 .nav-button {
@@ -928,6 +930,7 @@
   flex: 1;
 }
 .product-title {
+  margin-top: 13px;
   font-size: 32px;
   font-weight: bold;
   margin-bottom: 15px;
