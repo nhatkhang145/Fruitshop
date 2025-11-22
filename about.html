@@ -19,6 +19,7 @@
   </head>
   <body>
     <div class="main">
+       <!-- HEADER -->
       <header class="header">
         <nav class="navbar">
           <div class="navbar__wrapper">
@@ -44,10 +45,10 @@
                   </a>
                 </li>
                 <li class="navbar-item">
-                  <a href="" class="navbar-item__link">Đăng ký</a>
+                  <a href="register.html" class="navbar-item__link">Đăng ký</a>
                 </li>
                 <li class="navbar-item">
-                  <a href="" class="navbar-item__link">Đăng nhập</a>
+                  <a href="login.html" class="navbar-item__link">Đăng nhập</a>
                 </li>
               </ul>
             </div>
@@ -115,18 +116,65 @@
                   <i class="fa-solid fa-basket-shopping"></i>
                   <span class="badge">2</span>
                 </a>
-                <a
-                  href="/account.html"
-                  class="icon-btn account-btn"
-                  title="Tài khoản"
-                >
-                  <i class="fa-regular fa-user"></i>
-                </a>
+                <div class="header__account">
+                  <a
+                    
+                    class="icon-btn account-btn"
+                    title="Tài khoản"
+                  >
+                    <i class="fa-regular fa-user"></i>
+                  </a>
+
+                  <div class="account-dropdown">
+                    <div class="account-user">
+                      <div class="user-info">
+                        <img
+                          src="https://via.placeholder.com/100"
+                          alt="User Avatar"
+                          class="user-avatar"
+                        />
+                        <div class="user-details">
+                          <span class="user-name">Nguyễn Văn A</span>
+                          <span class="user-email">nguyenvana@gmail.com</span>
+                        </div>
+                      </div>
+
+                      <ul class="account-menu">
+                        <li>
+                          <a href="/profile.html">
+                            <i class="fa-regular fa-id-card"></i> Hồ sơ của tôi
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/orders.html">
+                            <i class="fa-solid fa-box-open"></i> Đơn mua
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/wishlist.html">
+                            <i class="fa-regular fa-heart"></i> Sản phẩm yêu
+                            thích
+                          </a>
+                        </li>
+                        <li>
+                          <a href="/change-password.html">
+                            <i class="fa-solid fa-key"></i> Đổi mật khẩu
+                          </a>
+                        </li>
+
+                        <li class="border-top">
+                          <a href="#" class="text-danger">
+                            <i class="fa-solid fa-arrow-right-from-bracket"></i>
+                            Đăng xuất
+                          </a>
+                        </li>
+                      </ul>
+                    </div>
+                  </div>
+                </div>
               </div>
             </div>
           </div>
-
-         
         </nav>
       </header>
       <!-- end header -->
