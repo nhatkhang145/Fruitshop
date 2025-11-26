@@ -971,3 +971,15 @@ input#theme-toggle:checked + .theme-toggle-dropdown::before {
     width: 100%;
   }
 }
+
+/* Trạng thái cho Coupon */
+.content main .bottom-data .orders table tr td .status.completed {
+  background: var(--success); 
+}
+.content main .bottom-data .orders table tr td .status.expired {
+  background: var(--dark-grey); 
+}
+.content main .bottom-data .orders table tr td .status.cancelled {
+  background: var(--danger); 
+}
+

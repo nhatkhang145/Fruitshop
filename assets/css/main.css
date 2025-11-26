@@ -686,121 +686,201 @@ margin-bottom: 20px;
 .home-icon:hover {
   color: var(--primary-brand-color);
 }
+/* =========================================
+   PRODUCT CARD STYLES
+   ========================================= */
 
-/* PRODUCT CARD STYLE CHUNG */
+/* 1. Khung thẻ sản phẩm */
 .product-card {
-  background: #fff;
-  border-radius: 12px;
-  overflow: hidden;
-  position: relative;
+  background-color: #fff;
   border: 1px solid #f0f0f0;
-  transition: all 0.4s ease;
-  /* Mặc định cho grid */
+  border-radius: 12px;
+  overflow: hidden; /* Bo tròn ảnh */
+  position: relative;
+  transition: all 0.3s ease;
   width: 100%;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
 }
+
+/* Hiệu ứng hover: Nổi lên và đổ bóng */
 .product-card:hover {
   transform: translateY(-5px);
-  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.12);
+  border-color: #e0e0e0;
 }
+
+/* 2. Phần hình ảnh */
 .product-image {
   position: relative;
-  padding-top: 100%; /* 1:1 Aspect Ratio */
+  width: 100%;
+  padding-top: 100%; /* Tạo khung vuông 1:1 */
   overflow: hidden;
-  background: #f8f8f8;
+  background-color: #f9f9f9;
 }
+
 .product-image img {
   position: absolute;
   top: 0;
   left: 0;
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover; /* Đảm bảo ảnh không bị méo */
   transition: transform 0.5s ease;
 }
+
+/* Hover vào card thì ảnh phóng to nhẹ */
 .product-card:hover .product-image img {
   transform: scale(1.08);
 }
 
+/* 3. Nhãn giảm giá (Badge) */
 .product-badge {
   position: absolute;
-  top: 15px;
-  left: 15px;
+  top: 12px;
+  left: 12px;
   padding: 4px 10px;
-  border-radius: 20px;
-  font-size: 12px;
-  font-weight: 600;
-  color: white;
-  z-index: 1;
-}
-.product-badge.sale {
-  background: var(--secondary-brand-color);
+  border-radius: 4px;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #fff;
+  z-index: 2;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.1);
 }
 
+.product-badge.sale {
+  background-color: #ff4d4f; /* Màu đỏ nổi bật */
+}
+
+/* 4. Các nút hành động (Ẩn mặc định, hiện khi hover) */
 .product-actions {
   position: absolute;
-  top: 15px;
-  right: -50px;
+  top: 12px;
+  right: -50px; /* Giấu sang bên phải */
   display: flex;
   flex-direction: column;
   gap: 8px;
+  transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+  z-index: 3;
   opacity: 0;
-  transition: all 0.3s ease;
-  z-index: 2;
 }
+
 .product-card:hover .product-actions {
-  right: 15px;
+  right: 12px; /* Trượt vào */
   opacity: 1;
 }
 
+/* Style chung cho nút (thẻ a và button) */
 .action-btn {
-  width: 35px;
-  height: 35px;
+  width: 38px;
+  height: 38px;
   border-radius: 50%;
-  background: white;
+  background-color: #fff;
   border: none;
-  color: #333;
   display: flex;
   align-items: center;
   justify-content: center;
+  color: #555;
   cursor: pointer;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
-  transition: var(--transition);
-}
-.action-btn:hover {
-  background: var(--primary-color);
-  color: white;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+  transition: all 0.2s ease;
+  text-decoration: none; /* Xóa gạch chân thẻ a */
+  font-size: 1rem;
 }
 
+.action-btn:hover {
+  background-color: var(--primary-color, #3d8b91); /* Dùng biến màu hoặc màu cứng */
+  color: #fff;
+  transform: scale(1.1);
+}
+
+/* 5. Phần thông tin sản phẩm */
 .product-info {
   padding: 15px;
   text-align: center;
 }
-.category {
-  font-size: 13px;
-  color: #888;
-  margin-bottom: 5px;
+
+/* Danh mục */
+.product-info .category {
+  font-size: 1.2rem;
+  color: #999;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  margin-bottom: 4px;
+
 }
+
+/* Tên sản phẩm */
 .product-info h3 {
-  font-size: 16px;
+  
+  font-size: 1.4rem;
   font-weight: 600;
-  margin: 0 0 10px;
-  color: var(--text-dark);
+  line-height: 1.4;
+  overflow: hidden;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
 }
-.price {
+
+.product-info h3 a {
+  color: #333;
+  text-decoration: none;
+  transition: color 0.2s;
+}
+
+.product-info h3 a:hover {
+  color: var(--primary-color, #3d8b91);
+}
+
+/* Đánh giá sao */
+.product-info .rating {
   display: flex;
   justify-content: center;
-  gap: 10px;
   align-items: center;
+  gap: 3px;
+  font-size: 1.4rem;
+  color: #ffc107; /* Màu vàng sao */
+  margin-bottom: 8px;
 }
-.current {
-  color: var(--primary-brand-color);
+
+.product-info .rating span {
+  color: #ccc;
+  margin-left: 5px;
+  font-size: 1rem;
+}
+
+/* Giá tiền */
+.product-info .price {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.product-info .price .current {
+  color: #2fb45a; /* Màu xanh giá tiền */
   font-weight: 700;
-  font-size: 16px;
+  font-size: 1.4rem;
 }
-.original {
-  color: #999;
+
+.product-info .price .original {
+  color: #aaa;
   text-decoration: line-through;
-  font-size: 13px;
+  font-size: 1.2rem;
+}
+
+/* Responsive Mobile: Luôn hiện nút mua hàng hoặc chỉnh nhỏ lại */
+@media (max-width: 576px) {
+  .product-actions {
+    right: 10px; /* Trên mobile có thể để hiện luôn hoặc dùng logic khác */
+    opacity: 1; 
+    top: auto;
+    bottom: 100px; /* Đẩy xuống gần ảnh hơn */
+  }
+  
+  .action-btn {
+    width: 32px;
+    height: 32px;
+  }
 }
 
 /* =========================================================
