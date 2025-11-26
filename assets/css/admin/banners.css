@@ -1,0 +1,54 @@
+/* =================================== */
+/* === CSS CHO TRANG BANNER === */
+/* =================================== */
+
+/* Ảnh thumbnail trong bảng (Cần to hơn ảnh sản phẩm bình thường) */
+.content main .bottom-data .orders table td.banner-cell img {
+  width: 120px;  /* Rộng hơn để nhìn rõ banner */
+  height: 60px;
+  border-radius: 4px;
+  object-fit: cover;
+  border: 1px solid #eee;
+}
+
+/* Tiêu đề banner trong bảng */
+.banner-title {
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0;
+}
+
+/* Trạng thái (Status Badges) */
+.status.completed {
+  background: rgba(47, 180, 90, 0.15);
+  color: var(--success);
+}
+.status.hidden {
+  background: rgba(107, 114, 128, 0.15);
+  color: #4b5563;
+}
+
+/* Nút hành động */
+.action-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: transparent;
+  border: none;
+  cursor: pointer;
+  color: var(--dark-grey);
+  font-size: 1.2rem;
+  transition: 0.2s;
+}
+.action-btn:hover {
+  background: var(--grey);
+  color: var(--dark);
+}
+.action-btn.edit:hover {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.action-btn.delete:hover {
+  background: var(--light-danger);
+  color: var(--danger);
+}
