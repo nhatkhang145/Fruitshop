@@ -155,21 +155,6 @@
   margin: 20px 0;
 }
 
-/* --- OPTIONS (Weight) --- */
-.product-options {
-  margin-bottom: 25px;
-}
-.option-label {
-  font-weight: 600;
-  display: block;
-  margin-bottom: 10px;
-  font-size: 1.4rem;
-}
-.option-group {
-  display: flex;
-  gap: 10px;
-  flex-wrap: wrap;
-}
 
 /* Style Radio như Buttons */
 .option-item {
