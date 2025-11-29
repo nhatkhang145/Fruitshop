@@ -1,0 +1,245 @@
+/* --- CSS Mới cho form Reset Password --- */
+.app-content {
+    background-color: #e9ebee;
+    /* Màu nền xám giống ảnh */
+    min-height: 450px;
+    /* Chiều cao tối thiểu để đẩy footer xuống */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+/* Khung form chính */
+.find-account-box {
+    background-color: #fff;
+    width: 600px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* Phần tiêu đề form */
+.find-account-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #dadde1;
+}
+
+.find-account-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c1e21;
+}
+
+/* Phần nội dung form */
+.find-account-body {
+    padding: 20px;
+}
+
+.find-account-body p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 17px;
+    color: #1c1e21;
+    line-height: 1.3;
+}
+
+.find-account-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 1px solid #ccd0d5;
+    border-radius: 6px;
+    box-sizing: border-box;
+    /* Đảm bảo padding không làm vỡ khung */
+    outline: none;
+    color: #1c1e21;
+}
+
+.find-account-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px #e7f3ff;
+}
+
+/* Phần nút bấm dưới cùng */
+.find-account-footer {
+    padding: 16px 20px;
+    background-color: #fff;
+    border-top: 1px solid #dadde1;
+    display: flex;
+    justify-content: flex-end;
+    /* Đẩy nút sang phải */
+    gap: 10px;
+    /* Khoảng cách giữa 2 nút */
+}
+
+.btn-action {
+    border: none;
+    padding: 0 24px;
+    height: 38px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-cancel {
+    background-color: #e4e6eb;
+    color: #4b4f56;
+}
+
+.btn-cancel:hover {
+    background-color: #d8dadf;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn-search {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-search:hover {
+    background-color: #2d6e52;
+    box-shadow: 0 2px 5px rgba(61, 139, 145, 0.3);
+    transform: translateY(-1px);
+}
+
+/* Điều chỉnh lại khung cho form reset */
+.reset-box {
+    width: 600px;
+    /* Form này rộng hơn form tìm kiếm một chút */
+}
+
+/* Bố cục chia 2 cột */
+.reset-body {
+    padding: 20px;
+    display: flex;
+    gap: 20px;
+}
+
+/* Cột trái */
+.reset-content-left {
+    flex: 1;
+    /* Chiếm phần lớn diện tích */
+}
+
+.reset-instruction {
+    font-size: 17px;
+    margin-top: 0;
+    margin-bottom: 15px;
+    color: #1c1e21;
+}
+
+/* Style cho từng dòng lựa chọn (Radio button) */
+.reset-option {
+    display: flex;
+    align-items: flex-start;
+    /* Căn radio thẳng hàng với dòng đầu tiên */
+    margin-bottom: 15px;
+}
+
+.reset-radio {
+    margin-top: 4px;
+    /* Căn chỉnh radio xuống một chút cho đều với text */
+    margin-right: 10px;
+    transform: scale(1.2);
+    /* Phóng to nút radio một chút */
+    cursor: pointer;
+}
+
+.reset-label-content {
+    display: flex;
+    flex-direction: column;
+    cursor: pointer;
+}
+
+.option-title {
+    font-size: 16px;
+    color: #1c1e21;
+    line-height: 1.3;
+}
+
+.option-desc {
+    font-size: 13px;
+    color: #606770;
+    margin-top: 2px;
+    line-height: 1.4;
+}
+
+/* Cột phải (Avatar user) */
+.reset-content-right {
+    width: 140px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding-left: 20px;
+}
+
+/* Tạo hình tròn avatar mặc định */
+.user-avatar-placeholder {
+    width: 60px;
+    height: 60px;
+    background-color: #d8dadf;
+    /* Màu xám */
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 10px;
+    color: #fff;
+    font-size: 30px;
+    overflow: hidden;
+}
+
+/* Nếu bạn muốn dùng ảnh thật thay vì icon thì thay thẻ img vào html và css như sau:
+.user-avatar-placeholder img { width: 100%; height: 100%; object-fit: cover; } 
+*/
+
+.user-name {
+    font-size: 16px;
+    font-weight: 600;
+    color: #1c1e21;
+    display: block;
+}
+
+.user-role {
+    font-size: 13px;
+    color: #606770;
+}
+
+/* Footer riêng cho form này */
+.reset-footer {
+    display: flex;
+    justify-content: space-between;
+    /* Đẩy link sang trái, nút sang phải */
+    align-items: center;
+}
+
+.cant-access-link {
+    color: #1877f2;
+    text-decoration: none;
+    font-size: 14px;
+}
+
+.cant-access-link:hover {
+    text-decoration: underline;
+}
+
+.reset-actions {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+    /* Căn giữa theo trục dọc cho gọn */
+    flex-wrap: nowrap;
+    /* Tránh xuống dòng các nút */
+}
