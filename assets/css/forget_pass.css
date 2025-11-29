@@ -1,0 +1,114 @@
+/* Container bao quanh để căn giữa và tạo nền xám */
+.app-content {
+    background-color: #e9ebee;
+    /* Màu nền xám giống ảnh */
+    min-height: 450px;
+    /* Chiều cao tối thiểu để đẩy footer xuống */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: Helvetica, Arial, sans-serif;
+}
+
+/* Khung form chính */
+.find-account-box {
+    background-color: #fff;
+    width: 500px;
+    border-radius: 8px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    overflow: hidden;
+}
+
+/* Phần tiêu đề form */
+.find-account-header {
+    padding: 16px 20px;
+    border-bottom: 1px solid #dadde1;
+}
+
+.find-account-header h3 {
+    margin: 0;
+    font-size: 20px;
+    font-weight: 700;
+    color: #1c1e21;
+}
+
+/* Phần nội dung form */
+.find-account-body {
+    padding: 20px;
+}
+
+.find-account-body p {
+    margin-top: 0;
+    margin-bottom: 15px;
+    font-size: 17px;
+    color: #1c1e21;
+    line-height: 1.3;
+}
+
+.find-account-input {
+    width: 100%;
+    padding: 14px 16px;
+    font-size: 16px;
+    border: 1px solid #ccd0d5;
+    border-radius: 6px;
+    box-sizing: border-box;
+    /* Đảm bảo padding không làm vỡ khung */
+    outline: none;
+    color: #1c1e21;
+}
+
+.find-account-input:focus {
+    border-color: var(--primary-color);
+    box-shadow: 0 0 0 2px #e7f3ff;
+}
+
+/* Phần nút bấm dưới cùng */
+.find-account-footer {
+    padding: 16px 20px;
+    background-color: #fff;
+    border-top: 1px solid #dadde1;
+    display: flex;
+    justify-content: flex-end;
+    /* Đẩy nút sang phải */
+    gap: 10px;
+    /* Khoảng cách giữa 2 nút */
+}
+
+.btn-action {
+    border: none;
+    padding: 0 24px;
+    height: 38px;
+    font-size: 15px;
+    font-weight: 600;
+    border-radius: 6px;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+}
+
+.btn-cancel {
+    background-color: #e4e6eb;
+    color: #4b4f56;
+}
+
+.btn-cancel:hover {
+    background-color: #d8dadf;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.15);
+    transform: translateY(-1px);
+}
+
+.btn-search {
+    background-color: var(--primary-color);
+    color: #fff;
+}
+
+.btn-search:hover {
+    background-color: #2d6e52;
+    box-shadow: 0 2px 5px rgba(61, 139, 145, 0.3);
+    transform: translateY(-1px);
+}
