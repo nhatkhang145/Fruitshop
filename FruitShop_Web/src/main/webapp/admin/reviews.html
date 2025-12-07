@@ -1,0 +1,297 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/admin/style.css" />
+  <link rel="stylesheet" href="/assets/css/admin/reviews.css" />
+  <title>Quản lý Đánh giá</title>
+</head>
+
+<body>
+  <div class="sidebar">
+    <a href="/admin/index.html" class="logo">
+      <img class="navbar__menu-logo-img"
+        src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+        alt="Organic Harvest Logo" />
+    </a>
+    <ul class="side-menu">
+      <li class="">
+        <a href="/admin/index.html"><i class="bx bxs-dashboard"></i>Tổng quan</a>
+      </li>
+      <li>
+        <a href="/admin/products.html"><i class="bx bx-basket"></i>Quản lý sản phẩm</a>
+      </li>
+      <li>
+        <a href="/admin/Categories.html"><i class="bx bx-category"></i>Quản lý danh mục</a>
+      </li>
+      <li>
+        <a href="/admin/orders.html"><i class="bx bx-receipt"></i>Quản lý đơn hàng</a>
+      </li>
+      <li>
+        <a href="/admin/users.html"><i class="bx bx-group"></i>Quản lý khách hàng</a>
+      </li>
+      <li class="">
+        <a href="/admin/banners.html"><i class='bx bx-images'></i>Quản lý Banner</a>
+      </li>
+      <li class="">
+        <a href="/admin/coupons.html"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
+      </li>
+      <li class="active">
+        <a href="/admin/reviews.html"><i class="bx bx-star"></i>Đánh giá</a>
+      </li>
+      <li class="">
+        <a href="/admin/posts.html"><i class='bx bx-news'></i>Tin tức / Blog</a>
+      </li>
+      <li>
+        <a href="/admin/notifications.html"><i class="bx bx-bell"></i>Lịch sử Thông báo</a>
+      </li>
+      <li>
+        <a href="/admin/Contact.html"><i class="bx bx-message-detail"></i>Tin nhắn</a>
+      </li>
+
+      <li class="">
+        <a href="/admin/reports.html"><i class="bx bx-line-chart"></i>Thống kê</a>
+      </li>
+      <li class="">
+        <a href="/admin/Settings.html"><i class="bx bx-cog"></i>Cài đặt</a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="content">
+    <nav>
+      <i class="bx bx-menu"></i>
+      <form action="#">
+        <div class="form-input">
+          <input type="search" placeholder="Tìm kiếm nội dung đánh giá..." />
+          <button class="search-btn" type="submit"><i class="bx bx-search"></i></button>
+        </div>
+      </form>
+      <div class="notification-wrapper">
+        <a href="#" class="notif" id="notifBtn">
+          <i class="bx bx-bell"></i><span class="count">12</span>
+        </a>
+      </div>
+      <div class="profile-wrapper">
+        <a href="#" class="profile" id="profileBtn"><img src="/assets/images/logo.jpg" /></a>
+      </div>
+    </nav>
+
+    <main>
+      <div class="header">
+        <div class="left">
+          <h1>Quản lý Đánh giá</h1>
+          <ul class="breadcrumb">
+            <li><a href="#">Quản lý</a></li>
+            <li>/</li>
+            <li><a href="#" class="active">Đánh giá</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <ul class="insights review-insights">
+        <li>
+          <i class='bx bx-message-square-dots'></i>
+          <span class="info">
+            <h3>1,024</h3>
+            <p>Tổng đánh giá</p>
+          </span>
+        </li>
+        <li>
+          <i class='bx bx-chat'></i>
+          <span class="info">
+            <h3>5</h3>
+            <p>Chưa trả lời</p>
+          </span>
+        </li>
+        <li>
+          <i class='bx bxs-star'></i>
+          <span class="info">
+            <h3>4.8</h3>
+            <p>Điểm trung bình</p>
+          </span>
+        </li>
+      </ul>
+
+      <div class="bottom-data">
+        <div class="orders">
+          <div class="header">
+            <h3>Danh sách phản hồi khách hàng</h3>
+            <div class="filters">
+              <select id="ratingFilter">
+                <option value="">Tất cả sao</option>
+                <option value="5">5 Sao</option>
+                <option value="4">4 Sao</option>
+                <option value="3">3 Sao</option>
+                <option value="2">2 Sao</option>
+                <option value="1">1 Sao</option>
+              </select>
+              <select id="statusFilter">
+                <option value="">Tất cả trạng thái</option>
+                <option value="visible">Đang hiện</option>
+                <option value="hidden">Đã ẩn</option>
+                <option value="replied">Đã trả lời</option>
+                <option value="unreplied">Chưa trả lời</option>
+              </select>
+            </div>
+          </div>
+
+          <table>
+            <thead>
+              <tr>
+                <th>Khách hàng</th>
+                <th width="40%">Nội dung & Phản hồi</th>
+                <th>Sản phẩm</th>
+                <th>Trạng thái</th>
+                <th>Hành động</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td class="user-cell">
+                  <img src="https://via.placeholder.com/40" alt="Avatar">
+                  <div>
+                    <p>Nguyễn Văn A</p>
+                    <small>nguyenvana@gmail.com</small>
+                    <div style="color: #28a745; font-size: 11px; margin-top: 2px;">
+                      <i class='bx bxs-check-circle'></i> Đã mua hàng
+                    </div>
+                  </div>
+                </td>
+                <td class="review-content-cell">
+                  <div class="stars" style="color: #ffc107;">
+                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                      class='bx bxs-star'></i><i class='bx bxs-star'></i>
+                  </div>
+                  <p class="comment" style="font-style: italic;">"Trái cây rất tươi, giao hàng nhanh. Đóng gói cẩn thận,
+                    rất hài lòng!"</p>
+                  <small class="date">Vừa xong</small>
+                </td>
+                <td>
+                  <a href="#" class="product-link">Táo Envy Mỹ</a>
+                </td>
+                <td><span class="status completed">Hiển thị</span></td>
+                <td>
+                  <div class="action-group">
+                    <button class="action-btn reply" onclick="openReplyModal('Nguyễn Văn A', 'Táo Envy Mỹ')"
+                      title="Trả lời"><i class='bx bx-reply'></i></button>
+                    <button class="action-btn hide" title="Ẩn bình luận"><i class='bx bx-hide'></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="user-cell">
+                  <img src="https://via.placeholder.com/40" alt="Avatar">
+                  <div>
+                    <p>Trần Thị B</p>
+                    <small>tranb@gmail.com</small>
+                    <div style="color: #28a745; font-size: 11px; margin-top: 2px;">
+                      <i class='bx bxs-check-circle'></i> Đã mua hàng
+                    </div>
+                  </div>
+                </td>
+                <td class="review-content-cell">
+                  <div class="stars" style="color: #ffc107;">
+                    <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
+                      class='bx bxs-star'></i><i class='bx bx-star'></i>
+                  </div>
+                  <p class="comment" style="font-style: italic;">"Nho ngọt nhưng hơi nhỏ so với hình."</p>
+
+                  <div class="admin-reply"
+                    style="margin-top: 8px; background: #f0f9ff; padding: 8px; border-radius: 4px; border-left: 3px solid #3d8b91;">
+                    <strong style="color: #3d8b91; font-size: 12px;">Admin:</strong>
+                    <span style="font-size: 13px;">Cảm ơn bạn đã góp ý, shop sẽ lưu ý chọn trái to hơn cho đơn sau
+                      ạ!</span>
+                  </div>
+
+                  <small class="date">14/11/2025 08:15</small>
+                </td>
+                <td>
+                  <a href="#" class="product-link">Nho Mẫu Đơn</a>
+                </td>
+                <td><span class="status completed">Hiển thị</span></td>
+                <td>
+                  <div class="action-group">
+                    <button class="action-btn reply" onclick="openReplyModal('Trần Thị B', 'Nho Mẫu Đơn')"
+                      title="Sửa trả lời"><i class='bx bx-pencil'></i></button>
+                    <button class="action-btn hide" title="Ẩn bình luận"><i class='bx bx-hide'></i></button>
+                  </div>
+                </td>
+              </tr>
+
+              <tr>
+                <td class="user-cell">
+                  <img src="https://via.placeholder.com/40" alt="Avatar">
+                  <div>
+                    <p>Lê Văn C</p>
+                    <small>levanc@yahoo.com</small>
+                  </div>
+                </td>
+                <td class="review-content-cell">
+                  <div class="stars" style="color: #ffc107;">
+                    <i class='bx bxs-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i
+                      class='bx bx-star'></i><i class='bx bx-star'></i>
+                  </div>
+                  <p class="comment" style="font-style: italic; color: #999;">"Quảng cáo sai sự thật, đừng mua! (Nội
+                    dung spam)"</p>
+                  <small class="date">12/11/2025 14:20</small>
+                </td>
+                <td>
+                  <a href="#" class="product-link">Sầu riêng Ri6</a>
+                </td>
+                <td><span class="status cancelled" style="background: #eee; color: #333;">Đã ẩn</span></td>
+                <td>
+                  <div class="action-group">
+                    <button class="action-btn approve" title="Hiện lại" style="background: #28a745;"><i
+                        class='bx bx-show'></i></button>
+                    <button class="action-btn delete" title="Xóa vĩnh viễn"><i class='bx bx-trash'></i></button>
+                  </div>
+                </td>
+              </tr>
+
+            </tbody>
+          </table>
+
+          <div class="pagination">
+            <a href="#" class="page-btn disabled">&laquo;</a>
+            <a href="#" class="page-btn active">1</a>
+            <a href="#" class="page-btn">2</a>
+            <a href="#" class="page-btn">&raquo;</a>
+          </div>
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div id="replyModal" class="modal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeReplyModal()">&times;</span>
+      <h2>Trả lời đánh giá</h2>
+      <p>Đang phản hồi khách hàng: <strong id="replyUser" style="color: var(--primary);"></strong></p>
+      <p style="margin-bottom: 15px; font-size: 13px; color: #666;">Sản phẩm: <span id="replyProduct"></span></p>
+
+      <form id="replyForm">
+        <div class="form-group">
+          <textarea id="replyText" rows="5" class="form-control"
+            placeholder="Nhập nội dung cảm ơn hoặc giải thích..."></textarea>
+        </div>
+        <div style="text-align: right; margin-top: 15px;">
+          <button type="button" class="btn-outline" onclick="closeReplyModal()"
+            style="margin-right: 10px; padding: 8px 20px; border: 1px solid #ccc; background: #fff; border-radius: 4px; cursor: pointer;">Hủy</button>
+          <button type="submit" class="btn-submit">Gửi phản hồi</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <script src="../assets/js/admin/main.js"></script>
+  <script src="../assets/js/admin/reviews.js"></script>
+</body>
+
+</html>

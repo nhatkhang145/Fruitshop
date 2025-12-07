@@ -1,0 +1,211 @@
+/* =================================== */
+/* === CSS TRANG CHI TIẾT KHÁCH HÀNG === */
+/* =================================== */
+
+/* Block (Khối) */
+.user-detail {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap; /* Cho phép xuống hàng trên di động */
+  gap: 24px;
+}
+
+/* Cột chính (trái) */
+.user-detail__main {
+  flex: 3; /* Chiếm 3 phần */
+  min-width: 400px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Cột phụ (phải) */
+.user-detail__sidebar {
+  flex: 1; /* Chiếm 1 phần */
+  min-width: 280px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+/* Thẻ Card (chứa các nhóm) */
+.user-detail__card {
+  background: var(--light);
+  border-radius: 10px;
+  padding: 24px;
+}
+.user-detail__card.text-center {
+  text-align: center;
+}
+
+.user-detail__legend {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--dark);
+  padding-bottom: 10px;
+  margin-bottom: 15px;
+  border-bottom: 1px solid var(--grey);
+}
+
+/* Bảng Đơn hàng */
+.user-detail__order-table {
+  width: 100%;
+  border-collapse: collapse;
+}
+.user-detail__order-table th {
+  text-align: left;
+  padding-bottom: 12px;
+  font-size: 13px;
+  border-bottom: 1px solid var(--grey);
+  color: var(--dark-grey);
+}
+.user-detail__order-table td {
+  padding: 16px 4px;
+  border-bottom: 1px solid var(--grey);
+  color: var(--dark);
+  vertical-align: middle;
+}
+/* Tái sử dụng .status */
+.user-detail__order-table .status {
+  font-size: 10px;
+  padding: 4px 10px;
+  color: var(--light);
+  border-radius: 20px;
+  font-weight: 700;
+}
+.user-detail__order-table .status.completed {
+  background: var(--success);
+}
+.user-detail__order-table .status.cancelled {
+  background: var(--danger);
+}
+/* Tái sử dụng .action-btn (từ style.css) */
+.user-detail__order-table .action-btn {
+  font-size: 1rem;
+}
+
+
+/* Ghi chú nội bộ */
+.user-detail__notes-list {
+  max-height: 200px;
+  overflow-y: auto;
+  margin-bottom: 15px;
+}
+.user-detail__notes-list .note-item {
+  background: var(--grey);
+  padding: 10px;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+.note-item p {
+  font-size: 0.9rem;
+  color: var(--dark);
+}
+.note-item small {
+  font-size: 0.75rem;
+  color: var(--dark-grey);
+}
+.user-detail__textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--grey);
+  background: var(--grey);
+  border-radius: 6px;
+  color: var(--dark);
+  outline: none;
+  font-size: 14px;
+  resize: vertical;
+}
+.user-detail__save-btn {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* Sidebar: Hồ sơ */
+.user-detail__avatar {
+  width: 100px;
+  height: 100px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 4px solid var(--grey);
+  margin-bottom: 10px;
+}
+.user-detail__name {
+  font-size: 1.5rem;
+  font-weight: 600;
+  color: var(--dark);
+  margin-bottom: 5px;
+}
+.user-detail__member-since {
+  font-size: 0.9rem;
+  color: var(--dark-grey);
+}
+
+/* Sidebar: Thống kê */
+.user-detail__stats {
+  list-style: none;
+}
+.user-detail__stats li {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  color: var(--dark);
+  padding: 10px 0;
+  border-bottom: 1px dashed var(--grey);
+}
+.user-detail__stats li:last-child {
+  border-bottom: none;
+}
+.user-detail__stats li span {
+  color: var(--dark-grey);
+}
+.user-detail__stats li strong {
+  font-size: 1.1rem;
+  font-weight: 600;
+}
+
+/* Sidebar: Liên hệ */
+.user-detail__contact p {
+  color: var(--dark);
+  line-height: 1.6;
+  margin-bottom: 8px;
+  word-wrap: break-word; /* Chống vỡ layout */
+}
+.user-detail__contact hr {
+  border: none;
+  border-top: 1px solid var(--grey);
+  margin: 10px 0;
+}
+
+/* Sidebar: Hành động */
+.user-detail__actions {
+  list-style: none;
+}
+.user-detail__actions li {
+  margin-bottom: 5px;
+}
+.user-detail__actions .action-link {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 5px;
+  font-size: 0.95rem;
+  font-weight: 500;
+  color: var(--primary);
+  border-radius: 6px;
+  transition: background 0.3s ease;
+}
+.user-detail__actions .action-link:hover {
+  background: var(--grey);
+}
+.user-detail__actions .action-link .bx {
+  font-size: 1.3rem;
+}
+/* Biến thể màu đỏ */
+.user-detail__actions .action-link.action-link--danger {
+  color: var(--danger);
+}
+.user-detail__actions .action-link.action-link--danger:hover {
+  background: var(--light-danger);
+}

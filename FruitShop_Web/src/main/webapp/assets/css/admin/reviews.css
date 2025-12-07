@@ -1,0 +1,99 @@
+/* =================================== */
+/* === CSS TRANG QUẢN LÝ ĐÁNH GIÁ === */
+/* =================================== */
+
+/* --- 1. Insights Tùy Chỉnh --- */
+.review-insights li {
+  min-width: 200px;
+}
+.review-insights .filter-btn {
+  display: block;
+  padding: 5px 0;
+  color: var(--dark-grey);
+  font-weight: 500;
+  transition: 0.3s;
+}
+.review-insights .filter-btn:hover,
+.review-insights .filter-btn.active {
+  color: var(--primary);
+  padding-left: 5px;
+}
+
+/* --- 2. Bảng Đánh giá --- */
+
+/* Cột Khách hàng */
+.user-cell {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.user-cell img {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+}
+.user-cell p {
+  font-weight: 600;
+  color: var(--dark);
+  margin: 0;
+}
+.user-cell small {
+  color: var(--dark-grey);
+  font-size: 0.8rem;
+}
+
+/* Cột Nội dung */
+.review-content-cell .stars {
+  color: #ffc107; /* Màu vàng sao */
+  font-size: 1.1rem;
+  margin-bottom: 4px;
+}
+.review-content-cell .comment {
+  font-size: 0.95rem;
+  color: var(--dark);
+  line-height: 1.5;
+  margin-bottom: 6px;
+}
+.review-content-cell .date {
+  font-size: 0.8rem;
+  color: var(--dark-grey);
+}
+
+/* Admin Reply Box */
+.admin-reply {
+  background: #f0fdf4; /* Xanh nhạt */
+  border-left: 3px solid var(--success);
+  padding: 8px;
+  margin: 8px 0;
+  margin-right: 20px;
+  font-size: 0.9rem;
+  border-radius: 4px;
+  color: var(--dark);
+}
+.admin-reply strong {
+  color: var(--success);
+}
+
+/* Cột Sản phẩm */
+.product-link {
+  color: var(--primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: 0.2s;
+}
+.product-link:hover {
+  text-decoration: underline;
+}
+
+/* --- 3. Trạng thái & Nút --- */
+
+/* Màu status (kế thừa hoặc ghi đè nếu cần) */
+.status.pending { background: var(--warning); }
+.status.completed { background: var(--success); } /* Dùng cho Đã duyệt */
+.status.hidden { background: var(--dark-grey); }
+
+/* Nút hành động riêng cho review */
+.action-btn.approve { background: var(--success); }
+.action-btn.reply { background: var(--primary); }
+.action-btn.hide { background: var(--dark-grey); }

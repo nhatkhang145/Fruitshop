@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="/assets/css/base.css" />
+  <link rel="stylesheet" href="../assets/css/admin/style.css" />
+  <link rel="stylesheet" href="../assets/css/admin/product-edit.css" />
+  <title>Tạo/Sửa Mã giảm giá</title>
+</head>
+
+<body>
+  <div class="sidebar">
+    <a href="/admin/index.html" class="logo">
+      <img class="navbar__menu-logo-img"
+        src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+        alt="Organic Harvest Logo" />
+    </a>
+    <ul class="side-menu">
+      <li><a href="/admin/index.html"><i class="bx bxs-dashboard"></i>Tổng quan</a></li>
+      <li><a href="/admin/products.html"><i class="bx bx-basket"></i>Quản lý sản phẩm</a></li>
+      <li><a href="/admin/Categories.html"><i class="bx bx-category"></i>Quản lý danh mục</a></li>
+      <li><a href="/admin/orders.html"><i class="bx bx-receipt"></i>Quản lý đơn hàng</a></li>
+      <li><a href="/admin/users.html"><i class="bx bx-group"></i>Quản lý khách hàng</a></li>
+      <li class="">
+        <a href="/admin/banners.html"><i class='bx bx-images'></i>Quản lý Banner</a>
+      </li>
+
+      <li class="active">
+        <a href="/admin/coupons.html"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
+      </li>
+      <li class="">
+        <a href="/admin/reviews.html"><i class="bx bx-star"></i>Đánh giá</a>
+      </li>
+      <li class="">
+        <a href="/admin/posts.html"><i class='bx bx-news'></i>Tin tức / Blog</a>
+      </li>
+      <li><a href="/admin/notifications.html"><i class="bx bx-bell"></i>Lịch sử Thông báo</a></li>
+      <li><a href="/admin/Contact.html"><i class="bx bx-message-detail"></i>Tin nhắn</a></li>
+      <li><a href="/admin/reports.html"><i class="bx bx-line-chart"></i>Thống kê</a></li>
+      <li class="">
+        <a href="/admin/Settings.html"><i class="bx bx-cog"></i>Cài đặt</a>
+      </li>
+
+    </ul>
+  </div>
+
+  <div class="content">
+    <nav>
+      <i class="bx bx-menu"></i>
+    </nav>
+
+    <main>
+      <div class="header">
+        <div class="left">
+          <h1>Tạo mã giảm giá</h1>
+          <ul class="breadcrumb">
+            <li><a href="/admin/coupons.html">Mã giảm giá</a></li>
+            <li>/</li>
+            <li><a href="#" class="active">Thêm mới</a></li>
+          </ul>
+        </div>
+        <a href="#" class="report" onclick="document.getElementById('couponForm').submit()">
+          <i class="bx bx-save"></i>
+          <span>Lưu mã</span>
+        </a>
+      </div>
+
+      <div class="bottom-data">
+        <div class="product-edit">
+          <form id="couponForm" class="product-edit__form">
+
+            <div class="product-edit__main">
+              <div class="product-edit__card">
+                <div class="product-edit__group">
+                  <label class="product-edit__label">Mã Code (Viết liền, không dấu)</label>
+                  <input type="text" class="product-edit__input" placeholder="Ví dụ: TET2025, SALE50"
+                    style="text-transform: uppercase;" required />
+                </div>
+                <div class="product-edit__group">
+                  <label class="product-edit__label">Mô tả chương trình</label>
+                  <textarea class="product-edit__textarea" rows="3"
+                    placeholder="Ví dụ: Giảm giá mừng xuân Ất Tỵ..."></textarea>
+                </div>
+              </div>
+
+              <div class="product-edit__card">
+                <legend class="product-edit__legend">Thiết lập mức giảm</legend>
+                <div class="product-edit__price-row">
+                  <div class="product-edit__group">
+                    <label class="product-edit__label">Loại giảm giá</label>
+                    <select class="product-edit__select">
+                      <option value="percent">Theo phần trăm (%)</option>
+                      <option value="fixed">Số tiền cố định (VNĐ)</option>
+                    </select>
+                  </div>
+                  <div class="product-edit__group">
+                    <label class="product-edit__label">Giá trị giảm</label>
+                    <input type="number" class="product-edit__input"
+                      placeholder="VD: 10 (cho %) hoặc 50000 (cho tiền)" />
+                  </div>
+                </div>
+                <div class="product-edit__group" style="margin-top: 15px;">
+                  <label class="product-edit__label">Đơn hàng tối thiểu để áp dụng (VNĐ)</label>
+                  <input type="number" class="product-edit__input" value="0" />
+                  <small style="color: #888;">Nhập 0 nếu áp dụng cho mọi đơn hàng.</small>
+                </div>
+              </div>
+            </div>
+
+            <div class="product-edit__sidebar">
+              <div class="product-edit__card">
+                <legend class="product-edit__legend">Thời gian áp dụng</legend>
+                <div class="product-edit__group">
+                  <label class="product-edit__label">Ngày bắt đầu</label>
+                  <input type="datetime-local" class="product-edit__input" />
+                </div>
+                <div class="product-edit__group">
+                  <label class="product-edit__label">Ngày kết thúc</label>
+                  <input type="datetime-local" class="product-edit__input" />
+                </div>
+              </div>
+
+              <div class="product-edit__card">
+                <legend class="product-edit__legend">Giới hạn sử dụng</legend>
+                <div class="product-edit__group">
+                  <label class="product-edit__label">Số lượng mã tối đa</label>
+                  <input type="number" class="product-edit__input" placeholder="VD: 100" />
+                  <small style="color: #888;">Để trống nếu không giới hạn.</small>
+                </div>
+                <div class="product-edit__group">
+                  <label class="product-edit__label">Trạng thái</label>
+                  <select class="product-edit__select">
+                    <option value="1">Đang hoạt động</option>
+                    <option value="0">Tạm khóa</option>
+                  </select>
+                </div>
+                <button type="submit" class="btn-submit product-edit__save-btn">Lưu Mã</button>
+              </div>
+            </div>
+
+          </form>
+        </div>
+      </div>
+    </main>
+  </div>
+  <script src="../assets/js/admin/main.js"></script>
+</body>
+
+</html>

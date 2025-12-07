@@ -1,0 +1,76 @@
+/* =================================== */
+/* === CSS CHO TRANG QUẢN LÝ ĐƠN HÀNG === */
+/* =================================== */
+
+.content main .insights li .bx.bx-loader-circle {
+  background: var(--light-warning);
+  color: var(--warning);
+}
+.content main .insights li .bx.bx-package {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bxs-truck {
+  background: var(--light-primary);
+  color: var(--primary);
+}
+.content main .insights li .bx.bx-check-circle {
+  background: var(--light-success);
+  color: var(--success);
+}
+.content main .bottom-data .orders .header .filters {
+  display: flex;
+  align-items: center;
+  grid-gap: 10px;
+}
+.content main .bottom-data .orders .header .filters input[type="date"] {
+  padding: 8px 12px;
+  border-radius: 6px;
+  border: 1px solid var(--grey);
+  background: var(--light);
+  color: var(--dark);
+  outline: none;
+  font-size: 14px;
+}
+.content main .bottom-data .orders table tr td .status.pending {
+  background: var(--warning);
+}
+.content main .bottom-data .orders table tr td .status.processing {
+  background: var(--primary);
+}
+.content main .bottom-data .orders table tr td .status.shipped {
+  background: var(--primary);
+  opacity: 0.8;
+}
+.content main .bottom-data .orders table tr td .status.completed {
+  background: var(--success);
+}
+.content main .bottom-data .orders table tr td .status.cancelled {
+  background: var(--danger);
+}
+.content main .bottom-data .orders table td .action-btn.view {
+  background: var(--primary);
+  color: var(--light);
+  padding: 6px 12px;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  display: inline-flex;
+  align-items: center;
+  grid-gap: 5px;
+  transition: opacity 0.3s ease;
+}
+.content main .bottom-data .orders table td .action-btn.view .bx {
+  font-size: 1.2rem;
+}
+.content main .bottom-data .orders table td .action-btn.view:hover {
+  opacity: 0.8;
+}
+.content main .bottom-data .orders table td {
+  vertical-align: middle;
+  padding: 14px 0;
+}
+.content main .bottom-data .orders table th,
+.content main .bottom-data .orders table td {
+  padding-left: 6px;
+}

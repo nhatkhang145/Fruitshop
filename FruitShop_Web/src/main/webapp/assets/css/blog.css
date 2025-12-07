@@ -1,0 +1,190 @@
+/*
+ STYLES FOR BLOG CATEGORY PAGE
+*/
+.blog-layout {
+  display: grid;
+  /* Cột sidebar 300px, cột content chiếm phần còn lại */
+  grid-template-columns: 300px 1fr; 
+  gap: 30px;
+  padding: 60px 0;
+}
+
+/* --- Sidebar (Cột trái) --- */
+.blog-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 25px;
+}
+
+.widget {
+  background: #fff;
+  border: 1px solid #eee;
+  border-radius: 8px;
+  padding: 20px;
+  box-shadow: 0 2px 5px rgba(0,0,0,0.05);
+}
+
+.widget-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 15px 0;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+/* Widget: Search */
+.widget-search {
+  display: flex;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  overflow: hidden;
+}
+.widget-search input {
+  flex: 1;
+  border: none;
+  padding: 10px;
+  font-size: 14px;
+  outline: none;
+}
+.widget-search button {
+  border: none;
+  background: var(--primary-color);
+  color: white;
+  padding: 0 12px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+}
+.widget-search button:hover {
+  background: #258a4c;
+}
+
+/* Widget: List (Categories) */
+.widget-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+.widget-list a {
+  text-decoration: none;
+  color: #555;
+  font-size: 15px;
+  display: flex;
+  justify-content: space-between;
+  transition: color 0.2s ease;
+}
+.widget-list a:hover {
+  color: var(--primary-color);
+}
+.widget-list .count {
+  color: #999;
+}
+
+/* Widget: Recent Posts */
+.widget-recent-posts {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+}
+.widget-recent-posts li {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.widget-recent-posts img {
+  width: 60px;
+  height: 60px;
+  object-fit: cover;
+  border-radius: 5px;
+}
+.widget-recent-posts a {
+  font-size: 14px;
+  font-weight: 600;
+  color: #444;
+  text-decoration: none;
+  line-height: 1.4;
+  transition: color 0.2s ease;
+}
+.widget-recent-posts a:hover {
+  color: var(--primary-color);
+}
+.widget-recent-posts .date {
+  font-size: 12px;
+  color: #999;
+  display: block;
+  margin-top: 4px;
+}
+
+/* --- Main Content (Cột phải) --- */
+.blog-main-content {
+  min-width: 0; /* Fix lỗi overflow trong grid */
+}
+
+.blog-page-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 20px 0;
+  color: #222;
+}
+
+/* Ghi đè class .blog__grid từ trang chủ (trên trang chủ là 3 cột) */
+.blog-page-grid {
+  grid-template-columns: repeat(2, 1fr);
+  gap: 25px;
+}
+
+/* Pagination */
+.pagination {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 40px;
+  padding-top: 20px;
+  border-top: 1px solid #f0f0f0;
+}
+.page-numbers {
+  display: inline-block;
+  padding: 10px 15px;
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+  text-decoration: none;
+  color: #555;
+  font-weight: 500;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+.page-numbers:hover {
+  background: #f8f9fa;
+  color: var(--primary-color);
+  border-color: #ccc;
+}
+.page-numbers.current {
+  background: var(--primary-color);
+  color: white;
+  border-color: var(--primary-color);
+}
+
+/* --- Responsive --- */
+@media (max-width: 900px) {
+  .blog-layout {
+    /* Xếp 1 cột trên tablet/mobile */
+    grid-template-columns: 1fr;
+  }
+  .blog-page-grid {
+     /* Vẫn giữ 2 cột trên tablet */
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 600px) {
+  .blog-page-grid {
+    /* 1 cột trên mobile */
+    grid-template-columns: 1fr;
+  }
+}
