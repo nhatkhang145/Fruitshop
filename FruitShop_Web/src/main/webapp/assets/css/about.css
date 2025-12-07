@@ -1,0 +1,97 @@
+/*
+ STYLES FOR ABOUT US PAGE
+*/
+
+
+/* Phần giới thiệu chính */
+.about-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 40px;
+  align-items: center;
+  padding: 60px 0;
+}
+
+.about-image img {
+  width: 100%;
+  border-radius: 8px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.1);
+}
+
+.about-content {
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.about-title {
+  font-size: 36px;
+  margin: 0 0 10px 0;
+  color: #222;
+}
+
+.about-subtitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--primary-color);
+  margin: 0 0 20px 0;
+}
+
+.about-content p {
+  margin-bottom: 15px;
+  color: #555;
+}
+
+/* Phần giá trị cốt lõi */
+.values-section {
+  background-color: #fdfdfd;
+  padding: 60px 0;
+  border-top: 1px solid #eee;
+}
+
+.section-title {
+  text-align: center;
+  font-size: 30px;
+  margin-bottom: 40px;
+  color: #222;
+}
+
+.values-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 30px;
+  text-align: center;
+}
+
+.value-item i {
+  font-size: 40px;
+  color: var(--primary-color);
+  margin-bottom: 20px;
+}
+
+.value-item h3 {
+  font-size: 20px;
+  margin-bottom: 10px;
+  color: #333;
+}
+
+.value-item p {
+  font-size: 15px;
+  line-height: 1.6;
+  color: #666;
+}
+
+/* Responsive cho trang About Us */
+@media (max-width: 900px) {
+  .about-section {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .values-grid {
+    grid-template-columns: 1fr;
+  }
+  .about-title {
+    font-size: 28px;
+  }
+}

@@ -1,0 +1,356 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link
+      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
+      rel="stylesheet"
+    />
+    <link rel="stylesheet" href="/assets/css/base.css" />
+    <link rel="stylesheet" href="../assets/css/admin/style.css" />
+    <link rel="stylesheet" href="/assets/css/admin/order-detail.css" />
+    <title>Chi tiết Đơn hàng</title>
+  </head>
+
+  <body>
+    <!-- Sidebar -->
+    <div class="sidebar">
+      <a href="/admin/index.html" class="logo">
+        <img
+          class="navbar__menu-logo-img"
+          src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+          alt="Organic Harvest Logo"
+        />
+      </a>
+      <ul class="side-menu">
+        <li class="">
+          <a href="/admin/index.html"
+            ><i class="bx bxs-dashboard"></i>Tổng quan</a
+          >
+        </li>
+        <li>
+          <a href="/admin/products.html"
+            ><i class="bx bx-basket"></i>Quản lý sản phẩm</a
+          >
+        </li>
+        <li>
+          <a href="/admin/Categories.html"
+            ><i class="bx bx-category"></i>Quản lý danh mục</a
+          >
+        </li>
+        <li class="active">
+          <a href="/admin/orders.html"
+            ><i class="bx bx-receipt"></i>Quản lý đơn hàng</a
+          >
+        </li>
+        <li>
+          <a href="/admin/users.html"
+            ><i class="bx bx-group"></i>Quản lý khách hàng</a
+          >
+        </li>
+          <li class="">
+            <a href="/admin/banners.html"><i class='bx bx-images'></i>Quản lý Banner</a>
+        </li>
+          <li class="">
+          <a href="/admin/coupons.html"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
+        </li>
+        <li class="">
+          <a href="/admin/reviews.html"><i class="bx bx-star"></i>Đánh giá</a>
+        </li>
+        <li class="">
+          <a href="/admin/posts.html"><i class='bx bx-news'></i>Tin tức / Blog</a>
+        </li>
+        <li>
+          <a href="/admin/notifications.html"
+            ><i class="bx bx-bell"></i>Lịch sử Thông báo</a
+          >
+        </li>
+        <li>
+          <a href="/admin/Contact.html"
+            ><i class="bx bx-message-detail"></i>Tin nhắn</a
+          >
+        </li>
+
+        <li>
+          <a href="/admin/reports.html"
+            ><i class="bx bx-line-chart"></i>Thống kê</a
+          >
+        </li>
+     <li class="">
+          <a href="/admin/Settings.html"><i class="bx bx-cog"></i>Cài đặt</a>
+        </li>
+       
+      </ul>
+    </div>
+    <!-- End of Sidebar -->
+
+    <!-- Main Content -->
+    <div class="content">
+      <!-- Navbar -->
+      <nav>
+        <i class="bx bx-menu"></i>
+        <form action="#">
+          <div class="form-input">
+            <input type="search" placeholder="Search..." />
+            <button class="search-btn" type="submit">
+              <i class="bx bx-search"></i>
+            </button>
+          </div>
+        </form>
+
+        <div class="notification-wrapper">
+          <a href="#" class="notif" id="notifBtn">
+            <i class="bx bx-bell"></i>
+            <span class="count">12</span>
+          </a>
+
+          <div class="notification-dropdown" id="notifDropdown">
+            <h3 class="dropdown-header">Thông báo mới</h3>
+            <ul class="notification-list">
+              <li class="notification-item unread">
+                <i class="bx bx-cart-add item-icon"></i>
+                <div class="item-content">
+                  <p><strong>Đơn hàng mới</strong></p>
+                  <span>Bạn có đơn hàng #12350 từ Nguyễn Văn A.</span>
+                  <small>2 phút trước</small>
+                </div>
+              </li>
+              <li class="notification-item unread">
+                <i class="bx bx-user-plus item-icon"></i>
+                <div class="item-content">
+                  <p><strong>Khách hàng mới</strong></p>
+                  <span>Trần Thị B vừa đăng ký tài khoản.</span>
+                  <small>1 giờ trước</small>
+                </div>
+              </li>
+              <li class="notification-item">
+                <i class="bx bxs-error-circle item-icon"></i>
+                <div class="item-content">
+                  <p><strong>Hết hàng</strong></p>
+                  <span>Sản phẩm "Dâu tây Hàn Quốc" đã hết hàng.</span>
+                  <small>Hôm qua</small>
+                </div>
+              </li>
+            </ul>
+            <div class="dropdown-footer">
+              <a href="/admin/notifications.html">Xem tất cả thông báo</a>
+            </div>
+          </div>
+        </div>
+        <div class="profile-wrapper">
+          <a href="#" class="profile" id="profileBtn">
+            <img src="images/logo.png" />
+          </a>
+
+          <div class="profile-dropdown" id="profileDropdown">
+            <h3 class="dropdown-header">Tài khoản</h3>
+            <ul class="profile-menu">
+              <li>
+                <a href="/admin/profile.html">
+                  <i class="bx bxs-user-circle"></i>
+                  <span>Hồ sơ của tôi</span>
+                </a>
+              </li>
+              <li>
+                <a href="/admin/profile.html#changepassword">
+                  <i class="bx bxs-lock-alt"></i>
+                  <span>Đổi mật khẩu</span>
+                </a>
+              </li>
+
+              <li class="profile-menu-toggle">
+                <i class="bx bx-moon"></i>
+                <span>Chế độ Tối</span>
+
+                <input type="checkbox" id="theme-toggle" hidden />
+                <label for="theme-toggle" class="theme-toggle-dropdown"></label>
+              </li>
+              <hr />
+              <li>
+                <a href="#" class="logout">
+                  <i class="bx bx-log-out-circle"></i>
+                  <span>Đăng xuất</span>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </nav>
+
+      <!-- End of Navbar -->
+      <main>
+        <div class="header">
+          <div class="left">
+            <h1 id="pageTitle">Chi tiết Đơn hàng #12345</h1>
+            <ul class="breadcrumb">
+              <li><a href="/admin/orders.html">Đơn hàng</a></li>
+              <li>/</li>
+              <li>
+                <a href="#" class="active" id="breadcrumbTitle">#12345</a>
+              </li>
+            </ul>
+          </div>
+          <a href="#" class="report" id="printInvoiceBtn">
+            <i class="bx bx-printer"></i>
+            <span>In Hóa đơn</span>
+          </a>
+        </div>
+
+        <div class="bottom-data">
+          <div class="order-detail">
+            <form id="orderDetailForm" class="order-detail__form">
+              <div class="order-detail__main">
+                <div class="order-detail__card">
+                  <legend class="order-detail__legend">Sản phẩm</legend>
+                  <table class="order-detail__item-table">
+                    <thead>
+                      <tr>
+                        <th>Sản phẩm</th>
+                        <th>Giá</th>
+                        <th>Số lượng</th>
+                        <th>Tổng</th>
+                      </tr>
+                    </thead>
+                    <tbody>
+                      <tr>
+                        <td>
+                          <div class="item-product">
+                            <img
+                              src="https://via.placeholder.com/40x40"
+                              alt="Táo"
+                            />
+                            <div class="item-info">
+                              <p>Táo Envy New Zealand (Size L)</p>
+                              <small>SKU: T-ENVY-NZ-01</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td>250,000đ</td>
+                        <td>x 1</td>
+                        <td>250,000đ</td>
+                      </tr>
+                      <tr>
+                        <td>
+                          <div class="item-product">
+                            <img
+                              src="https://via.placeholder.com/40x40"
+                              alt="Nho"
+                            />
+                            <div class="item-info">
+                              <p>Nho không hạt Úc</p>
+                              <small>SKU: N-KH-AUC-05</small>
+                            </div>
+                          </div>
+                        </td>
+                        <td>320,000đ</td>
+                        <td>x 2</td>
+                        <td>640,000đ</td>
+                      </tr>
+                    </tbody>
+                  </table>
+                </div>
+
+                <div class="order-detail__card">
+                  <legend class="order-detail__legend">
+                    Ghi chú của Khách hàng
+                  </legend>
+                  <p class="order-detail__customer-note">
+                    Vui lòng giao hàng sau 5 giờ chiều, cảm ơn shop!
+                  </p>
+                </div>
+              </div>
+
+              <div class="order-detail__sidebar">
+                <div class="order-detail__card">
+                  <legend class="order-detail__legend">
+                    Trạng thái Đơn hàng
+                  </legend>
+                  <div class="order-detail__group">
+                    <select id="orderStatus" class="order-detail__input">
+                      <option value="pending">Chờ xử lý</option>
+                      <option value="processing" selected>Đang xử lý</option>
+                      <option value="shipped">Đang giao</option>
+                      <option value="completed">Hoàn thành</option>
+                      <option value="cancelled">Đã hủy</option>
+                    </select>
+                    <button
+                      type="submit"
+                      class="btn-submit order-detail__save-btn"
+                    >
+                      Cập nhật
+                    </button>
+                  </div>
+                  <div class_="order-detail__action-links">
+                    <a href="#" id="printPackingSlipBtn">In Phiếu giao hàng</a>
+                  </div>
+                </div>
+
+                <div class="order-detail__card">
+                  <legend class="order-detail__legend">Khách hàng</legend>
+                  <div class="order-detail__customer-info">
+                    <p><strong>Nguyễn Văn A</strong></p>
+                    <p>nguyenvana@gmail.com</p>
+                    <p>0905.123.456</p>
+                    <hr />
+                    <p>
+                      <strong>Địa chỉ Giao hàng:</strong><br />
+                      123 Đường ABC, Phường 1, Quận 2, TP. Hồ Chí Minh
+                    </p>
+                  </div>
+                </div>
+
+                <div class="order-detail__card">
+                  <legend class="order-detail__legend">Thanh toán</legend>
+                  <ul class="order-detail__financials">
+                    <li>
+                      <span>Tổng phụ:</span>
+                      <span>890,000đ</span>
+                    </li>
+                    <li>
+                      <span>Vận chuyển:</span>
+                      <span>30,000đ</span>
+                    </li>
+                    <li class="total">
+                      <strong>Tổng cộng:</strong>
+                      <strong>920,000đ</strong>
+                    </li>
+                  </ul>
+                  <hr />
+                  <p><strong>P.thức:</strong> Thanh toán khi nhận hàng (COD)</p>
+                  <p>
+                    <strong>Trạng thái:</strong>
+                    <span class="status pending">Chưa thanh toán</span>
+                  </p>
+                </div>
+
+                <div class="order-detail__card">
+                  <legend class="order-detail__legend">Ghi chú Nội bộ</legend>
+                  <div class="order-detail__notes-list">
+                    <div class="note-item">
+                      <p>Đã gọi điện xác nhận SĐT lúc 10h sáng.</p>
+                      <small>Admin A - 15/11/2025</small>
+                    </div>
+                  </div>
+                  <textarea
+                    id="internalNote"
+                    class="order-detail__textarea"
+                    rows="3"
+                    placeholder="Thêm ghi chú (khách không thấy)..."
+                  ></textarea>
+                  <button class="btn-submit order-detail__save-btn">
+                    Lưu Ghi chú
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </div>
+      </main>
+    </div>
+
+    <script src="../assets/js/admin/main.js"></script>
+    <script src="../assets/js/admin/order-detail.js"></script>
+
+  </body>
+</html>
