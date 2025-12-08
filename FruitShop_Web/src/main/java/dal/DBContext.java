@@ -5,7 +5,6 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBContext {
-
     // Hàm này dùng để kết nối với Database của bạn
     public Connection getConnection() throws Exception {
         // 1. Thay tên database của bạn vào đây (chỗ fruitshop_db)
