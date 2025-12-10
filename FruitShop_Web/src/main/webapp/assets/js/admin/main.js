@@ -124,7 +124,7 @@ document.addEventListener("DOMContentLoaded", () => {
       if (isConfirmed) {
         localStorage.removeItem("authToken");
         alert("Đã đăng xuất thành công!");
-        window.location.href = "/admin/login.html"; // Sửa lại đường dẫn nếu cần
+        window.location.href = "/admin/login.jsp"; // Sửa lại đường dẫn nếu cần
       }
     });
   }
