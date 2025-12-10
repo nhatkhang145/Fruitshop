@@ -1,8 +1,7 @@
-package view;
+package dal;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
-import java.sql.SQLException;
 
 public class DBContext {
     // Hàm này dùng để kết nối với Database của bạn

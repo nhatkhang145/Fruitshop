@@ -80,7 +80,7 @@
       const res = await postJson('/api/auth/register', { name, email, password });
       if(res.ok){
         showMessage(msg, 'Đăng ký thành công. Chuyển sang trang đăng nhập...', 'info');
-        setTimeout(()=> window.location.href = (res.body && res.body.redirect) || 'login.html', 900);
+        setTimeout(()=> window.location.href = (res.body && res.body.redirect) || 'login.jsp', 900);
       } else {
         const reason = (res.body && (res.body.message || res.body.error)) || 'Đăng ký thất bại';
         showMessage(msg, reason, 'error');

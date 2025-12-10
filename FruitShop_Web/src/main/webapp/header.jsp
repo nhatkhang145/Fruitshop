@@ -6,14 +6,17 @@
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Chi tiết đơn hàng #12345 - Organic Harvest</title>
+    <title>Organic Harvest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
-    <link rel="stylesheet" href="./assets/css/base.css" />
-    <link rel="stylesheet" href="./assets/css/main.css" />
-    <link rel="stylesheet" href="./assets/css/profile.css" />
-    <link rel="stylesheet" href="./assets/css/orders.css" />
-    <link rel="stylesheet" href="./assets/css/order-history-detail.css" />
+
+    <link rel="stylesheet" href="assets/css/base.css" />
+    <link rel="stylesheet" href="assets/css/main.css" />
+    <link rel="stylesheet" href="assets/css/profile.css" />
+    <link rel="stylesheet" href="assets/css/orders.css" />
+    <link rel="stylesheet" href="assets/css/order-history-detail.css" />
+
+    <link rel="stylesheet" href="assets/css/auth.css" />
 </head>
 
 <body>
@@ -43,10 +46,10 @@
                         </a>
                     </li>
                     <li class="navbar-item">
-                        <a href="register.html" class="navbar-item__link">Đăng ký</a>
+                        <a href="register.jsp" class="navbar-item__link">Đăng ký</a>
                     </li>
                     <li class="navbar-item">
-                        <a href="login.html" class="navbar-item__link">Đăng nhập</a>
+                        <a href="login.jsp" class="navbar-item__link">Đăng nhập</a>
                     </li>
                 </ul>
             </div>
