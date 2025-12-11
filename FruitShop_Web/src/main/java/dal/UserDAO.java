@@ -40,7 +40,7 @@ public class UserDAO {
             ps.setString(3, password);
             ps.executeUpdate();
         } catch (Exception e) {
-            System.out.println("❌ LỖI SIGNUP: " + e.getMessage());
+            System.out.println(" LỖI SIGNUP: " + e.getMessage());
             e.printStackTrace();
         } finally {
             closeResources(conn, ps, null);
@@ -62,7 +62,7 @@ public class UserDAO {
             if (rs.next()) {
                 User u = new User();
                 u.setId(rs.getInt("id"));
-                u.setFullname(rs.getString("fullname"));
+                u.setFullName(rs.getString("fullname"));
                 u.setEmail(rs.getString("email"));
                 u.setPassword(rs.getString("password"));
                 u.setRole(rs.getInt("role"));
