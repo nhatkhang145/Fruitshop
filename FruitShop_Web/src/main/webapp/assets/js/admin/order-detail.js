@@ -1,4 +1,4 @@
-/* === SCRIPT TRANG CHI TIẾT ĐƠN HÀNG (order-detail.html) === */
+/* === SCRIPT TRANG CHI TIẾT ĐƠN HÀNG (order-detail.jsp) === */
 document.addEventListener("DOMContentLoaded", () => {
   // Chỉ chạy nếu chúng ta ở trang order-detail
   const orderDetailForm = document.getElementById("orderDetailForm");

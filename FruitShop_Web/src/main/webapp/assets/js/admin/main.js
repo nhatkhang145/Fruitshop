@@ -130,7 +130,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 });
 
-/* === SCRIPT TRANG CHI TIẾT KHÁCH HÀNG (user-detail.html) === */
+/* === SCRIPT TRANG CHI TIẾT KHÁCH HÀNG (user-detail.jsp) === */
 document.addEventListener("DOMContentLoaded", () => {
   // Chỉ chạy nếu chúng ta ở trang user-detail (kiểm tra bằng 1 ID)
   const userDetailMain = document.querySelector(".user-detail__main");
