@@ -10,13 +10,13 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
 
-    <link rel="stylesheet" href="assets/css/base.css" />
-    <link rel="stylesheet" href="assets/css/main.css" />
-    <link rel="stylesheet" href="assets/css/profile.css" />
-    <link rel="stylesheet" href="assets/css/orders.css" />
-    <link rel="stylesheet" href="assets/css/order-history-detail.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/profile.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/orders.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/order-history-detail.css" />
 
-    <link rel="stylesheet" href="assets/css/auth.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/auth.css" />
 </head>
 
 <body>
@@ -38,7 +38,7 @@
                 </ul>
                 <ul class="navbar-list">
                     <li class="navbar-item">
-                        <a href="faqs.html" class="navbar-item__link">
+                        <a href="${pageContext.request.contextPath}faqs.jsp" class="navbar-item__link">
                 <span class="navbar-icon__link">
                   <i class="navbar-icon fa-regular fa-circle-question"></i>
                 </span>
@@ -46,10 +46,10 @@
                         </a>
                     </li>
                     <li class="navbar-item">
-                        <a href="register.jsp" class="navbar-item__link">Đăng ký</a>
+                        <a href="${pageContext.request.contextPath}register.jsp" class="navbar-item__link">Đăng ký</a>
                     </li>
                     <li class="navbar-item">
-                        <a href="login.jsp" class="navbar-item__link">Đăng nhập</a>
+                        <a href="${pageContext.request.contextPath}login.jsp" class="navbar-item__link">Đăng nhập</a>
                     </li>
                 </ul>
             </div>
@@ -58,7 +58,7 @@
         <div class="navbar__menu">
             <div class="navbar__menu-inner">
                 <div class="navbar__menu-logo">
-                    <a href="/index.html">
+                    <a href="${pageContext.request.contextPath}/index.jsp">
                         <img class="navbar__menu-logo-img"
                              src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
                              alt="Organic Harvest Logo" />
@@ -66,15 +66,15 @@
                 </div>
 
                 <ul class="main-nav-links subnav-links">
-                    <li><a href="index.jsp">Trang chủ</a></li>
-                    <li><a href="/shop.html">Sản Phẩm</a></li>
-                    <li><a href="/about.html">Giới thiệu</a></li>
-                    <li><a href="blog.html">Bài viết</a></li>
-                    <li><a href="/contact.html">Liên hệ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop.jsp">Sản Phẩm</a></li>
+                    <li><a href="${pageContext.request.contextPath}/about.jsp">Giới thiệu</a></li>
+                    <li><a href="${pageContext.request.contextPath}/blog.jsp">Bài viết</a></li>
+                    <li><a href="${pageContext.request.contextPath}/contact.jsp">Liên hệ</a></li>
                 </ul>
 
                 <div class="navbar__menu-search">
-                    <form class="search-form" action="/shop.html" method="get" role="search">
+                    <form class="search-form" action="/shop.jsp" method="get" role="search">
                         <select name="category" class="search-cat" aria-label="Category">
                             <option value="all">Danh mục</option>
                             <option value="fruits">Trái cây</option>
@@ -89,11 +89,11 @@
                 </div>
 
                 <div class="navbar__menu-actions">
-                    <a href="/wishlist.html" class="icon-btn wishlist-btn" title="Yêu thích">
+                    <a href="${pageContext.request.contextPath}/wishlist.jsp" class="icon-btn wishlist-btn" title="Yêu thích">
                         <i class="fa-solid fa-heart"></i>
                         <span class="badge">3</span>
                     </a>
-                    <a href="/cart.html" class="icon-btn cart-btn" title="Giỏ hàng">
+                    <a href="${pageContext.request.contextPath}/cart.jsp" class="icon-btn cart-btn" title="Giỏ hàng">
                         <i class="fa-solid fa-basket-shopping"></i>
                         <span class="badge">2</span>
                     </a>
@@ -114,22 +114,22 @@
 
                                 <ul class="account-menu">
                                     <li>
-                                        <a href="/profile.html">
+                                        <a href="${pageContext.request.contextPath}/profile.jsp">
                                             <i class="fa-regular fa-id-card"></i> Hồ sơ của tôi
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/orders.html">
+                                        <a href="${pageContext.request.contextPath}/orders.jsp">
                                             <i class="fa-solid fa-box-open"></i> Đơn mua
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/wishlist.html">
+                                        <a href="${pageContext.request.contextPath}/wishlist.jsp">
                                             <i class="fa-regular fa-heart"></i> Sản phẩm yêu thích
                                         </a>
                                     </li>
                                     <li>
-                                        <a href="/change-password.html">
+                                        <a href="${pageContext.request.contextPath}/change-password.jsp">
                                             <i class="fa-solid fa-key"></i> Đổi mật khẩu
                                         </a>
                                     </li>

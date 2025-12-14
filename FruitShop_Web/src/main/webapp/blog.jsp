@@ -1,0 +1,314 @@
+<%@page contentType="text/html" pageEncoding="UTF-8"%>
+<!DOCTYPE html>
+<html lang="vi">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Bài viết — The Organic Harvest</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+  <link rel="stylesheet" href="assets/css/base.css" />
+  <link rel="stylesheet" href="assets/css/main.css" />
+  <link rel="stylesheet" href="assets/css/blog.css" />
+</head>
+
+<body>
+  <jsp:include page="header.jsp"></jsp:include>
+  <main class="blog-page-container">
+    <div class="breadcrumb">
+      <div class="grid">
+        <a href="index.jsp">Trang chủ</a>
+        <i class="fa-solid fa-angle-right"></i>
+        <span>Bài viết</span>
+      </div>
+    </div>
+
+    <div class="blog-layout grid">
+      <aside class="blog-sidebar">
+        <div class="widget">
+          <h3 class="widget-title">Tìm kiếm</h3>
+          <form class="widget-search">
+            <input type="search" placeholder="Nhập từ khóa..." />
+            <button type="submit">
+              <i class="fa-solid fa-magnifying-glass"></i>
+            </button>
+          </form>
+        </div>
+
+        <div class="widget">
+          <h3 class="widget-title">Danh mục</h3>
+          <ul class="widget-list">
+            <li>
+              <a href="#">Dinh dưỡng <span class="count">(5)</span></a>
+            </li>
+            <li>
+              <a href="#">Công thức <span class="count">(3)</span></a>
+            </li>
+            <li>
+              <a href="#">Sức khỏe<span class="count">(8)</span></a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="widget">
+          <h3 class="widget-title">Bài viết mới</h3>
+          <ul class="widget-recent-posts">
+            <li>
+              <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                alt="Bài viết 1" />
+              <div>
+                <a href="#">12 loại trái cây và rau quả tốt cho sức khỏe</a>
+                <span class="date">16/11/2022</span>
+              </div>
+            </li>
+            <li>
+              <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+                alt="Bài viết 2" />
+              <div>
+                <a href="#">Giá trị dinh dưỡng của nước cam ép</a>
+                <span class="date">15/11/2022</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </aside>
+
+      <section class="blog-main-content">
+        <div class="blog__grid blog-page-grid">
+          <div class="blog__item">
+            <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+              alt="Blog 1" class="blog__image" />
+            <div class="blog__content">
+              <div class="blog__meta">
+                <span class="blog__author">Đăng bởi Admin</span>
+                <span class="blog__date">16/11/2022</span>
+              </div>
+              <h3 class="blog__post-title">
+                12 loại trái cây và rau quả tốt cho sức khỏe cần phải có...
+              </h3>
+              <a href="blog-detail.jsp" class="blog__link">Xem thêm →</a>
+            </div>
+          </div>
+
+          <div class="blog__item">
+            <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+              alt="Blog 2" class="blog__image" />
+            <div class="blog__content">
+              <div class="blog__meta">
+                <span class="blog__author">Đăng bởi Admin</span>
+                <span class="blog__date">16/11/2022</span>
+              </div>
+              <h3 class="blog__post-title">
+                Sự thật dinh dưỡng về nước cam tươi, Lượng calo...
+              </h3>
+              <a href="#" class="blog__link">Xem thêm →</a>
+            </div>
+          </div>
+
+          <div class="blog__item">
+            <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+              alt="Blog 3" class="blog__image" />
+            <div class="blog__content">
+              <div class="blog__meta">
+                <span class="blog__author">Đăng bởi Admin</span>
+                <span class="blog__date">16/11/2022</span>
+              </div>
+              <h3 class="blog__post-title">
+                Công thức tuyệt vời để tận dụng thực phẩm hữu cơ...
+              </h3>
+              <a href="#" class="blog__link">Xem thêm →</a>
+            </div>
+          </div>
+
+          <div class="blog__item">
+            <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+              alt="Blog 4" class="blog__image" />
+            <div class="blog__content">
+              <div class="blog__meta">
+                <span class="blog__author">Đăng bởi Admin</span>
+                <span class="blog__date">15/11/2022</span>
+              </div>
+              <h3 class="blog__post-title">
+                Khám phá lợi ích của nông sản địa phương
+              </h3>
+              <a href="#" class="blog__link">Xem thêm →</a>
+            </div>
+          </div>
+
+          <div class="blog__item">
+            <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+              alt="Blog 5" class="blog__image" />
+            <div class="blog__content">
+              <div class="blog__meta">
+                <span class="blog__author">Đăng bởi Admin</span>
+                <span class="blog__date">14/11/2022</span>
+              </div>
+              <h3 class="blog__post-title">
+                Công thức sinh tố đơn giản nạp nhanh năng lượng
+              </h3>
+              <a href="#" class="blog__link">Xem thêm →</a>
+            </div>
+          </div>
+
+          <div class="blog__item">
+            <img src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
+              alt="Blog 6" class="blog__image" />
+            <div class="blog__content">
+              <div class="blog__meta">
+                <span class="blog__author">Đăng bởi Admin</span>
+                <span class="blog__date">13/11/2022</span>
+              </div>
+              <h3 class="blog__post-title">
+                Tại sao canh tác hữu cơ quan trọng với sức khỏe
+              </h3>
+              <a href="#" class="blog__link">Xem thêm →</a>
+            </div>
+          </div>
+        </div>
+
+        <nav class="pagination">
+          <span class="page-numbers current">1</span>
+          <a class="page-numbers" href="#">2</a>
+          <a class="next page-numbers" href="#">Tiếp theo →</a>
+        </nav>
+      </section>
+    </div>
+  </main>
+  <footer class="footer">
+    <div class="footer__main">
+      <div class="footer__grid">
+        <div class="footer__company">
+          <div class="footer__brand">
+            <a href="/">
+              <img class="navbar__menu-logo-img"
+                src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                alt="Logo Organic Harvest" />
+            </a>
+          </div>
+          <p class="footer__description">
+            Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
+          </p>
+          <div class="footer__social">
+            <a href="https://www.themedevhub.com" target="_blank"
+              class="footer__social-link footer__social-link--facebook">
+              <svg class="footer__social-icon" viewBox="0 0 24 24">
+                <path
+                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
+              </svg>
+            </a>
+            <a href="https://www.themedevhub.com" target="_blank"
+              class="footer__social-link footer__social-link--twitter">
+              <svg class="footer__social-icon" viewBox="0 0 24 24">
+                <path
+                  d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
+              </svg>
+            </a>
+            <a href="https://www.themedevhub.com" target="_blank"
+              class="footer__social-link footer__social-link--telegram">
+              <svg class="footer__social-icon" viewBox="0 0 24 24">
+                <path
+                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z" />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div class="footer__section">
+          <h3 class="footer__title">Chính sách</h3>
+          <ul class="footer__links">
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/about-us" target="_blank" class="footer__link">Trang chủ</a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/hire-experts" target="_blank" class="footer__link">Sản phẩm</a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/themes" target="_blank" class="footer__link">Giới thiệu</a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Bài viết</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__section">
+          <h3 class="footer__title">Hổ trợ khách hàng</h3>
+          <ul class="footer__links">
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/about-us" target="_blank" class="footer__link">Tìm kiếm
+              </a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/hire-experts" target="_blank" class="footer__link">Chính sách bảo
+                mật</a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/themes" target="_blank" class="footer__link">Điều khoản dịch vụ</a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Hướng dẫn kiểm tra đơn
+                hàng</a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Chính sách giao
+                nhận</a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Chính sách thanh
+                toán</a>
+            </li>
+            <li class="footer__link-item">
+              <div class="footer__link-dot"></div>
+              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Chính sách đổi trả</a>
+            </li>
+          </ul>
+        </div>
+
+        <div class="footer__section">
+          <h3 class="footer__title">Đăng kí nhận tin</h3>
+
+          <form class="footer__newsletter-form">
+            <input type="email" placeholder="Nhập địa chỉ email" class="footer__newsletter-input" required />
+            <button type="submit" class="footer__newsletter-button">
+              Đăng kí
+            </button>
+          </form>
+        </div>
+      </div>
+    </div>
+
+    <div class="footer__bottom">
+      <div class="footer__bottom-content">
+        <p class="footer__copyright">
+          &copy; 2025 Company. Đã đăng ký bản quyền.
+        </p>
+        <ul class="footer__bottom-links">
+          <li>
+            <a href="https://www.themedevhub.com/about-us" target="_blank" class="footer__bottom-link">Về chúng tôi</a>
+          </li>
+          <li>
+            <a href="https://www.themedevhub.com/privacy-policy" target="_blank" class="footer__bottom-link">Điều
+              khoản</a>
+          </li>
+          <li>
+            <a href="https://www.themedevhub.com/terms-and-conditions" target="_blank" class="footer__bottom-link">Bảo
+              mật</a>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </footer>
+</body>
+
+</html>

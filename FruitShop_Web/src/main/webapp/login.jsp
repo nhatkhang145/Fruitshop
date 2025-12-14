@@ -58,7 +58,7 @@
                 <label class="fm-check">
                   <input name="remember" type="checkbox" /> Ghi nhớ tôi
                 </label>
-                <a class="fm-link" href="forget_pass.html">Quên mật khẩu?</a>
+                <a class="fm-link" href="forget_pass.jsp">Quên mật khẩu?</a>
               </div>
 
               <button type="submit" class="fm-btn">Đăng nhập</button>
@@ -96,8 +96,8 @@
                 </div>
               </c:if>
 
-              <label class="fm-label">Email
-                <input name="user" type="text" required placeholder="Nhập Email của bạn" />
+              <label class="fm-label">Tên đăng nhập
+                <input name="user" type="text" required placeholder="Nhập tên đăng nhập của bạn" />
               </label>
 
               <label class="fm-label">Email

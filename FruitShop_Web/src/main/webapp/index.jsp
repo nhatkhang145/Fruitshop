@@ -97,7 +97,7 @@
               <div class="carousel-container">
                 <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -106,11 +106,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -124,7 +124,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -144,7 +144,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -153,11 +153,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -171,7 +171,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -191,7 +191,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -200,11 +200,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -218,7 +218,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -238,7 +238,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -247,11 +247,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -265,7 +265,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -285,7 +285,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -294,11 +294,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -312,7 +312,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -332,7 +332,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -341,11 +341,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -359,7 +359,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -379,7 +379,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -388,11 +388,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -406,7 +406,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -460,7 +460,7 @@
                 <h2 class="product-title">Dừa sáp</h2>
                 <p class="product-desc">Thơm ngon mọng nước</p>
                 <p class="product-price">10.000 Đ</p>
-                <a href="#" class="shop-now">
+                <a href="${pageContext.request.contextPath}#" class="shop-now">
                   MUA NGAY <span class="arrow">→</span>
                 </a>
               </div>
@@ -490,7 +490,7 @@
               <!-- Giữ nguyên product-card của bạn -->
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -499,11 +499,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -517,7 +517,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -537,7 +537,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -546,11 +546,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -564,7 +564,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -584,7 +584,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -593,11 +593,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -611,7 +611,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -631,7 +631,7 @@
               </div>
               <div class="product-card">
                 <div class="product-image">
-                  <a href="/product-detail.html?id=1">
+                  <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
                     <img
                       src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
                       alt="Dưa" loading="lazy" />
@@ -640,11 +640,11 @@
                   <div class="product-badge sale">-10%</div>
 
                   <div class="product-actions">
-                    <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                    <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
                       <i class="far fa-heart"></i>
                     </a>
 
-                    <a href="/product-detail.html?id=1" class="action-btn" title="Xem nhanh">
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn" title="Xem nhanh">
                       <i class="far fa-eye"></i>
                     </a>
 
@@ -658,7 +658,7 @@
                   <div class="category">Trái cây nhập khẩu</div>
 
                   <h3>
-                    <a href="/product-detail.html?id=1" title="Dừa">Dừa</a>
+                    <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
                   </h3>
 
                   <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
@@ -716,7 +716,7 @@
               <h3 class="blog__post-title">
                 12 loại trái cây và rau củ bạn nhất định nên có...
               </h3>
-              <a href="#" class="blog__link">Xem thêm →</a>
+              <a href="${pageContext.request.contextPath}#" class="blog__link">Xem thêm →</a>
             </div>
           </div>
 
@@ -732,7 +732,7 @@
               <h3 class="blog__post-title">
                 Dinh dưỡng & calo trong nước cam tươi...
               </h3>
-              <a href="#" class="blog__link">Xem thêm →</a>
+              <a href="${pageContext.request.contextPath}#" class="blog__link">Xem thêm →</a>
             </div>
           </div>
 
@@ -748,7 +748,7 @@
               <h3 class="blog__post-title">
                 Những công thức nấu ăn số lượng lớn giúp bạn...
               </h3>
-              <a href="#" class="blog__link">Xem thêm →</a>
+              <a href="${pageContext.request.contextPath}#" class="blog__link">Xem thêm →</a>
             </div>
           </div>
         </div>
