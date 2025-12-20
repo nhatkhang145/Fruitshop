@@ -18,6 +18,21 @@ public class DBContext {
         return DriverManager.getConnection(url, user, password);
     }
 
+    protected Connection connection;
+
+    public DBContext() {
+        try {
+            // Thay đổi thông tin của bạn tại đây
+            String user = "root";       // User mặc định của XAMPP/MySQL
+            String pass = "";           // Pass mặc định thường là rỗng
+            String url = "jdbc:mysql://localhost:3306/fruitshop_db"; // Tên database của bạn
+
+            Class.forName("com.mysql.cj.jdbc.Driver");
+            connection = DriverManager.getConnection(url, user, pass);
+        } catch (ClassNotFoundException | SQLException ex) {
+            System.out.println("Loi ket noi DB: " + ex);
+        }
+    }
     // Hàm main này để chạy thử xem kết nối được chưa (Test)
     public static void main(String[] args) {
         try {
