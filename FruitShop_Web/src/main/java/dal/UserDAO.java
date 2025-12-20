@@ -1,89 +1,46 @@
 package dal;
 
 import model.User;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
+import java.util.Optional;
 
 public class UserDAO {
-
-    // 1. Kiểm tra Email tồn tại
+    
+    // 1. Kiểm tra Email tồn tại (Viết lại bằng Jdbi)
     public boolean checkExist(String email) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            String query = "SELECT * FROM users WHERE email = ?";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, email);
-            rs = ps.executeQuery();
-            return rs.next();
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeResources(conn, ps, rs);
-        }
-        return false;
+        String query = "SELECT COUNT(*) FROM users WHERE email = ?";
+        // withHandle tự động mở và đóng kết nối, không cần try-catch
+        return DBContext.get().withHandle(handle -> 
+            handle.createQuery(query)
+                  .bind(0, email) // Gán email vào dấu ? đầu tiên
+                  .mapTo(Integer.class)
+                  .one() > 0
+        );
     }
 
     // 2. Đăng ký người dùng mới
     public void signup(String fullname, String email, String password) {
-        Connection conn = null;
-        PreparedStatement ps = null;
         String query = "INSERT INTO users (fullname, email, password, role, status, login_type) VALUES (?, ?, ?, 0, 1, 'local')";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, fullname);
-            ps.setString(2, email);
-            ps.setString(3, password);
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println(" LỖI SIGNUP: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            closeResources(conn, ps, null);
-        }
+        
+        DBContext.get().useHandle(handle -> 
+            handle.createUpdate(query)
+                  .bind(0, fullname)
+                  .bind(1, email)
+                  .bind(2, password)
+                  .execute()
+        );
     }
 
-    // 3. Đăng nhập - Kiểm tra chỉ tài khoản active (status = 1)
+    // 3. Đăng nhập
     public User checkLogin(String email, String password) {
-        Connection conn = null;
-        PreparedStatement ps = null;
-        ResultSet rs = null;
-        try {
-            String query = "SELECT * FROM users WHERE email = ? AND password = ? AND status = 1";
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-            ps.setString(1, email);
-            ps.setString(2, password);
-            rs = ps.executeQuery();
-            if (rs.next()) {
-                User u = new User();
-                u.setId(rs.getInt("id"));
-                u.setFullName(rs.getString("fullname"));
-                u.setEmail(rs.getString("email"));
-                u.setPassword(rs.getString("password"));
-                u.setRole(rs.getInt("role"));
-                return u;
-            }
-        } catch (Exception e) {
-            e.printStackTrace();
-        } finally {
-            closeResources(conn, ps, rs);
-        }
-        return null;
-    }
-
-    // Đóng tài nguyên để tránh memory leak
-    private void closeResources(Connection conn, PreparedStatement ps, ResultSet rs) {
-        try {
-            if (rs != null) rs.close();
-            if (ps != null) ps.close();
-            if (conn != null) conn.close();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        String query = "SELECT * FROM users WHERE email = ? AND password = ? AND status = 1";
+        
+        return DBContext.get().withHandle(handle -> 
+            handle.createQuery(query)
+                  .bind(0, email)
+                  .bind(1, password)
+                  .mapToBean(User.class) // Tự động mapping cột SQL vào class User
+                  .findFirst()
+                  .orElse(null) // Nếu không tìm thấy thì trả về null
+        );
     }
 }
