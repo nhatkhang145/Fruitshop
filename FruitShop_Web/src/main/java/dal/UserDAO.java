@@ -4,6 +4,7 @@ import model.User;
 import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
+import java.sql.SQLException;
 
 public class UserDAO {
 
@@ -84,6 +85,51 @@ public class UserDAO {
             if (conn != null) conn.close();
         } catch (Exception e) {
             e.printStackTrace();
+        }
+    }
+
+    // 4. Cập nhật thông tin User (Tên, Số điện thoại)
+    public void update(User user) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+
+        String query = "UPDATE users SET fullname = ?, phone = ?, WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+
+            ps.setString(1, user.getFullName());
+            ps.setString(2, user.getPhone());
+            ps.setInt(3, user.getId());
+
+            ps.executeUpdate();
+
+        } catch (Exception e) {
+            System.out.println("Lỗi updateUser: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, null);
+        }
+    }
+
+    // 5. Đổi mật khẩu
+    public void changePassword(int id, String newPassword) {
+        Connection conn = null;
+        PreparedStatement ps = null;
+        String query = "UPDATE users SET password = ? WHERE id = ?";
+        try {
+            conn = new DBContext().getConnection();
+            ps = conn.prepareStatement(query);
+
+            ps.setString(1, newPassword);
+            ps.setInt(2, id);
+
+            ps.executeUpdate();
+        } catch (Exception e) {
+            System.out.println("Lỗi changePassword: " + e.getMessage());
+            e.printStackTrace();
+        } finally {
+            closeResources(conn, ps, null);
         }
     }
 }
