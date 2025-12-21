@@ -5,8 +5,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="40b191cf-7666-4f64-a2b5-da075275f0f2" name="Changes" comment="">
-      <change beforePath="$PROJECT_DIR$/FruitShop_Web/src/main/java/dal/DBContext.java" beforeDir="false" afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/java/dal/DBContext.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FruitShop_Web/src/main/java/dal/UserDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/java/dal/UserDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/java/dal/CategoryDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -55,6 +55,7 @@
   </component>
   <component name="PropertiesComponent"><![CDATA[{
   "keyToString": {
+    "Application.CategoryDAO.executor": "Run",
     "Application.DBContext.executor": "Run",
     "ModuleVcsDetector.initialDetectionPerformed": "true",
     "RunOnceActivity.ShowReadmeOnStart": "true",
@@ -78,7 +79,20 @@
     ]
   }
 }]]></component>
-  <component name="RunManager" selected="Smart Tomcat.Tomcat: Fruitshop_Web">
+  <component name="RunManager" selected="Application.CategoryDAO">
+    <configuration name="CategoryDAO" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="dal.CategoryDAO" />
+      <module name="Fruitshop_Web" />
+      <extension name="coverage">
+        <pattern>
+          <option name="PATTERN" value="dal.*" />
+          <option name="ENABLED" value="true" />
+        </pattern>
+      </extension>
+      <method v="2">
+        <option name="Make" enabled="true" />
+      </method>
+    </configuration>
     <configuration name="DBContext" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="ALTERNATIVE_JRE_PATH" value="$PROJECT_DIR$/../.jdks/corretto-23.0.2" />
       <option name="ALTERNATIVE_JRE_PATH_ENABLED" value="true" />
@@ -104,9 +118,6 @@
       <option name="catalinaBase" value="" />
       <option name="contextPath" value="/Fruitshop_Web" />
       <option name="docBase" value="$PROJECT_DIR$/FruitShop_Web/src/main/webapp" />
-      <option name="envOptions">
-        <map />
-      </option>
       <option name="extraClassPath" value="" />
       <option name="tomcatInfo">
         <TomcatInfo>
@@ -122,11 +133,13 @@
       </method>
     </configuration>
     <list>
+      <item itemvalue="Application.CategoryDAO" />
       <item itemvalue="Application.DBContext" />
       <item itemvalue="Smart Tomcat.Tomcat: Fruitshop_Web" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.CategoryDAO" />
         <item itemvalue="Application.DBContext" />
       </list>
     </recent_temporary>
