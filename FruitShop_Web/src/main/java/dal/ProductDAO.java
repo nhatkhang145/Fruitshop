@@ -1,146 +1,86 @@
 package dal;
 
 import model.Product;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
-public class ProductDAO extends DBContext {
+// Không cần extends DBContext nữa vì ta dùng hàm static DBContext.get()
+public class ProductDAO {
 
     // 1. Lấy tất cả sản phẩm
     public List<Product> getAllProducts() {
-        List<Product> list = new ArrayList<>();
-        String sql = "SELECT * FROM products"; // MySQL thường để tên bảng chữ thường, bạn kiểm tra lại DB nhé
-
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Product p = new Product(
-                        rs.getInt("product_id"),
-                        rs.getString("product_name"),
-                        rs.getDouble("price"),
-                        rs.getInt("quantity"),
-                        rs.getString("description"),
-                        rs.getString("image"),
-                        rs.getInt("category_id")
-                );
-                list.add(p);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
+        String sql = "SELECT * FROM products";
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                  .mapToBean(Product.class) // Tự động map cột DB vào class Product
+                  .list()
+        );
     }
 
     // 2. Lấy sản phẩm theo Category ID
     public List<Product> getProductsByCategoryID(int cid) {
-        List<Product> list = new ArrayList<>();
         String sql = "SELECT * FROM products WHERE category_id = ?";
-
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, cid);
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                Product p = new Product(
-                        rs.getInt("product_id"),
-                        rs.getString("product_name"),
-                        rs.getDouble("price"),
-                        rs.getInt("quantity"),
-                        rs.getString("description"),
-                        rs.getString("image"),
-                        rs.getInt("category_id")
-                );
-                list.add(p);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                  .bind(0, cid) // Gán cid vào dấu ? đầu tiên
+                  .mapToBean(Product.class)
+                  .list()
+        );
     }
 
     // 3. Lấy chi tiết 1 sản phẩm
     public Product getProductByID(int id) {
         String sql = "SELECT * FROM products WHERE product_id = ?";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            st.setInt(1, id);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return new Product(
-                        rs.getInt("product_id"),
-                        rs.getString("product_name"),
-                        rs.getDouble("price"),
-                        rs.getInt("quantity"),
-                        rs.getString("description"),
-                        rs.getString("image"),
-                        rs.getInt("category_id")
-                );
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return null;
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                  .bind(0, id)
+                  .mapToBean(Product.class)
+                  .findFirst()
+                  .orElse(null) // Nếu không tìm thấy trả về null
+        );
     }
 
-    // ================== PHẦN PHÂN TRANG (MYSQL) ==================
+    // ================== PHẦN PHÂN TRANG ==================
 
     // 4. Đếm tổng số lượng sản phẩm
     public int countAll() {
         String sql = "SELECT COUNT(*) FROM products";
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            ResultSet rs = st.executeQuery();
-            if (rs.next()) {
-                return rs.getInt(1);
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return 0;
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                  .mapTo(Integer.class)
+                  .one()
+        );
     }
 
-    // 5. Phân trang (Sử dụng LIMIT của MySQL)
+    // 5. Phân trang (Trang 1 lấy 6 bài, Trang 2 lấy 6 bài tiếp...)
     public List<Product> pagingProduct(int index) {
-        List<Product> list = new ArrayList<>();
-        // Cú pháp MySQL: LIMIT offset, count
-        // offset: vị trí bắt đầu lấy (bắt đầu từ 0) -> (trang hiện tại - 1) * 6
-        // count: số lượng lấy -> 6
         String sql = "SELECT * FROM products ORDER BY product_id LIMIT ?, 6";
-
-        try {
-            PreparedStatement st = connection.prepareStatement(sql);
-            // Tính toán vị trí bắt đầu
-            int offset = (index - 1) * 6;
-            st.setInt(1, offset);
-
-            ResultSet rs = st.executeQuery();
-            while (rs.next()) {
-                list.add(new Product(
-                        rs.getInt("product_id"),
-                        rs.getString("product_name"),
-                        rs.getDouble("price"),
-                        rs.getInt("quantity"),
-                        rs.getString("description"),
-                        rs.getString("image"),
-                        rs.getInt("category_id")
-                ));
-            }
-        } catch (SQLException e) {
-            System.out.println(e);
-        }
-        return list;
+        int offset = (index - 1) * 6; // Tính vị trí bắt đầu
+        
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                  .bind(0, offset)
+                  .mapToBean(Product.class)
+                  .list()
+        );
     }
 
     // Main test
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
+        
+        // Thử lấy danh sách
         List<Product> list = dao.getAllProducts();
-        for (Product p : list) {
-            System.out.println(p.getId() + " - " + p.getName());
+        
+        System.out.println("----- TEST LIST PRODUCTS -----");
+        if (list.isEmpty()) {
+            System.out.println("Chưa có sản phẩm nào hoặc lỗi kết nối!");
+        } else {
+            for (Product p : list) {
+                // Lưu ý: Đảm bảo class Product của bạn có hàm getProduct_name() hoặc getName()
+                // Jdbi map theo tên cột product_name -> field productName hoặc product_name
+                System.out.println(p.getId() + " - " + p.getName() + " - " + p.getPrice());
+            }
         }
     }
 }
