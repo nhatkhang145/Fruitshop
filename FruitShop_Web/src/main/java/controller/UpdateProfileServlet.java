@@ -40,7 +40,7 @@ public class UpdateProfileServlet extends HttpServlet {
 
         session.setAttribute("account", user);
 
-        req.setAttribute("message", "Cập nhật thành công!");
+        req.setAttribute("mess", "Cập nhật thành công!");
         req.getRequestDispatcher("profile.jsp").forward(req, resp);
     }
 }
