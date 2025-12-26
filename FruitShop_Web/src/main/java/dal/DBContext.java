@@ -1,52 +1,57 @@
 package dal;
 
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.SQLException;
+import org.jdbi.v3.core.Jdbi;
+import java.io.InputStream;
+import java.util.Properties;
 
 public class DBContext {
-    // Hàm này dùng để kết nối với Database của bạn
-    public Connection getConnection() throws Exception {
-        // 1. Thay tên database của bạn vào đây (chỗ fruitshop_db)
-        String url = "jdbc:mysql://localhost:3306/fruitshop_db";
-        String user = "root";  // Mặc định của XAMPP
-        String password = "";  // Mặc định của XAMPP là rỗng
+    private static Jdbi jdbi;
 
-        // 2. Load Driver MySQL (Đoạn này lấy từ thư viện bạn vừa add vào pom.xml)
-        Class.forName("com.mysql.cj.jdbc.Driver");
-
-        return DriverManager.getConnection(url, user, password);
-    }
-
-    protected Connection connection;
-
-    public DBContext() {
+    // Khối static: Chạy ngay khi ứng dụng khởi động để nạp kết nối
+    static {
         try {
-            // Thay đổi thông tin của bạn tại đây
-            String user = "root";       // User mặc định của XAMPP/MySQL
-            String pass = "";           // Pass mặc định thường là rỗng
-            String url = "jdbc:mysql://localhost:3306/fruitshop_db"; // Tên database của bạn
+            // 1. Đọc thông tin từ file cấu hình (db.properties)
+            InputStream is = DBContext.class.getClassLoader().getResourceAsStream("db.properties");
+            Properties props = new Properties();
 
-            Class.forName("com.mysql.cj.jdbc.Driver");
-            connection = DriverManager.getConnection(url, user, pass);
-        } catch (ClassNotFoundException | SQLException ex) {
-            System.out.println("Loi ket noi DB: " + ex);
+            if (is == null) {
+                // Nếu không thấy file properties, dùng cấu hình cứng (Dự phòng)
+                jdbi = Jdbi.create("jdbc:mysql://localhost:3306/fruitshop_db", "root", "");
+            } else {
+                props.load(is);
+                String driver = props.getProperty("db.driver");
+                String url = props.getProperty("db.url");
+                String user = props.getProperty("db.username");
+                String pass = props.getProperty("db.password");
+                // Nạp driver (quan trọng với Tomcat cũ)
+                Class.forName(driver);
+                // Tạo kết nối Jdbi
+                jdbi = Jdbi.create(url, user, pass);
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            throw new RuntimeException(" Lỗi khởi tạo Database: " + e.getMessage());
         }
     }
-    // Hàm main này để chạy thử xem kết nối được chưa (Test)
+
+    // Hàm lấy kết nối (Dùng cái này thay cho getConnection ngày xưa)
+    public static Jdbi get() {
+        return jdbi;
+    }
+
+    // Hàm main để test kết nối
     public static void main(String[] args) {
         try {
-            DBContext db = new DBContext();
-            Connection conn = db.getConnection();
-            if (conn != null) {
-                System.out.println("--------------------------------");
-                System.out.println("KẾT NỐI THÀNH CÔNG RỒI BẠN ƠI!");
-                System.out.println("--------------------------------");
-            }
+            System.out.println("Đang kết nối...");
+            // Test thử truy vấn đơn giản
+            String dbName = DBContext.get().withHandle(handle ->
+                    handle.createQuery("SELECT DATABASE()").mapTo(String.class).one()
+            );
+            System.out.println("✅ KẾT NỐI THÀNH CÔNG TỚI DATABASE: " + dbName);
         } catch (Exception e) {
-            System.out.println("--------------------------------");
-            System.out.println("LỖI RỒI: " + e.getMessage());
-            System.out.println("--------------------------------");
+            System.out.println("❌ KẾT NỐI THẤT BẠI!");
+            e.printStackTrace();
         }
     }
 }
