@@ -4,14 +4,7 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="40b191cf-7666-4f64-a2b5-da075275f0f2" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/java/controller/UpdateProfileServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FruitShop_Web/src/main/java/controller/LoginServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/java/controller/LoginServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FruitShop_Web/src/main/java/controller/RegisterServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/java/controller/RegisterServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FruitShop_Web/src/main/webapp/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/webapp/header.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FruitShop_Web/src/main/webapp/profile.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/webapp/profile.jsp" afterDir="false" />
-    </list>
+    <list default="true" id="40b191cf-7666-4f64-a2b5-da075275f0f2" name="Changes" comment="" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
