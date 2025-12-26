@@ -46,10 +46,10 @@
                         </a>
                     </li>
                     <li class="navbar-item">
-                        <a href="${pageContext.request.contextPath}register.jsp" class="navbar-item__link">Đăng ký</a>
+                        <a href="register.jsp" class="navbar-item__link">Đăng ký</a>
                     </li>
                     <li class="navbar-item">
-                        <a href="${pageContext.request.contextPath}login.jsp" class="navbar-item__link">Đăng nhập</a>
+                        <a href="login.jsp" class="navbar-item__link">Đăng nhập</a>
                     </li>
                 </ul>
             </div>
