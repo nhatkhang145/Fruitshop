@@ -50,46 +50,26 @@ public class UserDAO {
 
     // 4. Cập nhật thông tin User (Tên, Số điện thoại)
     public void update(User user) {
-        Connection conn = null;
-        PreparedStatement ps = null;
+        String query = "UPDATE users SET fullname = ?, phone = ? WHERE id = ?";
 
-        String query = "UPDATE users SET fullname = ?, phone = ?, WHERE id = ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
-
-            ps.setString(1, user.getFullName());
-            ps.setString(2, user.getPhone());
-            ps.setInt(3, user.getId());
-
-            ps.executeUpdate();
-
-        } catch (Exception e) {
-            System.out.println("Lỗi updateUser: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            closeResources(conn, ps, null);
-        }
+        DBContext.get().useHandle(handle ->
+                handle.createUpdate(query)
+                        .bind(0, user.getFullName())
+                        .bind(1, user.getPhone())
+                        .bind(2, user.getId())
+                        .execute()
+        );
     }
 
     // 5. Đổi mật khẩu
     public void changePassword(int id, String newPassword) {
-        Connection conn = null;
-        PreparedStatement ps = null;
         String query = "UPDATE users SET password = ? WHERE id = ?";
-        try {
-            conn = new DBContext().getConnection();
-            ps = conn.prepareStatement(query);
 
-            ps.setString(1, newPassword);
-            ps.setInt(2, id);
-
-            ps.executeUpdate();
-        } catch (Exception e) {
-            System.out.println("Lỗi changePassword: " + e.getMessage());
-            e.printStackTrace();
-        } finally {
-            closeResources(conn, ps, null);
-        }
+        DBContext.get().useHandle(handle ->
+                handle.createUpdate(query)
+                        .bind(0, newPassword)
+                        .bind(1, id)
+                        .execute()
+        );
     }
 }
