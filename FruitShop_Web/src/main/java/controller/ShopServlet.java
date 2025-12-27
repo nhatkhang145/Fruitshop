@@ -1,7 +1,9 @@
 package controller;
 
 import dal.ProductDAO;
+import dal.CategoryDAO;
 import model.Product;
+import model.Category;
 import java.io.IOException;
 import java.util.List;
 import jakarta.servlet.ServletException;
@@ -10,67 +12,64 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 
-// Khai báo đường dẫn URL cho Servlet này là /shop
 @WebServlet(name = "ShopServlet", urlPatterns = {"/shop"})
 public class ShopServlet extends HttpServlet {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+
+        ProductDAO pDao = new ProductDAO();
+        CategoryDAO cDao = new CategoryDAO(); // Giả sử bạn đã có CategoryDAO để lấy danh sách danh mục
+
+        String indexPage = request.getParameter("index");
+        String categoryId = request.getParameter("cid");
+
+        List<Product> listP;
+
+        // 1. Load danh sách Categories để hiển thị ở Sidebar bên trái (nếu có)
+        List<Category> listC = cDao.getAllCategories(); // Bạn cần đảm bảo CategoryDAO có hàm này
+        request.setAttribute("listC", listC);
+
+        // 2. Xử lý Logic hiển thị sản phẩm
+        if (categoryId != null && !categoryId.isEmpty()) {
+            // Case A: Nếu người dùng lọc theo Danh mục
+            int cid = Integer.parseInt(categoryId);
+            listP = pDao.getProductsByCategoryID(cid);
+            request.setAttribute("tag", cid); // Để đánh dấu active category menu
+        } else {
+            // Case B: Nếu vào trang Shop bình thường (Phân trang)
+            if (indexPage == null) {
+                indexPage = "1";
+            }
+            int index = Integer.parseInt(indexPage);
+
+            // Tính toán số trang (Pagination)
+            int count = pDao.countAll();
+            int endPage = count / 6;
+            if (count % 6 != 0) {
+                endPage++;
+            }
+
+            listP = pDao.pagingProduct(index);
+            request.setAttribute("endP", endPage); // Truyền tổng số trang về JSP
+            request.setAttribute("tag", index);    // Để đánh dấu trang hiện tại đang active
+        }
+
+        // 3. Gửi dữ liệu về JSP
+        request.setAttribute("listP", listP);
+        request.getRequestDispatcher("shop.jsp").forward(request, response);
+    }
 
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-
-        // 1. Khởi tạo DAO
-        ProductDAO dao = new ProductDAO();
-
-        // 2. Nhận các tham số từ URL
-        String cid_raw = request.getParameter("cid");   // Lấy mã danh mục (nếu có)
-        String index_raw = request.getParameter("index"); // Lấy số trang (nếu có)
-
-        // Xử lý số trang (nếu không truyền index thì mặc định là trang 1)
-        int index = 1;
-        if (index_raw != null) {
-            index = Integer.parseInt(index_raw);
-        }
-
-        List<Product> listP; // List chứa sản phẩm sẽ gửi sang JSP
-
-        // 3. Xử lý Logic: Phân biệt xem người dùng đang Lọc hay đang Phân trang
-        if (cid_raw != null) {
-            // == TRƯỜNG HỢP 1: LỌC THEO DANH MỤC (có cid) ==
-            int cid = Integer.parseInt(cid_raw);
-            listP = dao.getProductsByCategoryID(cid);
-
-            // Đánh dấu để bên JSP biết đang chọn danh mục nào (để active menu)
-            request.setAttribute("tag", cid);
-        } else {
-            // == TRƯỜNG HỢP 2: KHÔNG CHỌN DANH MỤC (Xem tất cả + Phân trang) ==
-
-            // a. Lấy danh sách sản phẩm theo trang (Mỗi trang 6 món)
-            listP = dao.pagingProduct(index);
-
-            // b. Tính toán tổng số trang (để hiển thị nút 1, 2, 3...)
-            int count = dao.countAll(); // Đếm tổng sản phẩm trong DB
-            int pageSize = 6;           // Số lượng sản phẩm mỗi trang
-            int endPage = count / pageSize;
-            if (count % pageSize != 0) {
-                endPage++; // Nếu chia dư thì cộng thêm 1 trang
-            }
-
-            // Gửi số trang cuối cùng sang JSP để vòng lặp for chạy nút
-            request.setAttribute("endP", endPage);
-        }
-
-        // 4. Gửi dữ liệu sang trang shop.jsp
-        request.setAttribute("listP", listP); // List sản phẩm
-        request.setAttribute("index", index); // Trang hiện tại (để active nút phân trang)
-
-        // Chuyển hướng
-        request.getRequestDispatcher("shop.jsp").forward(request, response);
+        processRequest(request, response);
     }
 
     @Override
     protected void doPost(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        // Nếu có xử lý form tìm kiếm hoặc gì đó thì viết ở đây, tạm thời doGet là đủ
-        doGet(request, response);
+        processRequest(request, response);
     }
 }
