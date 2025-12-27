@@ -1,0 +1,61 @@
+package controller;
+
+import dal.CategoryDAO;
+import dal.ProductDAO;
+import model.Category;
+import model.Product;
+import jakarta.servlet.ServletException;
+import jakarta.servlet.annotation.WebServlet;
+import jakarta.servlet.http.HttpServlet;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpServletResponse;
+import java.io.IOException;
+import java.util.List;
+
+@WebServlet(name = "ProductDetailServlet", urlPatterns = {"/product-detail"})
+public class ProductDetailServlet extends HttpServlet {
+
+    protected void processRequest(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        response.setContentType("text/html;charset=UTF-8");
+        
+        String idRaw = request.getParameter("pid"); // Lấy id từ URL
+        ProductDAO pDao = new ProductDAO();
+        CategoryDAO cDao = new CategoryDAO();
+
+        try {
+            int id = Integer.parseInt(idRaw);
+            
+            // 1. Lấy thông tin chi tiết sản phẩm
+            Product p = pDao.getProductByID(id);
+            
+            // 2. Lấy danh sách sản phẩm liên quan (Cùng category)
+            List<Product> relatedP = pDao.getProductsByCategoryID(p.getCategoryId());
+            
+            // 3. (Tuỳ chọn) Lấy danh mục để hiển thị header/menu nếu cần
+            List<Category> listC = cDao.getAllCategories(); 
+            request.setAttribute("listC", listC);
+
+            request.setAttribute("detail", p);       // Biến 'detail' chứa thông tin 1 sản phẩm
+            request.setAttribute("relatedP", relatedP); // Biến 'relatedP' chứa list sản phẩm liên quan
+            
+            request.getRequestDispatcher("product-detail.jsp").forward(request, response);
+            
+        } catch (Exception e) {
+            // Nếu lỗi id không phải số hoặc không tìm thấy, quay về trang chủ
+            response.sendRedirect("index.jsp");
+        }
+    }
+
+    @Override
+    protected void doGet(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+
+    @Override
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        processRequest(request, response);
+    }
+}
