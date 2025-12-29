@@ -1,167 +1,181 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-<%@ taglib prefix="c" uri="jakarta.tags.core" %>
-<!-- HEADER -->
-<jsp:include page="header.jsp"></jsp:include>
-<div class="main">
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
-  <main class="fm-auth" style="margin-top: 40px; margin-bottom: 60px;">
-    <div class="fm-card">
-      <aside class="fm-left">
-        <a href="" style="text-decoration: none;">
-          <img class="fm-logo-img"
-               src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-               alt="Organic Harvest Logo" style="height: 70px; width: auto; margin-bottom: 30px;" />
-        </a>
-        <h2>Chào mừng đến với Organic Harvest</h2>
-        <p>Mua trái cây tươi sạch — giao tận nhà nhanh chóng.</p>
-        <div class="fm-illustration" aria-hidden="true"></div>
-      </aside>
+    <!DOCTYPE html>
+    <html lang="vi">
 
-      <section class="fm-right">
-        <div class="fm-form-wrap">
-          <div class="fm-tabs" role="tablist" aria-label="Auth tabs">
-            <button id="tab-login" class="fm-tab active" role="tab" aria-selected="true"
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Trang chủ - Organic Harvest</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/auth.css" />
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+
+    </head>
+
+    <body>
+      <!-- HEADER -->
+      <jsp:include page="header.jsp"></jsp:include>
+      <div class="main">
+
+        <main class="fm-auth" style="margin-top: 40px; margin-bottom: 60px;">
+          <div class="fm-card">
+            <aside class="fm-left">
+              <a href="" style="text-decoration: none;">
+                <img class="fm-logo-img"
+                  src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
+                  alt="Organic Harvest Logo" style="height: 70px; width: auto; margin-bottom: 30px;" />
+              </a>
+              <h2>Chào mừng đến với Organic Harvest</h2>
+              <p>Mua trái cây tươi sạch — giao tận nhà nhanh chóng.</p>
+              <div class="fm-illustration" aria-hidden="true"></div>
+            </aside>
+
+            <section class="fm-right">
+              <div class="fm-form-wrap">
+                <div class="fm-tabs" role="tablist" aria-label="Auth tabs">
+                  <button id="tab-login" class="fm-tab active" role="tab" aria-selected="true"
                     aria-controls="loginPanel">
-              Đăng nhập
-            </button>
+                    Đăng nhập
+                  </button>
 
-            <button id="tab-register" class="fm-tab" role="tab" aria-selected="false"
+                  <button id="tab-register" class="fm-tab" role="tab" aria-selected="false"
                     aria-controls="registerPanel">
-              Đăng ký
-            </button>
-          </div>
-
-          <div id="loginPanel" class="fm-panel" role="tabpanel" aria-labelledby="tab-login">
-            <form action="login" method="post">
-
-              <c:if test="${not empty registerSuccess}">
-                <div class="fm-message success"
-                     style="color: green; text-align: center; margin-bottom: 10px;">
-                  ${registerSuccess}
+                    Đăng ký
+                  </button>
                 </div>
-              </c:if>
 
-              <c:if test="${not empty error}">
-                <p style="color: red; text-align: center">${error}</p>
-              </c:if>
+                <div id="loginPanel" class="fm-panel" role="tabpanel" aria-labelledby="tab-login">
+                  <form action="login" method="post">
 
-              <label class="fm-label">Email
-                <input name="user" type="text" required placeholder="Nhập Email của bạn" />
-              </label>
+                    <c:if test="${not empty registerSuccess}">
+                      <div class="fm-message success" style="color: green; text-align: center; margin-bottom: 10px;">
+                        ${registerSuccess}
+                      </div>
+                    </c:if>
 
-              <label class="fm-label">Mật khẩu
-                <input name="pass" type="password" required
-                       placeholder="Vui lòng nhập mật khẩu" />
-              </label>
+                    <c:if test="${not empty error}">
+                      <p style="color: red; text-align: center">${error}</p>
+                    </c:if>
 
-              <div class="fm-row">
-                <label class="fm-check">
-                  <input name="remember" type="checkbox" /> Ghi nhớ tôi
-                </label>
-                <a class="fm-link" href="forget_pass.jsp">Quên mật khẩu?</a>
+                    <label class="fm-label">Email
+                      <input name="user" type="text" required placeholder="Nhập Email của bạn" />
+                    </label>
+
+                    <label class="fm-label">Mật khẩu
+                      <input name="pass" type="password" required placeholder="Vui lòng nhập mật khẩu" />
+                    </label>
+
+                    <div class="fm-row">
+                      <label class="fm-check">
+                        <input name="remember" type="checkbox" /> Ghi nhớ tôi
+                      </label>
+                      <a class="fm-link" href="forget_pass.jsp">Quên mật khẩu?</a>
+                    </div>
+
+                    <button type="submit" class="fm-btn">Đăng nhập</button>
+                    <div class="social-login">
+                      <p style="text-align: center; margin: 15px 0; color: #666;">Hoặc đăng nhập bằng
+                      </p>
+                      <div style="display: flex; gap: 10px; justify-content: center;">
+                        <a href="#" class="btn-social facebook"
+                          style="background: #3b5998; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                          <i class="fa-brands fa-facebook-f"></i> Facebook
+                        </a>
+                        <a href="#" class="btn-social google"
+                          style="background: #db4437; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
+                          <i class="fa-brands fa-google"></i> Google
+                        </a>
+                      </div>
+                    </div>
+                    <div id="loginMessage" class="fm-message" role="status" aria-live="polite"></div>
+
+                    <p class="fm-or">
+                      Bạn chưa có tài khoản?
+                      <a href="#register" id="gotoRegister">Tạo tài khoản</a>
+                    </p>
+                  </form>
+                </div>
+
+                <div id="registerPanel" class="fm-panel hidden" role="tabpanel" aria-labelledby="tab-register">
+                  <form action="register" method="post">
+
+                    <c:if test="${not empty registerError}">
+                      <div class="fm-message error" style="color: red; text-align: center; margin-bottom: 10px;">
+                        ${registerError}
+                      </div>
+                    </c:if>
+
+                    <label class="fm-label">Tên đăng nhập
+                      <input name="user" type="text" required placeholder="Nhập tên đăng nhập của bạn" />
+                    </label>
+
+                    <label class="fm-label">Email
+                      <input name="email" type="email" required placeholder="Email" />
+                    </label>
+
+                    <label class="fm-label">Mật khẩu
+                      <input name="pass" type="password" required minlength="6" placeholder="Mật khẩu" />
+                    </label>
+
+                    <label class="fm-label">Xác nhận mật khẩu
+                      <input name="re_pass" type="password" required placeholder="Xác nhận mật khẩu" />
+                    </label>
+
+                    <button type="submit" class="fm-btn">Tạo tài khoản</button>
+
+                    <p class="fm-or">
+                      Đã có tài khoản? <a href="#login" id="gotoLogin">Đăng nhập</a>
+                    </p>
+                  </form>
+                </div>
               </div>
-
-              <button type="submit" class="fm-btn">Đăng nhập</button>
-              <div class="social-login">
-                <p style="text-align: center; margin: 15px 0; color: #666;">Hoặc đăng nhập bằng
-                </p>
-                <div style="display: flex; gap: 10px; justify-content: center;">
-                  <a href="#" class="btn-social facebook"
-                     style="background: #3b5998; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
-                    <i class="fa-brands fa-facebook-f"></i> Facebook
-                  </a>
-                  <a href="#" class="btn-social google"
-                     style="background: #db4437; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
-                    <i class="fa-brands fa-google"></i> Google
-                  </a>
-                </div>
-              </div>
-              <div id="loginMessage" class="fm-message" role="status" aria-live="polite"></div>
-
-              <p class="fm-or">
-                Bạn chưa có tài khoản?
-                <a href="#register" id="gotoRegister">Tạo tài khoản</a>
-              </p>
-            </form>
+            </section>
           </div>
-
-          <div id="registerPanel" class="fm-panel hidden" role="tabpanel"
-               aria-labelledby="tab-register">
-            <form action="register" method="post">
-
-              <c:if test="${not empty registerError}">
-                <div class="fm-message error"
-                     style="color: red; text-align: center; margin-bottom: 10px;">
-                  ${registerError}
-                </div>
-              </c:if>
-
-              <label class="fm-label">Tên đăng nhập
-                <input name="user" type="text" required placeholder="Nhập tên đăng nhập của bạn" />
-              </label>
-
-              <label class="fm-label">Email
-                <input name="email" type="email" required placeholder="Email" />
-              </label>
-
-              <label class="fm-label">Mật khẩu
-                <input name="pass" type="password" required minlength="6"
-                       placeholder="Mật khẩu" />
-              </label>
-
-              <label class="fm-label">Xác nhận mật khẩu
-                <input name="re_pass" type="password" required
-                       placeholder="Xác nhận mật khẩu" />
-              </label>
-
-              <button type="submit" class="fm-btn">Tạo tài khoản</button>
-
-              <p class="fm-or">
-                Đã có tài khoản? <a href="#login" id="gotoLogin">Đăng nhập</a>
-              </p>
-            </form>
-          </div>
-        </div>
-      </section>
-    </div>
-  </main>
-  <script>
-    const loginTab = document.getElementById('tab-login');
-    const registerTab = document.getElementById('tab-register');
-    const loginPanel = document.getElementById('loginPanel');
-    const registerPanel = document.getElementById('registerPanel');
+        </main>
+        <script>
+          const loginTab = document.getElementById('tab-login');
+          const registerTab = document.getElementById('tab-register');
+          const loginPanel = document.getElementById('loginPanel');
+          const registerPanel = document.getElementById('registerPanel');
 
     // Nếu có lỗi đăng ký → mở tab đăng ký
     // Nếu đăng ký thành công → giữ tab login (để user đăng nhập luôn)
     <% if (request.getAttribute("registerError") != null) { %>
-      registerTab.click();
+            registerTab.click();
       <% } %>
-    // registerSuccess → giữ nguyên tab login (mặc định)
+            // registerSuccess → giữ nguyên tab login (mặc định)
 
-    loginTab.addEventListener('click', () => {
-      loginTab.classList.add('active');
-      registerTab.classList.remove('active');
-      loginPanel.classList.remove('hidden');
-      registerPanel.classList.add('hidden');
-    });
+            loginTab.addEventListener('click', () => {
+              loginTab.classList.add('active');
+              registerTab.classList.remove('active');
+              loginPanel.classList.remove('hidden');
+              registerPanel.classList.add('hidden');
+            });
 
-    registerTab.addEventListener('click', () => {
-      registerTab.classList.add('active');
-      loginTab.classList.remove('active');
-      registerPanel.classList.remove('hidden');
-      loginPanel.classList.add('hidden');
-    });
+          registerTab.addEventListener('click', () => {
+            registerTab.classList.add('active');
+            loginTab.classList.remove('active');
+            registerPanel.classList.remove('hidden');
+            loginPanel.classList.add('hidden');
+          });
 
-    // Nút chuyển nhỏ bên dưới
-    document.getElementById('gotoRegister').addEventListener('click', (e) => {
-      e.preventDefault();
-      registerTab.click();
-    });
-    document.getElementById('gotoLogin').addEventListener('click', (e) => {
-      e.preventDefault();
-      loginTab.click();
-    });
-  </script>
-</div>
-<!-- FOOTER -->
-<jsp:include page="footer.jsp"></jsp:include>
+          // Nút chuyển nhỏ bên dưới
+          document.getElementById('gotoRegister').addEventListener('click', (e) => {
+            e.preventDefault();
+            registerTab.click();
+          });
+          document.getElementById('gotoLogin').addEventListener('click', (e) => {
+            e.preventDefault();
+            loginTab.click();
+          });
+        </script>
+      </div>
+      <!-- FOOTER -->
+      <jsp:include page="footer.jsp"></jsp:include>
+    </body>
+
+    </html>

@@ -1,13 +1,11 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/settings.css" />
@@ -15,44 +13,10 @@
   </head>
 
   <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <a href="/admin/index.jsp" class="logo">
-        <img
-          class="navbar__menu-logo-img"
-          src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-          alt="Organic Harvest Logo"
-        />
-      </a>
-       <ul class="side-menu">
-        <li><a href="/admin/index.jsp"><i class="bx bxs-dashboard"></i>Tổng quan</a></li>
-        <li><a href="/admin/products.jsp"><i class="bx bx-basket"></i>Quản lý sản phẩm</a></li>
-        <li><a href="/admin/Categories.jsp"><i class="bx bx-category"></i>Quản lý danh mục</a></li>
-        <li><a href="/admin/orders.jsp"><i class="bx bx-receipt"></i>Quản lý đơn hàng</a></li>
-        <li><a href="/admin/users.jsp"><i class="bx bx-group"></i>Quản lý khách hàng</a></li>
-          <li class="">
-            <a href="/admin/banners.jsp"><i class='bx bx-images'></i>Quản lý Banner</a>
-        </li>
-          <li class="">
-          <a href="/admin/coupons.jsp"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
-        </li>
-        <li class="">
-          <a href="/admin/reviews.jsp"><i class="bx bx-star"></i>Đánh giá</a>
-        </li>
-        <li class="">
-                <a href="/admin/posts.jsp"><i class='bx bx-news'></i>Tin tức / Blog</a>
-            </li>
-        
-        <li><a href="/admin/notifications.jsp"><i class="bx bx-bell"></i>Lịch sử Thông báo</a></li>
-        <li><a href="/admin/Contact.jsp"><i class="bx bx-message-detail"></i>Tin nhắn</a></li>
-        <li><a href="/admin/reports.jsp"><i class="bx bx-line-chart"></i>Thống kê</a></li>
-        <li class="active">
-          <a href="/admin/Settings.jsp"><i class="bx bx-cog"></i>Cài đặt</a>
-        </li>
-       
-      </ul>
-    </div>
-    <!-- End of Sidebar -->
+
+    <jsp:include page="sidebar.jsp">
+      <jsp:param name="activePage" value="settings" />
+    </jsp:include>
 
     <!-- Main Content -->
     <div class="content">
@@ -171,50 +135,23 @@
                 <legend class="settings-page__legend">Cài đặt chung</legend>
 
                 <div class="settings-page__form-group">
-                  <label for="storeName" class="settings-page__label"
-                    >Tên cửa hàng</label
-                  >
-                  <input
-                    type="text"
-                    id="storeName"
-                    value="Organic Harvest"
-                    class="settings-page__input"
-                  />
+                  <label for="storeName" class="settings-page__label">Tên cửa hàng</label>
+                  <input type="text" id="storeName" value="Organic Harvest" class="settings-page__input" />
                 </div>
 
                 <div class="settings-page__form-group">
-                  <label for="storeSlogan" class="settings-page__label"
-                    >Slogan (Khẩu hiệu)</label
-                  >
-                  <input
-                    type="text"
-                    id="storeSlogan"
-                    value="Trái cây nhập khẩu"
-                    class="settings-page__input"
-                  />
+                  <label for="storeSlogan" class="settings-page__label">Slogan (Khẩu hiệu)</label>
+                  <input type="text" id="storeSlogan" value="Trái cây nhập khẩu" class="settings-page__input" />
                 </div>
 
                 <div class="settings-page__form-group">
-                  <label for="storeEmail" class="settings-page__label"
-                    >Email liên hệ</label
-                  >
-                  <input
-                    type="email"
-                    id="storeEmail"
-                    value="contact@shop.com"
-                    class="settings-page__input"
-                  />
+                  <label for="storeEmail" class="settings-page__label">Email liên hệ</label>
+                  <input type="email" id="storeEmail" value="contact@shop.com" class="settings-page__input" />
                 </div>
 
                 <div class="settings-page__form-group">
-                  <label for="storeLogo" class="settings-page__label"
-                    >Tải lên Logo</label
-                  >
-                  <input
-                    type="file"
-                    id="storeLogo"
-                    class="settings-page__file-input"
-                  />
+                  <label for="storeLogo" class="settings-page__label">Tải lên Logo</label>
+                  <input type="file" id="storeLogo" class="settings-page__file-input" />
                 </div>
               </fieldset>
 
@@ -222,47 +159,28 @@
                 <legend class="settings-page__legend">Cổng thanh toán</legend>
 
                 <div class="settings-page__form-group-toggle">
-                  <label class="settings-page__label"
-                    >Thanh toán khi nhận hàng (COD)</label
-                  >
+                  <label class="settings-page__label">Thanh toán khi nhận hàng (COD)</label>
                   <label class="toggle-switch">
-                    <input
-                      type="checkbox"
-                      class="toggle-switch__input"
-                      checked
-                    />
+                    <input type="checkbox" class="toggle-switch__input" checked />
                     <span class="toggle-switch__slider"></span>
                   </label>
                 </div>
 
                 <div class="settings-page__form-group-toggle">
-                  <label class="settings-page__label"
-                    >Chuyển khoản Ngân hàng</label
-                  >
+                  <label class="settings-page__label">Chuyển khoản Ngân hàng</label>
                   <label class="toggle-switch">
-                    <input
-                      type="checkbox"
-                      class="toggle-switch__input"
-                      checked
-                    />
+                    <input type="checkbox" class="toggle-switch__input" checked />
                     <span class="toggle-switch__slider"></span>
                   </label>
                 </div>
 
                 <div class="settings-page__form-group">
-                  <label for="bankInstructions" class="settings-page__label"
-                    >Hướng dẫn Chuyển khoản</label
-                  >
-                  <textarea
-                    id="bankInstructions"
-                    rows="4"
-                    class="settings-page__textarea"
-                  >
+                  <label for="bankInstructions" class="settings-page__label">Hướng dẫn Chuyển khoản</label>
+                  <textarea id="bankInstructions" rows="4" class="settings-page__textarea">
 Nội dung: [Tên] + [Mã đơn hàng]
 STK: 123456789
 Ngân hàng: Vietcombank
-</textarea
-                  >
+</textarea>
                 </div>
               </fieldset>
 
@@ -270,27 +188,13 @@ Ngân hàng: Vietcombank
                 <legend class="settings-page__legend">Vận chuyển</legend>
 
                 <div class="settings-page__form-group">
-                  <label for="shippingFee" class="settings-page__label"
-                    >Phí vận chuyển đồng giá (VNĐ)</label
-                  >
-                  <input
-                    type="number"
-                    id="shippingFee"
-                    value="30000"
-                    class="settings-page__input"
-                  />
+                  <label for="shippingFee" class="settings-page__label">Phí vận chuyển đồng giá (VNĐ)</label>
+                  <input type="number" id="shippingFee" value="30000" class="settings-page__input" />
                 </div>
 
                 <div class="settings-page__form-group">
-                  <label for="freeShippingMin" class="settings-page__label"
-                    >Miễn phí cho đơn hàng trên (VNĐ)</label
-                  >
-                  <input
-                    type="number"
-                    id="freeShippingMin"
-                    value="500000"
-                    class="settings-page__input"
-                  />
+                  <label for="freeShippingMin" class="settings-page__label">Miễn phí cho đơn hàng trên (VNĐ)</label>
+                  <input type="number" id="freeShippingMin" value="500000" class="settings-page__input" />
                 </div>
               </fieldset>
 
@@ -306,4 +210,5 @@ Ngân hàng: Vietcombank
     <script src="../assets/js/admin/main.js"></script>
     <script src="../assets/js/admin/settings.js"></script>
   </body>
-</html>
+
+  </html>

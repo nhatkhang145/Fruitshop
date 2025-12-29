@@ -1,226 +1,72 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
+  <!DOCTYPE html>
+  <html lang="en">
+
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link
-      href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css"
-      rel="stylesheet"
-    />
+    <title>Tổng quan - Admin</title>
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/dashboard.css" />
-    <title>Tổng quan</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
   </head>
 
   <body>
-    <!-- Sidebar -->
-    <div class="sidebar">
-      <a href="/admin/index.jsp" class="logo">
-        <img
-          class="navbar__menu-logo-img"
-          src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-          alt="Organic Harvest Logo"
-        />
-      </a>
-      <ul class="side-menu">
-        <li class="active">
-          <a href="/admin/index.jsp"
-            ><i class="bx bxs-dashboard"></i>Tổng quan</a
-          >
-        </li>
 
-        <li>
-          <a href="/admin/products.jsp"
-            ><i class="bx bx-basket"></i>Quản lý sản phẩm</a
-          >
-        </li>
-        <li>
-          <a href="/admin/Categories.jsp"
-            ><i class="bx bx-category"></i>Quản lý danh mục</a
-          >
-        </li>
-        <li>
-          <a href="/admin/orders.jsp"
-            ><i class="bx bx-receipt"></i>Quản lý đơn hàng</a
-          >
-        </li>
-        <li>
-          <a href="/admin/users.jsp"
-            ><i class="bx bx-group"></i>Quản lý khách hàng</a
-          >
-        </li>
-          <li class="">
-            <a href="/admin/banners.jsp"><i class='bx bx-images'></i>Quản lý Banner</a>
-        </li>
-          <li class="">
-          <a href="/admin/coupons.jsp"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
-        </li>
-        <li class="">
-          <a href="/admin/reviews.jsp"><i class="bx bx-star"></i>Đánh giá</a>
-        </li>
-        <li class="">
-          <a href="/admin/posts.jsp"><i class='bx bx-news'></i>Tin tức / Blog</a>
-        </li>
-        <li>
-          <a href="/admin/notifications.jsp"
-            ><i class="bx bx-bell"></i>Lịch sử Thông báo</a
-          >
-        </li>
-        <li>
-          <a href="/admin/Contact.jsp"
-            ><i class="bx bx-message-detail"></i>Tin nhắn</a
-          >
-        </li>
+    <jsp:include page="sidebar.jsp">
+      <jsp:param name="activePage" value="dashboard" />
+    </jsp:include>
 
-        <li>
-          <a href="/admin/reports.jsp"
-            ><i class="bx bx-line-chart"></i>Thống kê</a
-          >
-        </li>
-
-           <li class="">
-          <a href="/admin/Settings.jsp"><i class="bx bx-cog"></i>Cài đặt</a>
-        </li>
-      </ul>
-    </div>
-    <!-- End of Sidebar -->
-
-    <!-- Main Content -->
     <div class="content">
-      <!-- Navbar -->
-      <nav>
-        <i class="bx bx-menu"></i>
-        <form action="#">
-          <div class="form-input">
-            <input type="search" placeholder="Search..." />
-            <button class="search-btn" type="submit">
-              <i class="bx bx-search"></i>
-            </button>
-          </div>
-        </form>
 
-        <div class="notification-wrapper">
-          <a href="#" class="notif" id="notifBtn">
-            <i class="bx bx-bell"></i>
-            <span class="count">12</span>
-          </a>
-
-          <div class="notification-dropdown" id="notifDropdown">
-            <h3 class="dropdown-header">Thông báo mới</h3>
-            <ul class="notification-list">
-              <li class="notification-item unread">
-                <i class="bx bx-cart-add item-icon"></i>
-                <div class="item-content">
-                  <p><strong>Đơn hàng mới</strong></p>
-                  <span>Bạn có đơn hàng #12350 từ Nguyễn Văn A.</span>
-                  <small>2 phút trước</small>
-                </div>
-              </li>
-              <li class="notification-item unread">
-                <i class="bx bx-user-plus item-icon"></i>
-                <div class="item-content">
-                  <p><strong>Khách hàng mới</strong></p>
-                  <span>Trần Thị B vừa đăng ký tài khoản.</span>
-                  <small>1 giờ trước</small>
-                </div>
-              </li>
-              <li class="notification-item">
-                <i class="bx bxs-error-circle item-icon"></i>
-                <div class="item-content">
-                  <p><strong>Hết hàng</strong></p>
-                  <span>Sản phẩm "Dâu tây Hàn Quốc" đã hết hàng.</span>
-                  <small>Hôm qua</small>
-                </div>
-              </li>
-            </ul>
-            <div class="dropdown-footer">
-              <a href="/admin/notifications.jsp">Xem tất cả thông báo</a>
-            </div>
-          </div>
-        </div>
-        <div class="profile-wrapper">
-          <a href="#" class="profile" id="profileBtn">
-            <img src="images/logo.png" />
-          </a>
-
-          <div class="profile-dropdown" id="profileDropdown">
-            <h3 class="dropdown-header">Tài khoản</h3>
-            <ul class="profile-menu">
-              <li>
-                <a href="/admin/profile.jsp">
-                  <i class="bx bxs-user-circle"></i>
-                  <span>Hồ sơ của tôi</span>
-                </a>
-              </li>
-              <li>
-                <a href="/admin/profile.jsp#changepassword">
-                  <i class="bx bxs-lock-alt"></i>
-                  <span>Đổi mật khẩu</span>
-                </a>
-              </li>
-
-              <li class="profile-menu-toggle">
-                <i class="bx bx-moon"></i>
-                <span>Chế độ Tối</span>
-
-                <input type="checkbox" id="theme-toggle" hidden />
-                <label for="theme-toggle" class="theme-toggle-dropdown"></label>
-              </li>
-              <hr />
-              <li>
-                <a href="#" class="logout">
-                  <i class="bx bx-log-out-circle"></i>
-                  <span>Đăng xuất</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <!-- End of Navbar -->
+      <jsp:include page="header.jsp" />
 
       <main>
         <div class="header">
           <div class="left">
             <h1>Tổng quan</h1>
             <ul class="breadcrumb">
-              <li><a href="#">Quản lý</a></li>
+              <li><a href="#">Thống kê</a></li>
               <li>/</li>
               <li><a href="#" class="active">Tổng quan</a></li>
             </ul>
           </div>
+          <a href="#" class="report" id="exportBtn">
+            <i class="bx bx-cloud-download"></i>
+            <span>Tải báo cáo</span>
+          </a>
         </div>
 
         <ul class="insights">
           <li>
+            <i class="bx bx-calendar-check"></i>
+            <span class="info">
+              <h3>1,074</h3>
+              <p>Đơn hàng hoàn thành</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bx-show-alt"></i>
+            <span class="info">
+              <h3>3,944</h3>
+              <p>Lượt truy cập</p>
+            </span>
+          </li>
+          <li>
+            <i class="bx bx-line-chart"></i>
+            <span class="info">
+              <h3>14,721</h3>
+              <p>Lượt tìm kiếm</p>
+            </span>
+          </li>
+          <li>
             <i class="bx bx-dollar-circle"></i>
             <span class="info">
-              <h3>1,250,000đ</h3>
-              <p>Doanh thu Hôm nay</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-receipt"></i>
-            <span class="info">
-              <h3>15</h3>
-              <p>Đơn hàng Hôm nay</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-loader-circle"></i>
-            <span class="info">
-              <h3>8</h3>
-              <p>Chờ xử lý</p>
-            </span>
-          </li>
-          <li>
-            <i class="bx bx-user-plus"></i>
-            <span class="info">
-              <h3>22</h3>
-              <p>Khách hàng Mới (Tuần này)</p>
+              <h3>$6,742</h3>
+              <p>Tổng doanh thu</p>
             </span>
           </li>
         </ul>
@@ -228,49 +74,9 @@
         <div class="bottom-data">
           <div class="orders">
             <div class="header">
-              <h3>Đơn hàng mới nhất (Cần xử lý)</h3>
-              <a href="/admin/orders.jsp" class="view-all"
-                >Xem tất cả <i class="bx bx-right-arrow-alt"></i
-              ></a>
-            </div>
-            <table>
-              <thead>
-                <tr>
-                  <th>Mã Đơn Hàng</th>
-                  <th>Khách hàng</th>
-                  <th>Tổng tiền</th>
-                  <th>Trạng thái</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td>#12350</td>
-                  <td>Nguyễn Văn A</td>
-                  <td>320,000đ</td>
-                  <td><span class="status pending">Chờ xử lý</span></td>
-                </tr>
-                <tr>
-                  <td>#12349</td>
-                  <td>Trần Thị B</td>
-                  <td>1,500,000đ</td>
-                  <td><span class="status pending">Chờ xử lý</span></td>
-                </tr>
-                <tr>
-                  <td>#12348</td>
-                  <td>Lê Văn C</td>
-                  <td>450,000đ</td>
-                  <td><span class="status processing">Đang xử lý</span></td>
-                </tr>
-              </tbody>
-            </table>
-          </div>
-
-          <div class="orders">
-            <div class="header">
-              <h3>Doanh thu 7 ngày qua</h3>
-              <a href="/admin/reports.jsp" class="view-all"
-                >Xem báo cáo <i class="bx bx-right-arrow-alt"></i
-              ></a>
+              <h3>Biểu đồ doanh thu</h3>
+              <i class="bx bx-filter"></i>
+              <i class="bx bx-search"></i>
             </div>
             <div class="chart-container-sm">
               <canvas id="salesChart7Days"></canvas>
@@ -280,28 +86,28 @@
           <div class="reminders">
             <div class="header">
               <h3>Sản phẩm sắp hết hàng</h3>
-              <a href="/admin/products.jsp" class="view-all"
-                >Xem tất cả <i class="bx bx-right-arrow-alt"></i
-              ></a>
+              <a href="${pageContext.request.contextPath}/admin/products.jsp" class="view-all">
+                Xem tất cả <i class="bx bx-right-arrow-alt"></i>
+              </a>
             </div>
             <ul class="task-list">
               <li class="low-stock">
                 <div class="task-title">
-                  <img src="https://via.placeholder.com/36x36" alt="Dâu" />
+                  <img src="https://via.placeholder.com/36x36" alt="Icon" />
                   <p>Dâu tây Hàn Quốc (Hộp 500g)</p>
                 </div>
                 <span class="stock-count">Còn 5</span>
               </li>
               <li class="low-stock">
                 <div class="task-title">
-                  <img src="https://via.placeholder.com/36x36" alt="Cam" />
+                  <img src="https://via.placeholder.com/36x36" alt="Icon" />
                   <p>Cam Vàng Mỹ</p>
                 </div>
                 <span class="stock-count">Còn 8</span>
               </li>
               <li class="completed">
                 <div class="task-title">
-                  <img src="https://via.placeholder.com/36x36" alt="Táo" />
+                  <img src="https://via.placeholder.com/36x36" alt="Icon" />
                   <p>Táo Envy New Zealand</p>
                 </div>
                 <span class="stock-count">Còn 120</span>
@@ -312,6 +118,29 @@
       </main>
     </div>
 
-    <script src="../assets/js/admin/main.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/admin/main.js"></script>
+    <script>
+      // Code biểu đồ doanh thu (Giữ nguyên logic JS của bạn)
+      const ctx = document.getElementById('salesChart7Days').getContext('2d');
+      new Chart(ctx, {
+        type: 'line',
+        data: {
+          labels: ['Thứ 2', 'Thứ 3', 'Thứ 4', 'Thứ 5', 'Thứ 6', 'Thứ 7', 'CN'],
+          datasets: [{
+            label: 'Doanh thu (Triệu VNĐ)',
+            data: [12, 19, 3, 5, 2, 3, 10],
+            borderColor: '#388E3C',
+            backgroundColor: 'rgba(56, 142, 60, 0.2)',
+            borderWidth: 2,
+            tension: 0.4
+          }]
+        },
+        options: {
+          responsive: true,
+          maintainAspectRatio: false
+        }
+      });
+    </script>
   </body>
-</html>
+
+  </html>

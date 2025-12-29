@@ -23,15 +23,27 @@ public class LoginServlet extends HttpServlet {
         UserDAO dao = new UserDAO();
         User account = dao.checkLogin(email, pass);
 
-        if (account == null) {
-            request.setAttribute("error", "Email hoặc mật khẩu không đúng!");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
-        } else {
-            HttpSession session = request.getSession();
-            session.setAttribute("account", account);
-            // Đăng nhập xong về trang chủ
-            response.sendRedirect("index.jsp");
-        }
+       // ... Các đoạn code trên giữ nguyên ...
+
+if (account == null) {
+    request.setAttribute("error", "Email hoặc mật khẩu không đúng!");
+    request.getRequestDispatcher("login.jsp").forward(request, response);
+} else {
+    HttpSession session = request.getSession();
+    session.setAttribute("account", account);
+    
+    // --- ĐOẠN CODE CẦN SỬA LÀ ĐÂY ---
+    
+    // Kiểm tra quyền: Nếu Role = 1 (Admin) thì vào trang quản trị
+    if (account.getRole() == 1) {
+        response.sendRedirect("admin/index.jsp");
+    } else {
+        // Nếu là khách bình thường thì về trang chủ
+        response.sendRedirect("index.jsp");
+    }
+    
+
+}
     }
 
 }
