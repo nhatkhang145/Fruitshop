@@ -1,586 +1,244 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <!DOCTYPE html>
-    <html lang="vi">
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
-    <head>
-      <meta charset="UTF-8" />
-      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-      <title>Danh Mục Trái Cây</title>
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
-      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
-      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/shop.css" />
-    </head>
+      <!DOCTYPE html>
+      <html lang="vi">
 
-    <body>
-      <div class="main">
-        <!-- HEADER -->
-        <jsp:include page="header.jsp"></jsp:include>
-        <!-- CONTAINER -->
-        <!-- page title -->
-        <div class="breadcrumb">
-          <div class="grid">
-            <a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a>
-            <i class="fa-solid fa-angle-right"></i>
-            <span>Sản phẩm</span>
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Danh Mục Trái Cây</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/shop.css" />
+      </head>
+
+      <body>
+        <div class="main">
+          <!-- HEADER -->
+          <jsp:include page="header.jsp"></jsp:include>
+          <!-- CONTAINER -->
+          <!-- page title -->
+          <div class="breadcrumb">
+            <div class="grid">
+              <a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a>
+              <i class="fa-solid fa-angle-right"></i>
+              <span>Sản phẩm</span>
+            </div>
           </div>
-        </div>
-        <!--  -->
-        <div class="app__container">
-          <div class="grid">
-            <div class="grid__row app__content">
-              <!-- CỘT 2 -->
-              <div class="grid__column-2">
-                <nav class="category">
-                  <h3 class="category_heading">
-                    <i class="category__heading-icon fas fa-list"></i>
-                    Danh Mục
-                  </h3>
-                  <ul class="category-list">
-                    <li class="category-item">
-                      <details open>
-                        <summary>Trái Cây Tươi</summary>
-                        <ul class="subcategory-list">
-                          <li><a href="#">Táo</a></li>
-                          <li><a href="#">Cam</a></li>
-                          <li><a href="#">Chuối</a></li>
-                          <li><a href="#">Dưa Hấu</a></li>
-                        </ul>
-                      </details>
-                    </li>
-
-                    <li class="category-item">
-                      <details>
-                        <summary>Trái Cây Nhập Khẩu</summary>
-                        <ul class="subcategory-list">
-                          <li><a href="#">Nho Mỹ</a></li>
-                          <li><a href="#">Kiwi New Zealand</a></li>
-                          <li><a href="#">Lê Hàn Quốc</a></li>
-                        </ul>
-                      </details>
-                    </li>
-
-                    <li class="category-item">
-                      <details>
-                        <summary>Trái Cây Theo Mùa</summary>
-                        <ul class="subcategory-list">
-                          <li><a href="#">Xoài</a></li>
-                          <li><a href="#">Mít</a></li>
-                          <li><a href="#">Sầu Riêng</a></li>
-                          <li><a href="#">Chôm Chôm</a></li>
-                        </ul>
-                      </details>
-                    </li>
-
-                    <li class="category-item">
-                      <details>
-                        <summary>Combo Trái Cây</summary>
-                        <ul class="subcategory-list">
-                          <li><a href="#">Hộp Quà Trái Cây</a></li>
-                          <li><a href="#">Combo Gia Đình</a></li>
-                          <li><a href="#">Combo Văn Phòng</a></li>
-                        </ul>
-                      </details>
-                    </li>
-                  </ul>
-                </nav>
-
-                <!-- BỘ LỌC -->
-                <nav class="filter">
-                  <h3 class="category_heading">
-                    <i class="fa-solid fa-filter"></i>
-                    Bộ Lọc Tìm Kiếm
-                  </h3>
-                  <ul class="category-list">
-                    <li class="category-item">
-                      <details open>
-                        <summary>Quốc Gia</summary>
-                        <ul class="subcategory-list">
-                          <li><a href="#">Mỹ</a></li>
-                          <li><a href="#">Úc</a></li>
-                          <li><a href="#">Hàn Quốc</a></li>
-                          <li><a href="#">New Zealand</a></li>
-                        </ul>
-                      </details>
-                    </li>
-
-                    <li class="category-item">
-                      <details>
-                        <summary>Mức giá</summary>
-                        <ul class="subcategory-list">
-                          <li><a href="#">Dưới 200.000đ/kg</a></li>
-                          <li><a href="#">200.000đ - 500.000đ/kg</a></li>
-                          <li><a href="#">500.000đ - 1.000.000đ/kg</a></li>
-                          <li><a href="#">Trên 1.000.000đ/kg</a></li>
-                        </ul>
-                      </details>
-                    </li>
-                  </ul>
-                </nav>
-              </div>
-              <!-- KẾT THÚC CỘT 2 -->
-
-              <!-- CỘT 10 -->
-              <div class="grid__column-10">
-                <div class="sort-filter">
-                  <span class="sort-filter__label">Sắp xếp theo </span>
-                  <button class="sort-filter__btn btn">Phổ biến</button>
-                  <button class="sort-filter__btn btn btn--primary">
-                    Mới nhất
-                  </button>
-                  <button class="sort-filter__btn btn">Bán chạy</button>
-
-                  <div class="select-cost">
-                    <span class="select-cost__label">Giá</span>
-                    <i class="select-cost__icon fa-solid fa-arrow-down"></i>
-
-                    <ul class="select-cost__list">
-                      <li class="select-cost__item">
-                        <a href="" class="select-cost__link">Giá: từ thấp đến cao</a>
+          <!--  -->
+          <div class="app__container">
+            <div class="grid">
+              <div class="grid__row app__content">
+                <!-- CỘT 2 -->
+                <div class="grid__column-2">
+                  <nav class="category">
+                    <h3 class="category_heading">
+                      <i class="category__heading-icon fas fa-list"></i>
+                      Danh Mục
+                    </h3>
+                    <ul class="category-list">
+                      <li class="category-item">
+                        <details open>
+                          <summary>Trái Cây Tươi</summary>
+                          <ul class="subcategory-list">
+                            <li><a href="#">Táo</a></li>
+                            <li><a href="#">Cam</a></li>
+                            <li><a href="#">Chuối</a></li>
+                            <li><a href="#">Dưa Hấu</a></li>
+                          </ul>
+                        </details>
                       </li>
-                      <li class="select-cost__item">
-                        <a href="" class="select-cost__link">Giá: từ cao đến thấp</a>
+
+                      <li class="category-item">
+                        <details>
+                          <summary>Trái Cây Nhập Khẩu</summary>
+                          <ul class="subcategory-list">
+                            <li><a href="#">Nho Mỹ</a></li>
+                            <li><a href="#">Kiwi New Zealand</a></li>
+                            <li><a href="#">Lê Hàn Quốc</a></li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <li class="category-item">
+                        <details>
+                          <summary>Trái Cây Theo Mùa</summary>
+                          <ul class="subcategory-list">
+                            <li><a href="#">Xoài</a></li>
+                            <li><a href="#">Mít</a></li>
+                            <li><a href="#">Sầu Riêng</a></li>
+                            <li><a href="#">Chôm Chôm</a></li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <li class="category-item">
+                        <details>
+                          <summary>Combo Trái Cây</summary>
+                          <ul class="subcategory-list">
+                            <li><a href="#">Hộp Quà Trái Cây</a></li>
+                            <li><a href="#">Combo Gia Đình</a></li>
+                            <li><a href="#">Combo Văn Phòng</a></li>
+                          </ul>
+                        </details>
                       </li>
                     </ul>
+                  </nav>
+
+                  <!-- BỘ LỌC -->
+                  <nav class="filter">
+                    <h3 class="category_heading">
+                      <i class="fa-solid fa-filter"></i>
+                      Bộ Lọc Tìm Kiếm
+                    </h3>
+                    <ul class="category-list">
+                      <li class="category-item">
+                        <details open>
+                          <summary>Quốc Gia</summary>
+                          <ul class="subcategory-list">
+                            <li><a href="#">Mỹ</a></li>
+                            <li><a href="#">Úc</a></li>
+                            <li><a href="#">Hàn Quốc</a></li>
+                            <li><a href="#">New Zealand</a></li>
+                          </ul>
+                        </details>
+                      </li>
+
+                      <li class="category-item">
+                        <details>
+                          <summary>Mức giá</summary>
+                          <ul class="subcategory-list">
+                            <li><a href="#">Dưới 200.000đ/kg</a></li>
+                            <li><a href="#">200.000đ - 500.000đ/kg</a></li>
+                            <li><a href="#">500.000đ - 1.000.000đ/kg</a></li>
+                            <li><a href="#">Trên 1.000.000đ/kg</a></li>
+                          </ul>
+                        </details>
+                      </li>
+                    </ul>
+                  </nav>
+                </div>
+                <!-- KẾT THÚC CỘT 2 -->
+
+                <!-- CỘT 10 -->
+                <div class="grid__column-10">
+                  <div class="sort-filter">
+                    <span class="sort-filter__label">Sắp xếp theo </span>
+                    <button class="sort-filter__btn btn">Phổ biến</button>
+                    <button class="sort-filter__btn btn btn--primary">
+                      Mới nhất
+                    </button>
+                    <button class="sort-filter__btn btn">Bán chạy</button>
+
+                    <div class="select-cost">
+                      <span class="select-cost__label">Giá</span>
+                      <i class="select-cost__icon fa-solid fa-arrow-down"></i>
+
+                      <ul class="select-cost__list">
+                        <li class="select-cost__item">
+                          <a href="" class="select-cost__link">Giá: từ thấp đến cao</a>
+                        </li>
+                        <li class="select-cost__item">
+                          <a href="" class="select-cost__link">Giá: từ cao đến thấp</a>
+                        </li>
+                      </ul>
+                    </div>
+
+                    <div class="sort-filter__page">
+                      <span class="sort-filter__page-num"></span>
+                      <span class="sort-filter__page-current">1</span>
+                      <span class="sort-filter__page-total">/14 </span>
+
+                      <div class="sort-filter__page-control">
+                        <a href="" class="sort-filter__page-btn sort-filter__page-btn--disabled">
+                          <i class="sort-filter__page-icon fa-solid fa-arrow-left"></i>
+                        </a>
+                        <a href="" class="sort-filter__page-btn">
+                          <i class="sort-filter__page-icon fa-solid fa-arrow-right"></i>
+                        </a>
+                      </div>
+                    </div>
                   </div>
+                  <!-- Product item -->
+                  <div class="home-product">
+                    <div class="grid__row">
+                      <c:forEach items="${listP}" var="p">
+                        <div class="grid__column-2-4">
+                          <div class="product-card">
+                            <div class="product-image">
+                              <a href="product-detail?pid=${p.id}">
+                                <img src="${p.image}" alt="${p.name}" loading="lazy" />
+                              </a>
 
-                  <div class="sort-filter__page">
-                    <span class="sort-filter__page-num"></span>
-                    <span class="sort-filter__page-current">1</span>
-                    <span class="sort-filter__page-total">/14 </span>
+                              <div class="product-badge sale">-10%</div>
 
-                    <div class="sort-filter__page-control">
-                      <a href="" class="sort-filter__page-btn sort-filter__page-btn--disabled">
-                        <i class="sort-filter__page-icon fa-solid fa-arrow-left"></i>
-                      </a>
-                      <a href="" class="sort-filter__page-btn">
-                        <i class="sort-filter__page-icon fa-solid fa-arrow-right"></i>
-                      </a>
+                              <div class="product-actions">
+                                <a href="#" class="action-btn" title="Thêm vào yêu thích">
+                                  <i class="far fa-heart"></i>
+                                </a>
+
+                                <a href="product-detail?pid=${p.id}" class="action-btn" title="Xem nhanh">
+                                  <i class="far fa-eye"></i>
+                                </a>
+
+                                <button class="action-btn add-to-cart-btn" data-id="${p.id}" title="Thêm vào giỏ">
+                                  <i class="fas fa-shopping-basket"></i>
+                                </button>
+                              </div>
+                            </div>
+
+                            <div class="product-info">
+                              <div class="category">Trái cây nhập khẩu</div>
+
+                              <h3>
+                                <a href="product-detail?pid=${p.id}" title="${p.name}">${p.name}</a>
+                              </h3>
+
+                              <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span style="color: #999;">(15)</span>
+                              </div>
+
+                              <div class="price">
+                                <span class="current">
+                                  <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
+                                </span>
+                                <span class="original">
+                                  <fmt:formatNumber value="${p.price * 1.1}" pattern="#,###" />đ
+                                </span>
+                                <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </c:forEach>
+                    </div>
+                    <div class="col-12">
+                      <div class="pagination d-flex justify-content-center mt-5">
+                        <c:if test="${endP > 1}">
+                          <c:forEach begin="1" end="${endP}" var="i">
+                            <a href="shop?index=${i}" class="rounded ${tag == i ? 'active' : ''}">
+                              ${i}
+                            </a>
+                          </c:forEach>
+                        </c:if>
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <div class="home-product">
-                  <div class="grid__row">
-                    <div class="grid__column-2-4">
-                      <!-- Product Item -->
-                      <div class="product-card">
-                        <div class="product-image">
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                            <img
-                              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                              alt="Dưa" loading="lazy" />
-                          </a>
-
-                          <div class="product-badge sale">-10%</div>
-
-                          <div class="product-actions">
-                            <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                              <i class="far fa-heart"></i>
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                              title="Xem nhanh">
-                              <i class="far fa-eye"></i>
-                            </a>
-
-                            <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                              <i class="fas fa-shopping-basket"></i>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="product-info">
-                          <div class="category">Trái cây nhập khẩu</div>
-
-                          <h3>
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                          </h3>
-
-                          <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: #999;">(15)</span>
-                          </div>
-
-                          <div class="price">
-                            <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                            <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="grid__column-2-4">
-                      <!-- Product Item -->
-                      <div class="product-card">
-                        <div class="product-image">
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                            <img
-                              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                              alt="Dưa" loading="lazy" />
-                          </a>
-
-                          <div class="product-badge sale">-10%</div>
-
-                          <div class="product-actions">
-                            <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                              <i class="far fa-heart"></i>
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                              title="Xem nhanh">
-                              <i class="far fa-eye"></i>
-                            </a>
-
-                            <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                              <i class="fas fa-shopping-basket"></i>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="product-info">
-                          <div class="category">Trái cây nhập khẩu</div>
-
-                          <h3>
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                          </h3>
-
-                          <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: #999;">(15)</span>
-                          </div>
-
-                          <div class="price">
-                            <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                            <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="grid__column-2-4">
-                      <!-- Product Item -->
-                      <div class="product-card">
-                        <div class="product-image">
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                            <img
-                              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                              alt="Dưa" loading="lazy" />
-                          </a>
-
-                          <div class="product-badge sale">-10%</div>
-
-                          <div class="product-actions">
-                            <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                              <i class="far fa-heart"></i>
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                              title="Xem nhanh">
-                              <i class="far fa-eye"></i>
-                            </a>
-
-                            <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                              <i class="fas fa-shopping-basket"></i>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="product-info">
-                          <div class="category">Trái cây nhập khẩu</div>
-
-                          <h3>
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                          </h3>
-
-                          <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: #999;">(15)</span>
-                          </div>
-
-                          <div class="price">
-                            <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                            <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="grid__column-2-4">
-                      <!-- Product Item -->
-                      <div class="product-card">
-                        <div class="product-image">
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                            <img
-                              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                              alt="Dưa" loading="lazy" />
-                          </a>
-
-                          <div class="product-badge sale">-10%</div>
-
-                          <div class="product-actions">
-                            <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                              <i class="far fa-heart"></i>
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                              title="Xem nhanh">
-                              <i class="far fa-eye"></i>
-                            </a>
-
-                            <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                              <i class="fas fa-shopping-basket"></i>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="product-info">
-                          <div class="category">Trái cây nhập khẩu</div>
-
-                          <h3>
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                          </h3>
-
-                          <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: #999;">(15)</span>
-                          </div>
-
-                          <div class="price">
-                            <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                            <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="grid__column-2-4">
-                      <!-- Product Item -->
-                      <div class="product-card">
-                        <div class="product-image">
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                            <img
-                              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                              alt="Dưa" loading="lazy" />
-                          </a>
-
-                          <div class="product-badge sale">-10%</div>
-
-                          <div class="product-actions">
-                            <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                              <i class="far fa-heart"></i>
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                              title="Xem nhanh">
-                              <i class="far fa-eye"></i>
-                            </a>
-
-                            <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                              <i class="fas fa-shopping-basket"></i>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="product-info">
-                          <div class="category">Trái cây nhập khẩu</div>
-
-                          <h3>
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                          </h3>
-
-                          <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: #999;">(15)</span>
-                          </div>
-
-                          <div class="price">
-                            <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                            <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="grid__column-2-4">
-                      <!-- Product Item -->
-                      <div class="product-card">
-                        <div class="product-image">
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                            <img
-                              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                              alt="Dưa" loading="lazy" />
-                          </a>
-
-                          <div class="product-badge sale">-10%</div>
-
-                          <div class="product-actions">
-                            <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                              <i class="far fa-heart"></i>
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                              title="Xem nhanh">
-                              <i class="far fa-eye"></i>
-                            </a>
-
-                            <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                              <i class="fas fa-shopping-basket"></i>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="product-info">
-                          <div class="category">Trái cây nhập khẩu</div>
-
-                          <h3>
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                          </h3>
-
-                          <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: #999;">(15)</span>
-                          </div>
-
-                          <div class="price">
-                            <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                            <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="grid__column-2-4">
-                      <!-- Product Item -->
-                      <div class="product-card">
-                        <div class="product-image">
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                            <img
-                              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                              alt="Dưa" loading="lazy" />
-                          </a>
-
-                          <div class="product-badge sale">-10%</div>
-
-                          <div class="product-actions">
-                            <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                              <i class="far fa-heart"></i>
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                              title="Xem nhanh">
-                              <i class="far fa-eye"></i>
-                            </a>
-
-                            <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                              <i class="fas fa-shopping-basket"></i>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="product-info">
-                          <div class="category">Trái cây nhập khẩu</div>
-
-                          <h3>
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                          </h3>
-
-                          <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: #999;">(15)</span>
-                          </div>
-
-                          <div class="price">
-                            <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                            <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-                    <div class="grid__column-2-4">
-                      <!-- Product Item -->
-                      <div class="product-card">
-                        <div class="product-image">
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                            <img
-                              src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                              alt="Dưa" loading="lazy" />
-                          </a>
-
-                          <div class="product-badge sale">-10%</div>
-
-                          <div class="product-actions">
-                            <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                              <i class="far fa-heart"></i>
-                            </a>
-
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                              title="Xem nhanh">
-                              <i class="far fa-eye"></i>
-                            </a>
-
-                            <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                              <i class="fas fa-shopping-basket"></i>
-                            </button>
-                          </div>
-                        </div>
-
-                        <div class="product-info">
-                          <div class="category">Trái cây nhập khẩu</div>
-
-                          <h3>
-                            <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                          </h3>
-
-                          <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star"></i>
-                            <i class="fas fa-star-half-alt"></i>
-                            <span style="color: #999;">(15)</span>
-                          </div>
-
-                          <div class="price">
-                            <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                            <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                          </div>
-                        </div>
-                      </div>
-                    </div>
-
-
-
-                  </div>
-                  <!-- KẾT THÚC CỘT 10 -->
-                </div>
+                <!-- KẾT THÚC CỘT 10 -->
               </div>
             </div>
           </div>
+        </div>
         </div>
         <!-- FOOTER -->
         <footer class="footer">
@@ -635,7 +293,8 @@
                   </li>
                   <li class="footer__link-item">
                     <div class="footer__link-dot"></div>
-                    <a href="https://www.themedevhub.com/hire-experts" target="_blank" class="footer__link">Sản phẩm</a>
+                    <a href="https://www.themedevhub.com/hire-experts" target="_blank" class="footer__link">Sản
+                      phẩm</a>
                   </li>
                   <li class="footer__link-item">
                     <div class="footer__link-dot"></div>
@@ -681,7 +340,8 @@
                   </li>
                   <li class="footer__link-item">
                     <div class="footer__link-dot"></div>
-                    <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Chính sách thanh
+                    <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Chính sách
+                      thanh
                       toán</a>
                   </li>
                   <li class="footer__link-item">
@@ -730,7 +390,7 @@
           </div>
         </footer>
         <script src="./assets/js/main.js"></script>
-      </div>
-    </body>
+        </div>
+      </body>
 
-    </html>
+      </html>
