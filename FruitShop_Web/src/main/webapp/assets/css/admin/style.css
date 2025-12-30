@@ -983,3 +983,84 @@ input#theme-toggle:checked + .theme-toggle-dropdown::before {
   background: var(--danger); 
 }
 
+
+/* ================================================= */
+/* === TÙY CHỈNH THANH CÔNG CỤ (Length & Filter) === */
+/* ================================================= */
+
+/* 1. Căn chỉnh khung bao ngoài */
+.dataTables_wrapper .dataTables_length,
+.dataTables_wrapper .dataTables_filter {
+    color: var(--dark); /* Màu chữ */
+    font-weight: 500;
+    margin-bottom: 20px; /* Cách bảng một chút cho thoáng */
+    padding: 10px 0;
+}
+
+/* 2. Tùy chỉnh ô chọn số dòng (Length) */
+.dataTables_wrapper .dataTables_length select {
+    border: 1px solid #e0e0e0;
+    border-radius: 8px; /* Bo góc mềm mại */
+    padding: 6px 12px;
+    background-color: #fff;
+    color: var(--dark);
+    outline: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    margin: 0 6px; /* Khoảng cách với chữ xung quanh */
+}
+
+/* Hiệu ứng khi bấm vào */
+.dataTables_wrapper .dataTables_length select:focus {
+    border-color: var(--primary-color); /* Màu xanh chủ đạo */
+    box-shadow: 0 0 0 3px rgba(61, 139, 145, 0.1); /* Viền sáng mờ */
+}
+
+/* 3. Tùy chỉnh ô tìm kiếm (Filter) */
+.dataTables_wrapper .dataTables_filter {
+    float: right; /* Đẩy sang phải */
+    text-align: right;
+}
+
+.dataTables_wrapper .dataTables_filter label {
+    font-weight: 600;
+    color: var(--text-color);
+    display: inline-flex; /* Để căn giữa icon và input */
+    align-items: center;
+}
+
+.dataTables_wrapper .dataTables_filter input {
+    border: 1px solid #e0e0e0;
+    border-radius: 20px; /* Bo tròn kiểu viên thuốc */
+    padding: 8px 16px;
+    margin-left: 10px;
+    outline: none;
+    transition: all 0.3s ease;
+    width: 250px; /* Độ rộng ô tìm kiếm */
+    background: #fff url('https://cdn-icons-png.flaticon.com/512/54/54481.png') no-repeat 95% center; /* (Tùy chọn) Thêm icon kính lúp */
+    background-size: 14px;
+}
+
+/* Hiệu ứng khi gõ tìm kiếm */
+.dataTables_wrapper .dataTables_filter input:focus {
+    width: 300px; /* Hiệu ứng giãn rộng ra khi nhập */
+    border-color: var(--primary-color);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.05);
+}
+
+/* ================================================= */
+/* === RESPONSIVE (Cho điện thoại) === */
+/* ================================================= */
+@media screen and (max-width: 768px) {
+    .dataTables_wrapper .dataTables_filter {
+        float: none;
+        text-align: left;
+        margin-top: 10px;
+    }
+    
+    .dataTables_wrapper .dataTables_filter input {
+        width: 100%; /* Full màn hình trên điện thoại */
+        margin-left: 0;
+        margin-top: 5px;
+    }
+}

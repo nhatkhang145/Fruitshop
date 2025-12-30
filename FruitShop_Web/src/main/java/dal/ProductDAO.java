@@ -2,84 +2,84 @@ package dal;
 
 import model.Product;
 import java.util.List;
-import java.util.Optional;
 
-// Không cần extends DBContext nữa vì ta dùng hàm static DBContext.get()
 public class ProductDAO {
 
     // 1. Lấy tất cả sản phẩm
     public List<Product> getAllProducts() {
-        String sql = "SELECT * FROM products";
+        // SỬA: short_description AS description (để khớp với file Model)
+        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products";
         return DBContext.get().withHandle(handle ->
-            handle.createQuery(sql)
-                  .mapToBean(Product.class) // Tự động map cột DB vào class Product
-                  .list()
+                handle.createQuery(sql)
+                        .mapToBean(Product.class)
+                        .list()
         );
     }
 
     // 2. Lấy sản phẩm theo Category ID
     public List<Product> getProductsByCategoryID(int cid) {
-        String sql = "SELECT * FROM products WHERE category_id = ?";
+        // SỬA TƯƠNG TỰ
+        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE category_id = ?";
         return DBContext.get().withHandle(handle ->
-            handle.createQuery(sql)
-                  .bind(0, cid) // Gán cid vào dấu ? đầu tiên
-                  .mapToBean(Product.class)
-                  .list()
+                handle.createQuery(sql)
+                        .bind(0, cid)
+                        .mapToBean(Product.class)
+                        .list()
         );
     }
 
     // 3. Lấy chi tiết 1 sản phẩm
     public Product getProductByID(int id) {
-        String sql = "SELECT * FROM products WHERE product_id = ?";
+        // SỬA TƯƠNG TỰ
+        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE id = ?";
         return DBContext.get().withHandle(handle ->
-            handle.createQuery(sql)
-                  .bind(0, id)
-                  .mapToBean(Product.class)
-                  .findFirst()
-                  .orElse(null) // Nếu không tìm thấy trả về null
+                handle.createQuery(sql)
+                        .bind(0, id)
+                        .mapToBean(Product.class)
+                        .findFirst()
+                        .orElse(null)
         );
     }
 
     // ================== PHẦN PHÂN TRANG ==================
 
-    // 4. Đếm tổng số lượng sản phẩm
+    // 4. Đếm tổng số lượng sản phẩm (Giữ nguyên)
     public int countAll() {
         String sql = "SELECT COUNT(*) FROM products";
         return DBContext.get().withHandle(handle ->
-            handle.createQuery(sql)
-                  .mapTo(Integer.class)
-                  .one()
+                handle.createQuery(sql)
+                        .mapTo(Integer.class)
+                        .one()
         );
     }
 
-    // 5. Phân trang (Trang 1 lấy 6 bài, Trang 2 lấy 6 bài tiếp...)
+    // 5. Phân trang
     public List<Product> pagingProduct(int index) {
-        String sql = "SELECT * FROM products ORDER BY product_id LIMIT ?, 6";
-        int offset = (index - 1) * 6; // Tính vị trí bắt đầu
-        
+        // SỬA TƯƠNG TỰ
+        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products ORDER BY id LIMIT ?, 6";
+        int offset = (index - 1) * 6;
+
         return DBContext.get().withHandle(handle ->
-            handle.createQuery(sql)
-                  .bind(0, offset)
-                  .mapToBean(Product.class)
-                  .list()
+                handle.createQuery(sql)
+                        .bind(0, offset)
+                        .mapToBean(Product.class)
+                        .list()
         );
     }
 
     // Main test
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
-        
-        // Thử lấy danh sách
         List<Product> list = dao.getAllProducts();
-        
+
         System.out.println("----- TEST LIST PRODUCTS -----");
+        System.out.println("Tổng số lượng tìm thấy: " + list.size());
+
         if (list.isEmpty()) {
-            System.out.println("Chưa có sản phẩm nào hoặc lỗi kết nối!");
+            System.out.println("Lỗi: Không lấy được dữ liệu!");
         } else {
             for (Product p : list) {
-                // Lưu ý: Đảm bảo class Product của bạn có hàm getProduct_name() hoặc getName()
-                // Jdbi map theo tên cột product_name -> field productName hoặc product_name
-                System.out.println(p.getId() + " - " + p.getName() + " - " + p.getPrice());
+                System.out.println("ID: " + p.getId() + " | Tên: " + p.getName() + " | Giá: " + p.getPrice());
             }
         }
     }
