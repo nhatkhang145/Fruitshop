@@ -52,5 +52,63 @@ public class AddressDAO {
         );
     }
 
-   
+    // 3. Thêm địa chỉ mới
+    public void addAddress(Address address) {
+        DBContext.get().useHandle(handle -> {
+            // Nếu địa chỉ mới là mặc định, bỏ mặc định của các địa chỉ khác
+            if (address.isDefault()) {
+                handle.createUpdate("UPDATE user_addresses SET is_default = 0 WHERE user_id = ?")
+                        .bind(0, address.getUserId())
+                        .execute();
+            }
+
+            String query = "INSERT INTO user_addresses (user_id, receiver_name, phone_number, address, city, is_default) " +
+                           "VALUES (?, ?, ?, ?, ?, ?)";
+            handle.createUpdate(query)
+                    .bind(0, address.getUserId())
+                    .bind(1, address.getReceiverName())
+                    .bind(2, address.getPhoneNumber())
+                    .bind(3, address.getAddress())
+                    .bind(4, address.getCity())
+                    .bind(5, address.isDefault() ? 1 : 0)
+                    .execute();
+        });
+    }
+
+    // 4. Cập nhật địa chỉ
+    public void updateAddress(Address address) {
+        DBContext.get().useHandle(handle -> {
+            // Nếu địa chỉ này được đặt làm mặc định, bỏ mặc định của các địa chỉ khác
+            if (address.isDefault()) {
+                handle.createUpdate("UPDATE user_addresses SET is_default = 0 WHERE user_id = ? AND id != ?")
+                        .bind(0, address.getUserId())
+                        .bind(1, address.getId())
+                        .execute();
+            }
+
+            String query = "UPDATE user_addresses SET receiver_name = ?, phone_number = ?, address = ?, city = ?, is_default = ? " +
+                           "WHERE id = ?";
+            handle.createUpdate(query)
+                    .bind(0, address.getReceiverName())
+                    .bind(1, address.getPhoneNumber())
+                    .bind(2, address.getAddress())
+                    .bind(3, address.getCity())
+                    .bind(4, address.isDefault() ? 1 : 0)
+                    .bind(5, address.getId())
+                    .execute();
+        });
+    }
+
+    // 5. Xóa địa chỉ
+    public void deleteAddress(int addressId) {
+        String query = "DELETE FROM user_addresses WHERE id = ?";
+
+        DBContext.get().useHandle(handle ->
+                handle.createUpdate(query)
+                        .bind(0, addressId)
+                        .execute()
+        );
+    }
+
+    
 }
