@@ -51,7 +51,7 @@
                       <a href="orders.jsp"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
                     </li>
                     <li class="profile-menu-item">
-                      <a href="addresses.jsp"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
+                      <a href="addresses"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
                     </li>
                     <li class="profile-menu-item ">
                       <a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
@@ -100,11 +100,6 @@
                         <input type="text" name="phone" class="form-input" value="${sessionScope.account.phone}" />
                       </div>
 
-                      <div class="form-group">
-                        <label>Địa chỉ nhận hàng</label>
-                        <input type="text" name="address" class="form-input" value="${userAddress}"
-                          placeholder="Nhập địa chỉ giao hàng mặc định" />
-                      </div>
 
                       <div class="form-group">
                         <label>Giới tính</label>

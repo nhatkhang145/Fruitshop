@@ -52,6 +52,11 @@ public class Address {
         return isDefault;
     }
 
+    // Getter thay thế để dùng trong JSP (tránh reserved keyword 'default')
+    public boolean getDefaultAddress() {
+        return isDefault;
+    }
+
     // Setters
     public void setId(int id) {
         this.id = id;
