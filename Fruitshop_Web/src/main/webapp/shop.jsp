@@ -177,8 +177,8 @@
                               <div class="product-badge sale">-10%</div>
 
                               <div class="product-actions">
-                                <a href="#" class="action-btn" title="Thêm vào yêu thích">
-                                  <i class="far fa-heart"></i>
+                                <a href="wishlist?action=add&pid=${p.id}" class="action-btn" title="Thêm vào yêu thích">
+                                    <i class="far fa-heart"></i>
                                 </a>
 
                                 <a href="product-detail?pid=${p.id}" class="action-btn" title="Xem nhanh">
