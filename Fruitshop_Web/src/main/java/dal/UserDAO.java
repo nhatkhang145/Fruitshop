@@ -32,13 +32,25 @@ public class UserDAO {
 
     // 3. Đăng nhập
     public User checkLogin(String email, String password) {
-        String query = "SELECT * FROM users WHERE email = ? AND password = ? AND status = 1";
+        String query = "SELECT id, fullname, email, password, phone, role, avatar, gender, birthdate FROM users WHERE email = ? AND password = ? AND status = 1";
 
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(query)
                         .bind(0, email)
                         .bind(1, password)
-                        .mapToBean(User.class)
+                        .map((rs, ctx) -> {
+                            User user = new User();
+                            user.setId(rs.getInt("id"));
+                            user.setFullName(rs.getString("fullname"));
+                            user.setEmail(rs.getString("email"));
+                            user.setPassword(rs.getString("password"));
+                            user.setPhone(rs.getString("phone"));
+                            user.setRole(rs.getInt("role"));
+                            user.setAvatar(rs.getString("avatar"));
+                            user.setGender(rs.getString("gender"));
+                            user.setBirthDate(rs.getDate("birthdate"));
+                            return user;
+                        })
                         .findFirst()
                         .orElse(null)
         );
@@ -47,15 +59,15 @@ public class UserDAO {
     // 1. HÀM CẬP NHẬT THÔNG TIN CÁ NHÂN (Bảng users)
     // Chỉ update những cột có trong bảng users
     public void updateProfile(User user) {
-        // Thêm gender = ? vào câu lệnh SQL
-        String query = "UPDATE users SET fullname = ?, phone = ?, gender = ? WHERE id = ?";
+        String query = "UPDATE users SET fullname = ?, phone = ?, gender = ?, birthdate = ? WHERE id = ?";
 
         DBContext.get().useHandle(handle ->
                 handle.createUpdate(query)
                         .bind(0, user.getFullName())
                         .bind(1, user.getPhone())
-                        .bind(2, user.getGender()) // Bind tham số gender
-                        .bind(3, user.getId())
+                        .bind(2, user.getGender())
+                        .bind(3, user.getBirthDate())
+                        .bind(4, user.getId())
                         .execute()
         );
     }
