@@ -1,467 +1,287 @@
-<%@page contentType="text/html" pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Sổ địa chỉ - Organic Harvest</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/profile.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/addresses.css" />
-  </head>
-  <body>
-    <!-- HEADER -->
-    <jsp:include page="header.jsp"></jsp:include>
-    <div class="breadcrumb">
-      <div class="container">
-        <a href="/">Trang chủ</a> &gt;
-        <a href="/profile.jsp">Tài khoản</a> &gt; <span>Địa chỉ</span>
-      </div>
-    </div>
+<%@page contentType="text/html" pageEncoding="UTF-8" %>
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <!DOCTYPE html>
+    <html lang="vi">
 
-    <section class="profile-section">
-      <div class="container">
-        <div class="profile-container">
-          <aside class="profile-sidebar">
-            <div class="profile-user-brief">
-              <img
-                src="https://cdn-icons-png.flaticon.com/512/149/149071.png"
-                alt="Avatar"
-                class="brief-avatar"
-              />
-              <div class="brief-info">
-                <span class="brief-name">Nguyễn Văn A</span>
-                <a href="/profile.jsp" class="brief-edit"
-                  ><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a
-                >
-              </div>
-            </div>
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <title>Sổ địa chỉ - Organic Harvest</title>
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/profile.css" />
+      <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/addresses.css" />
+      <style>
+        .alert {
+          padding: 10px 15px;
+          margin-bottom: 15px;
+          border-radius: 4px;
+        }
 
-            <ul class="profile-menu">
-              <li class="profile-menu-item">
-                <a href="/profile.jsp"
-                  ><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a
-                >
-              </li>
-              <li class="profile-menu-item">
-                <a href="/orders.jsp"
-                  ><i class="fa-solid fa-box-open"></i> Đơn mua</a
-                >
-              </li>
-              <li class="profile-menu-item active">
-                <a href="/addresses.jsp"
-                  ><i class="fa-solid fa-location-dot"></i> Địa chỉ</a
-                >
-              </li>
-              <li class="profile-menu-item">
-                <a href="/change-password.jsp"
-                  ><i class="fa-solid fa-key"></i> Đổi mật khẩu</a
-                >
-              </li>
-              <li class="profile-menu-item">
-                <a href="/wishlist.jsp"
-                  ><i class="fa-regular fa-heart"></i> Yêu thích</a
-                >
-              </li>
-            </ul>
-          </aside>
+        .alert-success {
+          background-color: #d4edda;
+          color: #155724;
+          border: 1px solid #c3e6cb;
+        }
 
-          <main class="profile-content">
-            <div class="address-header">
-              <h3>Địa chỉ của tôi</h3>
-              <button class="btn btn-primary" id="btnAddAddress">
-                <i class="fa-solid fa-plus"></i> Thêm địa chỉ mới
-              </button>
-            </div>
+        .alert-danger {
+          background-color: #f8d7da;
+          color: #721c24;
+          border: 1px solid #f5c6cb;
+        }
 
-            <div class="address-list">
-              <div class="address-card default">
-                <div class="address-info">
-                  <div class="info-row">
-                    <span class="info-name">Nguyễn Văn A</span>
-                    <span class="info-divider">|</span>
-                    <span class="info-phone">0905.123.456</span>
-                  </div>
-                  <div class="info-address">
-                    <p>123 Đường ABC</p>
-                    <p>Phường 1, Quận 2, TP. Hồ Chí Minh</p>
-                  </div>
-                  <div class="info-tags">
-                    <span class="tag tag-default">Mặc định</span>
-                    <span class="tag tag-type">Nhà riêng</span>
-                  </div>
-                </div>
-                <div class="address-actions">
-                  <div class="action-links">
-                    <button class="btn-text">Cập nhật</button>
-                    <button class="btn-text disabled" disabled>Xóa</button>
-                  </div>
-                  <button class="btn btn-outline btn-sm disabled" disabled>
-                    Thiết lập mặc định
-                  </button>
-                </div>
-              </div>
+        .empty-addresses {
+          text-align: center;
+          padding: 40px;
+          color: #888;
+        }
 
-              <div class="address-card">
-                <div class="address-info">
-                  <div class="info-row">
-                    <span class="info-name">Nguyễn Văn A (Văn phòng)</span>
-                    <span class="info-divider">|</span>
-                    <span class="info-phone">0912.345.678</span>
-                  </div>
-                  <div class="info-address">
-                    <p>Tòa nhà Bitexco, Số 2 Hải Triều</p>
-                    <p>Phường Bến Nghé, Quận 1, TP. Hồ Chí Minh</p>
-                  </div>
-                  <div class="info-tags">
-                    <span class="tag tag-type">Văn phòng</span>
-                  </div>
-                </div>
-                <div class="address-actions">
-                  <div class="action-links">
-                    <button class="btn-text">Cập nhật</button>
-                    <button class="btn-text text-danger">Xóa</button>
-                  </div>
-                  <button class="btn btn-outline btn-sm">
-                    Thiết lập mặc định
-                  </button>
-                </div>
-              </div>
-            </div>
-          </main>
+        .empty-addresses i {
+          font-size: 48px;
+          margin-bottom: 15px;
+          color: #ccc;
+        }
+      </style>
+    </head>
+
+    <body>
+      <!-- HEADER -->
+      <jsp:include page="header.jsp"></jsp:include>
+      <div class="breadcrumb">
+        <div class="container">
+          <a href="${pageContext.request.contextPath}/">Trang chủ</a> &gt;
+          <a href="${pageContext.request.contextPath}/profile">Tài khoản</a> &gt; <span>Địa chỉ</span>
         </div>
       </div>
-    </section>
 
-    <div class="modal" id="addressModal">
-      <div class="modal-content">
-        <div class="modal-header">
-          <h3>Địa chỉ mới</h3>
-          <span class="close-modal">&times;</span>
-        </div>
-        <div class="modal-body">
-          <form class="address-form">
-            <div class="form-row">
-              <input
-                type="text"
-                class="form-input"
-                placeholder="Họ và tên"
-                required
-              />
-              <input
-                type="text"
-                class="form-input"
-                placeholder="Số điện thoại"
-                required
-              />
-            </div>
-            <div class="form-group">
-              <input
-                type="text"
-                class="form-input"
-                placeholder="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã"
-                readonly
-                style="cursor: pointer"
-              />
-            </div>
-            <div class="form-group">
-              <textarea
-                class="form-input"
-                placeholder="Địa chỉ cụ thể (Số nhà, tên đường...)"
-                rows="2"
-              ></textarea>
-            </div>
-
-            <div class="form-group">
-              <label class="checkbox-label">
-                <input type="checkbox" checked /> Đặt làm địa chỉ mặc định
-              </label>
-            </div>
-
-            <div class="form-type">
-              <p>Loại địa chỉ:</p>
-              <div class="type-options">
-                <label
-                  ><input type="radio" name="addrType" value="home" checked />
-                  Nhà riêng</label
-                >
-                <label
-                  ><input type="radio" name="addrType" value="office" /> Văn
-                  phòng</label
-                >
-              </div>
-            </div>
-
-            <div class="modal-footer">
-              <button type="button" class="btn btn-outline close-modal-btn">
-                Trở lại
-              </button>
-              <button type="submit" class="btn btn-primary">Hoàn thành</button>
-            </div>
-          </form>
-        </div>
-      </div>
-    </div>
-    <!-- FOOTER -->
-    <footer class="footer">
-      <div class="footer__main">
-        <div class="footer__grid">
-          <!-- Company Info -->
-          <div class="footer__company">
-            <div class="footer__brand">
-              <a href="/">
+      <section class="profile-section">
+        <div class="container">
+          <div class="profile-container">
+            <aside class="profile-sidebar">
+              <div class="profile-user-brief">
                 <img
-                  class="navbar__menu-logo-img"
-                  src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-                  alt="Organic Harvest Logo"
-                />
-              </a>
-              <!-- <div class="footer__logo">T</div>
-                <h3 class="footer__company-name">Company</h3> -->
-            </div>
-            <p class="footer__description">
-              Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
-            </p>
-            <div class="footer__social">
-              <a
-                href="https://www.themedevhub.com"
-                target="_blank"
-                class="footer__social-link footer__social-link--facebook"
-              >
-                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                  <path
-                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://www.themedevhub.com"
-                target="_blank"
-                class="footer__social-link footer__social-link--twitter"
-              >
-                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                  <path
-                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://www.themedevhub.com"
-                target="_blank"
-                class="footer__social-link footer__social-link--telegram"
-              >
-                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z"
-                  />
-                </svg>
-              </a>
-            </div>
+                  src="${sessionScope.account.avatar != null ? sessionScope.account.avatar : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}"
+                  alt="Avatar" class="brief-avatar" />
+                <div class="brief-info">
+                  <span class="brief-name">${sessionScope.account.fullName}</span>
+                  <a href="${pageContext.request.contextPath}/profile" class="brief-edit">
+                    <i class="fa-solid fa-pen"></i> Sửa hồ sơ
+                  </a>
+                </div>
+              </div>
+
+              <ul class="profile-menu">
+                <li class="profile-menu-item">
+                  <a href="${pageContext.request.contextPath}/profile"><i class="fa-regular fa-user"></i> Hồ sơ của
+                    tôi</a>
+                </li>
+                <li class="profile-menu-item">
+                  <a href="${pageContext.request.contextPath}/orders"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
+                </li>
+                <li class="profile-menu-item active">
+                  <a href="${pageContext.request.contextPath}/addresses"><i class="fa-solid fa-location-dot"></i> Địa
+                    chỉ</a>
+                </li>
+                <li class="profile-menu-item">
+                  <a href="${pageContext.request.contextPath}/change-password"><i class="fa-solid fa-key"></i> Đổi mật
+                    khẩu</a>
+                </li>
+                <li class="profile-menu-item">
+                  <a href="${pageContext.request.contextPath}/wishlist"><i class="fa-regular fa-heart"></i> Yêu
+                    thích</a>
+                </li>
+                <li class="profile-menu-item">
+                  <a href="${pageContext.request.contextPath}/logout" style="color: red;"><i
+                      class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                </li>
+              </ul>
+            </aside>
+
+            <main class="profile-content">
+              <div class="address-header">
+                <h3>Địa chỉ của tôi</h3>
+                <button class="btn btn-primary" id="btnAddAddress">
+                  <i class="fa-solid fa-plus"></i> Thêm địa chỉ mới
+                </button>
+              </div>
+
+              <!-- Thông báo -->
+              <c:if test="${not empty message}">
+                <div class="alert alert-success">${message}</div>
+              </c:if>
+              <c:if test="${not empty error}">
+                <div class="alert alert-danger">${error}</div>
+              </c:if>
+
+              <div class="address-list">
+                <!-- Nếu chưa có địa chỉ nào -->
+                <c:if test="${empty addresses}">
+                  <div class="empty-addresses">
+                    <i class="fa-solid fa-location-dot"></i>
+                    <p>Bạn chưa có địa chỉ nào</p>
+                    <p>Hãy thêm địa chỉ để thuận tiện cho việc giao hàng</p>
+                  </div>
+                </c:if>
+
+                <!-- Danh sách địa chỉ -->
+                <c:forEach var="addr" items="${addresses}">
+                  <div class="address-card ${addr.defaultAddress ? 'default' : ''}">
+                    <div class="address-info">
+                      <div class="info-row">
+                        <span class="info-name">${addr.receiverName}</span>
+                        <span class="info-divider">|</span>
+                        <span class="info-phone">${addr.phoneNumber}</span>
+                      </div>
+                      <div class="info-address">
+                        <p>${addr.address}</p>
+                        <p>${addr.city}</p>
+                      </div>
+                      <div class="info-tags">
+                        <c:if test="${addr.defaultAddress}">
+                          <span class="tag tag-default">Mặc định</span>
+                        </c:if>
+                      </div>
+                    </div>
+                    <div class="address-actions">
+                      <div class="action-links">
+                        <button class="btn-text btn-edit" data-id="${addr.id}" data-name="${addr.receiverName}"
+                          data-phone="${addr.phoneNumber}" data-address="${addr.address}" data-city="${addr.city}"
+                          data-default="${addr.defaultAddress}">Cập nhật</button>
+                        <c:choose>
+                          <c:when test="${addr.defaultAddress}">
+                            <button class="btn-text disabled" disabled>Xóa</button>
+                          </c:when>
+                          <c:otherwise>
+                            <form action="${pageContext.request.contextPath}/addresses" method="post"
+                              style="display:inline;">
+                              <input type="hidden" name="action" value="delete" />
+                              <input type="hidden" name="addressId" value="${addr.id}" />
+                              <button type="submit" class="btn-text text-danger"
+                                onclick="return confirm('Bạn có chắc muốn xóa địa chỉ này?')">Xóa</button>
+                            </form>
+                          </c:otherwise>
+                        </c:choose>
+                      </div>
+                      <c:if test="${!addr.defaultAddress}">
+                        <form action="${pageContext.request.contextPath}/addresses" method="post"
+                          style="display:inline;">
+                          <input type="hidden" name="action" value="setDefault" />
+                          <input type="hidden" name="addressId" value="${addr.id}" />
+                          <button type="submit" class="btn btn-outline btn-sm">Thiết lập mặc định</button>
+                        </form>
+                      </c:if>
+                      <c:if test="${addr.defaultAddress}">
+                        <button class="btn btn-outline btn-sm disabled" disabled>Thiết lập mặc định</button>
+                      </c:if>
+                    </div>
+                  </div>
+                </c:forEach>
+              </div>
+            </main>
           </div>
+        </div>
+      </section>
 
-          <!-- Quick Links -->
-          <div class="footer__section">
-            <h3 class="footer__title">Chính sách</h3>
-            <ul class="footer__links">
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/about-us"
-                  target="_blank"
-                  class="footer__link"
-                  >Trang chủ</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/hire-experts"
-                  target="_blank"
-                  class="footer__link"
-                  >Sản phẩm</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/themes"
-                  target="_blank"
-                  class="footer__link"
-                  >Giới thiệu</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Bài viết</a
-                >
-              </li>
-            </ul>
+      <!-- Modal Thêm/Sửa Địa chỉ -->
+      <div class="modal" id="addressModal">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h3 id="modalTitle">Địa chỉ mới</h3>
+            <span class="close-modal">&times;</span>
           </div>
+          <div class="modal-body">
+            <form class="address-form" action="${pageContext.request.contextPath}/addresses" method="post">
+              <input type="hidden" name="action" id="formAction" value="add" />
+              <input type="hidden" name="addressId" id="addressId" value="" />
 
-          <!-- Hổ trợ khách hàng -->
-          <div class="footer__section">
-            <h3 class="footer__title">Hổ trợ khách hàng</h3>
-            <ul class="footer__links">
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/about-us"
-                  target="_blank"
-                  class="footer__link"
-                  >Tìm kiếm
-                </a>
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/hire-experts"
-                  target="_blank"
-                  class="footer__link"
-                  >Chính sách bảo mật</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/themes"
-                  target="_blank"
-                  class="footer__link"
-                  >Điều khoản dịch vụ</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Hướng dẫn kiểm tra đơn hàng</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Chính sách giao nhận</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Chính sách thanh toán</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Chính sách đổi trả</a
-                >
-              </li>
-            </ul>
-          </div>
+              <div class="form-row">
+                <input type="text" name="receiverName" id="receiverName" class="form-input" placeholder="Họ và tên"
+                  required />
+                <input type="text" name="phoneNumber" id="phoneNumber" class="form-input" placeholder="Số điện thoại"
+                  required />
+              </div>
+              <div class="form-group">
+                <input type="text" name="city" id="city" class="form-input"
+                  placeholder="Tỉnh/Thành phố, Quận/Huyện, Phường/Xã" required />
+              </div>
+              <div class="form-group">
+                <textarea name="address" id="address" class="form-input"
+                  placeholder="Địa chỉ cụ thể (Số nhà, tên đường...)" rows="2" required></textarea>
+              </div>
 
-          <!-- Newsletter -->
-          <div class="footer__section">
-            <h3 class="footer__title">Đăng kí nhận tin</h3>
+              <div class="form-group">
+                <label class="checkbox-label">
+                  <input type="checkbox" name="isDefault" id="isDefault" /> Đặt làm địa chỉ mặc định
+                </label>
+              </div>
 
-            <form class="footer__newsletter-form">
-              <input
-                type="email"
-                placeholder="Nhập địa chỉ email"
-                class="footer__newsletter-input"
-                required
-              />
-              <button type="submit" class="footer__newsletter-button">
-                Đăng kí
-              </button>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline close-modal-btn">Trở lại</button>
+                <button type="submit" class="btn btn-primary">Hoàn thành</button>
+              </div>
             </form>
           </div>
         </div>
       </div>
 
-      <!-- Footer Bottom -->
-      <div class="footer__bottom">
-        <div class="footer__bottom-content">
-          <p class="footer__copyright">
-            &copy; 2025 Company. All rights reserved.
-          </p>
-          <ul class="footer__bottom-links">
-            <li>
-              <a
-                href="https://www.themedevhub.com/about-us"
-                target="_blank"
-                class="footer__bottom-link"
-                >About us</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.themedevhub.com/privacy-policy"
-                target="_blank"
-                class="footer__bottom-link"
-                >Terms</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.themedevhub.com/terms-and-conditions"
-                target="_blank"
-                class="footer__bottom-link"
-                >Privacy</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
+      <!-- FOOTER -->
+      <jsp:include page="footer.jsp"></jsp:include>
 
-    <script src="./assets/js/main.js"></script>
+      <script>
+        const modal = document.getElementById("addressModal");
+        const btnAdd = document.getElementById("btnAddAddress");
+        const spanClose = document.getElementsByClassName("close-modal")[0];
+        const btnClose = document.getElementsByClassName("close-modal-btn")[0];
 
-    <script>
-      const modal = document.getElementById("addressModal");
-      const btn = document.getElementById("btnAddAddress");
-      const span = document.getElementsByClassName("close-modal")[0];
-      const btnClose = document.getElementsByClassName("close-modal-btn")[0];
-
-      // Mở modal
-      btn.onclick = function () {
-        modal.style.display = "flex";
-      };
-
-      // Đóng modal
-      const closeModal = () => {
-        modal.style.display = "none";
-      };
-      span.onclick = closeModal;
-      btnClose.onclick = closeModal;
-
-      // Click ra ngoài thì đóng
-      window.onclick = function (event) {
-        if (event.target == modal) {
-          closeModal();
+        // Reset form
+        function resetForm() {
+          document.getElementById("modalTitle").textContent = "Địa chỉ mới";
+          document.getElementById("formAction").value = "add";
+          document.getElementById("addressId").value = "";
+          document.getElementById("receiverName").value = "";
+          document.getElementById("phoneNumber").value = "";
+          document.getElementById("city").value = "";
+          document.getElementById("address").value = "";
+          document.getElementById("isDefault").checked = false;
         }
-      };
-    </script>
-  </body>
-</html>
+
+        // Mở modal thêm mới
+        btnAdd.onclick = function () {
+          resetForm();
+          modal.style.display = "flex";
+        };
+
+        // Đóng modal
+        const closeModal = () => {
+          modal.style.display = "none";
+        };
+        spanClose.onclick = closeModal;
+        btnClose.onclick = closeModal;
+
+        // Click ra ngoài thì đóng
+        window.onclick = function (event) {
+          if (event.target == modal) {
+            closeModal();
+          }
+        };
+
+        // Xử lý nút Cập nhật
+        document.querySelectorAll('.btn-edit').forEach(btn => {
+          btn.onclick = function () {
+            document.getElementById("modalTitle").textContent = "Cập nhật địa chỉ";
+            document.getElementById("formAction").value = "update";
+            document.getElementById("addressId").value = this.dataset.id;
+            document.getElementById("receiverName").value = this.dataset.name;
+            document.getElementById("phoneNumber").value = this.dataset.phone;
+            document.getElementById("city").value = this.dataset.city;
+            document.getElementById("address").value = this.dataset.address;
+            document.getElementById("isDefault").checked = this.dataset.default === "true";
+            modal.style.display = "flex";
+          };
+        });
+      </script>
+    </body>
+
+    </html>

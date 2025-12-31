@@ -50,11 +50,29 @@ public class ProfileServlet extends HttpServlet {
         // Giả sử form chưa có ô nhập Thành phố, ta tạm để mặc định hoặc lấy từ form nếu có
         String city = "Hồ Chí Minh"; // Hoặc request.getParameter("city");
 
+        // Lấy ngày sinh từ form
+        String birthDay = request.getParameter("birthDay");
+        String birthMonth = request.getParameter("birthMonth");
+        String birthYear = request.getParameter("birthYear");
+
         // 2. Cập nhật Object User (để lưu session)
         user.setFullName(fullName);
         user.setPhone(phone);
         user.setGender(gender);
         // Lưu ý: User.java KHÔNG CÓ setAddress, nên đừng gọi nó ở đây
+
+ // Xử lý birthDate
+        if (birthDay != null && !birthDay.isEmpty()
+                && birthMonth != null && !birthMonth.isEmpty()
+                && birthYear != null && !birthYear.isEmpty()) {
+            // Format: yyyy-MM-dd
+            String dateStr = String.format("%s-%02d-%02d",
+                    birthYear,
+                    Integer.parseInt(birthMonth),
+                    Integer.parseInt(birthDay));
+            java.sql.Date birthDate = java.sql.Date.valueOf(dateStr);
+            user.setBirthDate(birthDate);
+        }
 
         UserDAO dao = new UserDAO();
         try {

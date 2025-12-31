@@ -1,5 +1,7 @@
 package model;
 
+import java.sql.Date;
+
 public class User {
     private int id;
     private String fullName;
@@ -8,7 +10,8 @@ public class User {
     private String phone;
     private int role;
     private String avatar;
-    private String gender; // <--- 1. THÊM BIẾN NÀY
+    private String gender;
+    private Date birthDate; 
 
     public User() {
     }
@@ -22,6 +25,7 @@ public class User {
         this.role = role;
         this.avatar = avatar;
         this.gender = gender;
+        this.birthDate = birthDate;
     }
 
     // Getter & Setter cũ giữ nguyên, thêm 2 cái mới cho gender:
@@ -54,6 +58,14 @@ public class User {
     public void setGender(String gender) {
         this.gender = gender;
     }
+
+    public Date getBirthDate() {
+        return birthDate;
+    }
+    public void setBirthDate(Date birthDate) {
+        this.birthDate = birthDate;
+    }
+
 }
   
 
