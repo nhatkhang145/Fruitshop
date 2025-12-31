@@ -110,5 +110,54 @@ public class AddressDAO {
         );
     }
 
-    
+    // 6. Đặt địa chỉ mặc định
+    public void setDefaultAddress(int userId, int addressId) {
+        DBContext.get().useHandle(handle -> {
+            // Bỏ mặc định tất cả địa chỉ của user
+            handle.createUpdate("UPDATE user_addresses SET is_default = 0 WHERE user_id = ?")
+                    .bind(0, userId)
+                    .execute();
+
+            // Đặt địa chỉ được chọn làm mặc định
+            handle.createUpdate("UPDATE user_addresses SET is_default = 1 WHERE id = ?")
+                    .bind(0, addressId)
+                    .execute();
+        });
+    }
+
+    // 7. Lấy địa chỉ mặc định của user
+    public Address getDefaultAddress(int userId) {
+        String query = "SELECT id, user_id, receiver_name, phone_number, address, city, is_default " +
+                       "FROM user_addresses WHERE user_id = ? AND is_default = 1 LIMIT 1";
+
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(query)
+                        .bind(0, userId)
+                        .map((rs, ctx) -> {
+                            Address addr = new Address();
+                            addr.setId(rs.getInt("id"));
+                            addr.setUserId(rs.getInt("user_id"));
+                            addr.setReceiverName(rs.getString("receiver_name"));
+                            addr.setPhoneNumber(rs.getString("phone_number"));
+                            addr.setAddress(rs.getString("address"));
+                            addr.setCity(rs.getString("city"));
+                            addr.setDefault(true);
+                            return addr;
+                        })
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
+    // 8. Đếm số địa chỉ của user
+    public int countAddresses(int userId) {
+        String query = "SELECT COUNT(*) FROM user_addresses WHERE user_id = ?";
+
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(query)
+                        .bind(0, userId)
+                        .mapTo(Integer.class)
+                        .one()
+        );
+    }
 }
