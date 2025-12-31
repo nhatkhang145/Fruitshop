@@ -4,6 +4,7 @@ public class Product {
     private int id;
     private String name;
     private double price;
+    private double salePrice;
     private int quantity;
     private String description;
     private String image;
@@ -14,10 +15,11 @@ public class Product {
     }
 
     // Constructor đầy đủ tham số
-    public Product(int id, String name, double price, int quantity, String description, String image, int categoryId) {
+    public Product(int id, String name, double price, double salePrice, int quantity, String description, String image, int categoryId) {
         this.id = id;
         this.name = name;
         this.price = price;
+        this.salePrice = salePrice;
         this.quantity = quantity;
         this.description = description;
         this.image = image;
@@ -30,6 +32,15 @@ public class Product {
     public String getName() { return name; }
     public void setName(String name) { this.name = name; }
     public double getPrice() { return price; }
+
+    public double getSalePrice() {
+        return salePrice;
+    }
+
+    public void setSalePrice(double salePrice) {
+        this.salePrice = salePrice;
+    }
+
     public void setPrice(double price) { this.price = price; }
     public int getQuantity() { return quantity; }
     public void setQuantity(int quantity) { this.quantity = quantity; }
