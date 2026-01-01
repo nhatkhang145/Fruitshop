@@ -1,69 +1,60 @@
-document.addEventListener("DOMContentLoaded", () => {
-  // 1. Xử lý Modal Trả lời
-  const replyModal = document.getElementById("replyModal");
-  const replyButtons = document.querySelectorAll(".reply-trigger");
-  const closeBtn = replyModal.querySelector(".close-btn");
-  const replyForm = document.getElementById("replyForm");
-  const originalReviewBox = replyModal.querySelector(".original-review");
+const replyModal = document.getElementById("replyModal");
+const replyUserSpan = document.getElementById("replyUser");
+const replyProductSpan = document.getElementById("replyProduct");
+const replyIdInput = document.getElementById("replyReviewId");
+const replyTextarea = document.getElementById("replyText");
 
-  if (replyModal && replyButtons) {
-    // Mở modal khi bấm nút Reply
-    replyButtons.forEach(btn => {
-      btn.addEventListener("click", (e) => {
-        e.preventDefault();
-        
-        // Lấy nội dung comment từ dòng tương ứng để hiện trong modal
-        const row = btn.closest("tr");
-        const commentText = row.querySelector(".comment").innerText;
-        originalReviewBox.innerText = commentText;
+/**
+ * Hàm mở Modal trả lời
+ * Được gọi từ sự kiện onclick ở nút "Trả lời" trong file JSP
+ * @param {string} reviewId - ID của đánh giá
+ * @param {string} userName - Tên khách hàng
+ * @param {string} productName - Tên sản phẩm
+ */
+function openReplyModal(reviewId, userName, productName) {
+    if (replyModal) {
+        // Điền dữ liệu vào Modal
+        replyUserSpan.innerText = userName;
+        replyProductSpan.innerText = productName;
+        replyIdInput.value = reviewId;
 
+        // Reset nội dung textarea (hoặc có thể fetch nội dung cũ nếu muốn sửa)
+        replyTextarea.value = "";
+
+        // Hiển thị Modal
         replyModal.style.display = "block";
-      });
-    });
 
-    // Đóng modal
-    closeBtn.addEventListener("click", () => {
-      replyModal.style.display = "none";
-    });
+        replyTextarea.focus();
+    }
+}
 
-    window.addEventListener("click", (e) => {
-      if (e.target == replyModal) {
+/**
+ * Hàm đóng Modal
+ */
+function closeReplyModal() {
+    if (replyModal) {
         replyModal.style.display = "none";
-      }
+    }
+}
+document.addEventListener("DOMContentLoaded", () => {
+
+    // Xử lý đóng Modal khi click ra vùng ngoài
+    window.addEventListener("click", (e) => {
+        if (e.target == replyModal) {
+            closeReplyModal();
+        }
     });
 
-    // Xử lý submit form (Giả lập)
-    replyForm.addEventListener("submit", (e) => {
-      e.preventDefault();
-      alert("Đã gửi câu trả lời thành công!");
-      replyModal.style.display = "none";
-      replyForm.reset();
-    });
-  }
-
-  // 2. Xử lý nút Duyệt / Ẩn / Xóa (Giả lập)
-  const actionButtons = document.querySelectorAll(".action-btn");
-  actionButtons.forEach(btn => {
-    btn.addEventListener("click", (e) => {
-      if (btn.classList.contains("approve")) {
-        if(confirm("Duyệt đánh giá này?")) {
-            // Logic gọi API duyệt
-            // Đổi UI:
-            const statusSpan = btn.closest("tr").querySelector(".status");
-            statusSpan.className = "status completed";
-            statusSpan.innerText = "Đã duyệt";
-        }
-      } else if (btn.classList.contains("hide")) {
-        if(confirm("Ẩn đánh giá này khỏi trang web?")) {
-             const statusSpan = btn.closest("tr").querySelector(".status");
-             statusSpan.className = "status hidden";
-             statusSpan.innerText = "Đã ẩn";
-        }
-      } else if (btn.classList.contains("delete")) {
-        if(confirm("Bạn có chắc chắn muốn XÓA VĨNH VIỄN đánh giá này?")) {
-            btn.closest("tr").remove();
-        }
-      }
-    });
-  });
+    // Xử lý logic validate form trước khi gửi
+    const replyForm = document.querySelector("form[action='review-action']");
+    if (replyForm) {
+        replyForm.addEventListener("submit", (e) => {
+            const content = replyTextarea.value.trim();
+            if (content === "") {
+                e.preventDefault(); // Chặn gửi nếu rỗng
+                alert("Vui lòng nhập nội dung trả lời!");
+                replyTextarea.focus();
+            }
+        });
+    }
 });

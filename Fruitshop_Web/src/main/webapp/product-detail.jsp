@@ -139,19 +139,78 @@
                   </div>
                 </div>
 
-                <div id="reviews" class="tab-content" style="display: none;">
-                  <div class="review-list">
-                    <div class="review-item">
-                      <div class="review-header">
-                        <strong>Người dùng mẫu</strong>
-                        <div class="stars"><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i
-                            class="fa-solid fa-star"></i></div>
-                      </div>
-                      <p class="review-text">Sản phẩm rất tươi ngon!</p>
-                      <small class="review-date">Vừa xong</small>
+                <div id="review" class="tab-content">
+                    <div class="product-reviews">
+                        <h3>Đánh giá sản phẩm</h3>
+
+                        <div class="review-form-wrapper" style="background: #f9f9f9; padding: 20px; border-radius: 8px; margin-bottom: 30px;">
+                            <c:if test="${sessionScope.account == null}">
+                                <p>Vui lòng <a href="login.jsp" style="color: var(--primary-color); font-weight: bold;">đăng nhập</a> để viết đánh giá.</p>
+                            </c:if>
+
+                            <c:if test="${sessionScope.account != null}">
+                                <form action="review" method="post" class="review-form">
+                                    <input type="hidden" name="action" value="add">
+                                    <input type="hidden" name="productId" value="${detail.id}">
+
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <label style="font-weight: 600; display: block; margin-bottom: 5px;">Đánh giá của bạn:</label>
+                                        <div class="rate">
+                                            <input type="radio" id="star5" name="rating" value="5" checked />
+                                            <label for="star5" title="5 sao">5 stars</label>
+                                            <input type="radio" id="star4" name="rating" value="4" />
+                                            <label for="star4" title="4 sao">4 stars</label>
+                                            <input type="radio" id="star3" name="rating" value="3" />
+                                            <label for="star3" title="3 sao">3 stars</label>
+                                            <input type="radio" id="star2" name="rating" value="2" />
+                                            <label for="star2" title="2 sao">2 stars</label>
+                                            <input type="radio" id="star1" name="rating" value="1" />
+                                            <label for="star1" title="1 sao">1 star</label>
+                                        </div>
+                                        </div>
+
+                                    <div class="form-group" style="margin-bottom: 15px;">
+                                        <textarea name="comment" rows="4" placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..." required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
+                                    </div>
+
+                                    <button type="submit" class="btn btn--primary">Gửi đánh giá</button>
+                                </form>
+                            </c:if>
+                        </div>
+
+                        <div class="review-list">
+                            <c:if test="${empty listR}">
+                                <p style="color: #666; font-style: italic;">Chưa có đánh giá nào cho sản phẩm này.</p>
+                            </c:if>
+
+                            <c:forEach items="${listR}" var="r">
+                                <div class="review-item" style="border-bottom: 1px solid #eee; padding: 15px 0; display: flex; gap: 15px;">
+                                    <div class="review-avatar">
+                                        <img src="${r.user.avatar != null ? r.user.avatar : 'assets/images/default-user.png'}"
+                                             alt="${r.user.fullname}"
+                                             style="width: 50px; height: 50px; border-radius: 50%; object-fit: cover;">
+                                    </div>
+                                    <div class="review-content">
+                                        <div class="review-header" style="margin-bottom: 5px;">
+                                            <span style="font-weight: bold; font-size: 1.1rem;">${r.user.fullname}</span>
+                                            <span style="color: #999; font-size: 0.9rem; margin-left: 10px;">
+                                                <fmt:formatDate value="${r.createdAt}" pattern="dd/MM/yyyy HH:mm"/>
+                                            </span>
+                                        </div>
+                                        <div class="review-rating" style="color: #ffc107; font-size: 0.9rem; margin-bottom: 8px;">
+                                            <c:forEach begin="1" end="${r.rating}">
+                                                <i class="fas fa-star"></i>
+                                            </c:forEach>
+                                            <c:forEach begin="1" end="${5 - r.rating}">
+                                                <i class="far fa-star"></i>
+                                            </c:forEach>
+                                        </div>
+                                        <p class="review-text" style="color: #333; line-height: 1.5;">${r.comment}</p>
+                                    </div>
+                                </div>
+                            </c:forEach>
+                        </div>
                     </div>
-                  </div>
                 </div>
 
                 <div id="shipping" class="tab-content" style="display: none;">
