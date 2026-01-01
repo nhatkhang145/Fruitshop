@@ -1,4 +1,16 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ page import="dal.ReviewDAO" %>
+<%@ page import="java.util.List" %>
+<%@ page import="model.Review" %>
+
+<%
+    ReviewDAO reviewDAO = new ReviewDAO();
+    List<Review> reviews = reviewDAO.getAllReviews();
+    request.setAttribute("reviews", reviews);
+%>
+
   <!DOCTYPE html>
   <html lang="vi">
 
@@ -92,110 +104,95 @@
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td class="user-cell">
-                    <img src="https://via.placeholder.com/40" alt="Avatar">
-                    <div>
-                      <p>Nguyễn Văn A</p>
-                      <small>nguyenvana@gmail.com</small>
-                      <div style="color: #28a745; font-size: 11px; margin-top: 2px;">
-                        <i class='bx bxs-check-circle'></i> Đã mua hàng
+                <c:forEach items="${reviews}" var="r">
+                  <tr>
+                    <td class="user-cell">
+                      <img src="${r.user.avatar != null ? pageContext.request.contextPath.concat('/').concat(r.user.avatar) : 'https://via.placeholder.com/40'}" alt="Avatar">
+                      <div>
+                        <p>${r.user.fullname}</p>
+                        <small>${r.user.email}</small>
+                        </div>
+                    </td>
+
+                    <td class="review-content-cell">
+                      <div class="stars" style="color: #ffc107;">
+                        <c:forEach begin="1" end="${r.rating}">
+                          <i class='bx bxs-star'></i>
+                        </c:forEach>
+                        <c:forEach begin="1" end="${5 - r.rating}">
+                          <i class='bx bx-star'></i>
+                        </c:forEach>
                       </div>
-                    </div>
-                  </td>
-                  <td class="review-content-cell">
-                    <div class="stars" style="color: #ffc107;">
-                      <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-                        class='bx bxs-star'></i><i class='bx bxs-star'></i>
-                    </div>
-                    <p class="comment" style="font-style: italic;">"Trái cây rất tươi, giao hàng nhanh. Đóng gói cẩn
-                      thận,
-                      rất hài lòng!"</p>
-                    <small class="date">Vừa xong</small>
-                  </td>
-                  <td>
-                    <a href="#" class="product-link">Táo Envy Mỹ</a>
-                  </td>
-                  <td><span class="status completed">Hiển thị</span></td>
-                  <td>
-                    <div class="action-group">
-                      <button class="action-btn reply" onclick="openReplyModal('Nguyễn Văn A', 'Táo Envy Mỹ')"
-                        title="Trả lời"><i class='bx bx-reply'></i></button>
-                      <button class="action-btn hide" title="Ẩn bình luận"><i class='bx bx-hide'></i></button>
-                    </div>
-                  </td>
-                </tr>
 
-                <tr>
-                  <td class="user-cell">
-                    <img src="https://via.placeholder.com/40" alt="Avatar">
-                    <div>
-                      <p>Trần Thị B</p>
-                      <small>tranb@gmail.com</small>
-                      <div style="color: #28a745; font-size: 11px; margin-top: 2px;">
-                        <i class='bx bxs-check-circle'></i> Đã mua hàng
+                      <p class="comment" style="font-style: italic;">"${r.comment}"</p>
+
+                      <c:if test="${not empty r.adminReply}">
+                          <div class="admin-reply" style="margin-top: 8px; background: #f0f9ff; padding: 8px; border-radius: 4px; border-left: 3px solid #3d8b91;">
+                            <strong style="color: #3d8b91; font-size: 12px;">Admin:</strong>
+                            <span style="font-size: 13px;">${r.adminReply}</span>
+                          </div>
+                      </c:if>
+
+                      <small class="date">
+                          <fmt:formatDate value="${r.createdAt}" pattern="dd/MM/yyyy HH:mm"/>
+                      </small>
+                    </td>
+
+                    <td>
+                      <a href="${pageContext.request.contextPath}/product-detail?pid=${r.productId}" target="_blank" class="product-link">
+                          ${r.product.name}
+                      </a>
+                    </td>
+
+                    <td>
+                        <c:choose>
+                            <c:when test="${r.status == 'hidden'}">
+                                <span class="status cancelled" style="background: #eee; color: #333;">Đã ẩn</span>
+                            </c:when>
+                            <c:otherwise>
+                                <span class="status completed">Hiển thị</span>
+                            </c:otherwise>
+                        </c:choose>
+                    </td>
+
+                    <td>
+                      <div class="action-group">
+                        <button class="action-btn reply"
+                                onclick="openReplyModal('${r.id}', '${r.user.fullname}', '${r.product.name}')"
+                                title="Trả lời/Sửa">
+                            <i class='bx bx-reply'></i>
+                        </button>
+
+                        <c:if test="${r.status != 'hidden'}">
+                           <form action="review-action" method="post" style="display:inline;">
+                               <input type="hidden" name="action" value="hide">
+                               <input type="hidden" name="id" value="${r.id}">
+                               <button class="action-btn hide" title="Ẩn bình luận" onclick="return confirm('Bạn muốn ẩn đánh giá này?')">
+                                   <i class='bx bx-hide'></i>
+                               </button>
+                           </form>
+                        </c:if>
+                        <c:if test="${r.status == 'hidden'}">
+                           <form action="review-action" method="post" style="display:inline;">
+                               <input type="hidden" name="action" value="show">
+                               <input type="hidden" name="id" value="${r.id}">
+                               <button class="action-btn approve" title="Hiện lại" style="background: #28a745;">
+                                   <i class='bx bx-show'></i>
+                               </button>
+                           </form>
+                        </c:if>
+
+                        <form action="review-action" method="post" style="display:inline;">
+                           <input type="hidden" name="action" value="delete">
+                           <input type="hidden" name="id" value="${r.id}">
+                           <button class="action-btn delete" title="Xóa vĩnh viễn" onclick="return confirm('Xóa vĩnh viễn đánh giá này?')">
+                               <i class='bx bx-trash'></i>
+                           </button>
+                        </form>
                       </div>
-                    </div>
-                  </td>
-                  <td class="review-content-cell">
-                    <div class="stars" style="color: #ffc107;">
-                      <i class='bx bxs-star'></i><i class='bx bxs-star'></i><i class='bx bxs-star'></i><i
-                        class='bx bxs-star'></i><i class='bx bx-star'></i>
-                    </div>
-                    <p class="comment" style="font-style: italic;">"Nho ngọt nhưng hơi nhỏ so với hình."</p>
-
-                    <div class="admin-reply"
-                      style="margin-top: 8px; background: #f0f9ff; padding: 8px; border-radius: 4px; border-left: 3px solid #3d8b91;">
-                      <strong style="color: #3d8b91; font-size: 12px;">Admin:</strong>
-                      <span style="font-size: 13px;">Cảm ơn bạn đã góp ý, shop sẽ lưu ý chọn trái to hơn cho đơn sau
-                        ạ!</span>
-                    </div>
-
-                    <small class="date">14/11/2025 08:15</small>
-                  </td>
-                  <td>
-                    <a href="#" class="product-link">Nho Mẫu Đơn</a>
-                  </td>
-                  <td><span class="status completed">Hiển thị</span></td>
-                  <td>
-                    <div class="action-group">
-                      <button class="action-btn reply" onclick="openReplyModal('Trần Thị B', 'Nho Mẫu Đơn')"
-                        title="Sửa trả lời"><i class='bx bx-pencil'></i></button>
-                      <button class="action-btn hide" title="Ẩn bình luận"><i class='bx bx-hide'></i></button>
-                    </div>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="user-cell">
-                    <img src="https://via.placeholder.com/40" alt="Avatar">
-                    <div>
-                      <p>Lê Văn C</p>
-                      <small>levanc@yahoo.com</small>
-                    </div>
-                  </td>
-                  <td class="review-content-cell">
-                    <div class="stars" style="color: #ffc107;">
-                      <i class='bx bxs-star'></i><i class='bx bx-star'></i><i class='bx bx-star'></i><i
-                        class='bx bx-star'></i><i class='bx bx-star'></i>
-                    </div>
-                    <p class="comment" style="font-style: italic; color: #999;">"Quảng cáo sai sự thật, đừng mua! (Nội
-                      dung spam)"</p>
-                    <small class="date">12/11/2025 14:20</small>
-                  </td>
-                  <td>
-                    <a href="#" class="product-link">Sầu riêng Ri6</a>
-                  </td>
-                  <td><span class="status cancelled" style="background: #eee; color: #333;">Đã ẩn</span></td>
-                  <td>
-                    <div class="action-group">
-                      <button class="action-btn approve" title="Hiện lại" style="background: #28a745;"><i
-                          class='bx bx-show'></i></button>
-                      <button class="action-btn delete" title="Xóa vĩnh viễn"><i class='bx bx-trash'></i></button>
-                    </div>
-                  </td>
-                </tr>
-
+                    </td>
+                  </tr>
+                </c:forEach>
               </tbody>
             </table>
 
@@ -217,9 +214,12 @@
         <p>Đang phản hồi khách hàng: <strong id="replyUser" style="color: var(--primary);"></strong></p>
         <p style="margin-bottom: 15px; font-size: 13px; color: #666;">Sản phẩm: <span id="replyProduct"></span></p>
 
-        <form id="replyForm">
+        <form action="review-action" method="post">
+          <input type="hidden" name="action" value="reply">
+          <input type="hidden" id="replyReviewId" name="id" value="">
+
           <div class="form-group">
-            <textarea id="replyText" rows="5" class="form-control"
+            <textarea name="replyContent" id="replyText" rows="5" class="form-control"
               placeholder="Nhập nội dung cảm ơn hoặc giải thích..."></textarea>
           </div>
           <div style="text-align: right; margin-top: 15px;">

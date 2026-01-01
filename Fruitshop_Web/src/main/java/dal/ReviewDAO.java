@@ -1,5 +1,6 @@
 package dal;
 
+import model.Product;
 import model.Review;
 import model.User;
 
@@ -50,27 +51,6 @@ public class ReviewDAO {
                         }).list());
     }
 
-    // Lấy tất cả đánh giá (Admin)
-    public List<Review> getAllReviews() {
-        String query = "SELECT r.*, u.fullname, p.name as product_name " +
-                "FROM reviews r " +
-                "JOIN users u ON r.user_id = u.id " +
-                "JOIN products p ON r.product_id = p.id " +
-                "ORDER BY r.created_at DESC";
-
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(query)
-                        .mapToBean(Review.class)
-                        .list());
-    }
-
-    // Xóa đánh giá (Admin)
-    public boolean deleteReview(int reviewId) {
-        String query = "DELETE FROM reviews WHERE id = :id";
-        return DBContext.get().withHandle(handle ->
-                handle.createUpdate(query).bind("id", reviewId).execute() > 0);
-    }
-
     // Kiểm tra đã mua hàng chưa
     public boolean hasBought(int userId, int productId) {
         String query = "SELECT count(*) FROM orders o " +
@@ -81,5 +61,68 @@ public class ReviewDAO {
                         .bind("uid", userId)
                         .bind("pid", productId)
                         .mapTo(Integer.class).one() > 0);
+    }
+
+    // Lấy tất cả đánh giá (Admin)
+    public List<Review> getAllReviews() {
+        String query = "SELECT r.*, u.fullname, p.name as product_name " +
+                "FROM reviews r " +
+                "JOIN users u ON r.user_id = u.id " +
+                "JOIN products p ON r.product_id = p.id " +
+                "ORDER BY r.created_at DESC";
+
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(query)
+                        .map((rs, ctx) -> {
+                            Review r = new Review();
+                            r.setId(rs.getInt("id"));
+                            r.setUserId(rs.getInt("user_id"));
+                            r.setProductId(rs.getInt("product_id"));
+                            r.setRating(rs.getInt("rating"));
+                            r.setComment(rs.getString("comment"));
+                            r.setAdminReply(rs.getString("admin_reply"));
+                            r.setStatus(rs.getString("status"));
+                            r.setCreatedAt(rs.getTimestamp("created_at"));
+
+                            // Map User info (Thêm Email cho Admin xem)
+                            User u = new User();
+                            u.setFullName(rs.getString("fullname"));
+                            u.setEmail(rs.getString("email"));
+                            u.setAvatar(rs.getString("avatar"));
+                            r.setUser(u);
+
+                            Product p = new Product();
+                            p.setName(rs.getString("product_name"));
+                            r.setProduct(p);
+
+                            return r;
+                        }).list());
+    }
+
+    // Admin trả lời đánh giá
+    public void replyReview(int reviewId, String replyContent) {
+        String query = "UPDATE reviews SET admin_reply = :reply WHERE id = :id";
+        DBContext.get().withHandle(handle ->
+                handle.createUpdate(query)
+                        .bind("reply", replyContent)
+                        .bind("id", reviewId)
+                        .execute());
+    }
+
+    // Admin ẩn/hiện đánh giá
+    public void updateStatus(int reviewId, String status) {
+        String query = "UPDATE reviews SET status = :status WHERE id = :id";
+        DBContext.get().withHandle(handle ->
+                handle.createUpdate(query)
+                        .bind("status", status)
+                        .bind("id", reviewId)
+                        .execute());
+    }
+
+    // Xóa đánh giá (Admin)
+    public boolean deleteReview(int reviewId) {
+        String query = "DELETE FROM reviews WHERE id = :id";
+        return DBContext.get().withHandle(handle ->
+                handle.createUpdate(query).bind("id", reviewId).execute() > 0);
     }
 }

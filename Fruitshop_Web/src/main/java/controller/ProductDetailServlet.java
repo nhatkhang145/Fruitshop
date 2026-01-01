@@ -2,6 +2,7 @@ package controller;
 
 import dal.CategoryDAO;
 import dal.ProductDAO;
+import dal.ReviewDAO;
 import model.Category;
 import model.Product;
 import jakarta.servlet.ServletException;
@@ -9,6 +10,8 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.Review;
+
 import java.io.IOException;
 import java.util.List;
 
@@ -36,6 +39,11 @@ public class ProductDetailServlet extends HttpServlet {
             List<Category> listC = cDao.getAllCategories(); 
             request.setAttribute("listC", listC);
 
+            // Lấy danh sách đánh giá sản phẩm
+            ReviewDAO rDao = new ReviewDAO();
+            List<Review> listR = rDao.getReviewsByProductId(id);
+            request.setAttribute("listR", listR);
+
             request.setAttribute("detail", p);       // Biến 'detail' chứa thông tin 1 sản phẩm
             request.setAttribute("relatedP", relatedP); // Biến 'relatedP' chứa list sản phẩm liên quan
             
@@ -43,6 +51,7 @@ public class ProductDetailServlet extends HttpServlet {
             
         } catch (Exception e) {
             // Nếu lỗi id không phải số hoặc không tìm thấy, quay về trang chủ
+            e.printStackTrace();
             response.sendRedirect("index.jsp");
         }
     }

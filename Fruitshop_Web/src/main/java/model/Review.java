@@ -11,13 +11,14 @@ public class Review {
     private String adminReply;
     private String status; // 'approved', 'hidden'
     private Timestamp createdAt;
+    private Product product;
 
     private User user;
 
     public Review() {
     }
 
-    public Review(int id, int userId, int productId, int rating, String comment, String adminReply, String status, Timestamp createdAt) {
+    public Review(int id, int userId, int productId, int rating, String comment, String adminReply, String status, Timestamp createdAt, Product product) {
         this.id = id;
         this.userId = userId;
         this.productId = productId;
@@ -26,6 +27,7 @@ public class Review {
         this.adminReply = adminReply;
         this.status = status;
         this.createdAt = createdAt;
+        this.product = product;
     }
 
     // Getters and Setters
@@ -90,5 +92,13 @@ public class Review {
     }
     public void setUser(User user) {
         this.user = user;
+    }
+
+    public Product getProduct() {
+        return product;
+    }
+
+    public void setProduct(Product product) {
+        this.product = product;
     }
 }
