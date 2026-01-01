@@ -8,7 +8,7 @@ public class ProductDAO {
     // 1. Lấy tất cả sản phẩm
     public List<Product> getAllProducts() {
         // SỬA: short_description AS description (để khớp với file Model)
-        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products";
+        String sql = "SELECT id, name, price,sale_price, quantity, short_description AS description, image, category_id AS categoryId FROM products";
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .mapToBean(Product.class)
@@ -66,7 +66,45 @@ public class ProductDAO {
                         .list()
         );
     }
+// ================== PHẦN ADMIN CRUD ==================
 
+    // 6. Thêm sản phẩm mới (Create)
+    public int insert(Product p) {
+        String sql = "INSERT INTO products (name, price, sale_price, quantity, short_description, image, category_id) " +
+                "VALUES (:name, :price, :salePrice, :quantity, :description, :image, :categoryId)";
+
+        return DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bindBean(p) // Tự động map các getter trong Product với param :name, :price...
+                        .execute()
+        );
+    }
+
+    // 7. Cập nhật sản phẩm (Update)
+    public int update(Product p) {
+        String sql = "UPDATE products SET name = :name, price = :price, sale_price = :salePrice, " +
+                "quantity = :quantity, short_description = :description, image = :image, category_id = :categoryId " +
+                "WHERE id = :id";
+
+        return DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bindBean(p)
+                        .execute()
+        );
+    }
+
+    // 8. Xóa sản phẩm (Delete)
+    // Lưu ý: Nếu bạn muốn xóa mềm (ẩn đi) thì đổi câu lệnh thành UPDATE products SET status = 0 WHERE id = ?
+    // Ở đây mình viết xóa cứng theo cơ bản trước.
+    public int delete(int id) {
+        String sql = "DELETE FROM products WHERE id = ?";
+
+        return DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind(0, id)
+                        .execute()
+        );
+    }
     // Main test
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
