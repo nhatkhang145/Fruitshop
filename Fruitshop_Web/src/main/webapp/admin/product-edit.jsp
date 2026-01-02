@@ -1,265 +1,186 @@
+<jsp:useBean id="product" scope="request" type="com.sun.org.apache.xml.internal.security.signature.Manifest"/>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-  <!DOCTYPE html>
-  <html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html lang="vi">
 
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/product-edit.css" />
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>${product.id > 0 ? 'Cập nhật sản phẩm' : 'Thêm sản phẩm mới'}</title>
 
-    <title>Thêm/sửa sản phẩm</title>
-  </head>
+  <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css" />
+  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/product-edit.css" />
 
-  <body>
+  <style>
+    /* CSS bổ sung để fix một số lỗi hiển thị khi nhúng JSP */
+    .product-edit__image-uploader img {
+      max-width: 100%;
+      max-height: 200px;
+      object-fit: contain;
+      margin-bottom: 10px;
+      display: block;
+    }
+  </style>
+</head>
 
-    <jsp:include page="sidebar.jsp">
-      <jsp:param name="activePage" value="products" />
-    </jsp:include>
+<body>
 
-    <!-- Main Content -->
-    <div class="content">
-      <!-- Navbar -->
-      <nav>
-        <i class="bx bx-menu"></i>
-        <form action="#">
-          <div class="form-input">
-            <input type="search" placeholder="Search..." />
-            <button class="search-btn" type="submit">
-              <i class="bx bx-search"></i>
-            </button>
-          </div>
-        </form>
+<jsp:include page="sidebar.jsp">
+  <jsp:param name="activePage" value="products" />
+</jsp:include>
 
-        <div class="notification-wrapper">
-          <a href="#" class="notif" id="notifBtn">
-            <i class="bx bx-bell"></i>
-            <span class="count">12</span>
-          </a>
+<div class="content">
+  <jsp:include page="header.jsp" />
 
-          <div class="notification-dropdown" id="notifDropdown">
-            <h3 class="dropdown-header">Thông báo mới</h3>
-            <ul class="notification-list">
-              <li class="notification-item unread">
-                <i class="bx bx-cart-add item-icon"></i>
-                <div class="item-content">
-                  <p><strong>Đơn hàng mới</strong></p>
-                  <span>Bạn có đơn hàng #12350 từ Nguyễn Văn A.</span>
-                  <small>2 phút trước</small>
-                </div>
-              </li>
-              <li class="notification-item unread">
-                <i class="bx bx-user-plus item-icon"></i>
-                <div class="item-content">
-                  <p><strong>Khách hàng mới</strong></p>
-                  <span>Trần Thị B vừa đăng ký tài khoản.</span>
-                  <small>1 giờ trước</small>
-                </div>
-              </li>
-              <li class="notification-item">
-                <i class="bx bxs-error-circle item-icon"></i>
-                <div class="item-content">
-                  <p><strong>Hết hàng</strong></p>
-                  <span>Sản phẩm "Dâu tây Hàn Quốc" đã hết hàng.</span>
-                  <small>Hôm qua</small>
-                </div>
-              </li>
-            </ul>
-            <div class="dropdown-footer">
-              <a href="/admin/notifications.jsp">Xem tất cả thông báo</a>
-            </div>
-          </div>
-        </div>
-        <div class="profile-wrapper">
-          <a href="#" class="profile" id="profileBtn">
-            <img src="images/logo.png" />
-          </a>
-
-          <div class="profile-dropdown" id="profileDropdown">
-            <h3 class="dropdown-header">Tài khoản</h3>
-            <ul class="profile-menu">
-              <li>
-                <a href="/admin/profile.jsp">
-                  <i class="bx bxs-user-circle"></i>
-                  <span>Hồ sơ của tôi</span>
-                </a>
-              </li>
-              <li>
-                <a href="/admin/profile.jsp#changepassword">
-                  <i class="bx bxs-lock-alt"></i>
-                  <span>Đổi mật khẩu</span>
-                </a>
-              </li>
-
-              <li class="profile-menu-toggle">
-                <i class="bx bx-moon"></i>
-                <span>Chế độ Tối</span>
-
-                <input type="checkbox" id="theme-toggle" hidden />
-                <label for="theme-toggle" class="theme-toggle-dropdown"></label>
-              </li>
-              <hr />
-              <li>
-                <a href="#" class="logout">
-                  <i class="bx bx-log-out-circle"></i>
-                  <span>Đăng xuất</span>
-                </a>
-              </li>
-            </ul>
-          </div>
-        </div>
-      </nav>
-
-      <!-- End of Navbar -->
-      <main>
-        <div class="header">
-          <div class="left">
-            <h1 id="pageTitle">Thêm sản phẩm mới</h1>
-            <ul class="breadcrumb">
-              <li><a href="/admin/products.jsp">Sản phẩm</a></li>
-              <li>/</li>
-              <li>
-                <a href="#" class="active" id="breadcrumbTitle">Thêm mới</a>
-              </li>
-            </ul>
-          </div>
-          <a href="#" class="report" id="saveProductBtn">
-            <i class="bx bx-save"></i>
-            <span>Lưu sản phẩm</span>
-          </a>
-        </div>
-
-        <div class="bottom-data">
-          <div class="product-edit">
-            <form id="productForm" class="product-edit__form">
-              <div class="product-edit__main">
-                <div class="product-edit__card">
-                  <div class="product-edit__group">
-                    <label for="productName" class="product-edit__label">Tên sản phẩm</label>
-                    <input type="text" id="productName" class="product-edit__input"
-                      placeholder="Ví dụ: Táo Envy New Zealand (Size L)" />
-                  </div>
-                </div>
-
-                <div class="product-edit__card">
-                  <div class="product-edit__group">
-                    <label for="productDesc" class="product-edit__label">Mô tả chi tiết</label>
-                    <textarea id="productDesc" class="product-edit__textarea" rows="10"></textarea>
-                  </div>
-                </div>
-
-                <div class="product-edit__card">
-                  <legend class="product-edit__legend">Giá bán (Ưu đãi)</legend>
-                  <div class="product-edit__price-row">
-                    <div class="product-edit__group">
-                      <label for="regularPrice" class="product-edit__label">Giá gốc (VNĐ)</label>
-                      <input type="number" id="regularPrice" class="product-edit__input" placeholder="Ví dụ: 300000" />
-                    </div>
-                    <div class="product-edit__group">
-                      <label for="salePrice" class="product-edit__label">Giá khuyến mãi (VNĐ)</label>
-                      <input type="number" id="salePrice" class="product-edit__input"
-                        placeholder="Để trống nếu không giảm giá" />
-                    </div>
-                  </div>
-                  <a href="#" id="scheduleSaleLink" class="product-edit__schedule-link">+ Lên lịch khuyến mãi</a>
-                  <div class="product-edit__schedule-fields" style="display: none">
-                    <div class="product-edit__price-row">
-                      <div class="product-edit__group">
-                        <label for="saleStart" class="product-edit__label">Từ ngày</label>
-                        <input type="date" id="saleStart" class="product-edit__input" />
-                      </div>
-                      <div class="product-edit__group">
-                        <label for="saleEnd" class="product-edit__label">Đến ngày</label>
-                        <input type="date" id="saleEnd" class="product-edit__input" />
-                      </div>
-                    </div>
-                  </div>
-                </div>
-                <div class="product-edit__card">
-                  <legend class="product-edit__legend">Kho hàng</legend>
-                  <div class="product-edit__price-row">
-                    <div class="product-edit__group">
-                      <label for="productSKU" class="product-edit__label">SKU (Mã sản phẩm)</label>
-                      <input type="text" id="productSKU" class="product-edit__input" placeholder="T-ENVY-NZ-01" />
-                    </div>
-                    <div class="product-edit__group">
-                      <label for="productStock" class="product-edit__label">Số lượng tồn kho</label>
-                      <input type="number" id="productStock" class="product-edit__input" placeholder="100" />
-                    </div>
-                  </div>
-                </div>
-              </div>
-
-              <div class="product-edit__sidebar">
-                <div class="product-edit__card">
-                  <legend class="product-edit__legend">Trạng thái</legend>
-                  <div class="product-edit__group">
-                    <select id="productStatus" class="product-edit__input">
-                      <option value="published">
-                        Đang hoạt động (Hiển thị)
-                      </option>
-                      <option value="draft">Bản nháp (Ẩn)</option>
-                    </select>
-                    <button type="submit" class="btn-submit product-edit__save-btn">
-                      Lưu
-                    </button>
-                  </div>
-                </div>
-
-                <div class="product-edit__card">
-                  <legend class="product-edit__legend">Danh mục</legend>
-                  <div class="product-edit__category-list">
-                    <div class="product-edit__category-item">
-                      <input type="checkbox" id="cat1" />
-                      <label for="cat1">Trái cây</label>
-                    </div>
-                    <div class="product-edit__category-item indent-1">
-                      <input type="checkbox" id="cat2" />
-                      <label for="cat2">Trái cây nhập khẩu</label>
-                    </div>
-                    <div class="product-edit__category-item indent-2">
-                      <input type="checkbox" id="cat3" />
-                      <label for="cat3">Táo</label>
-                    </div>
-                    <div class="product-edit__category-item indent-1">
-                      <input type="checkbox" id="cat4" />
-                      <label for="cat4">Trái cây Việt Nam</label>
-                    </div>
-                    <div class="product-edit__category-item">
-                      <input type="checkbox" id="cat5" />
-                      <label for="cat5">Rau củ</label>
-                    </div>
-                  </div>
-                </div>
-
-                <div class="product-edit__card">
-                  <legend class="product-edit__legend">Ảnh đại diện</legend>
-                  <div class="product-edit__image-uploader">
-                    <img src="https://via.placeholder.com/150" alt="Ảnh xem trước" id="mainImagePreview" />
-                    <input type="file" id="mainImage" accept="image/*" />
-                    <a href="#" id="setMainImageLink">Tải ảnh lên</a>
-                  </div>
-                </div>
-
-                <div class="product-edit__card">
-                  <legend class="product-edit__legend">
-                    Thư viện ảnh (phụ)
-                  </legend>
-                  <div class="product-edit__gallery-list"></div>
-                  <a href="#" id="setGalleryImagesLink" class="product-edit__add-gallery">+ Thêm ảnh</a>
-                  <input type="file" id="galleryImages" accept="image/*" multiple style="display: none" />
-                </div>
-              </div>
-            </form>
-          </div>
-        </div>
-      </main>
+  <main>
+    <div class="header">
+      <div class="left">
+        <h1 id="pageTitle">${product.id > 0 ? 'Cập nhật sản phẩm' : 'Thêm sản phẩm mới'}</h1>
+        <ul class="breadcrumb">
+          <li><a href="products">Sản phẩm</a></li>
+          <li>/</li>
+          <li>
+            <a href="#" class="active" id="breadcrumbTitle">${product.id > 0 ? 'Sửa' : 'Thêm mới'}</a>
+          </li>
+        </ul>
+      </div>
+      <a href="#" class="report" id="saveProductBtnHeader">
+        <i class="bx bx-save"></i>
+        <span>Lưu sản phẩm</span>
+      </a>
     </div>
 
-    <script src="../assets/js/admin/main.js"></script>
-    <script src="../assets/js/admin/product-edit.js"></script>
-  </body>
+    <div class="bottom-data">
+      <div class="product-edit">
+        <form id="productForm" action="product-save" method="post" enctype="multipart/form-data" class="product-edit__form">
 
-  </html>
+          <input type="hidden" name="id" value="${product.id > 0 ? product.id : 0}">
+          <input type="hidden" name="currentImage" value="${product.image}">
+
+          <div class="product-edit__main">
+            <div class="product-edit__card">
+              <div class="product-edit__group">
+                <label for="productName" class="product-edit__label">Tên sản phẩm</label>
+                <input type="text" id="productName" name="name" class="product-edit__input"
+                       value="${product.name}" placeholder="Ví dụ: Táo Envy New Zealand" required />
+              </div>
+            </div>
+
+            <div class="product-edit__card">
+              <div class="product-edit__group">
+                <label for="productDesc" class="product-edit__label">Mô tả chi tiết</label>
+                <textarea id="productDesc" name="description" class="product-edit__textarea" rows="10">${product.description}</textarea>
+              </div>
+            </div>
+
+            <div class="product-edit__card">
+              <legend class="product-edit__legend">Giá bán</legend>
+              <div class="product-edit__price-row">
+                <div class="product-edit__group">
+                  <label for="regularPrice" class="product-edit__label">Giá gốc (VNĐ)</label>
+                  <input type="number" id="regularPrice" name="price" class="product-edit__input"
+                         value="<fmt:formatNumber value='${product.price}' pattern='#'/>" placeholder="0" required />
+                </div>
+                <div class="product-edit__group">
+                  <label for="salePrice" class="product-edit__label">Giá khuyến mãi (VNĐ)</label>
+                  <input type="number" id="salePrice" name="salePrice" class="product-edit__input"
+                         value="<fmt:formatNumber value='${product.salePrice}' pattern='#'/>" placeholder="0" />
+                </div>
+              </div>
+            </div>
+
+            <div class="product-edit__card">
+              <legend class="product-edit__legend">Kho hàng</legend>
+              <div class="product-edit__price-row">
+                <div class="product-edit__group">
+                  <label for="productSKU" class="product-edit__label">Mã sản phẩm (ID)</label>
+                  <input type="text" id="productSKU" class="product-edit__input"
+                         value="${product.id > 0 ? product.id : 'Tự động tạo'}" readonly style="background-color: #f0f0f0;" />
+                </div>
+                <div class="product-edit__group">
+                  <label for="productStock" class="product-edit__label">Số lượng tồn kho</label>
+                  <input type="number" id="productStock" name="quantity" class="product-edit__input"
+                         value="${product.quantity}" placeholder="0" required />
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="product-edit__sidebar">
+            <div class="product-edit__card">
+              <legend class="product-edit__legend">Hành động</legend>
+              <div class="product-edit__group">
+                <button type="submit" class="btn-submit product-edit__save-btn" style="width: 100%; margin-top: 10px;">
+                  <i class='bx bx-save'></i> Lưu thay đổi
+                </button>
+                <a href="products" style="display: block; text-align: center; margin-top: 10px; color: #666;">Hủy bỏ</a>
+              </div>
+            </div>
+
+            <div class="product-edit__card">
+              <legend class="product-edit__legend">Danh mục</legend>
+              <div class="product-edit__group">
+                <select name="categoryId" class="product-edit__input" style="padding: 10px;">
+                  <c:forEach items="${categories}" var="c">
+                    <option value="${c.id}" ${product.categoryId == c.id ? 'selected' : ''}>
+                        ${c.name}
+                    </option>
+                  </c:forEach>
+                </select>
+              </div>
+            </div>
+
+            <div class="product-edit__card">
+              <legend class="product-edit__legend">Ảnh đại diện</legend>
+              <div class="product-edit__image-uploader">
+                <c:choose>
+                  <c:when test="${not empty product.image}">
+                    <img src="${pageContext.request.contextPath}/${product.image}" alt="Ảnh sản phẩm" id="mainImagePreview" />
+                  </c:when>
+                  <c:otherwise>
+                    <img src="https://via.placeholder.com/150" alt="Chưa có ảnh" id="mainImagePreview" />
+                  </c:otherwise>
+                </c:choose>
+
+                <input type="file" name="image" id="mainImage" accept="image/*" style="display: none;" onchange="previewImage(this);" />
+
+                <label for="mainImage" id="setMainImageLink" style="cursor: pointer; color: blue; display: block; text-align: center; margin-top: 10px;">
+                  <i class='bx bx-upload'></i> Tải ảnh lên
+                </label>
+              </div>
+            </div>
+
+          </div>
+        </form>
+      </div>
+    </div>
+  </main>
+</div>
+
+<script src="${pageContext.request.contextPath}/assets/js/admin/main.js"></script>
+
+<script>
+  // 1. Script xem trước ảnh khi chọn file
+  function previewImage(input) {
+    if (input.files && input.files[0]) {
+      var reader = new FileReader();
+      reader.onload = function(e) {
+        document.getElementById('mainImagePreview').src = e.target.result;
+      }
+      reader.readAsDataURL(input.files[0]);
+    }
+  }
+
+  // 2. Script để nút Lưu ở Header hoạt động như nút Submit form
+  document.getElementById('saveProductBtnHeader').addEventListener('click', function(e) {
+    e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ a
+    document.getElementById('productForm').submit(); // Submit form
+  });
+</script>
+</body>
+
+</html>
