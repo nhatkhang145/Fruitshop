@@ -31,6 +31,14 @@
     /* Cột tóm tắt chiếm 40% */
 }
 
+/* --- Checkout Section --- */
+.checkout-section {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    margin-bottom: 20px;
+}
+
 /* --- Block: billing-form --- */
 .billing-form__title {
     font-size: 1.8rem;

@@ -1,347 +1,209 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<!DOCTYPE html>
-<html lang="en">
+  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+      <!DOCTYPE html>
+      <html lang="vi">
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Đơn mua - Organic Harvest</title>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/profile.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/orders.css" />
-</head>
+      <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <title>Đơn mua - Organic Harvest</title>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/profile.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/orders.css" />
+      </head>
 
-<body>
-  <!-- HEADER -->
-  <jsp:include page="header.jsp"></jsp:include>
-  <div class="breadcrumb">
-    <div class="container">
-      <a href="/">Trang chủ</a> &gt;
-      <a href="/profile.jsp">Tài khoản</a> &gt; <span>Đơn mua</span>
-    </div>
-  </div>
+      <body>
+        <jsp:include page="header.jsp"></jsp:include>
 
-  <section class="profile-section">
-    <div class="container">
-      <div class="profile-container">
-        <aside class="profile-sidebar">
-          <div class="profile-user-brief">
-            <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="brief-avatar" />
-            <div class="brief-info">
-              <span class="brief-name">Nguyễn Văn A</span>
-              <a href="/profile.jsp" class="brief-edit"><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a>
-            </div>
-          </div>
-
-          <ul class="profile-menu">
-            <li class="profile-menu-item">
-              <a href="/profile.jsp"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
-            </li>
-            <li class="profile-menu-item active">
-              <a href="/orders.jsp"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
-            </li>
-            <li class="profile-menu-item">
-              <a href="/addresses.jsp"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
-            </li>
-            <li class="profile-menu-item">
-              <a href="/change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
-            </li>
-            <li class="profile-menu-item">
-              <a href="/wishlist.jsp"><i class="fa-regular fa-heart"></i> Yêu thích</a>
-            </li>
-          </ul>
-        </aside>
-
-        <main class="profile-content order-content">
-          <div class="order-tabs">
-            <a href="#" class="order-tab active">Tất cả</a>
-            <a href="#" class="order-tab">Chờ thanh toán</a>
-            <a href="#" class="order-tab">Vận chuyển</a>
-            <a href="#" class="order-tab">Hoàn thành</a>
-            <a href="#" class="order-tab">Đã hủy</a>
-          </div>
-
-          <div class="order-search-bar">
-            <i class="fa-solid fa-magnifying-glass"></i>
-            <input type="text" placeholder="Tìm kiếm theo ID đơn hàng hoặc Tên sản phẩm" />
-          </div>
-
-          <div class="order-list">
-            <div class="order-card">
-              <div class="order-card__header">
-                <div class="shop-info">
-                  <span class="shop-name">Organic Harvest</span>
-                  <button class="btn-chat">
-                    <i class="fa-regular fa-comment"></i> Chat
-                  </button>
-                </div>
-                <span class="order-status status-completed">HOÀN THÀNH</span>
-              </div>
-
-              <div class="order-card__body">
-                <div class="order-item">
-                  <img
-                    src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                    alt="Product" class="item-thumb" />
-                  <div class="item-info">
-                    <h4 class="item-name">
-                      Dừa sáp Trà Vinh (Loại 1) - Thơm ngon béo ngậy
-                    </h4>
-                    <p class="item-variant">Phân loại: Trái to</p>
-                    <p class="item-qty">x2</p>
-                  </div>
-                  <div class="item-price">
-                    <span class="old-price">200.000đ</span>
-                    <span class="new-price">150.000đ</span>
-                  </div>
-                </div>
-                <div class="order-item">
-                  <img src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png" alt="Product"
-                    class="item-thumb" />
-                  <div class="item-info">
-                    <h4 class="item-name">Cam Sành Vĩnh Long mọng nước</h4>
-                    <p class="item-variant">Phân loại: Túi 1kg</p>
-                    <p class="item-qty">x1</p>
-                  </div>
-                  <div class="item-price">
-                    <span class="new-price">30.000đ</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-card__footer">
-                <div class="total-money">
-                  Thành tiền: <span>330.000đ</span>
-                </div>
-                <div class="action-buttons">
-                  <a href="cart.jsp" class="btn btn-primary">Mua lại</a>
-                  <a href="order-history-detail.jsp" class="btn btn-outline">Xem chi tiết</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="order-card">
-              <div class="order-card__header">
-                <div class="shop-info">
-                  <span class="shop-name">Organic Harvest</span>
-                  <button class="btn-chat">
-                    <i class="fa-regular fa-comment"></i> Chat
-                  </button>
-                </div>
-                <span class="order-status status-shipping"><i class="fa-solid fa-truck"></i> ĐANG GIAO HÀNG</span>
-              </div>
-
-              <div class="order-card__body">
-                <div class="order-item">
-                  <img src="https://via.placeholder.com/80" alt="Product" class="item-thumb" />
-                  <div class="item-info">
-                    <h4 class="item-name">Táo Envy Mỹ nhập khẩu size lớn</h4>
-                    <p class="item-variant">Phân loại: 1kg</p>
-                    <p class="item-qty">x1</p>
-                  </div>
-                  <div class="item-price">
-                    <span class="new-price">120.000đ</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-card__footer">
-                <div class="total-money">
-                  Thành tiền: <span>120.000đ</span>
-                </div>
-                <div class="action-buttons">
-                  <button class="btn btn-disabled" disabled>
-                    Đã nhận được hàng
-                  </button>
-                  <a href="order-history-detail.jsp" class="btn btn-outline">Xem chi tiết</a>
-                </div>
-              </div>
-            </div>
-
-            <div class="order-card">
-              <div class="order-card__header">
-                <div class="shop-info">
-                  <span class="shop-name">Organic Harvest</span>
-                </div>
-                <span class="order-status status-cancelled">ĐÃ HỦY</span>
-              </div>
-
-              <div class="order-card__body">
-                <div class="order-item">
-                  <img src="https://via.placeholder.com/80" alt="Product" class="item-thumb" />
-                  <div class="item-info">
-                    <h4 class="item-name">
-                      Nho Mẫu Đơn Hàn Quốc (Shine Muscat)
-                    </h4>
-                    <p class="item-variant">Phân loại: Hộp 500g</p>
-                    <p class="item-qty">x1</p>
-                  </div>
-                  <div class="item-price">
-                    <span class="new-price">450.000đ</span>
-                  </div>
-                </div>
-              </div>
-
-              <div class="order-card__footer">
-                <div class="total-money">
-                  Thành tiền: <span>450.000đ</span>
-                </div>
-                <div class="action-buttons">
-                  <a href="cart.jsp" class="btn btn-primary">Mua lại</a>
-                  <a href="order-history-detail.jsp" class="btn btn-outline">Xem chi tiết</a>
-                </div>
-              </div>
-            </div>
-          </div>
-        </main>
-      </div>
-    </div>
-  </section>
-  <!-- FOOTER -->
-  <footer class="footer">
-    <div class="footer__main">
-      <div class="footer__grid">
-        <!-- Company Info -->
-        <div class="footer__company">
-          <div class="footer__brand">
-            <a href="/">
-              <img class="navbar__menu-logo-img"
-                src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-                alt="Organic Harvest Logo" />
-            </a>
-            <!-- <div class="footer__logo">T</div>
-                <h3 class="footer__company-name">Company</h3> -->
-          </div>
-          <p class="footer__description">
-            Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
-          </p>
-          <div class="footer__social">
-            <a href="https://www.themedevhub.com" target="_blank"
-              class="footer__social-link footer__social-link--facebook">
-              <svg class="footer__social-icon" viewBox="0 0 24 24">
-                <path
-                  d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-              </svg>
-            </a>
-            <a href="https://www.themedevhub.com" target="_blank"
-              class="footer__social-link footer__social-link--twitter">
-              <svg class="footer__social-icon" viewBox="0 0 24 24">
-                <path
-                  d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-              </svg>
-            </a>
-            <a href="https://www.themedevhub.com" target="_blank"
-              class="footer__social-link footer__social-link--telegram">
-              <svg class="footer__social-icon" viewBox="0 0 24 24">
-                <path
-                  d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z" />
-              </svg>
-            </a>
+        <div class="breadcrumb">
+          <div class="container">
+            <a href="${pageContext.request.contextPath}/">Trang chủ</a> &gt;
+            <a href="${pageContext.request.contextPath}/profile">Tài khoản</a> &gt; <span>Đơn mua</span>
           </div>
         </div>
 
-        <!-- Quick Links -->
-        <div class="footer__section">
-          <h3 class="footer__title">Chính sách</h3>
-          <ul class="footer__links">
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/about-us" target="_blank" class="footer__link">Trang chủ</a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/hire-experts" target="_blank" class="footer__link">Sản phẩm</a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/themes" target="_blank" class="footer__link">Giới thiệu</a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Bài viết</a>
-            </li>
-          </ul>
-        </div>
+        <section class="profile-section">
+          <div class="container">
+            <div class="profile-container">
+              <aside class="profile-sidebar">
+                <div class="profile-user-brief">
+                  <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="brief-avatar"
+                    id="briefAvatar" />
+                  <div class="brief-info">
+                    <span class="brief-name">${sessionScope.account.fullName}</span>
+                    <a href="#" class="brief-edit"><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a>
+                  </div>
+                </div>
 
-        <!-- Hổ trợ khách hàng -->
-        <div class="footer__section">
-          <h3 class="footer__title">Hổ trợ khách hàng</h3>
-          <ul class="footer__links">
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/about-us" target="_blank" class="footer__link">Tìm kiếm
-              </a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/hire-experts" target="_blank" class="footer__link">Chính sách bảo
-                mật</a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/themes" target="_blank" class="footer__link">Điều khoản dịch vụ</a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Hướng dẫn kiểm tra đơn
-                hàng</a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Chính sách giao
-                nhận</a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Chính sách thanh
-                toán</a>
-            </li>
-            <li class="footer__link-item">
-              <div class="footer__link-dot"></div>
-              <a href="https://www.themedevhub.com/contact" target="_blank" class="footer__link">Chính sách đổi trả</a>
-            </li>
-          </ul>
-        </div>
+                <ul class="profile-menu">
+                  <li class="profile-menu-item active">
+                    <a href="profile"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
+                  </li>
+                  <li class="profile-menu-item">
+                    <a href="orders"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
+                  </li>
+                  <li class="profile-menu-item">
+                    <a href="addresses"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
+                  </li>
+                  <li class="profile-menu-item ">
+                    <a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
+                  </li>
+                  <li class="profile-menu-item">
+                    <a href="wishlist.jsp"><i class="fa-regular fa-heart"></i> Yêu thích</a>
+                  </li>
+                  <li class="profile-menu-item">
+                    <a href="logout" style="color: red;"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                  </li>
+                </ul>
+              </aside>
 
-        <!-- Newsletter -->
-        <div class="footer__section">
-          <h3 class="footer__title">Đăng kí nhận tin</h3>
+              <main class="profile-content orders-content">
+                <div class="orders-header">
+                  <h2>Đơn mua của tôi</h2>
+                </div>
 
-          <form class="footer__newsletter-form">
-            <input type="email" placeholder="Nhập địa chỉ email" class="footer__newsletter-input" required />
-            <button type="submit" class="footer__newsletter-button">
-              Đăng kí
-            </button>
-          </form>
-        </div>
-      </div>
-    </div>
+                <c:if test="${not empty sessionScope.successMessage}">
+                  <div class="alert alert-success"
+                    style="background: #d4edda; color: #155724; padding: 12px; margin-bottom: 15px; border-radius: 5px;">
+                    ${sessionScope.successMessage}
+                  </div>
+                  <c:remove var="successMessage" scope="session" />
+                </c:if>
 
-    <!-- Footer Bottom -->
-    <div class="footer__bottom">
-      <div class="footer__bottom-content">
-        <p class="footer__copyright">
-          &copy; 2025 Company. All rights reserved.
-        </p>
-        <ul class="footer__bottom-links">
-          <li>
-            <a href="https://www.themedevhub.com/about-us" target="_blank" class="footer__bottom-link">About us</a>
-          </li>
-          <li>
-            <a href="https://www.themedevhub.com/privacy-policy" target="_blank" class="footer__bottom-link">Terms</a>
-          </li>
-          <li>
-            <a href="https://www.themedevhub.com/terms-and-conditions" target="_blank"
-              class="footer__bottom-link">Privacy</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-  </footer>
-  <script src="./assets/js/main.js"></script>
-</body>
+                <c:if test="${not empty sessionScope.errorMessage}">
+                  <div class="alert alert-danger"
+                    style="background: #f8d7da; color: #721c24; padding: 12px; margin-bottom: 15px; border-radius: 5px;">
+                    ${sessionScope.errorMessage}
+                  </div>
+                  <c:remove var="errorMessage" scope="session" />
+                </c:if>
 
-</html>
+                <div class="orders-tabs">
+                  <a href="${pageContext.request.contextPath}/orders?status=all"
+                    class="tab-item ${filterStatus == 'all' ? 'active' : ''}">
+                    Tất cả
+                  </a>
+                  <a href="${pageContext.request.contextPath}/orders?status=pending"
+                    class="tab-item ${filterStatus == 'pending' ? 'active' : ''}">
+                    Chờ xác nhận
+                    <c:if test="${pendingCount > 0}">
+                      <span class="badge">${pendingCount}</span>
+                    </c:if>
+                  </a>
+                  <a href="${pageContext.request.contextPath}/orders?status=processing"
+                    class="tab-item ${filterStatus == 'processing' ? 'active' : ''}">
+                    Đã xác nhận
+                    <c:if test="${processingCount > 0}">
+                      <span class="badge">${processingCount}</span>
+                    </c:if>
+                  </a>
+                  <a href="${pageContext.request.contextPath}/orders?status=shipped"
+                    class="tab-item ${filterStatus == 'shipped' ? 'active' : ''}">
+                    Đang giao
+                    <c:if test="${shippedCount > 0}">
+                      <span class="badge">${shippedCount}</span>
+                    </c:if>
+                  </a>
+                  <a href="${pageContext.request.contextPath}/orders?status=completed"
+                    class="tab-item ${filterStatus == 'completed' ? 'active' : ''}">
+                    Hoàn thành
+                  </a>
+                  <a href="${pageContext.request.contextPath}/orders?status=cancelled"
+                    class="tab-item ${filterStatus == 'cancelled' ? 'active' : ''}">
+                    Đã hủy
+                  </a>
+                </div>
+
+                <div class="orders-list">
+                  <c:choose>
+                    <c:when test="${empty orders}">
+                      <div class="empty-state" style="text-align: center; padding: 50px 0;">
+                        <i class="fa-solid fa-box-open" style="font-size: 50px; color: #ccc;"></i>
+                        <p style="margin-top: 20px;">Chưa có đơn hàng nào</p>
+                        <a href="${pageContext.request.contextPath}/shop" class="btn btn-primary"
+                          style="margin-top: 15px; display: inline-block; padding: 10px 30px; background: var(--primary-color); color: #fff; border-radius: 5px; text-decoration: none;">
+                          Mua sắm ngay
+                        </a>
+                      </div>
+                    </c:when>
+                    <c:otherwise>
+                      <c:forEach items="${orders}" var="order">
+                        <div class="order-card"
+                          style="border: 1px solid #ddd; border-radius: 8px; padding: 15px; margin-bottom: 15px;">
+                          <div class="order-card__header"
+                            style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 15px; padding-bottom: 10px; border-bottom: 1px solid #eee;">
+                            <div class="order-info">
+                              <span class="order-id" style="font-weight: 600;">Mã đơn: #${order.id}</span>
+                              <span class="order-date" style="color: #666; margin-left: 15px;">
+                                <fmt:formatDate value="${order.createdAt}" pattern="dd/MM/yyyy HH:mm" />
+                              </span>
+                            </div>
+                            <span class="order-status status-${order.status}"
+                              style="padding: 5px 15px; border-radius: 20px; background: #f0f0f0; font-size: 13px;">
+                              ${order.statusDisplay}
+                            </span>
+                          </div>
+
+                          <div class="order-card__body" style="margin-bottom: 15px;">
+                            <div class="order-address" style="display: flex; gap: 10px; color: #555; font-size: 14px;">
+                              <i class="fa-solid fa-location-dot" style="margin-top: 3px;"></i>
+                              <div>
+                                <strong>${order.fullname}</strong> - ${order.phone}<br />
+                                ${order.address}
+                              </div>
+                            </div>
+                          </div>
+
+                          <div class="order-card__footer"
+                            style="display: flex; justify-content: space-between; align-items: center;">
+                            <div class="order-total">
+                              <span style="color: #666;">Tổng tiền:</span>
+                              <strong class="price"
+                                style="color: var(--primary-color); font-size: 18px; margin-left: 10px;">
+                                <fmt:formatNumber value="${order.finalAmount}" type="number" groupingUsed="true" />₫
+                              </strong>
+                            </div>
+                            <div class="order-actions" style="display: flex; gap: 10px;">
+                              <a href="${pageContext.request.contextPath}/order-detail?id=${order.id}"
+                                class="btn btn-outline"
+                                style="padding: 8px 20px; border: 1px solid var(--primary-color); color: var(--primary-color); border-radius: 5px; text-decoration: none;">
+                                Xem chi tiết
+                              </a>
+                              <c:if test="${order.status == 'pending' || order.status == 'processing'}">
+                                <form action="${pageContext.request.contextPath}/orders" method="post"
+                                  style="display: inline;"
+                                  onsubmit="return confirm('Bạn có chắc muốn hủy đơn hàng này?');">
+                                  <input type="hidden" name="action" value="cancel" />
+                                  <input type="hidden" name="orderId" value="${order.id}" />
+                                  <button type="submit" class="btn btn-danger"
+                                    style="padding: 8px 20px; background: #dc3545; color: #fff; border: none; border-radius: 5px; cursor: pointer;">Hủy
+                                    đơn</button>
+                                </form>
+                              </c:if>
+                              <c:if test="${order.status == 'completed'}">
+                                <a href="${pageContext.request.contextPath}/shop" class="btn btn-primary"
+                                  style="padding: 8px 20px; background: var(--primary-color); color: #fff; border-radius: 5px; text-decoration: none;">
+                                  Mua lại
+                                </a>
+                              </c:if>
+                            </div>
+                          </div>
+                        </div>
+                      </c:forEach>
+                    </c:otherwise>
+                  </c:choose>
+                </div>
+              </main>
+            </div>
+          </div>
+        </section>
+
+        <jsp:include page="footer.jsp"></jsp:include>
+        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+      </body>
+
+      </html>
