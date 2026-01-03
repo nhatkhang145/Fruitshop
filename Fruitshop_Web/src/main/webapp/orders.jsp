@@ -40,10 +40,10 @@
                 </div>
 
                 <ul class="profile-menu">
-                  <li class="profile-menu-item active">
+                  <li class="profile-menu-item ">
                     <a href="profile"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
                   </li>
-                  <li class="profile-menu-item">
+                  <li class="profile-menu-item active">
                     <a href="orders"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
                   </li>
                   <li class="profile-menu-item">

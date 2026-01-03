@@ -39,7 +39,7 @@
                     </div>
 
                     <ul class="profile-menu">
-                    <li class="profile-menu-item active">
+                    <li class="profile-menu-item ">
                       <a href="profile"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
                     </li>
                     <li class="profile-menu-item">
@@ -48,7 +48,7 @@
                     <li class="profile-menu-item">
                       <a href="addresses"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
                     </li>
-                    <li class="profile-menu-item ">
+                    <li class="profile-menu-item active">
                       <a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
                     </li>
                     <li class="profile-menu-item">

@@ -35,7 +35,7 @@ public class CheckoutServlet extends HttpServlet {
 
         // Kiểm tra đăng nhập
         if (user == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
+            resp.sendRedirect(req.getContextPath() + "/login.jsp");
             return;
         }
 

@@ -19,6 +19,21 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
+  //--- 1.1 Active menu item on click ---
+  const allSideMenu = $$(".sidebar .side-menu li a");
+  allSideMenu.forEach((item) => {
+    const li = item.parentElement;
+    
+    item.addEventListener("click", function () {
+      // Remove active class from all items
+      allSideMenu.forEach((i) => {
+        i.parentElement.classList.remove("active");
+      });
+      // Add active class to clicked item
+      li.classList.add("active");
+    });
+  });
+
   //--- 2. Search toggle (small screens) ---
   const searchBtn = $(".content nav form .form-input button");
   const searchBtnIcon = $(".content nav form .form-input button .bx");
