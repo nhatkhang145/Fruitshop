@@ -177,8 +177,14 @@
                               <div class="product-badge sale">-10%</div>
 
                               <div class="product-actions">
-                                <a href="wishlist?action=add&pid=${p.id}" class="action-btn" title="Thêm vào yêu thích">
-                                    <i class="far fa-heart"></i>
+                                <c:set var="isLiked" value="${likedIds.contains(p.id)}" />
+
+                                <a href="wishlist?action=${isLiked ? 'remove' : 'add'}&pid=${p.id}"
+                                   class="action-btn"
+                                   title="${isLiked ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}">
+
+                                    <i class="${isLiked ? 'fas fa-heart' : 'far fa-heart'}"
+                                       style="${isLiked ? 'color: red;' : ''}"></i>
                                 </a>
 
                                 <a href="product-detail?pid=${p.id}" class="action-btn" title="Xem nhanh">
