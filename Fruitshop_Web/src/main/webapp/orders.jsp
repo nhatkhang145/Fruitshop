@@ -40,10 +40,10 @@
                 </div>
 
                 <ul class="profile-menu">
-                  <li class="profile-menu-item active">
+                  <li class="profile-menu-item ">
                     <a href="profile"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
                   </li>
-                  <li class="profile-menu-item">
+                  <li class="profile-menu-item active">
                     <a href="orders"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
                   </li>
                   <li class="profile-menu-item">
@@ -53,7 +53,7 @@
                     <a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
                   </li>
                   <li class="profile-menu-item">
-                    <a href="wishlist.jsp"><i class="fa-regular fa-heart"></i> Yêu thích</a>
+                    <a href="wishlist"><i class="fa-regular fa-heart"></i> Yêu thích</a>
                   </li>
                   <li class="profile-menu-item">
                     <a href="logout" style="color: red;"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
@@ -84,7 +84,7 @@
 
                 <div class="orders-tabs">
                   <a href="${pageContext.request.contextPath}/orders?status=all"
-                    class="tab-item ${filterStatus == 'all' ? 'active' : ''}">
+                    class="tab-item ${empty filterStatus || filterStatus == 'all' ? 'active' : ''}">
                     Tất cả
                   </a>
                   <a href="${pageContext.request.contextPath}/orders?status=pending"

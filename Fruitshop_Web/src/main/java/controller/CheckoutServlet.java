@@ -27,15 +27,11 @@ public class CheckoutServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        // Kiểm tra cả 2 key "user" và "account" để tương thích
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = (User) session.getAttribute("account");
-        }
+        User user = (User) session.getAttribute("account");
 
         // Kiểm tra đăng nhập
         if (user == null) {
-            resp.sendRedirect(req.getContextPath() + "/login");
+            resp.sendRedirect(req.getContextPath() + "/login.jsp");
             return;
         }
 
@@ -84,11 +80,7 @@ public class CheckoutServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.setCharacterEncoding("UTF-8");
         HttpSession session = req.getSession();
-        // Kiểm tra cả 2 key "user" và "account" để tương thích
-        User user = (User) session.getAttribute("user");
-        if (user == null) {
-            user = (User) session.getAttribute("account");
-        }
+        User user = (User) session.getAttribute("account");
 
         // Kiểm tra đăng nhập
         if (user == null) {

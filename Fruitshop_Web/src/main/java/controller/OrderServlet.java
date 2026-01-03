@@ -21,7 +21,7 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("account");
 
         // Kiểm tra đăng nhập
         if (user == null) {
@@ -29,12 +29,15 @@ public class OrderServlet extends HttpServlet {
             return;
         }
 
-        // Lấy filter status (nếu có)
+        // Lấy filter status (nếu có), mặc định là "all"
         String filterStatus = req.getParameter("status");
+        if (filterStatus == null || filterStatus.trim().isEmpty()) {
+            filterStatus = "all";
+        }
 
         List<Order> orders;
-        if (filterStatus != null && !filterStatus.isEmpty() && !filterStatus.equals("all")) {
-            // Lọc theo status
+        if (!filterStatus.equals("all")) {
+            // Lọc theo status cụ thể
             orders = orderDAO.getOrdersByStatus(user.getId(), filterStatus);
         } else {
             // Lấy tất cả
@@ -49,7 +52,7 @@ public class OrderServlet extends HttpServlet {
         int cancelledCount = orderDAO.countOrdersByStatus(user.getId(), "cancelled");
 
         req.setAttribute("orders", orders);
-        req.setAttribute("filterStatus", filterStatus == null ? "all" : filterStatus);
+        req.setAttribute("filterStatus", filterStatus);
         req.setAttribute("pendingCount", pendingCount);
         req.setAttribute("processingCount", processingCount);
         req.setAttribute("shippedCount", shippedCount);
@@ -62,7 +65,7 @@ public class OrderServlet extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         HttpSession session = req.getSession();
-        User user = (User) session.getAttribute("user");
+        User user = (User) session.getAttribute("account");
 
         if (user == null) {
             resp.sendRedirect(req.getContextPath() + "/login");

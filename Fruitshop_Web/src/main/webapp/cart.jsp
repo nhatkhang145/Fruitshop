@@ -149,69 +149,8 @@
           </div>
         </div>
 
-        <footer class="footer">
-          <div class="footer__main">
-            <div class="footer__grid">
-              <div class="footer__company">
-                <div class="footer__brand">
-                  <a href="/">
-                    <img class="navbar__menu-logo-img"
-                      src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-                      alt="Organic Harvest Logo" />
-                  </a>
-                </div>
-                <p class="footer__description">
-                  Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
-                </p>
-                <div class="footer__social">
-                  <a href="#" class="footer__social-link footer__social-link--facebook">
-                    <i class="fab fa-facebook-f"></i>
-                  </a>
-                  <a href="#" class="footer__social-link footer__social-link--twitter">
-                    <i class="fab fa-twitter"></i>
-                  </a>
-                  <a href="#" class="footer__social-link footer__social-link--telegram">
-                    <i class="fab fa-telegram"></i>
-                  </a>
-                </div>
-              </div>
-
-              <div class="footer__section">
-                <h3 class="footer__title">Chính sách</h3>
-                <ul class="footer__links">
-                  <li class="footer__link-item"><a href="#" class="footer__link">Trang chủ</a></li>
-                  <li class="footer__link-item"><a href="#" class="footer__link">Sản phẩm</a></li>
-                  <li class="footer__link-item"><a href="#" class="footer__link">Giới thiệu</a></li>
-                  <li class="footer__link-item"><a href="#" class="footer__link">Bài viết</a></li>
-                </ul>
-              </div>
-
-              <div class="footer__section">
-                <h3 class="footer__title">Hổ trợ khách hàng</h3>
-                <ul class="footer__links">
-                  <li class="footer__link-item"><a href="#" class="footer__link">Tìm kiếm</a></li>
-                  <li class="footer__link-item"><a href="#" class="footer__link">Chính sách bảo mật</a></li>
-                  <li class="footer__link-item"><a href="#" class="footer__link">Điều khoản dịch vụ</a></li>
-                  <li class="footer__link-item"><a href="#" class="footer__link">Hướng dẫn kiểm tra đơn hàng</a></li>
-                </ul>
-              </div>
-
-              <div class="footer__section">
-                <h3 class="footer__title">Đăng kí nhận tin</h3>
-                <form class="footer__newsletter-form">
-                  <input type="email" placeholder="Nhập địa chỉ email" class="footer__newsletter-input" required />
-                  <button type="submit" class="footer__newsletter-button">Đăng kí</button>
-                </form>
-              </div>
-            </div>
-          </div>
-
-          <div class="footer__bottom">
-            <div class="footer__bottom-content">
-              <p class="footer__copyright">&copy; 2025 Company. All rights reserved.</p>
-            </div>
-          </div>
-        </footer>
+        <jsp:include page="footer.jsp"></jsp:include>
+        
         <script src="./assets/js/main.js"></script>
       </body>
 

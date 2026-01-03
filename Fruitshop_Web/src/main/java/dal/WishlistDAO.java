@@ -44,7 +44,7 @@ public class WishlistDAO {
     // Lấy danh sách hiển thị
     public List<WishlistItem> getWishlistByUserId(int userId) {
         // 1. SỬA CÂU SQL: Thêm p.quantity vào danh sách cột cần lấy
-        String query = "SELECT w.id as w_id, w.user_id, w.product_id, w.created_at, " +
+        String query = "SELECT w.user_id, w.product_id, w.created_at, " +
                 "p.id as p_id, p.name, p.price, p.sale_price, p.image, p.quantity " +
                 "FROM wishlists w " +
                 "JOIN products p ON w.product_id = p.id " +
@@ -56,7 +56,7 @@ public class WishlistDAO {
                         .bind("uid", userId)
                         .map((rs, ctx) -> {
                             WishlistItem item = new WishlistItem();
-                            item.setId(rs.getInt("w_id"));
+                            // Không set id vì bảng wishlists không có cột id
                             item.setUserId(rs.getInt("user_id"));
                             item.setProductId(rs.getInt("product_id"));
                             item.setCreatedAt(rs.getTimestamp("created_at"));
