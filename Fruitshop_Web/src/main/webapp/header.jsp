@@ -72,8 +72,12 @@
                 </div>
 
                 <div class="navbar__menu-actions">
-                    <a href="${pageContext.request.contextPath}/wishlist.jsp" class="icon-btn wishlist-btn">
-                        <i class="fa-solid fa-heart"></i><span class="badge">0</span>
+                    <a href="wishlist" class="icon-btn wishlist-btn">
+                        <i class="fa-solid fa-heart"></i>
+
+                        <span class="badge">
+                            ${sessionScope.wishlistCount != null ? sessionScope.wishlistCount : 0}
+                        </span>
                     </a>
                     <a href="${pageContext.request.contextPath}/cart.jsp" class="icon-btn cart-btn">
                         <i class="fa-solid fa-basket-shopping"></i><span class="badge">0</span>

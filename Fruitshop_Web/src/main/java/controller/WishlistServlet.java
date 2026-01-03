@@ -45,6 +45,9 @@ public class WishlistServlet extends HttpServlet {
             if (pidStr != null) {
                 int pid = Integer.parseInt(pidStr);
                 dao.addToWishlist(user.getId(), pid);
+
+                int count = dao.countWishlist(user.getId());
+                session.setAttribute("wishlistCount", count);
             }
             // Quay lại trang trước đó (ví dụ đang ở Shop thì ở lại Shop)
             String referer = request.getHeader("Referer");
@@ -56,6 +59,9 @@ public class WishlistServlet extends HttpServlet {
             if (pidStr != null) {
                 int pid = Integer.parseInt(pidStr);
                 dao.removeFromWishlist(user.getId(), pid);
+
+                int count = dao.countWishlist(user.getId());
+                session.setAttribute("wishlistCount", count);
             }
             // Load lại trang wishlist
             response.sendRedirect("wishlist");
