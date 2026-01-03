@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<config>
+    <!-- Bật CKFinder -->
+    <enabled>true</enabled>
+    
+    <!-- URL truy cập thư mục uploads từ web -->
+    <baseURL>/Fruitshop_Web/uploads/</baseURL>
+    
+    <!-- Đường dẫn vật lý đến thư mục uploads trên server -->
+    <baseDir>d:/xampp/htdocs/Fruitshop/Fruitshop_Web/src/main/webapp/uploads/</baseDir>
+    
+    <!-- Bật license (có thể để trống cho trial) -->
+    <licenseKey></licenseKey>
+    <licenseName>localhost</licenseName>
+    
+    <!-- Kích thước ảnh thumbnail -->
+    <images>
+        <maxWidth>1600</maxWidth>
+        <maxHeight>1200</maxHeight>
+        <quality>80</quality>
+    </images>
+    
+    <thumbnails>
+        <enabled>true</enabled>
+        <width>150</width>
+        <height>150</height>
+        <quality>80</quality>
+    </thumbnails>
+    
+    <!-- Các loại resource (Images, Files, Flash) -->
+    <defaultResourceTypes></defaultResourceTypes>
+    <types>
+        <type name="Files">
+            <url>%BASE_URL%files/</url>
+            <directory>%BASE_DIR%files</directory>
+            <maxSize>10M</maxSize>
+            <allowedExtensions>7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip</allowedExtensions>
+            <deniedExtensions></deniedExtensions>
+        </type>
+        <type name="Images">
+            <url>%BASE_URL%images/</url>
+            <directory>%BASE_DIR%images</directory>
+            <maxSize>10M</maxSize>
+            <allowedExtensions>bmp,gif,jpeg,jpg,png,webp</allowedExtensions>
+            <deniedExtensions></deniedExtensions>
+        </type>
+        <type name="Products">
+            <url>%BASE_URL%products/</url>
+            <directory>%BASE_DIR%products</directory>
+            <maxSize>5M</maxSize>
+            <allowedExtensions>jpg,jpeg,png,webp</allowedExtensions>
+            <deniedExtensions></deniedExtensions>
+        </type>
+        <type name="Reviews">
+            <url>%BASE_URL%reviews/</url>
+            <directory>%BASE_DIR%reviews</directory>
+            <maxSize>3M</maxSize>
+            <allowedExtensions>jpg,jpeg,png</allowedExtensions>
+            <deniedExtensions></deniedExtensions>
+        </type>
+        <type name="Avatars">
+            <url>%BASE_URL%avatars/</url>
+            <directory>%BASE_DIR%avatars</directory>
+            <maxSize>2M</maxSize>
+            <allowedExtensions>jpg,jpeg,png</allowedExtensions>
+            <deniedExtensions></deniedExtensions>
+        </type>
+    </types>
+    
+    <!-- Kiểm tra double file extension -->
+    <checkDoubleExtension>true</checkDoubleExtension>
+    
+    <!-- Force ASCII filename -->
+    <forceASCII>false</forceASCII>
+    
+    <!-- Tắt xem file HTML trực tiếp -->
+    <htmlExtensions>html,htm,xml,js</htmlExtensions>
+    
+    <!-- Plugins -->
+    <plugins></plugins>
+    
+    <!-- Access Control -->
+    <accessControl>
+        <role name="*" >
+            <folder path="/" />
+        </role>
+    </accessControl>
+</config>

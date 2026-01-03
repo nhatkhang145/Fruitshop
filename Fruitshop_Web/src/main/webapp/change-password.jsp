@@ -12,7 +12,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Đổi mật khẩu - Organic Harvest</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/profile.css" />
@@ -39,25 +39,25 @@
                     </div>
 
                     <ul class="profile-menu">
-                        <li class="profile-menu-item">
-                            <a href="profile.jsp"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
-                        </li>
-                        <li class="profile-menu-item">
-                            <a href="orders.jsp"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
-                        </li>
-                        <li class="profile-menu-item">
-                            <a href="addresses.jsp"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
-                        </li>
-                        <li class="profile-menu-item active">
-                            <a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
-                        </li>
-                        <li class="profile-menu-item">
-                            <a href="wishlist.jsp"><i class="fa-regular fa-heart"></i> Yêu thích</a>
-                        </li>
-                         <li class="profile-menu-item">
-                            <a href="logout" style="color: red;"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
-                        </li>
-                    </ul>
+                    <li class="profile-menu-item active">
+                      <a href="profile"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
+                    </li>
+                    <li class="profile-menu-item">
+                      <a href="orders.jsp"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
+                    </li>
+                    <li class="profile-menu-item">
+                      <a href="addresses"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
+                    </li>
+                    <li class="profile-menu-item ">
+                      <a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
+                    </li>
+                    <li class="profile-menu-item">
+                      <a href="wishlist.jsp"><i class="fa-regular fa-heart"></i> Yêu thích</a>
+                    </li>
+                    <li class="profile-menu-item">
+                      <a href="logout" style="color: red;"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                    </li>
+                  </ul>
                 </aside>
 
                 <main class="profile-content">
