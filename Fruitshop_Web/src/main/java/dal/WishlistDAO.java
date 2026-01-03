@@ -44,10 +44,10 @@ public class WishlistDAO {
     // Lấy danh sách hiển thị
     public List<WishlistItem> getWishlistByUserId(int userId) {
         String query = "SELECT w.id as w_id, w.user_id, w.product_id, w.created_at, " +
-                        "p.id as p_id, p.name, p.price, p.sale_price, p.immage" +
+                        "p.id as p_id, p.name, p.price, p.sale_price, p.image " +
                         "FROM wishlists w " +
-                        "JOIN products p ON w.product_id = p.id" +
-                        "WHERE w.user_id = :uid" +
+                        "JOIN products p ON w.product_id = p.id " +
+                        "WHERE w.user_id = :uid " +
                         "ORDER BY w.created_at DESC";
 
         return DBContext.get().withHandle(handle ->
