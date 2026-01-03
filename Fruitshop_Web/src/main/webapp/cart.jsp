@@ -139,7 +139,7 @@
                         <fmt:formatNumber value="${sessionScope.totalMoney}" pattern="#,###" />đ
                       </span>
                     </div>
-                    <a href="checkout.jsp">
+                    <a href="${pageContext.request.contextPath}/checkout">
                       <button class="checkout-btn">THANH TOÁN</button>
                     </a>
                   </div>

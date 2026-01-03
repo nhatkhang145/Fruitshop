@@ -1,528 +1,427 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 <!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Giới thiệu</title>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css"
-    />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
-    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/checkout.css" />
-  </head>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Thanh toán - Organic Harvest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css">
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/checkout.css">
+</head>
+<body>
+    <jsp:include page="header.jsp"></jsp:include>
 
-  <body>
-    <!-- Header -->
-    <!-- HEADER -->
-   <jsp:include page="header.jsp"></jsp:include>
-    <!-- Page Title -->
     <div class="breadcrumb">
-      <div class="grid">
-        <a href="cart.jsp">Giỏ hàng</a>
-        <i class="fa-solid fa-angle-right"></i>
-        <span>thanh toán</span>
-      </div>
+        <div class="grid">
+            <a href="${pageContext.request.contextPath}/cart.jsp">Giỏ hàng</a>
+            <i class="fa-solid fa-angle-right"></i>
+            <span>Thanh toán</span>
+        </div>
     </div>
-    <!-- CONTAINER -->
+
     <div class="container-checkout">
-      <div class="checkout-layout">
-        <div class="checkout-layout__form-wrapper">
-          <div class="checkout-section">
-            <h2 class="billing-form__title">Địa chỉ nhận hàng</h2>
+        <form action="${pageContext.request.contextPath}/checkout" method="post" id="checkoutForm">
+            <div class="checkout-layout">
+                <div class="checkout-layout__form-wrapper">
+                    <c:if test="${not empty error}">
+                        <div class="alert alert-danger" style="background: #fee; color: #c00; padding: 12px; margin-bottom: 15px; border-radius: 5px;">
+                            ${error}
+                        </div>
+                    </c:if>
 
-            <div class="address-selection">
-              <label class="address-card selected">
-                <div class="address-card__radio">
-                  <input
-                    type="radio"
-                    name="shipping_address"
-                    value="addr_1"
-                    checked
-                    onchange="toggleAddressForm(false)"
-                  />
-                </div>
-                <div class="address-card__content">
-                  <div class="address-card__header">
-                    <span class="address-card__name">Nguyễn Văn A</span>
-                    <span class="address-card__phone">0905.123.456</span>
-                    <span class="address-card__badge">Mặc định</span>
-                  </div>
-                  <div class="address-card__body">
-                    123 Đường ABC, Phường 1, Quận 2, TP. Hồ Chí Minh
-                  </div>
-                </div>
-              </label>
+                    <div class="checkout-section">
+                        <h2 class="billing-form__title">
+                            <i class="fa-solid fa-location-dot"></i> Địa chỉ nhận hàng
+                        </h2>
 
-              <label class="address-card">
-                <div class="address-card__radio">
-                  <input
-                    type="radio"
-                    name="shipping_address"
-                    value="addr_2"
-                    onchange="toggleAddressForm(false)"
-                  />
-                </div>
-                <div class="address-card__content">
-                  <div class="address-card__header">
-                    <span class="address-card__name"
-                      >Nguyễn Văn A (Văn phòng)</span
-                    >
-                    <span class="address-card__phone">0912.345.678</span>
-                  </div>
-                  <div class="address-card__body">
-                    Tòa nhà Bitexco, Số 2 Hải Triều, Phường Bến Nghé, Quận 1,
-                    TP. Hồ Chí Minh
-                  </div>
-                </div>
-              </label>
+                        <c:choose>
+                            <c:when test="${not empty addresses}">
+                                <!-- Address Display Card (Shopee style) -->
+                                <div class="address-card" id="addressCard">
+                                    <div class="address-card-content" id="selectedAddressDisplay">
+                                        <c:set var="defaultAddr" value="${null}"/>
+                                        <c:forEach var="addr" items="${addresses}">
+                                            <c:if test="${addr.defaultAddress}">
+                                                <c:set var="defaultAddr" value="${addr}"/>
+                                            </c:if>
+                                        </c:forEach>
+                                        <c:if test="${not empty defaultAddr}">
+                                            <div class="address-info">
+                                                <span class="address-name">${defaultAddr.receiverName}</span>
+                                                <span class="address-phone">${defaultAddr.phoneNumber}</span>
+                                            </div>
+                                            <div class="address-detail">${defaultAddr.address}, ${defaultAddr.city}</div>
+                                            <input type="hidden" name="addressId" id="selectedAddressId" value="${defaultAddr.id}">
+                                        </c:if>
+                                    </div>
+                                    <button type="button" class="btn-change" onclick="openAddressModal()">Thay đổi</button>
+                                </div>
 
-              <label class="address-card">
-                <div class="address-card__radio">
-                  <input
-                    type="radio"
-                    name="shipping_address"
-                    value="new_addr"
-                    id="newAddressRadio"
-                    onchange="toggleAddressForm(true)"
-                  />
+                                <!-- Modal chọn địa chỉ -->
+                                <div class="address-modal" id="addressModal">
+                                    <div class="modal-overlay" onclick="closeAddressModal()"></div>
+                                    <div class="modal-container">
+                                        <div class="modal-header">
+                                            <h3>Chọn địa chỉ giao hàng</h3>
+                                            <button type="button" class="btn-close" onclick="closeAddressModal()">&times;</button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <c:forEach var="addr" items="${addresses}">
+                                                <div class="address-option" data-id="${addr.id}" data-name="${addr.receiverName}" data-phone="${addr.phoneNumber}" data-address="${addr.address}, ${addr.city}" onclick="selectAddress(this)">
+                                                    <div class="address-option-content">
+                                                        <div class="address-option-header">
+                                                            <span class="address-option-name">${addr.receiverName}</span>
+                                                            <span class="address-option-phone">${addr.phoneNumber}</span>
+                                                        </div>
+                                                        <div class="address-option-detail">${addr.address}, ${addr.city}</div>
+                                                        <c:if test="${addr.defaultAddress}">
+                                                            <span class="badge-default">Mặc định</span>
+                                                        </c:if>
+                                                    </div>
+                                                    <div class="radio-wrapper">
+                                                        <input type="radio" name="selectedAddr" value="${addr.id}" ${addr.defaultAddress ? 'checked' : ''}>
+                                                    </div>
+                                                </div>
+                                            </c:forEach>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <a href="${pageContext.request.contextPath}/addresses" class="btn-add-new">
+                                                <i class="fa-solid fa-plus"></i> Thêm địa chỉ mới
+                                            </a>
+                                            <button type="button" class="btn-confirm" onclick="confirmAddress()">Xác nhận</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </c:when>
+                            <c:otherwise>
+                                <!-- Manual input form -->
+                                <div class="billing-form__group">
+                                    <label class="billing-form__label" for="fullname">Họ và tên *</label>
+                                    <input class="billing-form__input" type="text" id="fullname" name="fullname" value="${user.fullName}" required>
+                                </div>
+                                <div class="billing-form__group">
+                                    <label class="billing-form__label" for="phone">Số điện thoại *</label>
+                                    <input class="billing-form__input" type="tel" id="phone" name="phone" value="${user.phone}" required>
+                                </div>
+                                <div class="billing-form__group">
+                                    <label class="billing-form__label" for="address">Địa chỉ nhận hàng *</label>
+                                    <textarea class="billing-form__input billing-form__input--textarea" id="address" name="address" rows="3" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố" required></textarea>
+                                </div>
+                            </c:otherwise>
+                        </c:choose>
+
+                        <div class="billing-form__group" style="margin-top: 20px">
+                            <label class="billing-form__label" for="note">Ghi chú đơn hàng (tùy chọn)</label>
+                            <textarea class="billing-form__input billing-form__input--textarea" id="note" name="note" placeholder="Ví dụ: Giao hàng trong giờ hành chính..."></textarea>
+                        </div>
+                    </div>
                 </div>
-                <div class="address-card__content">
-                  <span class="address-card__name"
-                    >Sử dụng địa chỉ khác / Thêm mới</span
-                  >
+
+                <!-- Order Summary -->
+                <div class="checkout-layout__summary-wrapper">
+                    <div class="order-summary">
+                        <h2 class="order-summary__title">Đơn hàng của bạn</h2>
+                        <table class="order-summary__table">
+                            <thead class="thead-border">
+                                <tr class="order-summary__row order-summary__row--header">
+                                    <th class="order-summary__cell order-summary__cell--header">Sản phẩm</th>
+                                    <th class="order-summary__cell order-summary__cell--header">Tạm tính</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <c:forEach items="${sessionScope.cart}" var="item">
+                                    <tr class="order-summary__row__item">
+                                        <td class="order-summary__cell">
+                                            <span class="order-summary__product-name">${item.product.name}</span> &times; ${item.quantity}
+                                        </td>
+                                        <td class="order-summary__cell">
+                                            <span class="order-summary__price">
+                                                <fmt:formatNumber value="${item.product.salePrice * item.quantity}" type="number" groupingUsed="true"/> ₫
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </c:forEach>
+                            </tbody>
+                            <tfoot>
+                                <tr class="order-summary__row order-summary__row--footer">
+                                    <th class="order-summary__cell order-summary__cell--label">Tạm tính</th>
+                                    <td class="order-summary__cell">
+                                        <span class="order-summary__price">
+                                            <fmt:formatNumber value="${totalProducts}" type="number" groupingUsed="true"/> ₫
+                                        </span>
+                                    </td>
+                                </tr>
+                                <tr class="order-summary__row order-summary__row--footer">
+                                    <th class="order-summary__cell order-summary__cell--label">Phí vận chuyển</th>
+                                    <td class="order-summary__cell">
+                                        <span class="order-summary__price--shipping">
+                                            <fmt:formatNumber value="${shippingFee}" type="number" groupingUsed="true"/> ₫
+                                        </span>
+                                    </td>
+                                </tr>
+                                <c:if test="${discount > 0}">
+                                    <tr class="order-summary__row order-summary__row--footer">
+                                        <th class="order-summary__cell order-summary__cell--label">Giảm giá</th>
+                                        <td class="order-summary__cell">
+                                            <span class="order-summary__price" style="color: #d9534f;">
+                                                - <fmt:formatNumber value="${discount}" type="number" groupingUsed="true"/> ₫
+                                            </span>
+                                        </td>
+                                    </tr>
+                                </c:if>
+                                <tr class="order-summary__row order-summary__row--footer">
+                                    <th class="order-summary__cell order-summary__cell--label">Tổng cộng</th>
+                                    <td class="order-summary__cell">
+                                        <span class="order-summary__price order-summary__price--total">
+                                            <fmt:formatNumber value="${finalAmount}" type="number" groupingUsed="true"/> ₫
+                                        </span>
+                                    </td>
+                                </tr>
+                            </tfoot>
+                        </table>
+
+                        <div class="payment">
+                            <ul class="payment__list">
+                                <li class="payment__option">
+                                    <input class="payment__radio" type="radio" name="paymentMethod" id="payment-cod" value="COD" checked>
+                                    <label class="payment__label" for="payment-cod">Trả tiền mặt khi nhận hàng (COD)</label>
+                                    <div class="payment__description">Thanh toán bằng tiền mặt khi giao hàng.</div>
+                                </li>
+                                <li class="payment__option">
+                                    <input class="payment__radio" type="radio" name="paymentMethod" id="payment-bank" value="bank_transfer">
+                                    <label class="payment__label" for="payment-bank">Chuyển khoản ngân hàng</label>
+                                    <div class="payment__description">Nội dung: [Tên] + [Mã đơn hàng] STK: 123456789 Ngân hàng: Vietcombank</div>
+                                </li>
+                            </ul>
+                            <p class="payment__privacy-text">
+                                Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng, hỗ trợ trải nghiệm của bạn trên trang web này và cho các mục đích khác được mô tả trong chính sách riêng tư của chúng tôi.
+                            </p>
+                            <button type="submit" class="button button--primary button--fullwidth">Đặt hàng</button>
+                        </div>
+                    </div>
                 </div>
-              </label>
             </div>
-          </div>
-
-          <div
-            id="new-address-form"
-            style="
-              display: none;
-              margin-top: 20px;
-              border-top: 1px dashed #ddd;
-              padding-top: 20px;
-            "
-          >
-            <h3 class="billing-form__title" style="font-size: 1.4rem">
-              Thông tin giao hàng mới
-            </h3>
-            <form class="billing-form">
-              <div class="billing-form__row">
-                <div class="billing-form__group billing-form__group--half">
-                  <label class="billing-form__label" for="first-name"
-                    >Tên *</label
-                  >
-                  <input
-                    class="billing-form__input"
-                    type="text"
-                    id="first-name"
-                  />
-                </div>
-                <div class="billing-form__group billing-form__group--half">
-                  <label class="billing-form__label" for="last-name"
-                    >Họ *</label
-                  >
-                  <input
-                    class="billing-form__input"
-                    type="text"
-                    id="last-name"
-                  />
-                </div>
-              </div>
-
-              <div class="billing-form__group">
-                <label class="billing-form__label" for="address"
-                  >Địa chỉ *</label
-                >
-                <input
-                  class="billing-form__input"
-                  type="text"
-                  id="address"
-                  placeholder="Số nhà, tên đường"
-                />
-              </div>
-
-              <div class="billing-form__group">
-                <label class="billing-form__label" for="city"
-                  >Tỉnh / Thành phố *</label
-                >
-                <input class="billing-form__input" type="text" id="city" />
-              </div>
-
-              <div class="billing-form__group">
-                <label class="billing-form__label" for="phone"
-                  >Số điện thoại *</label
-                >
-                <input class="billing-form__input" type="tel" id="phone" />
-              </div>
-
-              <div class="billing-form__group">
-                <label class="billing-form__label" for="email"
-                  >Địa chỉ email *</label
-                >
-                <input class="billing-form__input" type="email" id="email" />
-              </div>
-            </form>
-          </div>
-
-          <div class="billing-form__group" style="margin-top: 20px">
-            <label class="billing-form__label" for="order-notes"
-              >Ghi chú đơn hàng (tùy chọn)</label
-            >
-            <textarea
-              class="billing-form__input billing-form__input--textarea"
-              id="order-notes"
-              placeholder="Ví dụ: Giao hàng trong giờ hành chính..."
-            ></textarea>
-          </div>
-        </div>
-        <!-- checkout layout -->
-        <div class="checkout-layout__summary-wrapper">
-          <div class="order-summary">
-            <h2 class="order-summary__title">Đơn hàng của bạn</h2>
-
-            <table class="order-summary__table">
-              <thead class="thead-border">
-                <tr class="order-summary__row order-summary__row--header">
-                  <th class="order-summary__cell order-summary__cell--header">
-                    Sản phẩm
-                  </th>
-                  <th class="order-summary__cell order-summary__cell--header">
-                    Tạm tính
-                  </th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr class="order-summary__row__item">
-                  <td class="order-summary__cell">
-                    <span class="order-summary__product-name">Măng cụt</span>
-                    &times; 2
-                  </td>
-                  <td class="order-summary__cell">
-                    <span class="order-summary__price">66.000 ₫</span>
-                  </td>
-                </tr>
-                <tr class="order-summary__row__item">
-                  <td class="order-summary__cell">
-                    <span class="order-summary__product-name">Chuối</span>
-                    &times; 1
-                  </td>
-                  <td class="order-summary__cell">
-                    <span class="order-summary__price">15.000 ₫</span>
-                  </td>
-                </tr>
-              </tbody>
-
-              <tfoot>
-                <tr class="order-summary__row order-summary__row--footer">
-                  <th class="order-summary__cell order-summary__cell--label">
-                    Tạm tính
-                  </th>
-                  <td class="order-summary__cell">
-                    <span class="order-summary__price">81.000 ₫</span>
-                  </td>
-                </tr>
-                <tr class="order-summary__row order-summary__row--footer">
-                  <th class="order-summary__cell order-summary__cell--label">
-                    Giao hàng
-                  </th>
-                  <td class="order-summary__cell">
-                    <span class="order-summary__price--shipping">50.000 ₫</span>
-                  </td>
-                </tr>
-                <tr class="order-summary__row order-summary__row--footer">
-                  <th class="order-summary__cell order-summary__cell--label">
-                    Tổng cộng
-                  </th>
-                  <td class="order-summary__cell">
-                    <span
-                      class="order-summary__price order-summary__price--total"
-                      >131.000 ₫</span
-                    >
-                  </td>
-                </tr>
-              </tfoot>
-            </table>
-
-            <div class="payment">
-              <ul class="payment__list">
-                <li class="payment__option">
-                  <input
-                    class="payment__radio"
-                    type="radio"
-                    name="payment-method"
-                    id="payment-cod"
-                    checked
-                  />
-                  <label class="payment__label" for="payment-cod"
-                    >Trả tiền mặt khi nhận hàng (COD)</label
-                  >
-                  <div class="payment__description">
-                    Thanh toán bằng tiền mặt khi giao hàng.
-                  </div>
-                </li>
-                <li class="payment__option">
-                  <input
-                    class="payment__radio"
-                    type="radio"
-                    name="payment-method"
-                    id="payment-bank"
-                  />
-                  <label class="payment__label" for="payment-bank"
-                    >Chuyển khoản ngân hàng</label
-                  >
-                  <div class="payment__description">
-                    Nội dung: [Tên] + [Mã đơn hàng] STK: 123456789 Ngân hàng:
-                    Vietcombank
-                  </div>
-                </li>
-              </ul>
-
-              <p class="payment__privacy-text">
-                Thông tin cá nhân của bạn sẽ được sử dụng để xử lý đơn hàng, hỗ
-                trợ trải nghiệm của bạn trên trang web này và cho các mục đích
-                khác được mô tả trong chính sách riêng tư của chúng tôi.
-              </p>
-
-              <button class="button button--primary button--fullwidth">
-                Đặt hàng
-              </button>
-            </div>
-          </div>
-        </div>
-      </div>
+        </form>
     </div>
-    <!-- Footer -->
-    <footer class="footer">
-      <div class="footer__main">
-        <div class="footer__grid">
-          <!-- Company Info -->
-          <div class="footer__company">
-            <div class="footer__brand">
-              <a href="/">
-                <img
-                  class="navbar__menu-logo-img"
-                  src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-                  alt="Organic Harvest Logo"
-                />
-              </a>
-              <!-- <div class="footer__logo">T</div>
-                <h3 class="footer__company-name">Company</h3> -->
-            </div>
-            <p class="footer__description">
-              Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
-            </p>
-            <div class="footer__social">
-              <a
-                href="https://www.themedevhub.com"
-                target="_blank"
-                class="footer__social-link footer__social-link--facebook"
-              >
-                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                  <path
-                    d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://www.themedevhub.com"
-                target="_blank"
-                class="footer__social-link footer__social-link--twitter"
-              >
-                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                  <path
-                    d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z"
-                  />
-                </svg>
-              </a>
-              <a
-                href="https://www.themedevhub.com"
-                target="_blank"
-                class="footer__social-link footer__social-link--telegram"
-              >
-                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                  <path
-                    d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z"
-                  />
-                </svg>
-              </a>
-            </div>
-          </div>
 
-          <!-- Quick Links -->
-          <div class="footer__section">
-            <h3 class="footer__title">Chính sách</h3>
-            <ul class="footer__links">
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/about-us"
-                  target="_blank"
-                  class="footer__link"
-                  >Trang chủ</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/hire-experts"
-                  target="_blank"
-                  class="footer__link"
-                  >Sản phẩm</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/themes"
-                  target="_blank"
-                  class="footer__link"
-                  >Giới thiệu</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Bài viết</a
-                >
-              </li>
-            </ul>
-          </div>
+    <jsp:include page="footer.jsp"></jsp:include>
+    <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+    <script>
+        function openAddressModal() {
+            document.getElementById('addressModal').style.display = 'flex';
+        }
 
-          <!-- Hổ trợ khách hàng -->
-          <div class="footer__section">
-            <h3 class="footer__title">Hổ trợ khách hàng</h3>
-            <ul class="footer__links">
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/about-us"
-                  target="_blank"
-                  class="footer__link"
-                  >Tìm kiếm
-                </a>
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/hire-experts"
-                  target="_blank"
-                  class="footer__link"
-                  >Chính sách bảo mật</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/themes"
-                  target="_blank"
-                  class="footer__link"
-                  >Điều khoản dịch vụ</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Hướng dẫn kiểm tra đơn hàng</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Chính sách giao nhận</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Chính sách thanh toán</a
-                >
-              </li>
-              <li class="footer__link-item">
-                <div class="footer__link-dot"></div>
-                <a
-                  href="https://www.themedevhub.com/contact"
-                  target="_blank"
-                  class="footer__link"
-                  >Chính sách đổi trả</a
-                >
-              </li>
-            </ul>
-          </div>
+        function closeAddressModal() {
+            document.getElementById('addressModal').style.display = 'none';
+        }
 
-          <!-- Newsletter -->
-          <div class="footer__section">
-            <h3 class="footer__title">Đăng kí nhận tin</h3>
+        function selectAddress(element) {
+            document.querySelectorAll('.address-option').forEach(opt => opt.classList.remove('selected'));
+            element.classList.add('selected');
+            element.querySelector('input[type="radio"]').checked = true;
+        }
 
-            <form class="footer__newsletter-form">
-              <input
-                type="email"
-                placeholder="Nhập địa chỉ email"
-                class="footer__newsletter-input"
-                required
-              />
-              <button type="submit" class="footer__newsletter-button">
-                Đăng kí
-              </button>
-            </form>
-          </div>
-        </div>
-      </div>
+        function confirmAddress() {
+            var selected = document.querySelector('.address-option.selected') || document.querySelector('.address-option input:checked').closest('.address-option');
+            if (selected) {
+                var id = selected.getAttribute('data-id');
+                var name = selected.getAttribute('data-name');
+                var phone = selected.getAttribute('data-phone');
+                var address = selected.getAttribute('data-address');
+                
+                document.getElementById('selectedAddressDisplay').innerHTML = 
+                    '<div class="address-info"><span class="address-name">' + name + '</span><span class="address-phone">' + phone + '</span></div>' +
+                    '<div class="address-detail">' + address + '</div>';
+                document.getElementById('selectedAddressId').value = id;
+                
+                closeAddressModal();
+            }
+        }
+    </script>
+    <style>
+        /* Shopee-style Address Card */
+        .address-card {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 15px 20px;
+            border: 1px solid #e8e8e8;
+            border-radius: 8px;
+            background: #fff;
+            margin-bottom: 20px;
+        }
+        .address-card-content {
+            flex: 1;
+        }
+        .address-info {
+            margin-bottom: 8px;
+        }
+        .address-name {
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        .address-phone {
+            color: #666;
+        }
+        .address-detail {
+            color: #555;
+            font-size: 14px;
+        }
+        .btn-change {
+            padding: 8px 20px;
+            border: 1px solid #5a9a5a;
+            background: #fff;
+            color: #5a9a5a;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .btn-change:hover {
+            background: #5a9a5a;
+            color: #fff;
+        }
 
-      <!-- Footer Bottom -->
-      <div class="footer__bottom">
-        <div class="footer__bottom-content">
-          <p class="footer__copyright">
-            &copy; 2025 Company. All rights reserved.
-          </p>
-          <ul class="footer__bottom-links">
-            <li>
-              <a
-                href="https://www.themedevhub.com/about-us"
-                target="_blank"
-                class="footer__bottom-link"
-                >About us</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.themedevhub.com/privacy-policy"
-                target="_blank"
-                class="footer__bottom-link"
-                >Terms</a
-              >
-            </li>
-            <li>
-              <a
-                href="https://www.themedevhub.com/terms-and-conditions"
-                target="_blank"
-                class="footer__bottom-link"
-                >Privacy</a
-              >
-            </li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-  </body>
+        /* Modal */
+        .address-modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            z-index: 9999;
+            align-items: center;
+            justify-content: center;
+        }
+        .modal-overlay {
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: rgba(0,0,0,0.5);
+        }
+        .modal-container {
+            position: relative;
+            background: #fff;
+            border-radius: 8px;
+            width: 90%;
+            max-width: 600px;
+            max-height: 80vh;
+            display: flex;
+            flex-direction: column;
+        }
+        .modal-header {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 20px;
+            border-bottom: 1px solid #e8e8e8;
+        }
+        .modal-header h3 {
+            margin: 0;
+            font-size: 18px;
+        }
+        .btn-close {
+            background: none;
+            border: none;
+            font-size: 28px;
+            cursor: pointer;
+            color: #666;
+            padding: 0;
+            width: 30px;
+            height: 30px;
+            line-height: 1;
+        }
+        .modal-body {
+            padding: 20px;
+            overflow-y: auto;
+            flex: 1;
+        }
+        .address-option {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            border: 2px solid #e8e8e8;
+            border-radius: 8px;
+            margin-bottom: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+        .address-option:hover, .address-option.selected {
+            border-color: #5a9a5a;
+            background: #f9fff9;
+        }
+        .address-option-content {
+            flex: 1;
+        }
+        .address-option-header {
+            margin-bottom: 5px;
+        }
+        .address-option-name {
+            font-weight: 600;
+            margin-right: 15px;
+        }
+        .address-option-phone {
+            color: #666;
+        }
+        .address-option-detail {
+            color: #555;
+            font-size: 14px;
+        }
+        .badge-default {
+            display: inline-block;
+            padding: 2px 8px;
+            background: #e8f5e9;
+            color: #2e7d32;
+            font-size: 11px;
+            border-radius: 3px;
+            margin-top: 5px;
+        }
+        .radio-wrapper input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+        .modal-footer {
+            padding: 15px 20px;
+            border-top: 1px solid #e8e8e8;
+            display: flex;
+            gap: 10px;
+            justify-content: space-between;
+        }
+        .btn-add-new {
+            padding: 10px 20px;
+            border: 1px solid #5a9a5a;
+            background: #fff;
+            color: #5a9a5a;
+            border-radius: 4px;
+            text-decoration: none;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .btn-add-new:hover {
+            background: #f0fff0;
+        }
+        .btn-confirm {
+            padding: 10px 30px;
+            background: #5a9a5a;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        .btn-confirm:hover {
+            background: #4a8a4a;
+        }
+    </style>
+</body>
 </html>
