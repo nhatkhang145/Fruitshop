@@ -2,6 +2,8 @@ package controller;
 
 import dal.ProductDAO;
 import dal.CategoryDAO;
+import dal.WishlistDAO;
+import jakarta.servlet.http.HttpSession;
 import model.Product;
 import model.Category;
 import java.io.IOException;
@@ -11,6 +13,7 @@ import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import model.User;
 
 @WebServlet(name = "ShopServlet", urlPatterns = {"/shop"})
 public class ShopServlet extends HttpServlet {
@@ -54,6 +57,19 @@ public class ShopServlet extends HttpServlet {
             listP = pDao.pagingProduct(index);
             request.setAttribute("endP", endPage); // Truyền tổng số trang về JSP
             request.setAttribute("tag", index);    // Để đánh dấu trang hiện tại đang active
+        }
+
+        // Lấy danh sách sản phẩm đã thích
+        HttpSession session = request.getSession();
+        User user = (User) session.getAttribute("account"); // Lấy user hiện tại
+
+        if (user != null) {
+            WishlistDAO wDao = new WishlistDAO();
+            // Gọi hàm getLikedProductIds bạn đã viết trong WishlistDAO
+            List<Integer> likedIds = wDao.getLikedProductIds(user.getId());
+
+            // Gửi list ID này sang JSP
+            request.setAttribute("likedIds", likedIds);
         }
 
         // 3. Gửi dữ liệu về JSP

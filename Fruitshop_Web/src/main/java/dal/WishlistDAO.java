@@ -43,19 +43,20 @@ public class WishlistDAO {
 
     // Lấy danh sách hiển thị
     public List<WishlistItem> getWishlistByUserId(int userId) {
-        String query = "SELECT w.id as w_id, w.user_id, w.product_id, w.created_at, " +
-                        "p.id as p_id, p.name, p.price, p.sale_price, p.image " +
-                        "FROM wishlists w " +
-                        "JOIN products p ON w.product_id = p.id " +
-                        "WHERE w.user_id = :uid " +
-                        "ORDER BY w.created_at DESC";
+        // 1. SỬA CÂU SQL: Thêm p.quantity vào danh sách cột cần lấy
+        String query = "SELECT w.user_id, w.product_id, w.created_at, " +
+                "p.id as p_id, p.name, p.price, p.sale_price, p.image, p.quantity " +
+                "FROM wishlists w " +
+                "JOIN products p ON w.product_id = p.id " +
+                "WHERE w.user_id = :uid " +
+                "ORDER BY w.created_at DESC";
 
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(query)
                         .bind("uid", userId)
                         .map((rs, ctx) -> {
                             WishlistItem item = new WishlistItem();
-                            item.setId(rs.getInt("w_id"));
+                            // Không set id vì bảng wishlists không có cột id
                             item.setUserId(rs.getInt("user_id"));
                             item.setProductId(rs.getInt("product_id"));
                             item.setCreatedAt(rs.getTimestamp("created_at"));
@@ -67,9 +68,24 @@ public class WishlistDAO {
                             product.setSalePrice(rs.getDouble("sale_price"));
                             product.setImage(rs.getString("image"));
 
+                            // 2. SỬA MAPPER: Set số lượng cho sản phẩm
+                            product.setQuantity(rs.getInt("quantity"));
+
                             item.setProduct(product);
                             return item;
                         })
                         .list());
+    }
+
+    // Lấy sản phẩm yêu thích
+    public List<Integer> getLikedProductIds(int userId) {
+        String query = "SELECT product_id FROM wishlists WHERE user_id = ?";
+
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(query)
+                        .bind(0, userId)
+                        .mapTo(Integer.class)
+                        .list()
+        );
     }
 }
