@@ -36,57 +36,34 @@
                 <!-- CỘT 2 -->
                 <div class="grid__column-2">
                   <nav class="category">
-                    <h3 class="category_heading">
-                      <i class="category__heading-icon fas fa-list"></i>
-                      Danh Mục
-                    </h3>
-                    <ul class="category-list">
-                      <li class="category-item">
-                        <details open>
-                          <summary>Trái Cây Tươi</summary>
-                          <ul class="subcategory-list">
-                            <li><a href="#">Táo</a></li>
-                            <li><a href="#">Cam</a></li>
-                            <li><a href="#">Chuối</a></li>
-                            <li><a href="#">Dưa Hấu</a></li>
-                          </ul>
-                        </details>
-                      </li>
+                      <h3 class="category_heading">
+                          <i class="category__heading-icon fas fa-list"></i>
+                          Danh Mục
+                      </h3>
 
-                      <li class="category-item">
-                        <details>
-                          <summary>Trái Cây Nhập Khẩu</summary>
-                          <ul class="subcategory-list">
-                            <li><a href="#">Nho Mỹ</a></li>
-                            <li><a href="#">Kiwi New Zealand</a></li>
-                            <li><a href="#">Lê Hàn Quốc</a></li>
-                          </ul>
-                        </details>
-                      </li>
-
-                      <li class="category-item">
-                        <details>
-                          <summary>Trái Cây Theo Mùa</summary>
-                          <ul class="subcategory-list">
-                            <li><a href="#">Xoài</a></li>
-                            <li><a href="#">Mít</a></li>
-                            <li><a href="#">Sầu Riêng</a></li>
-                            <li><a href="#">Chôm Chôm</a></li>
-                          </ul>
-                        </details>
-                      </li>
-
-                      <li class="category-item">
-                        <details>
-                          <summary>Combo Trái Cây</summary>
-                          <ul class="subcategory-list">
-                            <li><a href="#">Hộp Quà Trái Cây</a></li>
-                            <li><a href="#">Combo Gia Đình</a></li>
-                            <li><a href="#">Combo Văn Phòng</a></li>
-                          </ul>
-                        </details>
-                      </li>
-                    </ul>
+                      <ul class="category-list">
+                          <c:forEach items="${listC}" var="c">
+                              <c:if test="${c.parentId == 0}">
+                                  <li class="category-item">
+                                      <details>
+                                          <summary>${c.name}</summary>
+                                          <ul class="subcategory-list">
+                                              <c:forEach items="${listC}" var="sub">
+                                                  <c:if test="${sub.parentId == c.id}">
+                                                      <li>
+                                                          <a href="shop?cid=${sub.id}"
+                                                             style="${tag == sub.id ? 'color: var(--primary-color); font-weight: bold;' : ''}">
+                                                              ${sub.name}
+                                                          </a>
+                                                      </li>
+                                                  </c:if>
+                                              </c:forEach>
+                                          </ul>
+                                      </details>
+                                  </li>
+                              </c:if>
+                          </c:forEach>
+                      </ul>
                   </nav>
 
                   <!-- BỘ LỌC -->
