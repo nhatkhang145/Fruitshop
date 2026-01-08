@@ -92,10 +92,13 @@
                     </div>
 
                     <div class="action-buttons">
-                      <button type="submit" class="btn btn-add-cart">
-                        <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
-                      </button>
-                      <button type="button" class="btn btn-buy-now">Mua ngay</button>
+                        <button type="submit" name="btAction" value="add" class="btn btn-add-cart">
+                            <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                        </button>
+
+                        <button type="submit" name="btAction" value="buy" class="btn btn-buy-now">
+                            Mua ngay
+                        </button>
                     </div>
                   </form>
 
