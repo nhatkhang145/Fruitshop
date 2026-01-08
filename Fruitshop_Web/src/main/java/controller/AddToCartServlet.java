@@ -23,6 +23,7 @@ public class AddToCartServlet extends HttpServlet {
         // 1. Lấy tham số từ form hoặc URL
         String pidRaw = request.getParameter("pid");
         String quantityRaw = request.getParameter("quantity");
+        String action = request.getParameter("btAction");
 
         // Mặc định số lượng là 1 (nếu add từ trang Shop)
         int quantity = 1;
@@ -79,12 +80,17 @@ public class AddToCartServlet extends HttpServlet {
             e.printStackTrace();
         }
 
-        // 5. Quay lại trang người dùng vừa đứng (Trang Shop hoặc Trang Chi tiết)
-        String referer = request.getHeader("Referer");
-        if (referer != null) {
-            response.sendRedirect(referer);
+        if ("buy".equals(action)) {
+            // Nếu nhấn "Mua ngay" -> Chuyển thẳng đến trangcheckout
+            response.sendRedirect("checkout.jsp");
         } else {
-            response.sendRedirect("shop");
+            // Nếu nhấn "Thêm vào giỏ" -> Quay lại trang hiện tại
+            String referer = request.getHeader("Referer");
+            if (referer != null) {
+                response.sendRedirect(referer);
+            } else {
+                response.sendRedirect("shop");
+            }
         }
     }
 

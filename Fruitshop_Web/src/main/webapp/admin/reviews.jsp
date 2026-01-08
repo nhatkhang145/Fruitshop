@@ -109,7 +109,7 @@
                     <td class="user-cell">
                       <img src="${r.user.avatar != null ? pageContext.request.contextPath.concat('/').concat(r.user.avatar) : 'https://via.placeholder.com/40'}" alt="Avatar">
                       <div>
-                        <p>${r.user.fullname}</p>
+                        <p>${r.user.fullName}</p>
                         <small>${r.user.email}</small>
                         </div>
                     </td>

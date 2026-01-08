@@ -30,8 +30,8 @@ public class ShopServlet extends HttpServlet {
 
         List<Product> listP;
 
-        // 1. Load danh sách Categories để hiển thị ở Sidebar bên trái (nếu có)
-        List<Category> listC = cDao.getAllCategories(); // Bạn cần đảm bảo CategoryDAO có hàm này
+        // 1. Load danh sách Categories
+        List<Category> listC = cDao.getAllCategories();
         request.setAttribute("listC", listC);
 
         // 2. Xử lý Logic hiển thị sản phẩm
