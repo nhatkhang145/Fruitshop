@@ -65,7 +65,7 @@ public class ReviewDAO {
 
     // Lấy tất cả đánh giá (Admin)
     public List<Review> getAllReviews() {
-        String query = "SELECT r.*, u.fullname, p.name as product_name " +
+        String query = "SELECT r.*, u.fullname, u.email, u.avatar, p.name as product_name " +
                 "FROM reviews r " +
                 "JOIN users u ON r.user_id = u.id " +
                 "JOIN products p ON r.product_id = p.id " +
