@@ -272,4 +272,26 @@ public class OrderDAO {
                         .one()
         );
     }
+    // 1. Lấy tất cả đơn hàng (cho trang Admin Orders)
+    public List<Order> getAllOrders() {
+        String sql = "SELECT * FROM orders ORDER BY id DESC";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapToBean(Order.class)
+                        .list()
+        );
+    }
+
+
+
+    // 3. Cập nhật trạng thái đơn hàng (cho chức năng Duyệt/Hủy đơn)
+    public void updateStatus(int orderId, int status) {
+        String sql = "UPDATE orders SET status = ? WHERE id = ?";
+        DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind(0, status)
+                        .bind(1, orderId)
+                        .execute()
+        );
+    }
 }
