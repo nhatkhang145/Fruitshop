@@ -85,7 +85,7 @@
                           style="background: #3b5998; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
                           <i class="fa-brands fa-facebook-f"></i> Facebook
                         </a>
-                        <a href="#" class="btn-social google"
+                        <a href="${pageContext.request.contextPath}/login-google-redirect" class="btn-social google"
                           style="background: #db4437; color: white; padding: 10px 20px; border-radius: 5px; text-decoration: none;">
                           <i class="fa-brands fa-google"></i> Google
                         </a>

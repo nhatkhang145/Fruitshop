@@ -1,6 +1,7 @@
 package model;
 
 import java.sql.Date;
+import java.sql.Timestamp;
 
 public class User {
     private int id;
@@ -11,7 +12,11 @@ public class User {
     private int role;
     private String avatar;
     private String gender;
-    private Date birthDate; 
+    private Date birthDate;
+    private int status;
+    private String loginType;
+    private String socialId;
+    private Timestamp createdAt; 
 
     public User() {
     }
@@ -66,6 +71,30 @@ public class User {
         this.birthDate = birthDate;
     }
 
-}
-  
+    public int getStatus() {
+        return status;
+    }
+    public void setStatus(int status) {
+        this.status = status;
+    }
 
+    public String getLoginType() {
+        return loginType;
+    }
+    public void setLoginType(String loginType) {
+        this.loginType = loginType;
+    }
+
+    public String getSocialId() {
+        return socialId;
+    }
+    public void setSocialId(String socialId) {
+        this.socialId = socialId;
+    }
+
+    public Timestamp getCreatedAt() {
+        return createdAt;
+    }
+    public void setCreatedAt(Timestamp createdAt) {
+        this.createdAt = createdAt;
+    }}
