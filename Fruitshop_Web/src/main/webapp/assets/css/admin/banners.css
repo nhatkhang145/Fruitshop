@@ -1,54 +1,165 @@
-/* =================================== */
-/* === CSS CHO TRANG BANNER === */
-/* =================================== */
+/* ========================================= */
+/* 1. GIAO DIỆN BẢNG (Giống trang Products)  */
+/* ========================================= */
 
-/* Ảnh thumbnail trong bảng (Cần to hơn ảnh sản phẩm bình thường) */
-.content main .bottom-data .orders table td.banner-cell img {
-  width: 120px;  /* Rộng hơn để nhìn rõ banner */
-  height: 60px;
-  border-radius: 4px;
-  object-fit: cover;
-  border: 1px solid #eee;
+/* Wrapper tổng của DataTables */
+.dataTables_wrapper {
+    padding: 10px 0;
+    font-family: 'Roboto', sans-serif;
 }
 
-/* Tiêu đề banner trong bảng */
-.banner-title {
-  font-weight: 600;
-  color: var(--dark);
-  margin: 0;
+/* Thanh tìm kiếm & chọn số dòng */
+.dataTables_length,
+.dataTables_filter {
+    margin-bottom: 20px;
 }
 
-/* Trạng thái (Status Badges) */
-.status.completed {
-  background: rgba(47, 180, 90, 0.15);
-  color: var(--success);
+.dataTables_length select {
+    padding: 6px 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    outline: none;
+    background: #f9f9f9;
+}
+
+.dataTables_filter input {
+    padding: 8px 15px;
+    border: 1px solid #ddd;
+    border-radius: 20px;
+    outline: none;
+    margin-left: 10px;
+    transition: all 0.3s ease;
+}
+
+.dataTables_filter input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 5px rgba(61, 139, 145, 0.2);
+}
+
+/* Style Bảng */
+table.dataTable {
+    border-collapse: collapse !important;
+    width: 100% !important;
+    border-bottom: 1px solid #eee;
+}
+
+table.dataTable thead th {
+    background-color: var(--primary); /* Dùng biến màu từ style.css gốc */
+    color: #fff;
+    padding: 15px 10px !important;
+    font-weight: 600;
+    text-transform: uppercase;
+    font-size: 13px;
+    border-bottom: none !important;
+}
+
+table.dataTable thead th:first-child { border-top-left-radius: 10px; }
+table.dataTable thead th:last-child { border-top-right-radius: 10px; }
+
+table.dataTable tbody td {
+    padding: 15px 10px !important;
+    vertical-align: middle;
+    font-size: 14px;
+    color: var(--dark);
+    border-bottom: 1px solid #eee;
+}
+
+table.dataTable tbody tr:hover {
+    background-color: #f1f8ff !important;
+    cursor: default;
+}
+
+/* Phân trang */
+.dataTables_paginate {
+    margin-top: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 5px;
+}
+
+.dataTables_paginate .paginate_button.current {
+    background: var(--primary) !important;
+    color: #fff !important;
+    border: none;
+    border-radius: 6px;
+}
+
+/* ========================================= */
+/* 2. STYLE RIÊNG CHO TRANG BANNER           */
+/* ========================================= */
+
+/* Ảnh thumbnail banner */
+.banner-img {
+    width: 120px;
+    height: 60px;
+    object-fit: cover;
+    border-radius: 6px;
+    border: 1px solid #eee;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+}
+
+/* Trạng thái (Badge) */
+.status {
+    padding: 6px 12px;
+    border-radius: 20px;
+    font-size: 12px;
+    font-weight: 600;
+}
+.status.active {
+    background: var(--light-success);
+    color: var(--success);
 }
 .status.hidden {
-  background: rgba(107, 114, 128, 0.15);
-  color: #4b5563;
+    background: var(--grey);
+    color: var(--dark-grey);
 }
 
-/* Nút hành động */
-.action-btn {
-  width: 32px;
-  height: 32px;
-  border-radius: 50%;
-  background: transparent;
-  border: none;
-  cursor: pointer;
-  color: var(--dark-grey);
-  font-size: 1.2rem;
-  transition: 0.2s;
+/* ========================================= */
+/* 3. STYLE CHO MODAL (Popup)                */
+/* ========================================= */
+.modal {
+    display: none;
+    position: fixed;
+    z-index: 2000;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    overflow: auto;
+    background-color: rgba(0,0,0,0.5);
+    opacity: 0;
+    transition: opacity 0.3s ease;
 }
-.action-btn:hover {
-  background: var(--grey);
-  color: var(--dark);
+
+.modal.show {
+    display: block;
+    opacity: 1;
 }
-.action-btn.edit:hover {
-  background: var(--light-primary);
-  color: var(--primary);
+
+/* Modal Content tùy chỉnh lại chút so với style.css gốc nếu cần */
+.modal-content {
+    background-color: #fff;
+    margin: 5% auto;
+    padding: 25px;
+    border-radius: 12px;
+    width: 90%;
+    max-width: 600px;
+    position: relative;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.2);
 }
-.action-btn.delete:hover {
-  background: var(--light-danger);
-  color: var(--danger);
+
+/* Preview ảnh trong Modal */
+#imagePreview {
+    margin-top: 15px;
+    padding: 10px;
+    background: #f8f9fa;
+    border-radius: 6px;
+    text-align: center;
+}
+#previewImg {
+    max-width: 100%;
+    height: auto;
+    max-height: 200px;
+    border-radius: 4px;
+    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
 }
