@@ -3,7 +3,8 @@ package model;
 public class Banner {
     private int id;
     private String title;
-    private String image;
+    private String description;
+    private String imageUrl;
     private String link;
     private int displayOrder;
     private int status;
@@ -11,10 +12,11 @@ public class Banner {
     public Banner() {
     }
 
-    public Banner(int id, String title, String image, String link, int displayOrder, int status) {
+    public Banner(int id, String title, String description, String imageUrl, String link, int displayOrder, int status) {
         this.id = id;
         this.title = title;
-        this.image = image;
+        this.description = description;
+        this.imageUrl = imageUrl;
         this.link = link;
         this.displayOrder = displayOrder;
         this.status = status;
@@ -35,11 +37,18 @@ public class Banner {
         this.title = title;
     }
 
-    public String getImage() {
-        return image;
+    public String getDescription() {
+        return description;
     }
-    public void setImage(String image) {
-        this.image = image;
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getImageUrl() {
+        return imageUrl;
+    }
+    public void setImageUrl(String imageUrl) {
+        this.imageUrl = imageUrl;
     }
 
     public String getLink() {
