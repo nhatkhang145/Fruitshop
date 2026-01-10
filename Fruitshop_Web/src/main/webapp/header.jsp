@@ -53,7 +53,7 @@
 
                 <ul class="main-nav-links subnav-links">
                     <li><a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a></li>
-                    <li><a href="${pageContext.request.contextPath}/shop.jsp">Sản Phẩm</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop">Sản Phẩm</a></li>
                     <li><a href="${pageContext.request.contextPath}/about.jsp">Giới thiệu</a></li>
                     <li><a href="${pageContext.request.contextPath}/blog.jsp">Bài viết</a></li>
                     <li><a href="${pageContext.request.contextPath}/contact.jsp">Liên hệ</a></li>

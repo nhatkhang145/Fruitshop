@@ -16,8 +16,6 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/profile.css" />
 
-        
-
       </head>
 
       <body>
@@ -35,7 +33,7 @@
               <div class="profile-container">
                 <aside class="profile-sidebar">
                   <div class="profile-user-brief">
-                    <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="brief-avatar"
+                    <img src="${sessionScope.account.avatar != null ? sessionScope.account.avatar : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}" alt="Avatar" class="brief-avatar"
                       id="briefAvatar" />
                     <div class="brief-info">
                       <span class="brief-name">${sessionScope.account.fullName}</span>
@@ -78,7 +76,7 @@
                     <div class="alert alert-danger">${error}</div>
                   </c:if>
 
-                  <form class="profile-form" action="profile" method="post">
+                  <form class="profile-form" action="profile" method="post" enctype="multipart/form-data">
                     <div class="profile-form-left">
 
                       <div class="form-group">
@@ -185,8 +183,8 @@
                         <img
                           src="${sessionScope.account.avatar != null ? sessionScope.account.avatar : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}"
                           alt="User Avatar" id="profileAvatarPreview" />
-                        <label for="fileInput" class="btn btn-outline-light">Chọn ảnh</label>
-                        <input type="file" id="fileInput" accept=".jpg,.jpeg,.png" hidden />
+                        <label for="avatarFile" class="btn btn-outline-light">Chọn ảnh</label>
+                        <input type="file" name="avatarFile" id="avatarFile" accept=".jpg,.jpeg,.png" hidden />
                         <div class="avatar-note">
                           Dụng lượng file tối đa 1 MB<br />Định dạng:.JPEG, .PNG
                         </div>
@@ -202,6 +200,19 @@
         </div>
 
         <script>
+          // Preview ảnh khi chọn file
+          document.getElementById('avatarFile').addEventListener('change', function(e) {
+            const file = e.target.files[0];
+            if (file) {
+              const reader = new FileReader();
+              reader.onload = function(event) {
+                document.getElementById('profileAvatarPreview').src = event.target.result;
+                document.getElementById('briefAvatar').src = event.target.result;
+              };
+              reader.readAsDataURL(file);
+            }
+          });
+
           // Custom Dropdown cho Ngày sinh - Style Shopee
           document.addEventListener('DOMContentLoaded', function () {
             // Dropdown Ngày

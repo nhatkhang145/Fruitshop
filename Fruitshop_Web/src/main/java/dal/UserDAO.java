@@ -59,7 +59,7 @@ public class UserDAO {
     // 1. HÀM CẬP NHẬT THÔNG TIN CÁ NHÂN (Bảng users)
     // Chỉ update những cột có trong bảng users
     public void updateProfile(User user) {
-        String query = "UPDATE users SET fullname = ?, phone = ?, gender = ?, birthdate = ? WHERE id = ?";
+        String query = "UPDATE users SET fullname = ?, phone = ?, gender = ?, birthdate = ?, avatar = ? WHERE id = ?";
 
         DBContext.get().useHandle(handle ->
                 handle.createUpdate(query)
@@ -67,7 +67,8 @@ public class UserDAO {
                         .bind(1, user.getPhone())
                         .bind(2, user.getGender())
                         .bind(3, user.getBirthDate())
-                        .bind(4, user.getId())
+                        .bind(4, user.getAvatar())
+                        .bind(5, user.getId())
                         .execute()
         );
     }
