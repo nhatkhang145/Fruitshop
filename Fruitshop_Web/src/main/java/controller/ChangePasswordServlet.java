@@ -2,6 +2,7 @@ package controller;
 
 import dal.UserDAO;
 import model.User;
+import util.PasswordUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,9 +31,20 @@ public class ChangePasswordServlet extends HttpServlet {
         String newPass = request.getParameter("new_pass");
         String renewPass = request.getParameter("renew_pass");
 
+        // Mã hóa mật khẩu cũ để so sánh
+        String hashedOldPass = PasswordUtils.hashMD5(oldPass);
+        
         // Mật khẩu cũ có đúng không?
-        if (!oldPass.equals(u.getPassword())) {
+        if (!hashedOldPass.equals(u.getPassword())) {
             request.setAttribute("error", "Mật khẩu cũ không đúng!");
+            request.getRequestDispatcher("change-password.jsp").forward(request, response);
+            return;
+        }
+
+        // Validate mật khẩu mới
+        String passwordError = PasswordUtils.getPasswordValidationMessage(newPass);
+        if (passwordError != null) {
+            request.setAttribute("error", passwordError);
             request.getRequestDispatcher("change-password.jsp").forward(request, response);
             return;
         }
@@ -51,11 +63,14 @@ public class ChangePasswordServlet extends HttpServlet {
             return;
         }
 
+        // Mã hóa mật khẩu mới
+        String hashedNewPass = PasswordUtils.hashMD5(newPass);
+
         UserDAO dao = new UserDAO();
-        dao.changePassword(u.getId(), newPass);
+        dao.changePassword(u.getId(), hashedNewPass);
 
         // Cập nhật lại pass trong session
-        u.setPassword(newPass);
+        u.setPassword(hashedNewPass);
         session.setAttribute("account", u);
 
         request.setAttribute("mess", "Đổi mật khẩu thành công!");

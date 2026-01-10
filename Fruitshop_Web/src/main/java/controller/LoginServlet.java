@@ -2,6 +2,7 @@ package controller;
 
 import dal.UserDAO;
 import model.User;
+import util.PasswordUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,8 +21,11 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("user");
         String pass = request.getParameter("pass");
 
+        // Mã hóa mật khẩu để so sánh với database
+        String hashedPassword = PasswordUtils.hashMD5(pass);
+
         UserDAO dao = new UserDAO();
-        User account = dao.checkLogin(email, pass);
+        User account = dao.checkLogin(email, hashedPassword);
 
        // ... Các đoạn code trên giữ nguyên ...
 

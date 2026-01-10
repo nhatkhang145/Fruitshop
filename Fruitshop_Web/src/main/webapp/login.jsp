@@ -110,15 +110,20 @@
                     </c:if>
 
                     <label class="fm-label">Tên đăng nhập
-                      <input name="user" type="text" required placeholder="Nhập tên đăng nhập của bạn" />
+                      <input name="user" type="text" required placeholder="Nhập tên đăng nhập của bạn" 
+                             value="${not empty regFullname ? regFullname : ''}" />
                     </label>
 
                     <label class="fm-label">Email
-                      <input name="email" type="email" required placeholder="Email" />
+                      <input name="email" type="email" required placeholder="Email" 
+                             value="${not empty regEmail ? regEmail : ''}" />
                     </label>
 
                     <label class="fm-label">Mật khẩu
-                      <input name="pass" type="password" required minlength="6" placeholder="Mật khẩu" />
+                      <input name="pass" type="password" required minlength="8" placeholder="Mật khẩu" />
+                      <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">
+                        Tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt (!@#$%...)
+                      </small>
                     </label>
 
                     <label class="fm-label">Xác nhận mật khẩu
@@ -142,19 +147,13 @@
           const loginPanel = document.getElementById('loginPanel');
           const registerPanel = document.getElementById('registerPanel');
 
-    // Nếu có lỗi đăng ký → mở tab đăng ký
-    // Nếu đăng ký thành công → giữ tab login (để user đăng nhập luôn)
-    <% if (request.getAttribute("registerError") != null) { %>
-            registerTab.click();
-      <% } %>
-            // registerSuccess → giữ nguyên tab login (mặc định)
-
-            loginTab.addEventListener('click', () => {
-              loginTab.classList.add('active');
-              registerTab.classList.remove('active');
-              loginPanel.classList.remove('hidden');
-              registerPanel.classList.add('hidden');
-            });
+          // Tab switching functions
+          loginTab.addEventListener('click', () => {
+            loginTab.classList.add('active');
+            registerTab.classList.remove('active');
+            loginPanel.classList.remove('hidden');
+            registerPanel.classList.add('hidden');
+          });
 
           registerTab.addEventListener('click', () => {
             registerTab.classList.add('active');
@@ -172,6 +171,12 @@
             e.preventDefault();
             loginTab.click();
           });
+
+          // Nếu có lỗi đăng ký → tự động mở tab đăng ký
+          <% if (request.getAttribute("registerError") != null) { %>
+            // Trigger click ngay khi DOM ready
+            registerTab.click();
+          <% } %>
         </script>
       </div>
       <!-- FOOTER -->
