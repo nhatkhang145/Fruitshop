@@ -1,174 +1,158 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-  <!DOCTYPE html>
-  <html lang="en">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<!DOCTYPE html>
+<html lang="vi">
 
-  <head>
+<head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Quản lý Banner</title>
+
     <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/banners.css" />
-    <title>Quản lý Banner</title>
-  </head>
 
-  <body>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+</head>
+
+<body>
 
     <jsp:include page="sidebar.jsp">
-      <jsp:param name="activePage" value="banners" />
+        <jsp:param name="activePage" value="banners" />
     </jsp:include>
 
     <div class="content">
+        <jsp:include page="header.jsp" />
 
-      <jsp:include page="header.jsp" />
-
-      <main>
-        <div class="header">
-          <div class="left">
-            <h1>Quản lý Banner / Slide</h1>
-            <ul class="breadcrumb">
-              <li><a href="#">Quản lý</a></li>
-              <li>/</li>
-              <li><a href="#" class="active">Banner</a></li>
-            </ul>
-          </div>
-          <a href="#" class="report" id="addBannerBtn">
-            <i class="bx bx-plus"></i>
-            <span>Thêm Banner Mới</span>
-          </a>
-        </div>
-
-        <div class="bottom-data">
-          <div class="orders">
+        <main>
             <div class="header">
-              <h3>Danh sách Slide hiển thị</h3>
-              <i class="bx bx-filter"></i>
+                <div class="left">
+                    <h1>Quản lý Banner</h1>
+                    <ul class="breadcrumb">
+                        <li><a href="index.jsp">Dashboard</a></li>
+                        <li>/</li>
+                        <li><a href="#" class="active">Banner Quảng Cáo</a></li>
+                    </ul>
+                </div>
+                <a href="#" class="report" onclick="openAddModal()">
+                    <i class="bx bx-plus"></i>
+                    <span>Thêm Banner</span>
+                </a>
             </div>
 
-            <table>
-              <thead>
-                <tr>
-                  <th>Hình ảnh</th>
-                  <th>Tiêu đề / Mô tả</th>
-                  <th>Liên kết (Link)</th>
-                  <th>Thứ tự</th>
-                  <th>Trạng thái</th>
-                  <th>Hành động</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr>
-                  <td class="banner-cell">
-                    <img src="" alt="Slide 1">
-                  </td>
-                  <td>
-                    <p class="banner-title">Trái Cây Nhập Khẩu</p>
-                    <small>Tươi ngon từ khắp nơi...</small>
-                  </td>
-                  <td>/shop.jsp?cat=imported</td>
-                  <td>1</td>
-                  <td><span class="status completed">Hiển thị</span></td>
-                  <td>
-                    <button class="action-btn edit"><i class="bx bx-edit"></i></button>
-                    <button class="action-btn delete"><i class="bx bx-trash"></i></button>
-                  </td>
-                </tr>
+            <div class="bottom-data">
+                <div class="orders">
+                    <div class="header">
+                        <h3>Danh sách Banner</h3>
+                    </div>
 
-                <tr>
-                  <td class="banner-cell">
-                    <img src="" alt="Slide 2">
-                  </td>
-                  <td>
-                    <p class="banner-title">Nguồn Gốc Rõ Ràng</p>
-                    <small>Minh bạch và an toàn...</small>
-                  </td>
-                  <td>/about.jsp</td>
-                  <td>2</td>
-                  <td><span class="status completed">Hiển thị</span></td>
-                  <td>
-                    <button class="action-btn edit"><i class="bx bx-edit"></i></button>
-                    <button class="action-btn delete"><i class="bx bx-trash"></i></button>
-                  </td>
-                </tr>
-
-                <tr>
-                  <td class="banner-cell">
-                    <img src="" alt="Slide 3">
-                  </td>
-                  <td>
-                    <p class="banner-title">Khuyến mãi Tết</p>
-                    <small>Giảm giá 50%...</small>
-                  </td>
-                  <td>/shop.jsp?sale=true</td>
-                  <td>3</td>
-                  <td><span class="status hidden">Đang ẩn</span></td>
-                  <td>
-                    <button class="action-btn edit"><i class="bx bx-edit"></i></button>
-                    <button class="action-btn delete"><i class="bx bx-trash"></i></button>
-                  </td>
-                </tr>
-
-              </tbody>
-            </table>
-          </div>
-        </div>
-      </main>
+                    <table id="bannerTable">
+                        <thead>
+                            <tr>
+                                <th>ID</th>
+                                <th>Hình ảnh</th>
+                                <th>Tiêu đề / Mô tả</th>
+                                <th>Liên kết</th>
+                                <th>Thứ tự</th>
+                                <th>Trạng thái</th>
+                                <th>Hành động</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <c:forEach items="${banners}" var="b">
+                                <tr>
+                                    <td>#${b.id}</td>
+                                    <td>
+                                        <img src="${pageContext.request.contextPath}/${b.imageUrl}" alt="banner" class="banner-img"
+                                             onerror="this.src='https://via.placeholder.com/120x60'"/>
+                                    </td>
+                                    <td>
+                                        <strong>${b.title}</strong><br>
+                                        <small style="color: #888;">${b.description}</small>
+                                    </td>
+                                    <td><a href="${b.link}" target="_blank" style="color: var(--primary);">${b.link}</a></td>
+                                    <td style="text-align: center;">${b.displayOrder}</td>
+                                    <td>
+                                        <c:choose>
+                                            <c:when test="${b.status == 1}"><span class="status active">Hiển thị</span></c:when>
+                                            <c:otherwise><span class="status hidden">Đã ẩn</span></c:otherwise>
+                                        </c:choose>
+                                    </td>
+                                    <td>
+                                        <a href="javascript:void(0)" class="action-btn edit"
+                                           onclick="openEditModal(${b.id}, '${b.title}', '${b.description}', '${b.link}', ${b.displayOrder}, ${b.status}, '${pageContext.request.contextPath}/${b.imageUrl}')">
+                                            <i class="bx bx-edit"></i>
+                                        </a>
+                                        <a href="banners?action=delete&id=${b.id}" class="action-btn delete"
+                                           onclick="return confirm('Bạn có chắc muốn xóa banner này?');">
+                                            <i class="bx bx-trash"></i>
+                                        </a>
+                                    </td>
+                                </tr>
+                            </c:forEach>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </main>
     </div>
 
     <div id="bannerModal" class="modal">
-      <div class="modal-content">
-        <span class="close-btn">&times;</span>
-        <h2 id="modalTitle">Thêm Banner mới</h2>
-        <form id="bannerForm">
+        <div class="modal-content">
+            <span class="close-btn" onclick="closeModal()" style="float:right; font-size:24px; cursor:pointer;">&times;</span>
+            <h2 id="modalTitle">Thêm Banner Mới</h2>
 
-          <div class="form-group" style="text-align: center;">
-            <img id="bannerPreview" src="https://via.placeholder.com/600x200?text=Preview"
-              style="max-width: 100%; height: 150px; object-fit: cover; border-radius: 8px; border: 2px dashed #ccc;">
-          </div>
+            <form action="banners" method="post" enctype="multipart/form-data" id="bannerForm">
+                <input type="hidden" name="action" id="formAction" value="add">
+                <input type="hidden" name="id" id="bannerId">
+                <input type="hidden" name="oldImage" id="oldImage">
 
-          <div class="form-group">
-            <label>Hình ảnh (URL hoặc Upload)</label>
-            <input type="text" id="bannerUrl" placeholder="Dán link ảnh vào đây..." class="form-control">
-            <div style="margin-top: 5px; font-size: 12px; color: #666;">Hoặc tải lên từ máy:</div>
-            <input type="file" id="bannerFile" accept="image/*" style="margin-top: 5px;">
-          </div>
+                <div class="form-group">
+                    <label>Tiêu đề</label>
+                    <input type="text" name="title" id="title" required class="form-control" placeholder="Nhập tiêu đề banner">
+                </div>
 
-          <div class="form-group-row">
-            <div class="form-group">
-              <label>Tiêu đề chính (H2)</label>
-              <input type="text" id="bannerTitle" placeholder="VD: Trái Cây Tươi">
-            </div>
-            <div class="form-group">
-              <label>Thứ tự hiển thị</label>
-              <input type="number" id="bannerOrder" value="1" min="1">
-            </div>
-          </div>
+                <div class="form-group">
+                    <label>Mô tả ngắn</label>
+                    <textarea name="description" id="description" rows="2" class="form-control"></textarea>
+                </div>
 
-          <div class="form-group">
-            <label>Mô tả phụ (P)</label>
-            <input type="text" id="bannerDesc" placeholder="VD: Nhập khẩu trực tiếp...">
-          </div>
+                <div class="form-group">
+                    <label>Link liên kết</label>
+                    <input type="text" name="link" id="link" class="form-control" placeholder="shop?cid=1">
+                </div>
 
-          <div class="form-group">
-            <label>Link liên kết (Khi bấm vào)</label>
-            <input type="text" id="bannerLink" placeholder="VD: /shop.jsp">
-          </div>
+                <div class="form-group-row" style="display:flex; gap:20px; margin-top:15px;">
+                    <div class="form-group">
+                        <label>Thứ tự hiển thị</label>
+                        <input type="number" name="displayOrder" id="displayOrder" value="0" class="form-control" style="width:100px;">
+                    </div>
 
-          <div class="form-group">
-            <label>Trạng thái</label>
-            <select id="bannerStatus">
-              <option value="active">Hiển thị</option>
-              <option value="hidden">Ẩn</option>
-            </select>
-          </div>
+                    <div class="form-group" style="display: flex; align-items: center; padding-top: 30px;">
+                        <input type="checkbox" name="status" id="status" value="1" style="width: 20px; height: 20px; margin-right: 10px;">
+                        <label for="status" style="margin: 0; cursor: pointer;">Hiển thị ngay</label>
+                    </div>
+                </div>
 
-          <button type="submit" class="btn-submit">Lưu Banner</button>
-        </form>
-      </div>
+                <div class="form-group" style="margin-top:15px;">
+                    <label>Hình ảnh</label>
+                    <input type="file" name="image" id="imageInput" accept="image/*" class="form-control">
+                    <div id="imagePreview" style="display: none;">
+                        <img src="" id="previewImg">
+                    </div>
+                </div>
+
+                <button type="submit" class="btn-submit" style="margin-top:20px; width:100%; padding:10px; background:var(--primary); color:white; border:none; border-radius:6px; cursor:pointer;">Lưu Banner</button>
+            </form>
+        </div>
     </div>
 
-    <script src="../assets/js/admin/main.js"></script>
-    <script src="../assets/js/admin/banners.js"></script>
-  </body>
+    <script src="${pageContext.request.contextPath}/assets/js/admin/main.js"></script>
+    <script src="${pageContext.request.contextPath}/assets/js/admin/banners.js"></script>
 
-  </html>
+</body>
+</html>
