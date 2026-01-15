@@ -30,9 +30,16 @@ public class ProductDAO {
 
     // 3. Lấy chi tiết 1 sản phẩm
     public Product getProductByID(int id) {
-        // SỬA TƯƠNG TỰ
-        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE id = ?";
-        return DBContext.get().withHandle(handle ->
+        String sql = "SELECT id, " +
+                "       name, " +
+                "       product_code AS productCode, " +
+                "       price, " +
+                "       sale_price AS salePrice, " +
+                "       quantity, " +
+                "       short_description AS description, " +
+                "       image, " +
+                "       category_id AS categoryId " +
+                "FROM products WHERE id = ?";        return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind(0, id)
                         .mapToBean(Product.class)

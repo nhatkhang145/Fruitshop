@@ -60,7 +60,7 @@
                       <span>(12 đánh giá)</span>
                     </div>
                     <span class="divider">|</span>
-                    <span class="product-sku">Mã SP: <strong>#${detail.id}</strong></span>
+                    <span class="product-sku">Mã SP: <strong>${detail.productCode}</strong></span>
                     <span class="divider">|</span>
                     <span class="stock-status in-stock">
                       ${detail.quantity > 0 ? 'Còn hàng' : 'Hết hàng'}
@@ -68,12 +68,25 @@
                   </div>
 
                   <div class="product-price-box">
-                    <span class="current-price">
-                      <fmt:formatNumber value="${detail.price}" pattern="#,###" />₫
-                    </span>
-                    <span class="old-price">
-                      <fmt:formatNumber value="${detail.price * 1.1}" pattern="#,###" />₫
-                    </span>
+                      <c:choose>
+                          <c:when test="${detail.salePrice > 0 && detail.salePrice < detail.price}">
+                              <span class="current-price">
+                                  <fmt:formatNumber value="${detail.salePrice}" pattern="#,###" />₫
+                              </span>
+                              <span class="old-price">
+                                  <fmt:formatNumber value="${detail.price}" pattern="#,###" />₫
+                              </span>
+                              <span class="discount-percent">
+                                  -<fmt:formatNumber value="${(detail.price - detail.salePrice)/detail.price * 100}" maxFractionDigits="0"/>%
+                              </span>
+                          </c:when>
+
+                          <c:otherwise>
+                              <span class="current-price">
+                                  <fmt:formatNumber value="${detail.price}" pattern="#,###" />₫
+                              </span>
+                          </c:otherwise>
+                      </c:choose>
                   </div>
 
                   <div class="product-description-short">
