@@ -155,7 +155,7 @@
                   </div>
                 </div>
 
-                <div id="review" class="tab-content">
+                <div id="reviews" class="tab-content">
                     <div class="product-reviews">
                         <h3>Đánh giá sản phẩm</h3>
 
