@@ -60,13 +60,8 @@
                 </ul>
 
                 <div class="navbar__menu-search">
-                    <form class="search-form" action="${pageContext.request.contextPath}/shop.jsp" method="get">
-                        <select name="category" class="search-cat">
-                            <option value="all">Danh mục</option>
-                            <option value="fruits">Trái cây</option>
-                            <option value="vegetables">Rau củ</option>
-                        </select>
-                        <input name="q" class="search-input" type="search" placeholder="Tìm kiếm..." />
+                    <form class="search-form" action="${pageContext.request.contextPath}/shop" method="get">
+                        <input name="q" class="search-input" type="search" placeholder="Tìm kiếm sản phẩm..." value="${param.q}" style="width: 100%; border-radius: 25px 0 0 25px;" />
                         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>

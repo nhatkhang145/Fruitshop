@@ -18,10 +18,18 @@ public class AdminOrderServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Lấy tất cả đơn hàng (Cần thêm method getAllOrders trong OrderDAO)
-        List<Order> list = orderDAO.getAllOrders();
+        String status = req.getParameter("status");
+        List<Order> list;
+
+        // Nếu có status và status không rỗng thì lọc, ngược lại lấy tất cả
+        if (status != null && !status.isEmpty() && !status.equals("all")) {
+            list = orderDAO.getOrdersByStatus(status);
+        } else {
+            list = orderDAO.getAllOrders();
+        }
 
         req.setAttribute("orders", list);
+        req.setAttribute("currentStatus", status); // Để giữ trạng thái select box
         req.getRequestDispatcher("/admin/orders.jsp").forward(req, resp);
     }
 }

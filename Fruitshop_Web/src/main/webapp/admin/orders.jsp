@@ -7,11 +7,13 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Quản lý đơn hàng</title>
+
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/Order.css" />
-  <title>Quản lý đơn hàng</title>
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
 </head>
 
 <body>
@@ -61,29 +63,23 @@
           <h3>Danh sách đơn hàng</h3>
           <div class="filters">
             <i class="bx bx-filter"></i>
-            <select id="statusFilter">
-              <option value="">Tất cả trạng thái</option>
-              <option value="pending">Chờ xử lý</option>
-              <option value="processing">Đang xử lý</option>
-              <option value="shipped">Đang giao</option>
-              <option value="completed">Hoàn thành</option>
-              <option value="cancelled">Đã hủy</option>
+            <select id="statusFilter" onchange="filterOrders(this)">
+              <option value="all">Tất cả trạng thái</option>
+              <option value="pending" ${currentStatus == 'pending' ? 'selected' : ''}>Chờ xử lý</option>
+              <option value="processing" ${currentStatus == 'processing' ? 'selected' : ''}>Đang xử lý</option>
+              <option value="shipped" ${currentStatus == 'shipped' ? 'selected' : ''}>Đang giao</option>
+              <option value="completed" ${currentStatus == 'completed' ? 'selected' : ''}>Hoàn thành</option>
+              <option value="cancelled" ${currentStatus == 'cancelled' ? 'selected' : ''}>Đã hủy</option>
             </select>
           </div>
         </div>
-        <table>
+
+        <table id="ordersTable">
           <thead>
           <tr>
-            <th>Mã Đơn Hàng</th>
-            <th>Khách hàng</th>
-            <th>Ngày đặt</th>
-            <th>Tổng tiền</th>
-            <th>Trạng thái</th>
-            <th>Hành động</th>
-          </tr>
+            <th>Mã Đơn</th>      <th>Khách hàng</th>   <th>Ngày đặt</th>     <th>Tổng tiền</th>    <th>Trạng thái</th>   <th>Hành động</th>    </tr>
           </thead>
           <tbody>
-          <%-- Vòng lặp hiển thị đơn hàng từ Servlet --%>
           <c:forEach items="${orders}" var="o">
             <tr>
               <td>#${o.id}</td>
@@ -100,43 +96,61 @@
                 <fmt:formatNumber value="${o.finalAmount}" type="currency" currencySymbol="đ"/>
               </td>
               <td>
-                  <%-- Hiển thị trạng thái với màu sắc tương ứng --%>
                 <span class="status ${o.status}">
-                                    <c:choose>
-                                      <c:when test="${o.status == 'pending'}">Chờ xử lý</c:when>
-                                      <c:when test="${o.status == 'processing'}">Đang xử lý</c:when>
-                                      <c:when test="${o.status == 'shipped'}">Đang giao</c:when>
-                                      <c:when test="${o.status == 'completed'}">Hoàn thành</c:when>
-                                      <c:when test="${o.status == 'cancelled'}">Đã hủy</c:when>
-                                      <c:otherwise>${o.status}</c:otherwise>
-                                    </c:choose>
-                                </span>
+                    <c:choose>
+                      <c:when test="${o.status == 'pending'}">Chờ xử lý</c:when>
+                      <c:when test="${o.status == 'processing'}">Đang xử lý</c:when>
+                      <c:when test="${o.status == 'shipped'}">Đang giao</c:when>
+                      <c:when test="${o.status == 'completed'}">Hoàn thành</c:when>
+                      <c:when test="${o.status == 'cancelled'}">Đã hủy</c:when>
+                      <c:otherwise>${o.status}</c:otherwise>
+                    </c:choose>
+                </span>
               </td>
               <td>
                 <a href="order-detail?id=${o.id}" class="action-btn view"><i class="bx bx-show"></i> Xem</a>
               </td>
             </tr>
           </c:forEach>
-          <%-- Nếu danh sách trống --%>
-          <c:if test="${empty orders}">
-            <tr>
-              <td colspan="6" style="text-align: center;">Không có đơn hàng nào.</td>
-            </tr>
-          </c:if>
+          <%-- Đã xóa đoạn c:if kiểm tra rỗng để tránh lỗi DataTables --%>
           </tbody>
         </table>
-      </div>
-
-      <div class="pagination">
-        <a href="#" class="page-btn disabled">&laquo;</a>
-        <a href="#" class="page-btn active">1</a>
-        <a href="#" class="page-btn">2</a>
-        <a href="#" class="page-btn">&raquo;</a>
       </div>
     </div>
   </main>
 </div>
 
 <script src="${pageContext.request.contextPath}/assets/js/admin/main.js"></script>
+
+<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+<script>
+  // Hàm lọc khi chọn Dropdown
+  function filterOrders(selectObject) {
+    var value = selectObject.value;
+    window.location.href = "orders?status=" + value;
+  }
+
+  // Cấu hình DataTables
+  $(document).ready(function() {
+    $('#ordersTable').DataTable({
+      "order": [[ 0, "desc" ]], // Sắp xếp cột ID (cột đầu tiên) giảm dần
+      "pageLength": 10,         // Mặc định hiện 10 dòng
+      "language": {
+        "search": "Tìm kiếm nhanh:",
+        "lengthMenu": "Hiển thị _MENU_ đơn hàng",
+        "info": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ đơn",
+        "zeroRecords": "Không tìm thấy đơn hàng nào",
+        "infoEmpty": "Chưa có đơn hàng",
+        "infoFiltered": "(lọc từ _MAX_ đơn)",
+        "paginate": {
+          "next": "Sau",
+          "previous": "Trước"
+        }
+      }
+    });
+  });
+</script>
 </body>
 </html>

@@ -23,10 +23,11 @@ public class ShopServlet extends HttpServlet {
         response.setContentType("text/html;charset=UTF-8");
 
         ProductDAO pDao = new ProductDAO();
-        CategoryDAO cDao = new CategoryDAO(); // Giả sử bạn đã có CategoryDAO để lấy danh sách danh mục
+        CategoryDAO cDao = new CategoryDAO();
 
         String indexPage = request.getParameter("index");
         String categoryId = request.getParameter("cid");
+        String searchKeyword = request.getParameter("q");
 
         List<Product> listP;
 
@@ -35,13 +36,24 @@ public class ShopServlet extends HttpServlet {
         request.setAttribute("listC", listC);
 
         // 2. Xử lý Logic hiển thị sản phẩm
-        if (categoryId != null && !categoryId.isEmpty()) {
-            // Case A: Nếu người dùng lọc theo Danh mục
+        
+        // Priority 1: Tìm kiếm (có từ khóa)
+        if (searchKeyword != null && !searchKeyword.trim().isEmpty()) {
+            // Case A: Tìm kiếm sản phẩm theo từ khóa
+            listP = pDao.searchProducts(searchKeyword, null);
+            request.setAttribute("searchKeyword", searchKeyword);
+            request.setAttribute("isSearch", true);
+        } 
+        // Priority 2: Lọc theo danh mục từ sidebar
+        else if (categoryId != null && !categoryId.isEmpty()) {
+            // Case B: Lọc theo Danh mục
             int cid = Integer.parseInt(categoryId);
             listP = pDao.getProductsByCategoryID(cid);
-            request.setAttribute("tag", cid); // Để đánh dấu active category menu
-        } else {
-            // Case B: Nếu vào trang Shop bình thường (Phân trang)
+            request.setAttribute("tag", cid);
+        } 
+        // Priority 3: Hiển thị bình thường với phân trang
+        else {
+            // Case C: Trang Shop bình thường (Phân trang)
             if (indexPage == null) {
                 indexPage = "1";
             }
@@ -55,8 +67,8 @@ public class ShopServlet extends HttpServlet {
             }
 
             listP = pDao.pagingProduct(index);
-            request.setAttribute("endP", endPage); // Truyền tổng số trang về JSP
-            request.setAttribute("tag", index);    // Để đánh dấu trang hiện tại đang active
+            request.setAttribute("endP", endPage);
+            request.setAttribute("tag", index);
         }
 
         // Lấy danh sách sản phẩm đã thích

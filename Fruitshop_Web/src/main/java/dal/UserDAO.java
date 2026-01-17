@@ -1,6 +1,8 @@
 package dal;
 
 import model.User;
+
+import java.util.List;
 import java.util.Optional;
 
 public class UserDAO {
@@ -134,37 +136,37 @@ public class UserDAO {
     // 6. Lấy user theo email (cho Google Login)
     public User getUserByEmail(String email) {
         String query = "SELECT id, fullname, email, password, phone, role, avatar, gender, birthdate, status, login_type, social_id, created_at " +
-                       "FROM users WHERE email = ?";
+                "FROM users WHERE email = ?";
 
         return DBContext.get().withHandle(handle ->
-                handle.createQuery(query)
-                        .bind(0, email)
-                        .map((rs, ctx) -> {
-                            User user = new User();
-                            user.setId(rs.getInt("id"));
-                            user.setFullName(rs.getString("fullname"));
-                            user.setEmail(rs.getString("email"));
-                            user.setPassword(rs.getString("password"));
-                            user.setPhone(rs.getString("phone"));
-                            user.setRole(rs.getInt("role"));
-                            user.setAvatar(rs.getString("avatar"));
-                            user.setGender(rs.getString("gender"));
-                            user.setBirthDate(rs.getDate("birthdate"));
-                            user.setStatus(rs.getInt("status"));
-                            user.setLoginType(rs.getString("login_type"));
-                            user.setSocialId(rs.getString("social_id"));
-                            user.setCreatedAt(rs.getTimestamp("created_at"));
-                            return user;
-                        })
-                        .findFirst()
-                        .orElse(null)
+                        handle.createQuery(query)
+                                .bind(0, email)
+                                .map((rs, ctx) -> {
+                                    User user = new User();
+                                    user.setId(rs.getInt("id"));
+                                    user.setFullName(rs.getString("fullname"));
+                                    user.setEmail(rs.getString("email"));
+                                    user.setPassword(rs.getString("password"));
+                                    user.setPhone(rs.getString("phone"));
+                                    user.setRole(rs.getInt("role"));
+                                    user.setAvatar(rs.getString("avatar"));
+                                    user.setGender(rs.getString("gender"));
+                                    user.setBirthDate(rs.getDate("birthdate"));
+                                    user.setStatus(rs.getInt("status"));
+                                    user.setLoginType(rs.getString("login_type"));
+                                    user.setSocialId(rs.getString("social_id"));
+                                    user.setCreatedAt(rs.getTimestamp("created_at"));
+                                    return user;
+                                })
+                                .findFirst()
+                                .orElse(null)
         );
     }
 
     // 7. Insert user mới (cho Google Login)
     public void insertUser(User user) {
         String sql = "INSERT INTO users (fullname, email, password, avatar, login_type, social_id, role, status, created_at) " +
-                     "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         DBContext.get().useHandle(handle ->
                 handle.createUpdate(sql)
@@ -192,6 +194,48 @@ public class UserDAO {
                         .bind(2, user.getAvatar())
                         .bind(3, user.getId())
                         .execute()
+        );
+    }
+
+    // 9. Lấy danh sách tất cả người dùng
+    public List<User> getAllUsers() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT * FROM users ORDER BY id DESC")
+                        .mapToBean(User.class)
+                        .list()
+        );
+    }
+
+    // 10. Cập nhật Role và Status (Cho chức năng Phân quyền/Chặn)
+    public boolean updateUserStatusAndRole(int userId, int role, String status) {
+        String sql = "UPDATE users SET role = :role, status = :status WHERE id = :userId";
+        int rows = DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("role", role)
+                        .bind("status", status)
+                        .bind("userId", userId)
+                        .execute()
+        );
+        return rows > 0;
+    }
+
+    // 11. Lấy User theo ID (Để hiện trang chi tiết)
+    public User getUserById(int id) {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT * FROM users WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(User.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
+    // 12. Thống kê: Đếm tổng số thành viên
+    public int countTotalUsers() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM users")
+                        .mapTo(Integer.class)
+                        .one()
         );
     }
 }

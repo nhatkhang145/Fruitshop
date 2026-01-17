@@ -30,9 +30,16 @@ public class ProductDAO {
 
     // 3. Lấy chi tiết 1 sản phẩm
     public Product getProductByID(int id) {
-        // SỬA TƯƠNG TỰ
-        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE id = ?";
-        return DBContext.get().withHandle(handle ->
+        String sql = "SELECT id, " +
+                "       name, " +
+                "       product_code AS productCode, " +
+                "       price, " +
+                "       sale_price AS salePrice, " +
+                "       quantity, " +
+                "       short_description AS description, " +
+                "       image, " +
+                "       category_id AS categoryId " +
+                "FROM products WHERE id = ?";        return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind(0, id)
                         .mapToBean(Product.class)
@@ -105,6 +112,55 @@ public class ProductDAO {
                         .execute()
         );
     }
+
+    // Lọc sản phẩm
+    public List<Product> filterProducts(Integer categoryId, Double minPrice, Double maxPrice, String sortType) {
+        StringBuilder sql = new StringBuilder("SELECT id, name, product_code AS productCode, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE status = 1");
+
+        // 1. Lọc theo Category
+        if (categoryId != null && categoryId > 0) {
+            sql.append(" AND category_id = :cid ");
+        }
+
+        // 2. Lọc theo Giá (Sử dụng giá thực tế phải trả: nếu có sale thì lấy sale_price, không thì lấy price)
+        // Logic SQL: Nếu (sale_price > 0 và < price) thì dùng sale_price, ngược lại dùng price
+        if (minPrice != null) {
+            sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) >= :min ");
+        }
+        if (maxPrice != null) {
+            sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) <= :max ");
+        }
+
+        // 3. Sắp xếp
+        if (sortType != null) {
+            switch (sortType) {
+                case "price_asc": // Giá tăng dần
+                    sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) ASC ");
+                    break;
+                case "price_desc": // Giá giảm dần
+                    sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) DESC ");
+                    break;
+                case "name_asc":
+                    sql.append(" ORDER BY name ASC ");
+                    break;
+                default: // Mặc định mới nhất
+                    sql.append(" ORDER BY id DESC ");
+                    break;
+            }
+        } else {
+            sql.append(" ORDER BY id DESC ");
+        }
+
+        return DBContext.get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            if (categoryId != null && categoryId > 0) query.bind("cid", categoryId);
+            if (minPrice != null) query.bind("min", minPrice);
+            if (maxPrice != null) query.bind("max", maxPrice);
+
+            return query.mapToBean(Product.class).list();
+        });
+    }
     // Main test
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
@@ -120,5 +176,51 @@ public class ProductDAO {
                 System.out.println("ID: " + p.getId() + " | Tên: " + p.getName() + " | Giá: " + p.getPrice());
             }
         }
+    }
+
+    // Tìm kiếm sản phẩm theo từ khóa và danh mục
+    public List<Product> searchProducts(String keyword, String category) {
+        StringBuilder sql = new StringBuilder(
+            "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
+            "FROM products WHERE status = 1"
+        );
+
+        // Tìm kiếm theo từ khóa (tên sản phẩm hoặc mô tả)
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            sql.append(" AND (name LIKE :keyword OR short_description LIKE :keyword)");
+        }
+
+        // Lọc theo danh mục
+        if (category != null && !category.equals("all")) {
+            sql.append(" AND category_id = :categoryId");
+        }
+
+        sql.append(" ORDER BY id DESC");
+
+        return DBContext.get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                query.bind("keyword", "%" + keyword.trim() + "%");
+            }
+
+            if (category != null && !category.equals("all")) {
+                try {
+                    int catId = Integer.parseInt(category);
+                    query.bind("categoryId", catId);
+                } catch (NumberFormatException e) {
+                    // Nếu category không phải số, bỏ qua
+                }
+            }
+
+            return query.mapToBean(Product.class).list();
+        });
+    }
+
+    // Thống kê: Đếm tổng số sản phẩm
+    public int countTotalProducts() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM products").mapTo(Integer.class).one()
+        );
     }
 }
