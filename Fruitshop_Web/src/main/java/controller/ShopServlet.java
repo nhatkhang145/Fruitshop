@@ -26,7 +26,6 @@ public class ShopServlet extends HttpServlet {
         CategoryDAO cDao = new CategoryDAO(); // Giả sử bạn đã có CategoryDAO để lấy danh sách danh mục
 
         String indexPage = request.getParameter("index");
-        String categoryId = request.getParameter("cid");
 
         List<Product> listP;
 
@@ -35,29 +34,46 @@ public class ShopServlet extends HttpServlet {
         request.setAttribute("listC", listC);
 
         // 2. Xử lý Logic hiển thị sản phẩm
-        if (categoryId != null && !categoryId.isEmpty()) {
-            // Case A: Nếu người dùng lọc theo Danh mục
-            int cid = Integer.parseInt(categoryId);
-            listP = pDao.getProductsByCategoryID(cid);
-            request.setAttribute("tag", cid); // Để đánh dấu active category menu
-        } else {
-            // Case B: Nếu vào trang Shop bình thường (Phân trang)
-            if (indexPage == null) {
-                indexPage = "1";
-            }
-            int index = Integer.parseInt(indexPage);
+        String cidRaw = request.getParameter("cid");
+        String priceRaw = request.getParameter("price");
+        String sortRaw = request.getParameter("sort");
 
-            // Tính toán số trang (Pagination)
-            int count = pDao.countAll();
-            int endPage = count / 6;
-            if (count % 6 != 0) {
-                endPage++;
-            }
+        int index = (indexPage == null || indexPage.isEmpty()) ? 1 : Integer.parseInt(indexPage);
+        Integer cid = (cidRaw == null || cidRaw.isEmpty()) ? null : Integer.parseInt(cidRaw);
 
-            listP = pDao.pagingProduct(index);
-            request.setAttribute("endP", endPage); // Truyền tổng số trang về JSP
-            request.setAttribute("tag", index);    // Để đánh dấu trang hiện tại đang active
+        Double minPrice = null, maxPrice = null;
+        // Tách chuỗi giá (ví dụ: "100000-500000")
+        if (priceRaw != null && !priceRaw.isEmpty()) {
+            String[] parts = priceRaw.split("-");
+            if (parts.length >= 1) minPrice = Double.parseDouble(parts[0]);
+            if (parts.length >= 2 && !parts[1].equals("max")) maxPrice = Double.parseDouble(parts[1]);
         }
+
+        // 2. Tính toán Phân trang (Dựa trên kết quả lọc)
+        // Gọi hàm countProductsByFilter vừa thêm trong DAO
+        int count = pDao.countProductsByFilter(cid, minPrice, maxPrice);
+        int endPage = count / 6;
+        if (count % 6 != 0) endPage++;
+
+        // 3. Lấy danh sách sản phẩm (Lọc + Phân trang + Sắp xếp)
+        // Gọi hàm filterProducts vừa thêm trong DAO
+        listP = pDao.filterProducts(cid, minPrice, maxPrice, sortRaw, index);
+
+        // 4. Truyền dữ liệu về JSP
+        request.setAttribute("endP", endPage);
+
+        // Logic giữ active menu (tag) của bạn:
+        // Nếu có chọn danh mục -> active danh mục, nếu không -> active số trang
+        if (cid != null) {
+            request.setAttribute("tag", cid);
+        } else {
+            request.setAttribute("tag", index);
+        }
+
+        // Truyền lại các tham số lọc để giao diện hiển thị đúng trạng thái (giữ giá trị trong ô select/checkbox)
+        request.setAttribute("cid", cidRaw);
+        request.setAttribute("priceTag", priceRaw);
+        request.setAttribute("sortTag", sortRaw);
 
         // Lấy danh sách sản phẩm đã thích
         HttpSession session = request.getSession();
@@ -65,10 +81,7 @@ public class ShopServlet extends HttpServlet {
 
         if (user != null) {
             WishlistDAO wDao = new WishlistDAO();
-            // Gọi hàm getLikedProductIds bạn đã viết trong WishlistDAO
             List<Integer> likedIds = wDao.getLikedProductIds(user.getId());
-
-            // Gửi list ID này sang JSP
             request.setAttribute("likedIds", likedIds);
         }
 
