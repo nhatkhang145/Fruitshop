@@ -294,4 +294,15 @@ public class OrderDAO {
                         .execute()
         );
     }
+
+    // 2. Lấy danh sách đơn hàng theo trạng thái (Cho Admin lọc)
+    public List<Order> getOrdersByStatus(String status) {
+        String sql = "SELECT * FROM orders WHERE status = :status ORDER BY created_at DESC";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("status", status)
+                        .mapToBean(Order.class)
+                        .list()
+        );
+    }
 }
