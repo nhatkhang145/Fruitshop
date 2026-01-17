@@ -112,6 +112,55 @@ public class ProductDAO {
                         .execute()
         );
     }
+
+    // Lọc sản phẩm
+    public List<Product> filterProducts(Integer categoryId, Double minPrice, Double maxPrice, String sortType) {
+        StringBuilder sql = new StringBuilder("SELECT id, name, product_code AS productCode, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE status = 1");
+
+        // 1. Lọc theo Category
+        if (categoryId != null && categoryId > 0) {
+            sql.append(" AND category_id = :cid ");
+        }
+
+        // 2. Lọc theo Giá (Sử dụng giá thực tế phải trả: nếu có sale thì lấy sale_price, không thì lấy price)
+        // Logic SQL: Nếu (sale_price > 0 và < price) thì dùng sale_price, ngược lại dùng price
+        if (minPrice != null) {
+            sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) >= :min ");
+        }
+        if (maxPrice != null) {
+            sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) <= :max ");
+        }
+
+        // 3. Sắp xếp
+        if (sortType != null) {
+            switch (sortType) {
+                case "price_asc": // Giá tăng dần
+                    sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) ASC ");
+                    break;
+                case "price_desc": // Giá giảm dần
+                    sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) DESC ");
+                    break;
+                case "name_asc":
+                    sql.append(" ORDER BY name ASC ");
+                    break;
+                default: // Mặc định mới nhất
+                    sql.append(" ORDER BY id DESC ");
+                    break;
+            }
+        } else {
+            sql.append(" ORDER BY id DESC ");
+        }
+
+        return DBContext.get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            if (categoryId != null && categoryId > 0) query.bind("cid", categoryId);
+            if (minPrice != null) query.bind("min", minPrice);
+            if (maxPrice != null) query.bind("max", maxPrice);
+
+            return query.mapToBean(Product.class).list();
+        });
+    }
     // Main test
     public static void main(String[] args) {
         ProductDAO dao = new ProductDAO();
