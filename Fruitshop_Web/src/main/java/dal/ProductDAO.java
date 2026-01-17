@@ -18,8 +18,7 @@ public class ProductDAO {
 
     // 2. Lấy sản phẩm theo Category ID
     public List<Product> getProductsByCategoryID(int cid) {
-        // SỬA TƯƠNG TỰ
-        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE category_id = ?";
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE category_id = ?";
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind(0, cid)
@@ -62,8 +61,7 @@ public class ProductDAO {
 
     // 5. Phân trang
     public List<Product> pagingProduct(int index) {
-        // SỬA TƯƠNG TỰ
-        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products ORDER BY id LIMIT ?, 6";
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products ORDER BY id LIMIT ?, 6";
         int offset = (index - 1) * 6;
 
         return DBContext.get().withHandle(handle ->

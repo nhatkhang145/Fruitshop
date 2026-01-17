@@ -7,6 +7,7 @@ import jakarta.servlet.http.HttpSession;
 import model.Product;
 import model.Category;
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -28,6 +29,7 @@ public class ShopServlet extends HttpServlet {
         String indexPage = request.getParameter("index");
 
         List<Product> listP;
+        List<Integer> likedIds = new ArrayList<>();
 
         // 1. Load danh sách Categories
         List<Category> listC = cDao.getAllCategories();
@@ -81,9 +83,9 @@ public class ShopServlet extends HttpServlet {
 
         if (user != null) {
             WishlistDAO wDao = new WishlistDAO();
-            List<Integer> likedIds = wDao.getLikedProductIds(user.getId());
-            request.setAttribute("likedIds", likedIds);
+            likedIds = wDao.getLikedProductIds(user.getId());
         }
+        request.setAttribute("likedIds", likedIds);
 
         // 3. Gửi dữ liệu về JSP
         request.setAttribute("listP", listP);
