@@ -1,5 +1,6 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
 
     <!DOCTYPE html>
     <html lang="vi">
@@ -19,75 +20,52 @@
       <div class="main">
         <!-- HEADER -->
         <jsp:include page="header.jsp"></jsp:include>
-        <!-- slide -->
+        
+        <!-- SLIDE BANNER -->
         <div id="slide">
           <div class="slide-container">
             <div class="slide-wrapper">
-              <!-- Slide 1 -->
-              <div class="slide-item">
-                <img src="https://i.pinimg.com/1200x/25/54/15/255415908ab241b565a5dbe42795519f.jpg" alt="Fresh Fruit" />
-                <div class="slide-caption">
-                  <h2>Trái Cây Nhập Khẩu</h2>
-                  <p>Những loại trái cây tươi ngon từ khắp nơi trên thế giới</p>
-                </div>
-              </div>
-
-              <!-- Slide 2 -->
-              <div class="slide-item">
-                <img src="https://i.pinimg.com/736x/ba/cc/a7/bacca77883505e3fa726612bb78951ee.jpg" alt="Clear Origin" />
-                <div class="slide-caption">
-                  <h2>Nguồn Gốc Rõ Ràng</h2>
-                  <p>Trái cây có nguồn gốc rõ ràng và minh bạch</p>
-                </div>
-              </div>
-
-              <!-- Slide 3 -->
-              <div class="slide-item">
-                <img src="https://bloganchoi.com/wp-content/uploads/2018/06/cac-loai-trai-cay.jpg" alt="City Lights" />
-                <div class="slide-caption">
-                  <h2>Trái Cây Tươi Sạch</h2>
-                  <p>Cam kết mang đến sản phẩm sạch và an toàn cho sức khỏe</p>
-                </div>
-              </div>
-
-              <!-- Slide 4 -->
-              <div class="slide-item">
-                <img src="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=900&h=500&fit=crop"
-                  alt="Forest Path" />
-                <div class="slide-caption">
-                  <h2>Trái Cây Tươi Sạch</h2>
-                  <p>Cam kết mang đến sản phẩm sạch và an toàn cho sức khỏe</p>
-                </div>
-              </div>
-
-              <!-- Slide 5 -->
-              <div class="slide-item">
-                <img src="https://images.unsplash.com/photo-1472214103451-9374bd1c798e?w=900&h=500&fit=crop"
-                  alt="Sunset View" />
-                <div class="slide-caption">
-                  <h2>Trái Cây Tươi Sạch</h2>
-                  <p>Cam kết mang đến sản phẩm sạch và an toàn cho sức khỏe</p>
-                </div>
-              </div>
+              <c:choose>
+                <c:when test="${not empty banners}">
+                  <c:forEach items="${banners}" var="banner">
+                    <div class="slide-item">
+                      <img src="${pageContext.request.contextPath}/${banner.imageUrl}" alt="${banner.title}" />
+                      <div class="slide-caption">
+                        <h2>${banner.title}</h2>
+                        <p>${banner.description}</p>
+                        <c:if test="${not empty banner.link}">
+                          <a href="${banner.link}" class="slide-btn" style="display: inline-block; padding: 10px 25px; background: #4CAF50; color: white; text-decoration: none; border-radius: 25px; margin-top: 15px; font-weight: 500;">Xem ngay →</a>
+                        </c:if>
+                      </div>
+                    </div>
+                  </c:forEach>
+                </c:when>
+                <c:otherwise>
+                  <div class="slide-item">
+                    <img src="https://i.pinimg.com/1200x/25/54/15/255415908ab241b565a5dbe42795519f.jpg" alt="Fresh Fruit" />
+                    <div class="slide-caption">
+                      <h2>Trái Cây Nhập Khẩu</h2>
+                      <p>Những loại trái cây tươi ngon từ khắp nơi trên thế giới</p>
+                    </div>
+                  </div>
+                </c:otherwise>
+              </c:choose>
             </div>
 
-            <!-- Nút Previous -->
-            <button class="nav-button prev-button" onclick="prevSlide()">
-              &#10094;
-            </button>
+            <button class="nav-button prev-button" onclick="prevSlide()">&#10094;</button>
+            <button class="nav-button next-button" onclick="nextSlide()">&#10095;</button>
 
-            <!-- Nút Next -->
-            <button class="nav-button next-button" onclick="nextSlide()">
-              &#10095;
-            </button>
-
-            <!-- Chỉ báo dots -->
             <div class="slide-indicators">
-              <span class="indicator-dot active" onclick="goToSlide(0)"></span>
-              <span class="indicator-dot" onclick="goToSlide(1)"></span>
-              <span class="indicator-dot" onclick="goToSlide(2)"></span>
-              <span class="indicator-dot" onclick="goToSlide(3)"></span>
-              <span class="indicator-dot" onclick="goToSlide(4)"></span>
+              <c:choose>
+                <c:when test="${not empty banners}">
+                  <c:forEach items="${banners}" var="banner" varStatus="status">
+                    <span class="indicator-dot ${status.index == 0 ? 'active' : ''}" onclick="goToSlide(${status.index})"></span>
+                  </c:forEach>
+                </c:when>
+                <c:otherwise>
+                  <span class="indicator-dot active" onclick="goToSlide(0)"></span>
+                </c:otherwise>
+              </c:choose>
             </div>
           </div>
         </div>
@@ -97,11 +75,9 @@
             <section id="top-offers">
               <div class="container">
                 <div class="section-header">
-                  <h2>Ưu đãi trong tuần này</h2>
+                  <h2>Sản phẩm mới nhất</h2>
                   <div class="header-icons">
-                    <button class="home-icon">
-                      <i class="fas fa-home"></i>
-                    </button>
+                    <button class="home-icon"><i class="fas fa-star"></i></button>
                   </div>
                 </div>
 
@@ -112,55 +88,71 @@
                   <button class="arrow next" aria-label="Next products">
                     <i class="fas fa-chevron-right"></i>
                   </button>
+                  
                   <div class="carousel-container">
-                    <div class="product-card">
-                      <div class="product-image">
-                        <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                          <img
-                            src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                            alt="Dưa" loading="lazy" />
-                        </a>
+                    <c:choose>
+                      <c:when test="${not empty newProducts}">
+                        <c:forEach items="${newProducts}" var="product">
+                          <div class="product-card">
+                            <div class="product-image">
+                              <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">
+                                <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
+                              </a>
 
-                        <div class="product-badge sale">-10%</div>
+                              <c:if test="${product.salePrice > 0 && product.salePrice < product.price}">
+                                <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
+                              </c:if>
 
-                        <div class="product-actions">
-                          <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
-                            <i class="far fa-heart"></i>
-                          </a>
+                              <div class="product-actions">
+                                <a href="${pageContext.request.contextPath}/wishlist?action=add&productId=${product.id}" class="action-btn" title="Thêm vào yêu thích">
+                                  <i class="far fa-heart"></i>
+                                </a>
+                                <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" title="Xem nhanh">
+                                  <i class="far fa-eye"></i>
+                                </a>
+                                <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
+                                  <i class="fas fa-shopping-basket"></i>
+                                </button>
+                              </div>
+                            </div>
 
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                            title="Xem nhanh">
-                            <i class="far fa-eye"></i>
-                          </a>
+                            <div class="product-info">
+                              <div class="category">Trái cây</div>
+                              <h3><a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">${product.name}</a></h3>
 
-                          <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                            <i class="fas fa-shopping-basket"></i>
-                          </button>
-                        </div>
-                      </div>
+                              <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                                <span style="color: #999;">(0)</span>
+                              </div>
 
-                      <div class="product-info">
-                        <div class="category">Trái cây nhập khẩu</div>
-
-                        <h3>
-                          <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                        </h3>
-
-                        <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star"></i>
-                          <i class="fas fa-star-half-alt"></i>
-                          <span style="color: #999;">(15)</span>
-                        </div>
-
-                        <div class="price">
-                          <span class="current">120,000đ</span> <span class="original">200,000đ</span>
-                          <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
-                        </div>
-                      </div>
-                    </div>
+                              <div class="price">
+                                <c:choose>
+                                  <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
+                                    <span class="current"><fmt:formatNumber value="${product.salePrice}" type="number" groupingUsed="true" />đ</span>
+                                    <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
+                                  </c:when>
+                                  <c:otherwise>
+                                    <span class="current"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
+                                  </c:otherwise>
+                                </c:choose>
+                                <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                              </div>
+                            </div>
+                          </div>
+                        </c:forEach>
+                      </c:when>
+                      <c:otherwise>
+                        <p style="text-align: center; padding: 20px; width: 100%;">Không có sản phẩm nào</p>
+                      </c:otherwise>
+                    </c:choose>
+                  </div>
+                </div>
+              </div>
+            </section>
                     <div class="product-card">
                       <div class="product-image">
                         <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
@@ -504,57 +496,75 @@
             <section id="top-trending">
               <div class="container">
                 <div class="section-header">
-                  <h2>Xu hướng</h2>
+                  <h2>Sản phẩm bán chạy</h2>
                   <div class="header-icons">
-                    <button class="home-icon">
-                      <i class="fas fa-fire"></i>
-                    </button>
+                    <button class="home-icon"><i class="fas fa-fire"></i></button>
                   </div>
                 </div>
 
                 <div class="trending-grid">
-                  <!-- Giữ nguyên product-card của bạn -->
-                  <div class="product-card">
-                    <div class="product-image">
-                      <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1">
-                        <img
-                          src="https://ik.imagekit.io/8tm3umulk/image/s%E1%BA%A3n%20ph%E1%BA%A9m/dua?updatedAt=1762455965231"
-                          alt="Dưa" loading="lazy" />
-                      </a>
+                  <c:choose>
+                    <c:when test="${not empty trendingProducts}">
+                      <c:forEach items="${trendingProducts}" var="product">
+                        <div class="product-card">
+                          <div class="product-image">
+                            <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">
+                              <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
+                            </a>
 
-                      <div class="product-badge sale">-10%</div>
+                            <c:if test="${product.salePrice > 0 && product.salePrice < product.price}">
+                              <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
+                            </c:if>
 
-                      <div class="product-actions">
-                        <a href="${pageContext.request.contextPath}#" class="action-btn" title="Thêm vào yêu thích">
-                          <i class="far fa-heart"></i>
-                        </a>
+                            <div class="product-actions">
+                              <a href="${pageContext.request.contextPath}/wishlist?action=add&productId=${product.id}" class="action-btn" title="Thêm vào yêu thích">
+                                <i class="far fa-heart"></i>
+                              </a>
+                              <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" title="Xem nhanh">
+                                <i class="far fa-eye"></i>
+                              </a>
+                              <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
+                                <i class="fas fa-shopping-basket"></i>
+                              </button>
+                            </div>
+                          </div>
 
-                        <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" class="action-btn"
-                          title="Xem nhanh">
-                          <i class="far fa-eye"></i>
-                        </a>
+                          <div class="product-info">
+                            <div class="category">Trái cây</div>
+                            <h3><a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">${product.name}</a></h3>
 
-                        <button class="action-btn add-to-cart-btn" data-id="1" title="Thêm vào giỏ">
-                          <i class="fas fa-shopping-basket"></i>
-                        </button>
-                      </div>
-                    </div>
+                            <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star"></i>
+                              <i class="fas fa-star-half-alt"></i>
+                              <span style="color: #999;">(0)</span>
+                            </div>
 
-                    <div class="product-info">
-                      <div class="category">Trái cây nhập khẩu</div>
-
-                      <h3>
-                        <a href="${pageContext.request.contextPath}/product-detail.jsp?id=1" title="Dừa">Dừa</a>
-                      </h3>
-
-                      <div class="rating" style="color: #ffc107; font-size: 0.8rem; margin-bottom: 5px;">
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star"></i>
-                        <i class="fas fa-star-half-alt"></i>
-                        <span style="color: #999;">(15)</span>
-                      </div>
+                            <div class="price">
+                              <c:choose>
+                                <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
+                                  <span class="current"><fmt:formatNumber value="${product.salePrice}" type="number" groupingUsed="true" />đ</span>
+                                  <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
+                                </c:when>
+                                <c:otherwise>
+                                  <span class="current"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
+                                </c:otherwise>
+                              </c:choose>
+                              <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                            </div>
+                          </div>
+                        </div>
+                      </c:forEach>
+                    </c:when>
+                    <c:otherwise>
+                      <p style="text-align: center; padding: 20px; grid-column: 1 / -1;">Không có sản phẩm nào</p>
+                    </c:otherwise>
+                  </c:choose>
+                </div>
+              </div>
+            </section>
 
                       <div class="price">
                         <span class="current">120,000đ</span> <span class="original">200,000đ</span>

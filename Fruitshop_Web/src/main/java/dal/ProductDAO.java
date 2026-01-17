@@ -217,6 +217,52 @@ public class ProductDAO {
         });
     }
 
+    // Lấy sản phẩm mới nhất
+    public List<Product> getNewestProducts(int limit) {
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
+                     "FROM products WHERE status = 1 ORDER BY id DESC LIMIT ?";
+        
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                .bind(0, limit)
+                .mapToBean(Product.class)
+                .list()
+        );
+    }
+
+    // Lấy sản phẩm bán chạy
+    public List<Product> getBestSellingProducts(int limit) {
+        String sql = "SELECT p.id, p.name, p.price, p.sale_price AS salePrice, p.quantity, " +
+                     "p.short_description AS description, p.image, p.category_id AS categoryId " +
+                     "FROM products p " +
+                     "WHERE p.status = 1 " +
+                     "ORDER BY p.id DESC " +
+                     "LIMIT ?";
+        
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                .bind(0, limit)
+                .mapToBean(Product.class)
+                .list()
+        );
+    }
+
+    // Lấy sản phẩm có giảm giá
+    public List<Product> getDiscountProducts(int limit) {
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
+                     "FROM products " +
+                     "WHERE status = 1 AND sale_price > 0 AND sale_price < price " +
+                     "ORDER BY (price - sale_price) / price DESC " +
+                     "LIMIT ?";
+        
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                .bind(0, limit)
+                .mapToBean(Product.class)
+                .list()
+        );
+    }
+
     // Thống kê: Đếm tổng số sản phẩm
     public int countTotalProducts() {
         return DBContext.get().withHandle(handle ->
