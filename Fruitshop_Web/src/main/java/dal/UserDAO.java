@@ -164,4 +164,11 @@ public class UserDAO {
                         .orElse(null)
         );
     }
+
+    // Thống kê: Đếm tổng số thành viên
+    public int countTotalUsers() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM users").mapTo(Integer.class).one()
+        );
+    }
 }
