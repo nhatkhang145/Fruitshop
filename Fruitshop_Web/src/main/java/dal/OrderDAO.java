@@ -305,4 +305,19 @@ public class OrderDAO {
                         .list()
         );
     }
+
+    // Thống kê: Tính tổng doanh thu (chỉ tính đơn đã hoàn thành)
+    public double getTotalRevenue() {
+        String sql = "SELECT SUM(final_amount) FROM orders WHERE status = 'completed'";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql).mapTo(Double.class).findFirst().orElse(0.0)
+        );
+    }
+
+    // Thống kê: Đếm tổng số đơn hàng
+    public int countTotalOrders() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM orders").mapTo(Integer.class).one()
+        );
+    }
 }
