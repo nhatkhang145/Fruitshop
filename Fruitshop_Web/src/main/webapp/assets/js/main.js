@@ -137,83 +137,117 @@
 //         console.log('Scroll threshold:', scrollThreshold + 'px');
 // =================================================================================================================================
 // slider chính
-let currentSlide = 0;
-const totalSlides = 5;
-const slideWrapper = document.querySelector(".slide-wrapper");
-const dots = document.querySelectorAll(".indicator-dot");
+document.addEventListener('DOMContentLoaded', function() {
+  let currentSlide = 0;
+  const slideWrapper = document.querySelector(".slide-wrapper");
+  const slides = document.querySelectorAll(".slide-item");
+  const totalSlides = slides.length;
+  const dots = document.querySelectorAll(".indicator-dot");
+  const prevButton = document.querySelector(".prev-button");
+  const nextButton = document.querySelector(".next-button");
+  const slideContainer = document.querySelector(".slide-container");
+  const slideIndicators = document.querySelector('.slide-indicators');
 
-// Hàm cập nhật vị trí slide
-function updateSlide() {
-  slideWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+  // Kiểm tra xem có slideWrapper không
+  if (!slideWrapper || !slideContainer) {
+    console.log('Slider elements not found');
+    return;
+  }
 
-  // Cập nhật dots
-  dots.forEach((dot, index) => {
-    dot.classList.toggle("active", index === currentSlide);
+  console.log('Total slides:', totalSlides);
+
+  // Ẩn controls nếu chỉ có 1 slide
+  if (totalSlides <= 1) {
+    if (prevButton) prevButton.style.display = 'none';
+    if (nextButton) nextButton.style.display = 'none';
+    if (slideIndicators) slideIndicators.style.display = 'none';
+    console.log('Only 1 slide, controls hidden');
+    return; // Không cần chạy code slider nếu chỉ có 1 slide
+  }
+
+  // Hàm cập nhật vị trí slide
+  function updateSlide() {
+    slideWrapper.style.transform = `translateX(-${currentSlide * 100}%)`;
+
+    // Cập nhật dots
+    dots.forEach((dot, index) => {
+      dot.classList.toggle("active", index === currentSlide);
+    });
+  }
+
+  // Chuyển sang slide tiếp theo
+  function nextSlide() {
+    currentSlide = (currentSlide + 1) % totalSlides;
+    updateSlide();
+  }
+
+  // Chuyển về slide trước
+  function prevSlide() {
+    currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
+    updateSlide();
+  }
+
+  // Đi đến slide cụ thể
+  window.goToSlide = function(index) {
+    currentSlide = index;
+    updateSlide();
+  }
+
+  // Tự động chuyển slide sau 5 giây
+  let autoSlide = setInterval(nextSlide, 5000);
+  console.log('Auto-slide started');
+
+  // Dừng auto-slide khi hover vào slider
+  slideContainer.addEventListener("mouseenter", () => {
+    clearInterval(autoSlide);
+    console.log('Auto-slide paused');
   });
-}
 
-// Chuyển sang slide tiếp theo
-function nextSlide() {
-  currentSlide = (currentSlide + 1) % totalSlides;
-  updateSlide();
-}
+  // Tiếp tục auto-slide khi rời khỏi slider
+  slideContainer.addEventListener("mouseleave", () => {
+    autoSlide = setInterval(nextSlide, 5000);
+    console.log('Auto-slide resumed');
+  });
 
-// Chuyển về slide trước
-function prevSlide() {
-  currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-  updateSlide();
-}
+  // Hỗ trợ phím mũi tên
+  document.addEventListener("keydown", (e) => {
+    if (e.key === "ArrowLeft") {
+      prevSlide();
+    } else if (e.key === "ArrowRight") {
+      nextSlide();
+    }
+  });
 
-// Đi đến slide cụ thể
-function goToSlide(index) {
-  currentSlide = index;
-  updateSlide();
-}
+  // Hỗ trợ touch swipe trên mobile
+  let touchStartX = 0;
+  let touchEndX = 0;
 
-// Tự động chuyển slide sau 5 giây
-let autoSlide = setInterval(nextSlide, 5000);
+  slideContainer.addEventListener("touchstart", (e) => {
+    touchStartX = e.changedTouches[0].screenX;
+  });
 
-// Dừng auto-slide khi hover vào slider
-const slideContainer = document.querySelector(".slide-container");
-slideContainer.addEventListener("mouseenter", () => {
-  clearInterval(autoSlide);
-});
+  slideContainer.addEventListener("touchend", (e) => {
+    touchEndX = e.changedTouches[0].screenX;
+    handleSwipe();
+  });
 
-// Tiếp tục auto-slide khi rời khỏi slider
-slideContainer.addEventListener("mouseleave", () => {
-  autoSlide = setInterval(nextSlide, 5000);
-});
+  function handleSwipe() {
+    if (touchStartX - touchEndX > 50) {
+      nextSlide();
+    }
+    if (touchEndX - touchStartX > 50) {
+      prevSlide();
+    }
+  }
 
-// Hỗ trợ phím mũi tên
-document.addEventListener("keydown", (e) => {
-  if (e.key === "ArrowLeft") {
-    prevSlide();
-  } else if (e.key === "ArrowRight") {
-    nextSlide();
+  // Xử lý click nút prev/next
+  if (prevButton) {
+    prevButton.addEventListener('click', prevSlide);
+  }
+  if (nextButton) {
+    nextButton.addEventListener('click', nextSlide);
   }
 });
-
-// Hỗ trợ touch swipe trên mobile
-let touchStartX = 0;
-let touchEndX = 0;
-
-slideContainer.addEventListener("touchstart", (e) => {
-  touchStartX = e.changedTouches[0].screenX;
-});
-
-slideContainer.addEventListener("touchend", (e) => {
-  touchEndX = e.changedTouches[0].screenX;
-  handleSwipe();
-});
-
-function handleSwipe() {
-  if (touchStartX - touchEndX > 50) {
-    nextSlide();
-  }
-  if (touchEndX - touchStartX > 50) {
-    prevSlide();
-  }
-}
 
 
 
