@@ -18,8 +18,7 @@ public class ProductDAO {
 
     // 2. Lấy sản phẩm theo Category ID
     public List<Product> getProductsByCategoryID(int cid) {
-        // SỬA TƯƠNG TỰ
-        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE category_id = ?";
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE category_id = ?";
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind(0, cid)
@@ -62,8 +61,7 @@ public class ProductDAO {
 
     // 5. Phân trang
     public List<Product> pagingProduct(int index) {
-        // SỬA TƯƠNG TỰ
-        String sql = "SELECT id, name, price, quantity, short_description AS description, image, category_id AS categoryId FROM products ORDER BY id LIMIT ?, 6";
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products ORDER BY id LIMIT ?, 6";
         int offset = (index - 1) * 6;
 
         return DBContext.get().withHandle(handle ->
@@ -113,50 +111,52 @@ public class ProductDAO {
         );
     }
 
+    // Đếm tổng số sản phẩm sau khi lọc
+    public int countProductsByFilter(Integer cid, Double minPrice, Double maxPrice) {
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM products WHERE status = 1 ");
+        if (cid != null) sql.append(" AND category_id = :cid ");
+        if (minPrice != null) sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) >= :min ");
+        if (maxPrice != null) sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) <= :max ");
+
+        return DBContext.get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+            if (cid != null) query.bind("cid", cid);
+            if (minPrice != null) query.bind("min", minPrice);
+            if (maxPrice != null) query.bind("max", maxPrice);
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
     // Lọc sản phẩm
-    public List<Product> filterProducts(Integer categoryId, Double minPrice, Double maxPrice, String sortType) {
-        StringBuilder sql = new StringBuilder("SELECT id, name, product_code AS productCode, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE status = 1");
+    public List<Product> filterProducts(Integer cid, Double minPrice, Double maxPrice, String sortType, int index) {
+        StringBuilder sql = new StringBuilder("SELECT id, name, product_code AS productCode, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId, status FROM products WHERE status = 1 ");
 
-        // 1. Lọc theo Category
-        if (categoryId != null && categoryId > 0) {
-            sql.append(" AND category_id = :cid ");
-        }
+        // Các điều kiện lọc
+        if (cid != null) sql.append(" AND category_id = :cid ");
+        if (minPrice != null) sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) >= :min ");
+        if (maxPrice != null) sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) <= :max ");
 
-        // 2. Lọc theo Giá (Sử dụng giá thực tế phải trả: nếu có sale thì lấy sale_price, không thì lấy price)
-        // Logic SQL: Nếu (sale_price > 0 và < price) thì dùng sale_price, ngược lại dùng price
-        if (minPrice != null) {
-            sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) >= :min ");
-        }
-        if (maxPrice != null) {
-            sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) <= :max ");
-        }
-
-        // 3. Sắp xếp
+        // Sắp xếp
         if (sortType != null) {
             switch (sortType) {
-                case "price_asc": // Giá tăng dần
-                    sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) ASC ");
-                    break;
-                case "price_desc": // Giá giảm dần
-                    sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) DESC ");
-                    break;
-                case "name_asc":
-                    sql.append(" ORDER BY name ASC ");
-                    break;
-                default: // Mặc định mới nhất
-                    sql.append(" ORDER BY id DESC ");
-                    break;
+                case "price_asc": sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) ASC "); break;
+                case "price_desc": sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) DESC "); break;
+                case "name_asc": sql.append(" ORDER BY name ASC "); break;
+                default: sql.append(" ORDER BY id DESC "); break;
             }
         } else {
             sql.append(" ORDER BY id DESC ");
         }
 
+        // Phân trang (Mỗi trang 6 sản phẩm)
+        sql.append(" LIMIT 6 OFFSET :offset ");
+
         return DBContext.get().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
-
-            if (categoryId != null && categoryId > 0) query.bind("cid", categoryId);
+            if (cid != null) query.bind("cid", cid);
             if (minPrice != null) query.bind("min", minPrice);
             if (maxPrice != null) query.bind("max", maxPrice);
+            query.bind("offset", (index - 1) * 6);
 
             return query.mapToBean(Product.class).list();
         });
