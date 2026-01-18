@@ -272,4 +272,52 @@ public class OrderDAO {
                         .one()
         );
     }
+    // 1. Lấy tất cả đơn hàng (cho trang Admin Orders)
+    public List<Order> getAllOrders() {
+        String sql = "SELECT * FROM orders ORDER BY id DESC";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .mapToBean(Order.class)
+                        .list()
+        );
+    }
+
+
+
+    // 3. Cập nhật trạng thái đơn hàng (cho chức năng Duyệt/Hủy đơn)
+    public void updateStatus(int orderId, int status) {
+        String sql = "UPDATE orders SET status = ? WHERE id = ?";
+        DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind(0, status)
+                        .bind(1, orderId)
+                        .execute()
+        );
+    }
+
+    // 2. Lấy danh sách đơn hàng theo trạng thái (Cho Admin lọc)
+    public List<Order> getOrdersByStatus(String status) {
+        String sql = "SELECT * FROM orders WHERE status = :status ORDER BY created_at DESC";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("status", status)
+                        .mapToBean(Order.class)
+                        .list()
+        );
+    }
+
+    // Thống kê: Tính tổng doanh thu (chỉ tính đơn đã hoàn thành)
+    public double getTotalRevenue() {
+        String sql = "SELECT SUM(final_amount) FROM orders WHERE status = 'completed'";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql).mapTo(Double.class).findFirst().orElse(0.0)
+        );
+    }
+
+    // Thống kê: Đếm tổng số đơn hàng
+    public int countTotalOrders() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM orders").mapTo(Integer.class).one()
+        );
+    }
 }

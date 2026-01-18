@@ -28,6 +28,42 @@ public class CategoryDAO {
         }
     }
 
+    // Thêm vào trong class CategoryDAO
+    public void insert(Category c) {
+        String sql = "INSERT INTO Categories (name, description, parent_id, status) VALUES (?, ?, ?, ?)";
+        DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind(0, c.getName())
+                        .bind(1, c.getDescription())
+                        .bind(2, c.getParentId())
+                        .bind(3, c.getStatus())
+                        .execute()
+        );
+    }
+
+    public void update(Category c) {
+        String sql = "UPDATE Categories SET name=?, description=?, parent_id=?, status=? WHERE id=?";
+        DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind(0, c.getName())
+                        .bind(1, c.getDescription())
+                        .bind(2, c.getParentId())
+                        .bind(3, c.getStatus())
+                        .bind(4, c.getId())
+                        .execute()
+        );
+    }
+
+    public void delete(int id) {
+        // Xóa mềm (ẩn đi) hoặc xóa cứng tùy logic của bạn. Ở đây ví dụ xóa cứng.
+        String sql = "DELETE FROM Categories WHERE id=?";
+        DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind(0, id)
+                        .execute()
+        );
+    }
+
     public static void main(String[] args) {
         CategoryDAO dao = new CategoryDAO();
         List<Category> list = dao.getAllCategories();
@@ -36,4 +72,7 @@ public class CategoryDAO {
             System.out.println(c.getName());
         }
     }
+
+
+
 }

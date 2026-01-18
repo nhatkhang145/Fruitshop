@@ -1,6 +1,8 @@
 package dal;
 
 import model.User;
+
+import java.util.List;
 import java.util.Optional;
 
 public class UserDAO {
@@ -130,14 +132,43 @@ public class UserDAO {
         );
     }
 
-    // 6. Cập nhật mật khẩu theo email
-    public void updatePasswordByEmail(String email, String newPassword) {
-        String query = "UPDATE users SET password = ? WHERE email = ?";
-        DBContext.get().useHandle(handle ->
-                handle.createUpdate(query)
-                        .bind(0, newPassword)
-                        .bind(1, email)
+    // 1. Lấy danh sách tất cả người dùng
+    public List<User> getAllUsers() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT * FROM users ORDER BY id DESC")
+                        .mapToBean(User.class)
+                        .list()
+        );
+    }
+
+    // 2. Cập nhật Role và Status (Cho chức năng Phân quyền/Chặn)
+    public boolean updateUserStatusAndRole(int userId, int role, String status) {
+        String sql = "UPDATE users SET role = :role, status = :status WHERE id = :userId";
+        int rows = DBContext.get().withHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind("role", role)
+                        .bind("status", status)
+                        .bind("userId", userId)
                         .execute()
+        );
+        return rows > 0;
+    }
+
+    // 3. Lấy User theo ID (Để hiện trang chi tiết)
+    public User getUserById(int id) {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT * FROM users WHERE id = :id")
+                        .bind("id", id)
+                        .mapToBean(User.class)
+                        .findFirst()
+                        .orElse(null)
+        );
+    }
+
+    // Thống kê: Đếm tổng số thành viên
+    public int countTotalUsers() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM users").mapTo(Integer.class).one()
         );
     }
 }

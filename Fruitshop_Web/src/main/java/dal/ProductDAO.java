@@ -177,4 +177,11 @@ public class ProductDAO {
             }
         }
     }
+
+    // Thống kê: Đếm tổng số sản phẩm
+    public int countTotalProducts() {
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery("SELECT COUNT(*) FROM products").mapTo(Integer.class).one()
+        );
+    }
 }
