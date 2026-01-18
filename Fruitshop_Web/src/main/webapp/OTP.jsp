@@ -26,27 +26,25 @@
                 </div>
 
                 <div class="security-body">
-                    <p class="security-instruction">Vui lòng kiểm tra điện thoại để xem tin nhắn văn bản có mã. Mã của
-                        bạn có 8 ký tự.</p>
+                    <c:if test="${not empty error}">
+                        <p style="color: red; text-align: center;">${error}</p>
+                    </c:if>
 
-                    <div class="security-content-row">
-                        <div class="security-input-wrapper">
-                            <input type="text" class="find-account-input security-input" placeholder="Nhập mã">
+                    <form action="verifyOTP" method="post">
+                        <p class="security-instruction">Vui lòng kiểm tra email để lấy mã xác thực.</p>
+
+                        <div class="security-content-row">
+                            <div class="security-input-wrapper">
+                                <input type="text" name="otp" class="find-account-input security-input" placeholder="Nhập mã 6 số" required>
+                            </div>
                         </div>
 
-                        <div class="security-info-text">
-                            <span>Chúng tôi đã gửi mã cho bạn đến:</span>
-                            <span class="security-phone">+*********25</span>
+                        <div class="find-account-footer security-footer">
+                            <div class="security-actions">
+                                <button type="submit" class="btn-action btn-search">Tiếp tục</button>
+                            </div>
                         </div>
-                    </div>
-                </div>
-
-                <div class="find-account-footer security-footer">
-                    <a href="#" class="cant-access-link">Chưa nhận được mã?</a>
-                    <div class="security-actions">
-                        <button type="button" class="btn-action btn-cancel">Hủy</button>
-                        <button type="button" class="btn-action btn-search">Tiếp tục</button>
-                    </div>
+                    </form>
                 </div>
             </div>
         </div>
