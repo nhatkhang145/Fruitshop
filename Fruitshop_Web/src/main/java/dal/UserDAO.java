@@ -129,4 +129,15 @@ public class UserDAO {
                         .execute()
         );
     }
+
+    // 6. Cập nhật mật khẩu theo email
+    public void updatePasswordByEmail(String email, String newPassword) {
+        String query = "UPDATE users SET password = ? WHERE email = ?";
+        DBContext.get().useHandle(handle ->
+                handle.createUpdate(query)
+                        .bind(0, newPassword)
+                        .bind(1, email)
+                        .execute()
+        );
+    }
 }
