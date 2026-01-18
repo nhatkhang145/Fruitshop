@@ -103,6 +103,13 @@
 
                 <!-- CỘT 10 -->
                 <div class="grid__column-10">
+                  <!-- Hiển thị thông báo tìm kiếm -->
+                  <c:if test="${isSearch}">
+                    <div style="padding: 15px; background: #f8f9fa; border-left: 4px solid #28a745; margin-bottom: 20px;">
+                      <strong>Kết quả tìm kiếm:</strong> "<em>${searchKeyword}</em>" - Tìm thấy <strong>${listP.size()}</strong> sản phẩm
+                    </div>
+                  </c:if>
+                  
                   <div class="sort-filter">
                     <span class="sort-filter__label">Sắp xếp theo </span>
                     <button class="sort-filter__btn btn">Phổ biến</button>

@@ -52,21 +52,16 @@
                 </div>
 
                 <ul class="main-nav-links subnav-links">
-                    <li><a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a></li>
-                    <li><a href="${pageContext.request.contextPath}/shop.jsp">Sản Phẩm</a></li>
+                    <li><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/shop">Sản Phẩm</a></li>
                     <li><a href="${pageContext.request.contextPath}/about.jsp">Giới thiệu</a></li>
                     <li><a href="${pageContext.request.contextPath}/blog.jsp">Bài viết</a></li>
                     <li><a href="${pageContext.request.contextPath}/contact.jsp">Liên hệ</a></li>
                 </ul>
 
                 <div class="navbar__menu-search">
-                    <form class="search-form" action="${pageContext.request.contextPath}/shop.jsp" method="get">
-                        <select name="category" class="search-cat">
-                            <option value="all">Danh mục</option>
-                            <option value="fruits">Trái cây</option>
-                            <option value="vegetables">Rau củ</option>
-                        </select>
-                        <input name="q" class="search-input" type="search" placeholder="Tìm kiếm..." />
+                    <form class="search-form" action="${pageContext.request.contextPath}/shop" method="get">
+                        <input name="q" class="search-input" type="search" placeholder="Tìm kiếm sản phẩm..." value="${param.q}" style="width: 100%; border-radius: 25px 0 0 25px;" />
                         <button type="submit" class="search-btn"><i class="fa-solid fa-magnifying-glass"></i></button>
                     </form>
                 </div>
@@ -80,7 +75,10 @@
                         </span>
                     </a>
                     <a href="${pageContext.request.contextPath}/cart.jsp" class="icon-btn cart-btn">
-                        <i class="fa-solid fa-basket-shopping"></i><span class="badge">0</span>
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <span class="badge">
+                            ${sessionScope.size != null ? sessionScope.size : 0}
+                        </span>
                     </a>
 
                     <div class="header__account">

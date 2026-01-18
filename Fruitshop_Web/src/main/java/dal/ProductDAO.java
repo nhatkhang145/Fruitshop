@@ -178,6 +178,91 @@ public class ProductDAO {
         }
     }
 
+    // Tìm kiếm sản phẩm theo từ khóa và danh mục
+    public List<Product> searchProducts(String keyword, String category) {
+        StringBuilder sql = new StringBuilder(
+            "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
+            "FROM products WHERE status = 1"
+        );
+
+        // Tìm kiếm theo từ khóa (tên sản phẩm hoặc mô tả)
+        if (keyword != null && !keyword.trim().isEmpty()) {
+            sql.append(" AND (name LIKE :keyword OR short_description LIKE :keyword)");
+        }
+
+        // Lọc theo danh mục
+        if (category != null && !category.equals("all")) {
+            sql.append(" AND category_id = :categoryId");
+        }
+
+        sql.append(" ORDER BY id DESC");
+
+        return DBContext.get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            if (keyword != null && !keyword.trim().isEmpty()) {
+                query.bind("keyword", "%" + keyword.trim() + "%");
+            }
+
+            if (category != null && !category.equals("all")) {
+                try {
+                    int catId = Integer.parseInt(category);
+                    query.bind("categoryId", catId);
+                } catch (NumberFormatException e) {
+                    // Nếu category không phải số, bỏ qua
+                }
+            }
+
+            return query.mapToBean(Product.class).list();
+        });
+    }
+
+    // Lấy sản phẩm mới nhất
+    public List<Product> getNewestProducts(int limit) {
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
+                     "FROM products WHERE status = 1 ORDER BY id DESC LIMIT ?";
+        
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                .bind(0, limit)
+                .mapToBean(Product.class)
+                .list()
+        );
+    }
+
+    // Lấy sản phẩm bán chạy
+    public List<Product> getBestSellingProducts(int limit) {
+        String sql = "SELECT p.id, p.name, p.price, p.sale_price AS salePrice, p.quantity, " +
+                     "p.short_description AS description, p.image, p.category_id AS categoryId " +
+                     "FROM products p " +
+                     "WHERE p.status = 1 " +
+                     "ORDER BY p.id DESC " +
+                     "LIMIT ?";
+        
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                .bind(0, limit)
+                .mapToBean(Product.class)
+                .list()
+        );
+    }
+
+    // Lấy sản phẩm có giảm giá
+    public List<Product> getDiscountProducts(int limit) {
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
+                     "FROM products " +
+                     "WHERE status = 1 AND sale_price > 0 AND sale_price < price " +
+                     "ORDER BY (price - sale_price) / price DESC " +
+                     "LIMIT ?";
+        
+        return DBContext.get().withHandle(handle ->
+            handle.createQuery(sql)
+                .bind(0, limit)
+                .mapToBean(Product.class)
+                .list()
+        );
+    }
+
     // Thống kê: Đếm tổng số sản phẩm
     public int countTotalProducts() {
         return DBContext.get().withHandle(handle ->

@@ -1,13 +1,14 @@
 package controller;
 
 import dal.UserDAO;
+import util.PasswordUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
-// ... các import giữ nguyên
+
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
 public class RegisterServlet extends HttpServlet {
     @Override
@@ -22,24 +23,34 @@ public class RegisterServlet extends HttpServlet {
         // Validate input
         if (fullname == null || fullname.trim().isEmpty()) {
             request.setAttribute("registerError", "Tên đăng nhập không được để trống!");
+            request.setAttribute("regFullname", fullname);
+            request.setAttribute("regEmail", email);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
 
         if (email == null || email.trim().isEmpty()) {
             request.setAttribute("registerError", "Email không được để trống!");
+            request.setAttribute("regFullname", fullname);
+            request.setAttribute("regEmail", email);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
 
-        if (pass == null || pass.length() < 6) {
-            request.setAttribute("registerError", "Mật khẩu phải có ít nhất 6 ký tự!");
+        // Validate mật khẩu theo yêu cầu mới
+        String passwordError = PasswordUtils.getPasswordValidationMessage(pass);
+        if (passwordError != null) {
+            request.setAttribute("registerError", passwordError);
+            request.setAttribute("regFullname", fullname);
+            request.setAttribute("regEmail", email);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
 
         if (!pass.equals(re_pass)) {
             request.setAttribute("registerError", "Mật khẩu xác nhận không khớp!");
+            request.setAttribute("regFullname", fullname);
+            request.setAttribute("regEmail", email);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         }
@@ -48,10 +59,14 @@ public class RegisterServlet extends HttpServlet {
         // Kiểm tra email đã tồn tại chưa
         if (dao.checkExist(email)) {
             request.setAttribute("registerError", "Email này đã được sử dụng!");
+            request.setAttribute("regFullname", fullname);
+            request.setAttribute("regEmail", email);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
         } else {
-            dao.signup(fullname, email, pass);
+            // Mã hóa mật khẩu trước khi lưu
+            String hashedPassword = PasswordUtils.hashMD5(pass);
+            dao.signup(fullname, email, hashedPassword);
             request.setAttribute("registerSuccess", "Đăng ký thành công! Vui lòng đăng nhập.");
             request.getRequestDispatcher("login.jsp").forward(request, response);
         }

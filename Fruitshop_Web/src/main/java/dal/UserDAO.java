@@ -61,7 +61,7 @@ public class UserDAO {
     // 1. HÀM CẬP NHẬT THÔNG TIN CÁ NHÂN (Bảng users)
     // Chỉ update những cột có trong bảng users
     public void updateProfile(User user) {
-        String query = "UPDATE users SET fullname = ?, phone = ?, gender = ?, birthdate = ? WHERE id = ?";
+        String query = "UPDATE users SET fullname = ?, phone = ?, gender = ?, birthdate = ?, avatar = ? WHERE id = ?";
 
         DBContext.get().useHandle(handle ->
                 handle.createUpdate(query)
@@ -69,7 +69,8 @@ public class UserDAO {
                         .bind(1, user.getPhone())
                         .bind(2, user.getGender())
                         .bind(3, user.getBirthDate())
-                        .bind(4, user.getId())
+                        .bind(4, user.getAvatar())
+                        .bind(5, user.getId())
                         .execute()
         );
     }
@@ -132,7 +133,83 @@ public class UserDAO {
         );
     }
 
-    // 1. Lấy danh sách tất cả người dùng
+    // 5.1. Cập nhật mật khẩu theo email (dùng cho reset password)
+    public void updatePasswordByEmail(String email, String newPassword) {
+        String query = "UPDATE users SET password = ? WHERE email = ?";
+
+        DBContext.get().useHandle(handle ->
+                handle.createUpdate(query)
+                        .bind(0, newPassword)
+                        .bind(1, email)
+                        .execute()
+        );
+    }
+
+    // 6. Lấy user theo email (cho Google Login)
+    public User getUserByEmail(String email) {
+        String query = "SELECT id, fullname, email, password, phone, role, avatar, gender, birthdate, status, login_type, social_id, created_at " +
+                "FROM users WHERE email = ?";
+
+        return DBContext.get().withHandle(handle ->
+                        handle.createQuery(query)
+                                .bind(0, email)
+                                .map((rs, ctx) -> {
+                                    User user = new User();
+                                    user.setId(rs.getInt("id"));
+                                    user.setFullName(rs.getString("fullname"));
+                                    user.setEmail(rs.getString("email"));
+                                    user.setPassword(rs.getString("password"));
+                                    user.setPhone(rs.getString("phone"));
+                                    user.setRole(rs.getInt("role"));
+                                    user.setAvatar(rs.getString("avatar"));
+                                    user.setGender(rs.getString("gender"));
+                                    user.setBirthDate(rs.getDate("birthdate"));
+                                    user.setStatus(rs.getInt("status"));
+                                    user.setLoginType(rs.getString("login_type"));
+                                    user.setSocialId(rs.getString("social_id"));
+                                    user.setCreatedAt(rs.getTimestamp("created_at"));
+                                    return user;
+                                })
+                                .findFirst()
+                                .orElse(null)
+        );
+    }
+
+    // 7. Insert user mới (cho Google Login)
+    public void insertUser(User user) {
+        String sql = "INSERT INTO users (fullname, email, password, avatar, login_type, social_id, role, status, created_at) " +
+                "VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)";
+
+        DBContext.get().useHandle(handle ->
+                handle.createUpdate(sql)
+                        .bind(0, user.getFullName())
+                        .bind(1, user.getEmail())
+                        .bind(2, user.getPassword())
+                        .bind(3, user.getAvatar())
+                        .bind(4, user.getLoginType())
+                        .bind(5, user.getSocialId())
+                        .bind(6, user.getRole())
+                        .bind(7, user.getStatus())
+                        .bind(8, user.getCreatedAt())
+                        .execute()
+        );
+    }
+
+    // 8. Update login type và social ID (khi merge account)
+    public void updateSocialInfo(User user) {
+        String query = "UPDATE users SET login_type = ?, social_id = ?, avatar = ? WHERE id = ?";
+
+        DBContext.get().useHandle(handle ->
+                handle.createUpdate(query)
+                        .bind(0, user.getLoginType())
+                        .bind(1, user.getSocialId())
+                        .bind(2, user.getAvatar())
+                        .bind(3, user.getId())
+                        .execute()
+        );
+    }
+
+    // 9. Lấy danh sách tất cả người dùng
     public List<User> getAllUsers() {
         return DBContext.get().withHandle(handle ->
                 handle.createQuery("SELECT * FROM users ORDER BY id DESC")
@@ -141,7 +218,7 @@ public class UserDAO {
         );
     }
 
-    // 2. Cập nhật Role và Status (Cho chức năng Phân quyền/Chặn)
+    // 10. Cập nhật Role và Status (Cho chức năng Phân quyền/Chặn)
     public boolean updateUserStatusAndRole(int userId, int role, String status) {
         String sql = "UPDATE users SET role = :role, status = :status WHERE id = :userId";
         int rows = DBContext.get().withHandle(handle ->
@@ -154,7 +231,7 @@ public class UserDAO {
         return rows > 0;
     }
 
-    // 3. Lấy User theo ID (Để hiện trang chi tiết)
+    // 11. Lấy User theo ID (Để hiện trang chi tiết)
     public User getUserById(int id) {
         return DBContext.get().withHandle(handle ->
                 handle.createQuery("SELECT * FROM users WHERE id = :id")
@@ -165,10 +242,12 @@ public class UserDAO {
         );
     }
 
-    // Thống kê: Đếm tổng số thành viên
+    // 12. Thống kê: Đếm tổng số thành viên
     public int countTotalUsers() {
         return DBContext.get().withHandle(handle ->
-                handle.createQuery("SELECT COUNT(*) FROM users").mapTo(Integer.class).one()
+                handle.createQuery("SELECT COUNT(*) FROM users")
+                        .mapTo(Integer.class)
+                        .one()
         );
     }
 }

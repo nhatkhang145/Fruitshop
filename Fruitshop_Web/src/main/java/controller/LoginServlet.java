@@ -2,6 +2,7 @@ package controller;
 
 import dal.UserDAO;
 import model.User;
+import util.PasswordUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -20,8 +21,11 @@ public class LoginServlet extends HttpServlet {
         String email = request.getParameter("user");
         String pass = request.getParameter("pass");
 
+        // Mã hóa mật khẩu để so sánh với database
+        String hashedPassword = PasswordUtils.hashMD5(pass);
+
         UserDAO dao = new UserDAO();
-        User account = dao.checkLogin(email, pass);
+        User account = dao.checkLogin(email, hashedPassword);
 
        // ... Các đoạn code trên giữ nguyên ...
 
@@ -32,14 +36,17 @@ if (account == null) {
     HttpSession session = request.getSession();
     session.setAttribute("account", account);
     
-    // --- ĐOẠN CODE CẦN SỬA LÀ ĐÂY ---
+    // Load số lượng wishlist từ database vào session
+    dal.WishlistDAO wishlistDAO = new dal.WishlistDAO();
+    int wishlistCount = wishlistDAO.countWishlist(account.getId());
+    session.setAttribute("wishlistCount", wishlistCount);
     
     // Kiểm tra quyền: Nếu Role = 1 (Admin) thì vào trang quản trị
     if (account.getRole() == 1) {
         response.sendRedirect("admin/index.jsp");
     } else {
         // Nếu là khách bình thường thì về trang chủ
-        response.sendRedirect("index.jsp");
+        response.sendRedirect(request.getContextPath() + "/");
     }
     
 

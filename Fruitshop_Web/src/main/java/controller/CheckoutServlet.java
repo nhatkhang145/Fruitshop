@@ -46,6 +46,14 @@ public class CheckoutServlet extends HttpServlet {
 
         // Lấy danh sách địa chỉ của user
         List<Address> addresses = addressDAO.getAddressesByUserId(user.getId());
+        
+        // Nếu không có địa chỉ → redirect đến trang addresses
+        if (addresses == null || addresses.isEmpty()) {
+            session.setAttribute("checkoutMessage", "Vui lòng thêm địa chỉ giao hàng trước khi thanh toán.");
+            resp.sendRedirect(req.getContextPath() + "/addresses");
+            return;
+        }
+        
         req.setAttribute("addresses", addresses);
         req.setAttribute("user", user);
 

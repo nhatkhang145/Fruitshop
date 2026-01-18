@@ -92,9 +92,10 @@
                             <div class="form-group">
                                 <label>Mật khẩu mới</label>
                                 <div class="password-input-wrapper">
-                                    <input type="password" name="new_pass" class="form-input" placeholder="Nhập mật khẩu mới" id="newPass" required minlength="6"/>
+                                    <input type="password" name="new_pass" class="form-input" placeholder="Nhập mật khẩu mới" id="newPass" required minlength="8"/>
                                     <i class="fa-regular fa-eye-slash toggle-password" toggle="#newPass"></i>
                                 </div>
+                                
                             </div>
 
                             <div class="form-group">
@@ -108,8 +109,8 @@
                             <div class="form-group">
                                 <label></label>
                                 <ul class="password-hints">
-                                    <li>Mật khẩu phải có ít nhất 6 ký tự</li>
-                                    <li>Nên bao gồm cả chữ và số để tăng bảo mật</li>
+            
+                                    <li> Tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt (!@#$%...)</li>
                                 </ul>
                             </div>
 

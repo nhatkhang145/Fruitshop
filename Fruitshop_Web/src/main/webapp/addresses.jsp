@@ -103,6 +103,12 @@
               </div>
 
               <!-- Thông báo -->
+              <c:if test="${not empty sessionScope.checkoutMessage}">
+                <div class="alert alert-success">
+                  ${sessionScope.checkoutMessage}
+                  <c:remove var="checkoutMessage" scope="session" />
+                </div>
+              </c:if>
               <c:if test="${not empty message}">
                 <div class="alert alert-success">${message}</div>
               </c:if>

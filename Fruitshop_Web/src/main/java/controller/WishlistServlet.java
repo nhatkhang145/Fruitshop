@@ -48,6 +48,15 @@ public class WishlistServlet extends HttpServlet {
 
                 int count = dao.countWishlist(user.getId());
                 session.setAttribute("wishlistCount", count);
+                
+                // Kiểm tra nếu là AJAX request
+                String ajaxHeader = request.getHeader("X-Requested-With");
+                if ("XMLHttpRequest".equals(ajaxHeader)) {
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("{\"success\": true, \"action\": \"added\", \"count\": " + count + "}");
+                    return;
+                }
             }
             // Quay lại trang trước đó (ví dụ đang ở Shop thì ở lại Shop)
             String referer = request.getHeader("Referer");
@@ -62,9 +71,19 @@ public class WishlistServlet extends HttpServlet {
 
                 int count = dao.countWishlist(user.getId());
                 session.setAttribute("wishlistCount", count);
+                
+                // Kiểm tra nếu là AJAX request
+                String ajaxHeader = request.getHeader("X-Requested-With");
+                if ("XMLHttpRequest".equals(ajaxHeader)) {
+                    response.setContentType("application/json");
+                    response.setCharacterEncoding("UTF-8");
+                    response.getWriter().write("{\"success\": true, \"action\": \"removed\", \"count\": " + count + "}");
+                    return;
+                }
             }
-            // Load lại trang wishlist
-            response.sendRedirect("wishlist");
+            // Quay lại trang trước đó
+            String referer = request.getHeader("Referer");
+            response.sendRedirect(referer != null ? referer : "shop");
         }
     }
 
