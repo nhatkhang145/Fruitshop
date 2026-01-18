@@ -51,7 +51,7 @@
                                               <c:forEach items="${listC}" var="sub">
                                                   <c:if test="${sub.parentId == c.id}">
                                                       <li>
-                                                          <a href="shop?cid=${sub.id}"
+                                                          <a href="shop?cid=${sub.id}&price=${priceTag}&sort=${sortTag}"
                                                              style="${tag == sub.id ? 'color: var(--primary-color); font-weight: bold;' : ''}">
                                                               ${sub.name}
                                                           </a>
@@ -86,13 +86,13 @@
                       </li>
 
                       <li class="category-item">
-                        <details>
-                          <summary>Mức giá</summary>
+                        <details open> <summary>Mức giá</summary>
                           <ul class="subcategory-list">
-                            <li><a href="#">Dưới 200.000đ/kg</a></li>
-                            <li><a href="#">200.000đ - 500.000đ/kg</a></li>
-                            <li><a href="#">500.000đ - 1.000.000đ/kg</a></li>
-                            <li><a href="#">Trên 1.000.000đ/kg</a></li>
+                            <li><a href="shop?cid=${cid}&price=0-200000&sort=${sortTag}" style="${priceTag == '0-200000' ? 'font-weight:bold; color:var(--primary-color)' : ''}">Dưới 200.000đ</a></li>
+                            <li><a href="shop?cid=${cid}&price=200000-500000&sort=${sortTag}" style="${priceTag == '200000-500000' ? 'font-weight:bold; color:var(--primary-color)' : ''}">200.000đ - 500.000đ</a></li>
+                            <li><a href="shop?cid=${cid}&price=500000-1000000&sort=${sortTag}" style="${priceTag == '500000-1000000' ? 'font-weight:bold; color:var(--primary-color)' : ''}">500.000đ - 1.000.000đ</a></li>
+                            <li><a href="shop?cid=${cid}&price=1000000-max&sort=${sortTag}" style="${priceTag == '1000000-max' ? 'font-weight:bold; color:var(--primary-color)' : ''}">Trên 1.000.000đ</a></li>
+                            <li><a href="shop?cid=${cid}&sort=${sortTag}" style="color: #999; font-size: 0.9rem;"><i class="fa-solid fa-xmark"></i> Xóa lọc giá</a></li>
                           </ul>
                         </details>
                       </li>

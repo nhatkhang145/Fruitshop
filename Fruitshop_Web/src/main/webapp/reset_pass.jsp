@@ -26,50 +26,30 @@
                 </div>
 
                 <div class="reset-body">
-                    <div class="reset-content-left">
-                        <p class="reset-instruction">Bạn muốn nhận mã để đặt lại mật khẩu bằng cách nào?</p>
+                    <div class="reset-content-left" style="width: 100%;">
+                        <c:if test="${not empty error}">
+                            <p style="color: red;">${error}</p>
+                        </c:if>
 
-                        <div class="reset-option">
-                            <input type="radio" id="opt-notify" name="recovery-method" checked class="reset-radio">
-                            <label for="opt-notify" class="reset-label-content">
-                                <span class="option-title">Gửi mã qua thông báo trên Organic Harvest</span>
-                                <span class="option-desc">Bạn đang đăng nhập trên một ứng dụng hoặc thiết bị khác. Nhận
-                                    thông báo kèm theo mã đăng nhập.</span>
-                            </label>
-                        </div>
+                        <form action="resetPassword" method="post">
+                            <h4 style="margin-bottom: 20px;">Tạo mật khẩu mới</h4>
 
-                        <div class="reset-option">
-                            <input type="radio" id="opt-sms" name="recovery-method" class="reset-radio">
-                            <label for="opt-sms" class="reset-label-content">
-                                <span class="option-title">Gửi mã qua SMS</span>
-                                <span class="option-desc">+*********25</span>
-                            </label>
-                        </div>
+                            <div class="reset-option">
+                                <label class="reset-label-content">Mật khẩu mới:</label>
+                                <input type="password" name="password" class="find-account-input" required style="width: 100%; margin-top: 5px;">
+                            </div>
 
-                        <div class="reset-option">
-                            <input type="radio" id="opt-password" name="recovery-method" class="reset-radio">
-                            <label for="opt-password" class="reset-label-content">
-                                <span class="option-title">Nhập mật khẩu để đăng nhập</span>
-                            </label>
-                        </div>
-                    </div>
+                            <div class="reset-option">
+                                <label class="reset-label-content">Nhập lại mật khẩu:</label>
+                                <input type="password" name="confirmPassword" class="find-account-input" required style="width: 100%; margin-top: 5px;">
+                            </div>
 
-                    <div class="reset-content-right">
-                        <div class="user-avatar-placeholder">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                        <div class="user-info-text">
-                            <span class="user-name">ThanhPhan</span>
-                            <span class="user-role">Người dùng</span>
-                        </div>
-                    </div>
-                </div>
-
-                <div class="find-account-footer reset-footer">
-                    <a href="#" class="cant-access-link">Bạn không truy cập được email và số điện thoại này nữa?</a>
-                    <div class="reset-actions">
-                        <a href="login.jsp" class="btn-action btn-cancel">Huỷ</a>
-                        <a href="OTP.jsp   " class="btn-action btn-search">Tiếp tục</a>
+                            <div class="find-account-footer reset-footer">
+                                <div class="reset-actions">
+                                    <button type="submit" class="btn-action btn-search">Hoàn tất</button>
+                                </div>
+                            </div>
+                        </form>
                     </div>
                 </div>
             </div>

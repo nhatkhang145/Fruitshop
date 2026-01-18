@@ -319,9 +319,193 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 // ----------------------------------------------
+// Xử lý button "Yêu thích"
+document.addEventListener('DOMContentLoaded', function() {
+    // Lấy tất cả button/link yêu thích
+    const wishlistButtons = document.querySelectorAll('.action-btn[href*="wishlist"]');
+    
+    wishlistButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const url = new URL(this.href);
+            const action = url.searchParams.get('action');
+            const productId = url.searchParams.get('pid');
+            
+            if (!productId) {
+                alert('Không tìm thấy ID sản phẩm');
+                return;
+            }
+            
+            const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+            const requestUrl = `${contextPath}/wishlist?action=${action}&pid=${productId}`;
+            
+            fetch(requestUrl, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // Cập nhật icon trái tim
+                    const icon = this.querySelector('i');
+                    if (data.action === 'added') {
+                        icon.className = 'fas fa-heart';
+                        icon.style.color = 'red';
+                        this.title = 'Bỏ yêu thích';
+                        // Cập nhật href để lần click sau sẽ remove
+                        url.searchParams.set('action', 'remove');
+                        this.href = url.toString();
+                        showNotification('Đã thêm vào danh sách yêu thích!', 'success');
+                    } else {
+                        icon.className = 'far fa-heart';
+                        icon.style.color = '';
+                        this.title = 'Thêm vào yêu thích';
+                        // Cập nhật href để lần click sau sẽ add
+                        url.searchParams.set('action', 'add');
+                        this.href = url.toString();
+                        showNotification('Đã bỏ khỏi danh sách yêu thích!', 'success');
+                    }
+                    
+                    // Cập nhật badge wishlist
+                    const wishlistBadge = document.querySelector('.wishlist-btn .badge');
+                    if (wishlistBadge) {
+                        wishlistBadge.textContent = data.count;
+                        wishlistBadge.style.animation = 'pulse 0.5s ease-in-out';
+                        setTimeout(() => {
+                            wishlistBadge.style.animation = '';
+                        }, 500);
+                    }
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Vui lòng đăng nhập để sử dụng chức năng này!', 'error');
+            });
+        });
+    });
+});
 
+// ----------------------------------------------
+// Xử lý button "Thêm vào giỏ hàng"
+document.addEventListener('DOMContentLoaded', function() {
+    // Lấy tất cả button "Thêm vào giỏ hàng"
+    const addToCartButtons = document.querySelectorAll('.add-to-cart-btn');
+    
+    addToCartButtons.forEach(button => {
+        button.addEventListener('click', function(e) {
+            e.preventDefault();
+            
+            const productId = this.getAttribute('data-id');
+            
+            if (!productId) {
+                alert('Không tìm thấy ID sản phẩm');
+                return;
+            }
+            
+            // Gửi request AJAX để thêm vào giỏ hàng
+            const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 2));
+            const url = `${contextPath}/add-to-cart?pid=${productId}&quantity=1`;
+            
+            fetch(url, {
+                method: 'GET',
+                headers: {
+                    'X-Requested-With': 'XMLHttpRequest'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Cập nhật badge giỏ hàng
+                    const cartBadge = document.querySelector('.cart-btn .badge');
+                    if (cartBadge) {
+                        const currentCount = parseInt(cartBadge.textContent) || 0;
+                        cartBadge.textContent = currentCount + 1;
+                        
+                        // Hiệu ứng animation
+                        cartBadge.style.animation = 'pulse 0.5s ease-in-out';
+                        setTimeout(() => {
+                            cartBadge.style.animation = '';
+                        }, 500);
+                    }
+                    
+                    // Hiển thị thông báo thành công
+                    showNotification('Đã thêm sản phẩm vào giỏ hàng!', 'success');
+                } else {
+                    showNotification('Có lỗi xảy ra, vui lòng thử lại!', 'error');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                showNotification('Có lỗi xảy ra, vui lòng thử lại!', 'error');
+            });
+        });
+    });
+});
 
- 
+// Hàm hiển thị thông báo
+function showNotification(message, type) {
+    // Tạo element thông báo
+    const notification = document.createElement('div');
+    notification.className = `notification notification-${type}`;
+    notification.textContent = message;
+    notification.style.cssText = `
+        position: fixed;
+        top: 80px;
+        right: 20px;
+        background: ${type === 'success' ? '#4CAF50' : '#f44336'};
+        color: white;
+        padding: 15px 25px;
+        border-radius: 5px;
+        box-shadow: 0 4px 6px rgba(0,0,0,0.2);
+        z-index: 9999;
+        animation: slideIn 0.3s ease-out;
+    `;
+    
+    document.body.appendChild(notification);
+    
+    // Tự động xóa sau 3 giây
+    setTimeout(() => {
+        notification.style.animation = 'slideOut 0.3s ease-out';
+        setTimeout(() => {
+            document.body.removeChild(notification);
+        }, 300);
+    }, 3000);
+}
 
-
-
+// Thêm CSS animation cho notification
+const style = document.createElement('style');
+style.textContent = `
+    @keyframes slideIn {
+        from {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+        to {
+            transform: translateX(0);
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOut {
+        from {
+            transform: translateX(0);
+            opacity: 1;
+        }
+        to {
+            transform: translateX(400px);
+            opacity: 0;
+        }
+    }
+    
+    @keyframes pulse {
+        0%, 100% {
+            transform: scale(1);
+        }
+        50% {
+            transform: scale(1.2);
+        }
+    }
+`;
+document.head.appendChild(style);

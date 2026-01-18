@@ -25,13 +25,19 @@
                     <h3>Tìm tài khoản của bạn</h3>
                 </div>
                 <div class="find-account-body">
-                    <p>Vui lòng nhập email hoặc số di động để tìm kiếm tài khoản của bạn.</p>
-                    <input type="text" class="find-account-input" value="tinthanhphan020805@gmail.com"
-                        placeholder="Email hoặc số điện thoại">
-                </div>
-                <div class="find-account-footer">
-                    <a href="login.jsp" class="btn-action btn-cancel">Hủy</a>
-                    <a href="reset_pass.jsp" class="btn-action btn-search">Tìm kiếm</a>
+                    <c:if test="${not empty error}">
+                        <p style="color: red; text-align: center;">${error}</p>
+                    </c:if>
+
+                    <form action="forgotPassword" method="post">
+                        <p>Vui lòng nhập email để tìm kiếm tài khoản của bạn.</p>
+                        <input type="email" name="email" class="find-account-input" placeholder="Email" required>
+
+                        <div class="find-account-footer">
+                            <a href="login.jsp" class="btn-action btn-cancel">Hủy</a>
+                            <button type="submit" class="btn-action btn-search">Tìm kiếm</button>
+                        </div>
+                    </form>
                 </div>
             </div>
         </div>

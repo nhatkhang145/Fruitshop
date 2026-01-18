@@ -133,6 +133,18 @@ public class UserDAO {
         );
     }
 
+    // 5.1. Cập nhật mật khẩu theo email (dùng cho reset password)
+    public void updatePasswordByEmail(String email, String newPassword) {
+        String query = "UPDATE users SET password = ? WHERE email = ?";
+
+        DBContext.get().useHandle(handle ->
+                handle.createUpdate(query)
+                        .bind(0, newPassword)
+                        .bind(1, email)
+                        .execute()
+        );
+    }
+
     // 6. Lấy user theo email (cho Google Login)
     public User getUserByEmail(String email) {
         String query = "SELECT id, fullname, email, password, phone, role, avatar, gender, birthdate, status, login_type, social_id, created_at " +

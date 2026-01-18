@@ -36,14 +36,17 @@ if (account == null) {
     HttpSession session = request.getSession();
     session.setAttribute("account", account);
     
-    // --- ĐOẠN CODE CẦN SỬA LÀ ĐÂY ---
+    // Load số lượng wishlist từ database vào session
+    dal.WishlistDAO wishlistDAO = new dal.WishlistDAO();
+    int wishlistCount = wishlistDAO.countWishlist(account.getId());
+    session.setAttribute("wishlistCount", wishlistCount);
     
     // Kiểm tra quyền: Nếu Role = 1 (Admin) thì vào trang quản trị
     if (account.getRole() == 1) {
         response.sendRedirect("admin/index.jsp");
     } else {
         // Nếu là khách bình thường thì về trang chủ
-        response.sendRedirect("index.jsp");
+        response.sendRedirect(request.getContextPath() + "/");
     }
     
 

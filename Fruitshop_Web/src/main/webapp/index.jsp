@@ -104,8 +104,9 @@
                               </c:if>
 
                               <div class="product-actions">
-                                <a href="${pageContext.request.contextPath}/wishlist?action=add&productId=${product.id}" class="action-btn" title="Thêm vào yêu thích">
-                                  <i class="far fa-heart"></i>
+                                <c:set var="isLiked" value="${likedIds.contains(product.id)}" />
+                                <a href="${pageContext.request.contextPath}/wishlist?action=${isLiked ? 'remove' : 'add'}&pid=${product.id}" class="action-btn" title="${isLiked ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}">
+                                  <i class="${isLiked ? 'fas fa-heart' : 'far fa-heart'}" style="${isLiked ? 'color: red;' : ''}"></i>
                                 </a>
                                 <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" title="Xem nhanh">
                                   <i class="far fa-eye"></i>
@@ -225,8 +226,9 @@
                             </c:if>
 
                             <div class="product-actions">
-                              <a href="${pageContext.request.contextPath}/wishlist?action=add&productId=${product.id}" class="action-btn" title="Thêm vào yêu thích">
-                                <i class="far fa-heart"></i>
+                              <c:set var="isLiked" value="${likedIds.contains(product.id)}" />
+                              <a href="${pageContext.request.contextPath}/wishlist?action=${isLiked ? 'remove' : 'add'}&pid=${product.id}" class="action-btn" title="${isLiked ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}">
+                                <i class="${isLiked ? 'fas fa-heart' : 'far fa-heart'}" style="${isLiked ? 'color: red;' : ''}"></i>
                               </a>
                               <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" title="Xem nhanh">
                                 <i class="far fa-eye"></i>

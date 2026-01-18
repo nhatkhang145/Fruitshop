@@ -80,6 +80,16 @@ public class AddToCartServlet extends HttpServlet {
             e.printStackTrace();
         }
 
+        // Kiểm tra nếu là AJAX request (từ JavaScript)
+        String ajaxHeader = request.getHeader("X-Requested-With");
+        if ("XMLHttpRequest".equals(ajaxHeader)) {
+            // Trả về response JSON cho AJAX
+            response.setContentType("application/json");
+            response.setCharacterEncoding("UTF-8");
+            response.getWriter().write("{\"success\": true, \"message\": \"Đã thêm vào giỏ hàng\"}");
+            return;
+        }
+        
         if ("buy".equals(action)) {
             // Nếu nhấn "Mua ngay" -> Chuyển thẳng đến trangcheckout
             response.sendRedirect("checkout.jsp");

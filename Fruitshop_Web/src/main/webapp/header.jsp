@@ -52,7 +52,7 @@
                 </div>
 
                 <ul class="main-nav-links subnav-links">
-                    <li><a href="${pageContext.request.contextPath}/index.jsp">Trang chủ</a></li>
+                    <li><a href="${pageContext.request.contextPath}/">Trang chủ</a></li>
                     <li><a href="${pageContext.request.contextPath}/shop">Sản Phẩm</a></li>
                     <li><a href="${pageContext.request.contextPath}/about.jsp">Giới thiệu</a></li>
                     <li><a href="${pageContext.request.contextPath}/blog.jsp">Bài viết</a></li>
@@ -75,7 +75,10 @@
                         </span>
                     </a>
                     <a href="${pageContext.request.contextPath}/cart.jsp" class="icon-btn cart-btn">
-                        <i class="fa-solid fa-basket-shopping"></i><span class="badge">0</span>
+                        <i class="fa-solid fa-basket-shopping"></i>
+                        <span class="badge">
+                            ${sessionScope.size != null ? sessionScope.size : 0}
+                        </span>
                     </a>
 
                     <div class="header__account">
