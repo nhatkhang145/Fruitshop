@@ -9,6 +9,9 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "ReportServlet", urlPatterns = {"/admin/reports"})
 public class ReportServlet extends HttpServlet {
@@ -31,7 +34,42 @@ public class ReportServlet extends HttpServlet {
         req.setAttribute("totalUsers", totalUsers);
         req.setAttribute("totalProducts", totalProducts);
 
-        // 3. Chuyển hướng
+        // 2. Xử lý dữ liệu cho BIỂU ĐỒ DOANH THU (Line/Bar Chart)
+        int currentYear = Calendar.getInstance().get(Calendar.YEAR);
+        List<Double> revenueList = orderDAO.getRevenueByMonth(currentYear);
+        // Chuyển List thành chuỗi JSON: [12000.0, 50000.0, ...]
+        req.setAttribute("chartRevenueData", listToString(revenueList));
+
+        // 3. Xử lý dữ liệu cho BIỂU ĐỒ DANH MỤC (Pie Chart)
+        Map<String, Double> categoryMap = orderDAO.getRevenueByCategory();
+        // Tách thành 2 mảng: Nhãn (Labels) và Dữ liệu (Data)
+        StringBuilder catLabels = new StringBuilder("[");
+        StringBuilder catData = new StringBuilder("[");
+
+        int i = 0;
+        for (Map.Entry<String, Double> entry : categoryMap.entrySet()) {
+            if (i > 0) { catLabels.append(","); catData.append(","); }
+            catLabels.append("'").append(entry.getKey()).append("'"); // Thêm dấu nháy cho chuỗi
+            catData.append(entry.getValue());
+            i++;
+        }
+        catLabels.append("]");
+        catData.append("]");
+
+        req.setAttribute("pieLabels", catLabels.toString());
+        req.setAttribute("pieData", catData.toString());
+
         req.getRequestDispatcher("/admin/reports.jsp").forward(req, resp);
+    }
+
+    // Hàm phụ trợ: Chuyển List<Double> thành chuỗi "[v1, v2, v3]"
+    private String listToString(List<Double> list) {
+        StringBuilder sb = new StringBuilder("[");
+        for (int i = 0; i < list.size(); i++) {
+            sb.append(list.get(i));
+            if (i < list.size() - 1) sb.append(",");
+        }
+        sb.append("]");
+        return sb.toString();
     }
 }

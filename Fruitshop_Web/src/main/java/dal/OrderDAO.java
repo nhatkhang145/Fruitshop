@@ -4,7 +4,10 @@ import model.Order;
 import model.OrderItem;
 import model.Product;
 
+import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class OrderDAO {
 
@@ -318,6 +321,58 @@ public class OrderDAO {
     public int countTotalOrders() {
         return DBContext.get().withHandle(handle ->
                 handle.createQuery("SELECT COUNT(*) FROM orders").mapTo(Integer.class).one()
+        );
+    }
+
+    public List<Double> getRevenueByMonth(int year) {
+        List<Double> list = new ArrayList<>();
+        // Khởi tạo mảng 12 số 0.0
+        for (int i = 0; i < 12; i++) list.add(0.0);
+
+        String sql = "SELECT MONTH(created_at) as month, SUM(final_amount) as total " +
+                "FROM orders " +
+                "WHERE status = 'completed' AND YEAR(created_at) = :year " +
+                "GROUP BY MONTH(created_at)";
+
+        DBContext.get().useHandle(handle -> {
+            handle.createQuery(sql)
+                    .bind("year", year)
+                    .map((rs, ctx) -> {
+                        int month = rs.getInt("month"); // Tháng 1-12
+                        double total = rs.getDouble("total");
+                        // Cập nhật vào list (index = month - 1)
+                        if (month >= 1 && month <= 12) {
+                            list.set(month - 1, total);
+                        }
+                        return null;
+                    }).list();
+        });
+        return list;
+    }
+
+    // 5. Thống kê: Lấy tổng doanh thu theo Danh mục (cho Biểu đồ tròn)
+    // Trả về Map: Key = Tên danh mục, Value = Tổng tiền
+    public java.util.Map<String, Double> getRevenueByCategory() {
+        String sql = "SELECT c.name, SUM(od.total) as revenue " +
+                "FROM order_details od " +
+                "JOIN products p ON od.product_id = p.id " +
+                "JOIN categories c ON p.category_id = c.id " +
+                "JOIN orders o ON od.order_id = o.id " +
+                "WHERE o.status = 'completed' " +
+                "GROUP BY c.name";
+
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .map((rs, ctx) -> new java.util.AbstractMap.SimpleEntry<>(
+                                rs.getString("name"),
+                                rs.getDouble("revenue")
+                        ))
+                        .list()
+                        .stream()
+                        .collect(java.util.stream.Collectors.toMap(
+                                java.util.Map.Entry::getKey,
+                                java.util.Map.Entry::getValue
+                        ))
         );
     }
 }
