@@ -12,26 +12,23 @@ import java.io.IOException;
 @WebServlet(name = "ResetPasswordServlet", urlPatterns = {"/resetPassword"})
 public class ResetPasswordServlet extends HttpServlet {
     protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-        String newPass = request.getParameter("password");
-        String confirmPass = request.getParameter("confirmPassword");
-
         HttpSession session = request.getSession();
-        String email = (String) session.getAttribute("email");
 
-        if (email == null) {
-            response.sendRedirect("forget_pass.jsp");
+        if (session.getAttribute("isVerified") == null || session.getAttribute("emailReset") == null) {
+            response.sendRedirect("login.jsp");
             return;
         }
+
+        String newPass = request.getParameter("password");
+        String confirmPass = request.getParameter("confirmPassword");
+        String email = (String) session.getAttribute("email");
 
         if (newPass.equals(confirmPass)) {
             UserDAO userDAO = new UserDAO();
             // Cập nhật mật khẩu mới vào DB
             userDAO.updatePasswordByEmail(email, newPass);
 
-            // Xóa session OTP để bảo mật
-            session.removeAttribute("otp");
-            session.removeAttribute("email");
-
+            session.invalidate();
             // Chuyển về trang login
             request.setAttribute("mess", "Đặt lại mật khẩu thành công! Vui lòng đăng nhập.");
             request.getRequestDispatcher("login.jsp").forward(request, response);

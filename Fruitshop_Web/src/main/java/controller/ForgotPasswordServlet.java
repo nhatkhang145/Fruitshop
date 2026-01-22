@@ -2,7 +2,7 @@ package controller;
 
 import dal.UserDAO;
 import model.User;
-import utils.EmailUtils;
+import util.EmailUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -30,8 +30,8 @@ public class ForgotPasswordServlet extends HttpServlet {
             if (isSent) {
                 HttpSession session = request.getSession();
                 session.setAttribute("otp", otp);
-                session.setAttribute("email", email);
-                session.setAttribute("otpCreationTime", System.currentTimeMillis());
+                session.setAttribute("emailReset", email);
+                session.setMaxInactiveInterval(300);
 
                 // Chuyển sang trang nhập OTP
                 response.sendRedirect("OTP.jsp");
