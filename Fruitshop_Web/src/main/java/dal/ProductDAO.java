@@ -99,8 +99,6 @@ public class ProductDAO {
     }
 
     // 8. Xóa sản phẩm (Delete)
-    // Lưu ý: Nếu bạn muốn xóa mềm (ẩn đi) thì đổi câu lệnh thành UPDATE products SET status = 0 WHERE id = ?
-    // Ở đây mình viết xóa cứng theo cơ bản trước.
     public int delete(int id) {
         String sql = "DELETE FROM products WHERE id = ?";
 
@@ -267,6 +265,47 @@ public class ProductDAO {
     public int countTotalProducts() {
         return DBContext.get().withHandle(handle ->
                 handle.createQuery("SELECT COUNT(*) FROM products").mapTo(Integer.class).one()
+        );
+    }
+
+    public List<Product> getProductsWithSort(String sortType) {
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT p.* FROM products p ");
+
+        // lọc theo bán chạy
+        if ("best_sell".equals(sortType)) {
+            sql.append("LEFT JOIN order_details od ON p.id = od.product_id ");
+            sql.append("GROUP BY p.id ");
+            sql.append("ORDER BY SUM(od.quantity) DESC");
+        } else {
+            // Các trường hợp sắp xếp khác
+            switch (sortType) {
+                case "new":
+                    sql.append("ORDER BY p.created_at DESC"); // Mới nhất (dựa vào ngày tạo)
+                    break;
+                case "old":
+                    sql.append("ORDER BY p.created_at ASC");  // Cũ nhất
+                    break;
+                case "popular":
+                    sql.append("ORDER BY p.views DESC");      // Phổ biến (dựa vào views)
+                    break;
+                case "price_asc":
+                    // Ưu tiên sắp xếp theo giá khuyến mãi nếu có, không thì giá gốc
+                    sql.append("ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) ASC");
+                    break;
+                case "price_desc":
+                    sql.append("ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) DESC");
+                    break;
+                default:
+                    sql.append("ORDER BY p.id DESC");
+                    break;
+            }
+        }
+
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql.toString())
+                        .mapToBean(Product.class)
+                        .list()
         );
     }
 }
