@@ -111,10 +111,18 @@ public class ProductDAO {
 
     // Đếm tổng số sản phẩm sau khi lọc
     public int countProductsByFilter(Integer cid, Double minPrice, Double maxPrice) {
-        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM products WHERE status = 1 ");
-        if (cid != null) sql.append(" AND category_id = :cid ");
-        if (minPrice != null) sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) >= :min ");
-        if (maxPrice != null) sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) <= :max ");
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM products p WHERE p.status = 1 ");
+
+        if (cid != null) {
+            sql.append(" AND p.category_id = :cid ");
+        }
+        // Logic giá: Nếu có giá Sale thì so sánh giá Sale, không thì so sánh giá gốc
+        if (minPrice != null) {
+            sql.append(" AND COALESCE(NULLIF(p.sale_price, 0), p.price) >= :min ");
+        }
+        if (maxPrice != null) {
+            sql.append(" AND COALESCE(NULLIF(p.sale_price, 0), p.price) <= :max ");
+        }
 
         return DBContext.get().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
@@ -127,54 +135,88 @@ public class ProductDAO {
 
     // Lọc sản phẩm
     public List<Product> filterProducts(Integer cid, Double minPrice, Double maxPrice, String sortType, int index) {
-        StringBuilder sql = new StringBuilder("SELECT id, name, product_code AS productCode, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId, status FROM products WHERE status = 1 ");
+        StringBuilder sql = new StringBuilder();
 
-        // Các điều kiện lọc
-        if (cid != null) sql.append(" AND category_id = :cid ");
-        if (minPrice != null) sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) >= :min ");
-        if (maxPrice != null) sql.append(" AND (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) <= :max ");
+        // 1. SELECT CƠ BẢN
+        sql.append("SELECT p.id, p.name, p.product_code AS productCode, p.price, ")
+                .append("p.sale_price AS salePrice, p.quantity, p.short_description AS description, ")
+                .append("p.image, p.category_id AS categoryId, p.status, p.created_at, p.views ") // Thêm created_at, views để sort
+                .append("FROM products p ");
 
-        // Sắp xếp
-        if (sortType != null) {
-            switch (sortType) {
-                case "price_asc": sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) ASC "); break;
-                case "price_desc": sql.append(" ORDER BY (CASE WHEN sale_price > 0 AND sale_price < price THEN sale_price ELSE price END) DESC "); break;
-                case "name_asc": sql.append(" ORDER BY name ASC "); break;
-                default: sql.append(" ORDER BY id DESC "); break;
-            }
-        } else {
-            sql.append(" ORDER BY id DESC ");
+        // 2. JOIN NẾU CẦN (Cho chức năng Bán chạy)
+        if ("best_sell".equals(sortType)) {
+            sql.append("LEFT JOIN order_details od ON p.id = od.product_id ");
         }
 
-        // Phân trang (Mỗi trang 6 sản phẩm)
+        // 3. ĐIỀU KIỆN LỌC (WHERE)
+        sql.append("WHERE p.status = 1 "); // Chỉ lấy sản phẩm đang hoạt động
+
+        if (cid != null) {
+            sql.append(" AND p.category_id = :cid ");
+        }
+
+        // Lọc theo Giá thực tế (Ưu tiên giá Sale)
+        if (minPrice != null) {
+            sql.append(" AND COALESCE(NULLIF(p.sale_price, 0), p.price) >= :min ");
+        }
+        if (maxPrice != null) {
+            sql.append(" AND COALESCE(NULLIF(p.sale_price, 0), p.price) <= :max ");
+        }
+
+        // 4. GOM NHÓM (GROUP BY) - Bắt buộc nếu có JOIN
+        if ("best_sell".equals(sortType)) {
+            sql.append(" GROUP BY p.id, p.name, p.product_code, p.price, p.sale_price, p.quantity, p.short_description, p.image, p.category_id, p.status, p.created_at, p.views ");
+        }
+
+        // 5. SẮP XẾP (ORDER BY) - Đầy đủ các trường hợp
+        if (sortType != null) {
+            switch (sortType) {
+                case "best_sell":
+                    sql.append(" ORDER BY SUM(od.quantity) DESC "); // Tổng số lượng bán giảm dần
+                    break;
+                case "new":
+                    sql.append(" ORDER BY p.created_at DESC ");     // Mới nhất
+                    break;
+                case "old":
+                    sql.append(" ORDER BY p.created_at ASC ");      // Cũ nhất
+                    break;
+                case "popular":
+                    sql.append(" ORDER BY p.views DESC ");          // Xem nhiều nhất
+                    break;
+                case "price_asc":
+                    sql.append(" ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) ASC ");
+                    break;
+                case "price_desc":
+                    sql.append(" ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) DESC ");
+                    break;
+                case "name_asc":
+                    sql.append(" ORDER BY p.name ASC ");
+                    break;
+                default:
+                    sql.append(" ORDER BY p.id DESC "); // Mặc định
+                    break;
+            }
+        } else {
+            sql.append(" ORDER BY p.id DESC ");
+        }
+
+        // 6. PHÂN TRANG (LIMIT OFFSET)
         sql.append(" LIMIT 6 OFFSET :offset ");
 
+        // 7. THỰC THI
         return DBContext.get().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
+
             if (cid != null) query.bind("cid", cid);
             if (minPrice != null) query.bind("min", minPrice);
             if (maxPrice != null) query.bind("max", maxPrice);
+
             query.bind("offset", (index - 1) * 6);
 
             return query.mapToBean(Product.class).list();
         });
     }
-    // Main test
-    public static void main(String[] args) {
-        ProductDAO dao = new ProductDAO();
-        List<Product> list = dao.getAllProducts();
 
-        System.out.println("----- TEST LIST PRODUCTS -----");
-        System.out.println("Tổng số lượng tìm thấy: " + list.size());
-
-        if (list.isEmpty()) {
-            System.out.println("Lỗi: Không lấy được dữ liệu!");
-        } else {
-            for (Product p : list) {
-                System.out.println("ID: " + p.getId() + " | Tên: " + p.getName() + " | Giá: " + p.getPrice());
-            }
-        }
-    }
 
     // Tìm kiếm sản phẩm theo từ khóa và danh mục
     public List<Product> searchProducts(String keyword, String category) {
@@ -265,47 +307,6 @@ public class ProductDAO {
     public int countTotalProducts() {
         return DBContext.get().withHandle(handle ->
                 handle.createQuery("SELECT COUNT(*) FROM products").mapTo(Integer.class).one()
-        );
-    }
-
-    public List<Product> getProductsWithSort(String sortType) {
-        StringBuilder sql = new StringBuilder();
-        sql.append("SELECT p.* FROM products p ");
-
-        // lọc theo bán chạy
-        if ("best_sell".equals(sortType)) {
-            sql.append("LEFT JOIN order_details od ON p.id = od.product_id ");
-            sql.append("GROUP BY p.id ");
-            sql.append("ORDER BY SUM(od.quantity) DESC");
-        } else {
-            // Các trường hợp sắp xếp khác
-            switch (sortType) {
-                case "new":
-                    sql.append("ORDER BY p.created_at DESC"); // Mới nhất (dựa vào ngày tạo)
-                    break;
-                case "old":
-                    sql.append("ORDER BY p.created_at ASC");  // Cũ nhất
-                    break;
-                case "popular":
-                    sql.append("ORDER BY p.views DESC");      // Phổ biến (dựa vào views)
-                    break;
-                case "price_asc":
-                    // Ưu tiên sắp xếp theo giá khuyến mãi nếu có, không thì giá gốc
-                    sql.append("ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) ASC");
-                    break;
-                case "price_desc":
-                    sql.append("ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) DESC");
-                    break;
-                default:
-                    sql.append("ORDER BY p.id DESC");
-                    break;
-            }
-        }
-
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(sql.toString())
-                        .mapToBean(Product.class)
-                        .list()
         );
     }
 }
