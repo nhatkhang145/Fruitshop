@@ -73,8 +73,6 @@
                       Bộ Lọc Tìm Kiếm
                     </h3>
                     <ul class="category-list">
-
-
                       <li class="category-item">
                         <details open> <summary>Mức giá</summary>
                           <ul class="subcategory-list">
@@ -100,43 +98,42 @@
                     </div>
                   </c:if>
                   
-                  <div class="sort-filter">
-                    <span class="sort-filter__label">Sắp xếp theo </span>
-                    <button class="sort-filter__btn btn">Phổ biến</button>
-                    <button class="sort-filter__btn btn btn--primary">
-                      Mới nhất
-                    </button>
-                    <button class="sort-filter__btn btn">Bán chạy</button>
+                  <div class="sort-filter" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 22px; border-radius: 2px; background-color: rgba(0, 0, 0, 0.03);">
+                      <div style="display: flex; align-items: center;">
+                          <span class="sort-filter__label" style="margin-right: 15px;">Sắp xếp theo:</span>
 
-                    <div class="select-cost">
-                      <span class="select-cost__label">Giá</span>
-                      <i class="select-cost__icon fa-solid fa-arrow-down"></i>
+                          <form action="shop" method="get" id="sortForm">
 
-                      <ul class="select-cost__list">
-                        <li class="select-cost__item">
-                          <a href="" class="select-cost__link">Giá: từ thấp đến cao</a>
-                        </li>
-                        <li class="select-cost__item">
-                          <a href="" class="select-cost__link">Giá: từ cao đến thấp</a>
-                        </li>
-                      </ul>
-                    </div>
+                              <c:if test="${not empty param.cid}">
+                                  <input type="hidden" name="cid" value="${param.cid}">
+                              </c:if>
+                              <c:if test="${not empty param.q}">
+                                  <input type="hidden" name="q" value="${param.q}">
+                              </c:if>
+                              <c:if test="${not empty priceTag}">
+                                  <input type="hidden" name="price" value="${priceTag}">
+                              </c:if>
 
-                    <div class="sort-filter__page">
-                      <span class="sort-filter__page-num"></span>
-                      <span class="sort-filter__page-current">1</span>
-                      <span class="sort-filter__page-total">/14 </span>
+                              <select name="sort" onchange="this.form.submit()"
+                                      style="height: 34px; padding: 0 12px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); background-color: #fff; min-width: 200px; cursor: pointer;">
 
-                      <div class="sort-filter__page-control">
-                        <a href="" class="sort-filter__page-btn sort-filter__page-btn--disabled">
-                          <i class="sort-filter__page-icon fa-solid fa-arrow-left"></i>
-                        </a>
-                        <a href="" class="sort-filter__page-btn">
-                          <i class="sort-filter__page-icon fa-solid fa-arrow-right"></i>
-                        </a>
+                                  <option value="new" ${sortTag == 'new' ? 'selected' : ''}>Mới nhất</option>
+                                  <option value="best_sell" ${sortTag == 'best_sell' ? 'selected' : ''}>Bán chạy nhất</option>
+                                  <option value="popular" ${sortTag == 'popular' ? 'selected' : ''}>Phổ biến (Lượt xem)</option>
+                                  <option value="price_asc" ${sortTag == 'price_asc' ? 'selected' : ''}>Giá: Thấp đến Cao</option>
+                                  <option value="price_desc" ${sortTag == 'price_desc' ? 'selected' : ''}>Giá: Cao đến Thấp</option>
+                                  <option value="old" ${sortTag == 'old' ? 'selected' : ''}>Cũ nhất</option>
+
+                              </select>
+                          </form>
                       </div>
-                    </div>
+
+                      <div class="sort-filter__page">
+                          <span class="sort-filter__page-current" style="color: var(--primary-color)">${tag != null ? tag : 1}</span>
+                          <span class="sort-filter__page-total">/${endP}</span>
+                      </div>
                   </div>
+
                   <!-- Product item -->
                   <div class="home-product">
                     <div class="grid__row">
