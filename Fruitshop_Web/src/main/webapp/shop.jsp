@@ -73,17 +73,7 @@
                       Bộ Lọc Tìm Kiếm
                     </h3>
                     <ul class="category-list">
-                      <li class="category-item">
-                        <details open>
-                          <summary>Quốc Gia</summary>
-                          <ul class="subcategory-list">
-                            <li><a href="#">Mỹ</a></li>
-                            <li><a href="#">Úc</a></li>
-                            <li><a href="#">Hàn Quốc</a></li>
-                            <li><a href="#">New Zealand</a></li>
-                          </ul>
-                        </details>
-                      </li>
+
 
                       <li class="category-item">
                         <details open> <summary>Mức giá</summary>

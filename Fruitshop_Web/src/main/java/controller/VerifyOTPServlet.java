@@ -17,7 +17,10 @@ public class VerifyOTPServlet extends HttpServlet {
 
         // Kiểm tra OTP
         if (sessionOTP != null && sessionOTP.equals(enteredOTP)) {
-            // OTP đúng -> Chuyển sang trang đổi mật khẩu
+            // Xóa OTP để không dùng được nữa
+            session.removeAttribute("otp");
+
+            session.setAttribute("isVerified", true);
             response.sendRedirect("reset_pass.jsp");
         } else {
             request.setAttribute("error", "Mã xác thực không đúng!");
