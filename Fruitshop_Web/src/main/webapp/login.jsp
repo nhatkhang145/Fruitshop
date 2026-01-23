@@ -51,10 +51,12 @@
                 <div id="loginPanel" class="fm-panel" role="tabpanel" aria-labelledby="tab-login">
                   <form action="login" method="post">
 
-                    <c:if test="${not empty registerSuccess}">
-                      <div class="fm-message success" style="color: green; text-align: center; margin-bottom: 10px;">
-                        ${registerSuccess}
+                    <c:if test="${not empty sessionScope.registerSuccess}">
+                      <div class="fm-message success" style="background: #d4edda; color: #155724; padding: 12px; border-radius: 5px; margin-bottom: 15px; border-left: 4px solid #28a745; display: flex; align-items: center; gap: 10px;">
+                        <i class="fas fa-check-circle" style="font-size: 20px;"></i>
+                        <span>${sessionScope.registerSuccess}</span>
                       </div>
+                      <% session.removeAttribute("registerSuccess"); %>
                     </c:if>
 
                     <c:if test="${not empty error}">
