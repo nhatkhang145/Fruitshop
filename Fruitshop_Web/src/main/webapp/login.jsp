@@ -68,7 +68,10 @@
                     </label>
 
                     <label class="fm-label">Mật khẩu
-                      <input name="pass" type="password" required placeholder="Vui lòng nhập mật khẩu" />
+                      <div class="password-input-wrapper">
+                        <input name="pass" type="password" id="loginPassword" required placeholder="Vui lòng nhập mật khẩu" />
+                        <i class="fas fa-eye toggle-password-icon" data-target="loginPassword"></i>
+                      </div>
                     </label>
 
                     <div class="fm-row">
@@ -122,14 +125,20 @@
                     </label>
 
                     <label class="fm-label">Mật khẩu
-                      <input name="pass" type="password" required minlength="8" placeholder="Mật khẩu" />
+                      <div class="password-input-wrapper">
+                        <input name="pass" type="password" id="registerPassword" required minlength="8" placeholder="Mật khẩu" />
+                        <i class="fas fa-eye toggle-password-icon" data-target="registerPassword"></i>
+                      </div>
                       <small style="color: #666; font-size: 12px; display: block; margin-top: 5px;">
                         Tối thiểu 8 ký tự, bao gồm chữ hoa, chữ thường, số và ký tự đặc biệt (!@#$%...)
                       </small>
                     </label>
 
                     <label class="fm-label">Xác nhận mật khẩu
-                      <input name="re_pass" type="password" required placeholder="Xác nhận mật khẩu" />
+                      <div class="password-input-wrapper">
+                        <input name="re_pass" type="password" id="confirmPassword" required placeholder="Xác nhận mật khẩu" />
+                        <i class="fas fa-eye toggle-password-icon" data-target="confirmPassword"></i>
+                      </div>
                     </label>
 
                     <button type="submit" class="fm-btn">Tạo tài khoản</button>
@@ -143,7 +152,62 @@
             </section>
           </div>
         </main>
+        <style>
+          .password-input-wrapper {
+            position: relative;
+            display: inline-block;
+            width: 100%;
+          }
+          
+          .toggle-password-icon {
+            position: absolute;
+            right: 15px;
+            top: 50%;
+            transform: translateY(-50%);
+            cursor: pointer;
+            color: #999;
+            font-size: 16px;
+            transition: color 0.3s;
+          }
+          
+          .toggle-password-icon:hover {
+            color: var(--primary-brand-color);
+          }
+          
+          .password-input-wrapper input {
+            padding-right: 45px !important;
+          }
+          
+          /* Hide browser default password reveal button */
+          .password-input-wrapper input::-ms-reveal,
+          .password-input-wrapper input::-ms-clear {
+            display: none;
+          }
+          
+          .password-input-wrapper input::-webkit-credentials-auto-fill-button,
+          .password-input-wrapper input::-webkit-password-reveal-button {
+            display: none;
+          }
+        </style>
         <script>
+          // Toggle password visibility
+          document.querySelectorAll('.toggle-password-icon').forEach(icon => {
+            icon.addEventListener('click', function() {
+              const targetId = this.getAttribute('data-target');
+              const input = document.getElementById(targetId);
+              
+              if (input.type === 'password') {
+                input.type = 'text';
+                this.classList.remove('fa-eye');
+                this.classList.add('fa-eye-slash');
+              } else {
+                input.type = 'password';
+                this.classList.remove('fa-eye-slash');
+                this.classList.add('fa-eye');
+              }
+            });
+          });
+
           const loginTab = document.getElementById('tab-login');
           const registerTab = document.getElementById('tab-register');
           const loginPanel = document.getElementById('loginPanel');
