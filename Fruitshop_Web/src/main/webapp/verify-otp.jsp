@@ -5,9 +5,30 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Xác thực OTP - Đăng ký</title>
+    <c:choose>
+        <c:when test="${sessionScope.otpType == 'register'}">
+            <title>Xác thực OTP - Đăng ký</title>
+        </c:when>
+        <c:when test="${sessionScope.otpType == 'forgot-password'}">
+            <title>Xác thực OTP - Quên mật khẩu</title>
+        </c:when>
+        <c:otherwise>
+            <title>Xác thực OTP</title>
+        </c:otherwise>
+    </c:choose>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
+        :root {
+            --primary-color: #3d8b91;
+            --primary-brand-color: #2fb45a;
+            --secondary-brand-color: #ff6b6b;
+            --white-color: #fff;
+            --text-dark: #333;
+            --text-light: #666;
+            --bg-light: #f9f9f9;
+            --border-color: #ddd;
+        }
+
         * {
             margin: 0;
             padding: 0;
@@ -16,7 +37,7 @@
 
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, var(--primary-color) 0%, var(--primary-brand-color) 100%);
             min-height: 100vh;
             display: flex;
             justify-content: center;
@@ -25,7 +46,7 @@
         }
 
         .otp-container {
-            background: white;
+            background: var(--white-color);
             border-radius: 20px;
             box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
             padding: 50px 40px;
@@ -48,7 +69,7 @@
 
         .otp-icon {
             font-size: 80px;
-            color: #4CAF50;
+            color: var(--primary-brand-color);
             margin-bottom: 20px;
             animation: bounce 1s ease-in-out;
         }
@@ -59,13 +80,13 @@
         }
 
         h2 {
-            color: #333;
+            color: var(--text-dark);
             margin-bottom: 10px;
             font-size: 28px;
         }
 
         .subtitle {
-            color: #666;
+            color: var(--text-light);
             margin-bottom: 30px;
             font-size: 14px;
         }
@@ -75,12 +96,12 @@
             padding: 15px;
             border-radius: 10px;
             margin-bottom: 30px;
-            color: #333;
-            border: 2px solid #4CAF50;
+            color: var(--text-dark);
+            border: 2px solid var(--primary-brand-color);
         }
 
         .email-sent strong {
-            color: #4CAF50;
+            color: var(--primary-brand-color);
             word-break: break-all;
         }
 
@@ -97,57 +118,57 @@
             text-align: center;
             font-size: 24px;
             font-weight: bold;
-            border: 2px solid #ddd;
+            border: 2px solid var(--border-color);
             border-radius: 10px;
             transition: all 0.3s;
-            background: #f9f9f9;
+            background: var(--bg-light);
         }
 
         .otp-input:focus {
-            border-color: #4CAF50;
+            border-color: var(--primary-brand-color);
             outline: none;
             transform: scale(1.1);
-            background: white;
-            box-shadow: 0 0 10px rgba(76, 175, 80, 0.3);
+            background: var(--white-color);
+            box-shadow: 0 0 10px rgba(47, 180, 90, 0.3);
         }
 
         .error-message {
-            color: #f44336;
+            color: var(--secondary-brand-color);
             background: #ffebee;
             padding: 12px;
             border-radius: 8px;
             margin-bottom: 20px;
             font-size: 14px;
-            border-left: 4px solid #f44336;
+            border-left: 4px solid var(--secondary-brand-color);
         }
 
         .success-message {
-            color: #4CAF50;
+            color: var(--primary-brand-color);
             background: #e8f5e9;
             padding: 12px;
             border-radius: 8px;
             margin-bottom: 20px;
             font-size: 14px;
-            border-left: 4px solid #4CAF50;
+            border-left: 4px solid var(--primary-brand-color);
         }
 
         .btn-verify {
             width: 100%;
             padding: 15px;
-            background: linear-gradient(135deg, #4CAF50, #45a049);
-            color: white;
+            background: linear-gradient(135deg, var(--primary-brand-color), #27a04f);
+            color: var(--white-color);
             border: none;
             border-radius: 10px;
             font-size: 16px;
             font-weight: bold;
             cursor: pointer;
             transition: all 0.3s;
-            box-shadow: 0 4px 15px rgba(76, 175, 80, 0.3);
+            box-shadow: 0 4px 15px rgba(47, 180, 90, 0.3);
         }
 
         .btn-verify:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 25px rgba(76, 175, 80, 0.5);
+            box-shadow: 0 6px 25px rgba(47, 180, 90, 0.5);
         }
 
         .btn-verify:active {
@@ -156,12 +177,12 @@
 
         .resend-section {
             margin-top: 20px;
-            color: #666;
+            color: var(--text-light);
             font-size: 14px;
         }
 
         .resend-link {
-            color: #4CAF50;
+            color: var(--primary-brand-color);
             text-decoration: none;
             font-weight: bold;
             cursor: pointer;
@@ -170,11 +191,11 @@
 
         .resend-link:hover {
             text-decoration: underline;
-            color: #45a049;
+            color: #27a04f;
         }
 
         .timer {
-            color: #f44336;
+            color: var(--secondary-brand-color);
             font-weight: bold;
         }
 
@@ -185,7 +206,7 @@
         }
 
         .back-login a {
-            color: #667eea;
+            color: var(--primary-color);
             text-decoration: none;
             font-weight: 500;
             transition: color 0.3s;
@@ -193,7 +214,7 @@
 
         .back-login a:hover {
             text-decoration: underline;
-            color: #764ba2;
+            color: var(--primary-brand-color);
         }
 
         .loading {
@@ -203,7 +224,7 @@
 
         .spinner {
             border: 3px solid #f3f3f3;
-            border-top: 3px solid #4CAF50;
+            border-top: 3px solid var(--primary-brand-color);
             border-radius: 50%;
             width: 30px;
             height: 30px;
@@ -223,12 +244,39 @@
             <i class="fas fa-envelope-open-text"></i>
         </div>
         
-        <h2>Xác thực Email</h2>
-        <p class="subtitle">Vui lòng nhập mã OTP đã được gửi đến email của bạn</p>
+        <c:choose>
+            <c:when test="${sessionScope.otpType == 'register'}">
+                <h2>Xác thực Email</h2>
+                <p class="subtitle">Vui lòng nhập mã OTP để hoàn tất đăng ký tài khoản</p>
+            </c:when>
+            <c:when test="${sessionScope.otpType == 'forgot-password'}">
+                <h2>Xác thực Email</h2>
+                <p class="subtitle">Vui lòng nhập mã OTP để đặt lại mật khẩu</p>
+            </c:when>
+            <c:otherwise>
+                <h2>Xác thực Email</h2>
+                <p class="subtitle">Vui lòng nhập mã OTP đã được gửi đến email của bạn</p>
+            </c:otherwise>
+        </c:choose>
         
         <div class="email-sent">
             📧 Mã OTP đã được gửi đến: <br>
-            <strong>${sessionScope.registerEmail}</strong>
+            <strong>
+                <c:choose>
+                    <c:when test="${not empty sessionScope.otpEmail}">
+                        ${sessionScope.otpEmail}
+                    </c:when>
+                    <c:when test="${not empty sessionScope.registerEmail}">
+                        ${sessionScope.registerEmail}
+                    </c:when>
+                    <c:when test="${not empty sessionScope.emailReset}">
+                        ${sessionScope.emailReset}
+                    </c:when>
+                    <c:otherwise>
+                        Email của bạn
+                    </c:otherwise>
+                </c:choose>
+            </strong>
         </div>
 
         <c:if test="${not empty error}">
@@ -243,7 +291,18 @@
             </div>
         </c:if>
 
-        <form action="${pageContext.request.contextPath}/verify-register-otp" method="post" id="otpForm">
+        <c:choose>
+            <c:when test="${sessionScope.otpType == 'register'}">
+                <form action="${pageContext.request.contextPath}/verify-register-otp" method="post" id="otpForm">
+            </c:when>
+            <c:when test="${sessionScope.otpType == 'forgot-password'}">
+                <form action="${pageContext.request.contextPath}/verifyOTP" method="post" id="otpForm">
+            </c:when>
+            <c:otherwise>
+                <form action="${pageContext.request.contextPath}/verifyOTP" method="post" id="otpForm">
+            </c:otherwise>
+        </c:choose>
+        
             <div class="otp-inputs">
                 <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required autocomplete="off">
                 <input type="text" class="otp-input" maxlength="1" pattern="[0-9]" required autocomplete="off">
@@ -255,7 +314,17 @@
             <input type="hidden" name="otp" id="hiddenOTP">
             
             <button type="submit" class="btn-verify">
-                <i class="fas fa-check-circle"></i> Xác thực & Hoàn tất đăng ký
+                <c:choose>
+                    <c:when test="${sessionScope.otpType == 'register'}">
+                        <i class="fas fa-check-circle"></i> Xác thực & Hoàn tất đăng ký
+                    </c:when>
+                    <c:when test="${sessionScope.otpType == 'forgot-password'}">
+                        <i class="fas fa-check-circle"></i> Xác thực & Tiếp tục
+                    </c:when>
+                    <c:otherwise>
+                        <i class="fas fa-check-circle"></i> Xác thực OTP
+                    </c:otherwise>
+                </c:choose>
             </button>
 
             <div class="loading" id="loadingSpinner">
@@ -266,9 +335,23 @@
 
         <div class="resend-section">
             <p>Không nhận được mã? 
-                <a href="${pageContext.request.contextPath}/resend-register-otp" class="resend-link" id="resendLink">
-                    Gửi lại OTP
-                </a>
+                <c:choose>
+                    <c:when test="${sessionScope.otpType == 'register'}">
+                        <a href="${pageContext.request.contextPath}/resend-register-otp" class="resend-link" id="resendLink">
+                            Gửi lại OTP
+                        </a>
+                    </c:when>
+                    <c:when test="${sessionScope.otpType == 'forgot-password'}">
+                        <a href="${pageContext.request.contextPath}/forgotPassword" class="resend-link" id="resendLink">
+                            Gửi lại OTP
+                        </a>
+                    </c:when>
+                    <c:otherwise>
+                        <a href="#" class="resend-link" id="resendLink">
+                            Gửi lại OTP
+                        </a>
+                    </c:otherwise>
+                </c:choose>
                 <span id="timerSection" style="display: none;">
                     (<span class="timer" id="timer">60</span>s)
                 </span>
@@ -300,7 +383,9 @@
                     
                     // Tự động chuyển sang ô tiếp theo
                     if (index < inputs.length - 1) {
-                        inputs[index + 1].focus();
+                        setTimeout(() => {
+                            inputs[index + 1].focus();
+                        }, 10);
                     }
                 } else {
                     // Nếu không phải số, xóa trống
@@ -314,8 +399,10 @@
                     // Nếu ô hiện tại trống, quay lại ô trước
                     if (e.target.value === '' && index > 0) {
                         e.preventDefault();
-                        inputs[index - 1].focus();
-                        inputs[index - 1].value = '';
+                        setTimeout(() => {
+                            inputs[index - 1].focus();
+                            inputs[index - 1].value = '';
+                        }, 10);
                     }
                 }
                 
@@ -345,7 +432,9 @@
                 // Focus vào ô cuối cùng đã điền hoặc ô cuối
                 const lastIndex = Math.min(digits.length - 1, inputs.length - 1);
                 if (inputs[lastIndex]) {
-                    inputs[lastIndex].focus();
+                    setTimeout(() => {
+                        inputs[lastIndex].focus();
+                    }, 10);
                 }
             });
 

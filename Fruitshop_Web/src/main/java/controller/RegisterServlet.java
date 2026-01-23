@@ -70,30 +70,9 @@ public class RegisterServlet extends HttpServlet {
         // Generate OTP (6 số)
         String otp = String.format("%06d", (int)(Math.random() * 1000000));
         
-        // Gửi OTP qua email
+        // Gửi OTP qua email với template đồng bộ
         try {
-            String subject = "Xác thực đăng ký tài khoản - Fruitshop";
-            String body = "<!DOCTYPE html>" +
-                "<html><head><style>" +
-                "body { font-family: Arial, sans-serif; background-color: #f4f4f4; padding: 20px; }" +
-                ".container { max-width: 600px; margin: 0 auto; background: white; padding: 30px; border-radius: 10px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); }" +
-                ".header { text-align: center; color: #4CAF50; margin-bottom: 20px; }" +
-                ".otp-code { font-size: 36px; font-weight: bold; color: #4CAF50; text-align: center; " +
-                "           padding: 25px; background: #f0f0f0; border-radius: 8px; margin: 25px 0; letter-spacing: 8px; }" +
-                ".note { color: #666; font-size: 14px; margin-top: 20px; line-height: 1.6; }" +
-                ".footer { text-align: center; margin-top: 30px; padding-top: 20px; border-top: 1px solid #eee; color: #999; font-size: 12px; }" +
-                "</style></head><body>" +
-                "<div class='container'>" +
-                "  <h2 class='header'>🍎 Xác thực đăng ký tài khoản</h2>" +
-                "  <p>Xin chào <strong>" + fullname + "</strong>,</p>" +
-                "  <p>Cảm ơn bạn đã đăng ký tài khoản tại <strong>Organic Harvest</strong>. Vui lòng sử dụng mã OTP bên dưới để hoàn tất đăng ký:</p>" +
-                "  <div class='otp-code'>" + otp + "</div>" +
-                "  <p class='note'>⏰ Mã OTP có hiệu lực trong <strong>5 phút</strong>.</p>" +
-                "  <p class='note'>🔒 Nếu bạn không yêu cầu đăng ký, vui lòng bỏ qua email này.</p>" +
-                "  <div class='footer'>© 2026 Organic Harvest. All rights reserved.</div>" +
-                "</div></body></html>";
-            
-            EmailUtils.sendEmail(email, subject, body);
+            EmailUtils.sendOTPEmail(email, fullname, otp, "register");
             
         } catch (Exception e) {
             e.printStackTrace();
@@ -111,9 +90,11 @@ public class RegisterServlet extends HttpServlet {
         session.setAttribute("registerFullname", fullname);
         session.setAttribute("registerEmail", email);
         session.setAttribute("registerPassword", PasswordUtils.hashMD5(pass)); // Lưu đã hash
+        session.setAttribute("otpType", "register");
+        session.setAttribute("otpEmail", email);
 
-        // Redirect đến trang nhập OTP
-        response.sendRedirect("register-verify-otp.jsp");
+        // Redirect đến trang nhập OTP chung
+        response.sendRedirect("verify-otp.jsp");
     }
 
 }

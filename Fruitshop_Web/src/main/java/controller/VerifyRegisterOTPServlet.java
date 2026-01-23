@@ -37,14 +37,14 @@ public class VerifyRegisterOTPServlet extends HttpServlet {
         // 2. Kiểm tra OTP đã hết hạn chưa
         if (System.currentTimeMillis() > otpExpiry) {
             request.setAttribute("error", "Mã OTP đã hết hạn! Vui lòng yêu cầu gửi lại.");
-            request.getRequestDispatcher("register-verify-otp.jsp").forward(request, response);
+            request.getRequestDispatcher("verify-otp.jsp").forward(request, response);
             return;
         }
 
         // 3. Kiểm tra OTP có đúng không
         if (!inputOTP.equals(sessionOTP)) {
             request.setAttribute("error", "Mã OTP không chính xác! Vui lòng thử lại.");
-            request.getRequestDispatcher("register-verify-otp.jsp").forward(request, response);
+            request.getRequestDispatcher("verify-otp.jsp").forward(request, response);
             return;
         }
 
@@ -59,6 +59,8 @@ public class VerifyRegisterOTPServlet extends HttpServlet {
             session.removeAttribute("registerFullname");
             session.removeAttribute("registerEmail");
             session.removeAttribute("registerPassword");
+            session.removeAttribute("otpType");
+            session.removeAttribute("otpEmail");
 
             // 6. Hiển thị thông báo thành công và redirect về login
             session.setAttribute("registerSuccess", "✅ Đăng ký thành công! Vui lòng đăng nhập.");
@@ -67,7 +69,7 @@ public class VerifyRegisterOTPServlet extends HttpServlet {
         } catch (Exception e) {
             e.printStackTrace();
             request.setAttribute("error", "Đăng ký thất bại! Vui lòng thử lại.");
-            request.getRequestDispatcher("register-verify-otp.jsp").forward(request, response);
+            request.getRequestDispatcher("verify-otp.jsp").forward(request, response);
         }
     }
 }
