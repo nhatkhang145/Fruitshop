@@ -37,7 +37,8 @@ public class ProductDAO {
                 "       quantity, " +
                 "       short_description AS description, " +
                 "       image, " +
-                "       category_id AS categoryId " +
+                "       category_id AS categoryId, " +
+                "       status " +
                 "FROM products WHERE id = ?";        return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind(0, id)
@@ -75,8 +76,8 @@ public class ProductDAO {
 
     // 6. Thêm sản phẩm mới (Create)
     public int insert(Product p) {
-        String sql = "INSERT INTO products (name, price, sale_price, quantity, short_description, image, category_id) " +
-                "VALUES (:name, :price, :salePrice, :quantity, :description, :image, :categoryId)";
+        String sql = "INSERT INTO products (name, product_code, price, sale_price, quantity, short_description, image, category_id, status) " +
+                "VALUES (:name, :productCode, :price, :salePrice, :quantity, :description, :image, :categoryId, :status)";
 
         return DBContext.get().withHandle(handle ->
                 handle.createUpdate(sql)
@@ -87,8 +88,8 @@ public class ProductDAO {
 
     // 7. Cập nhật sản phẩm (Update)
     public int update(Product p) {
-        String sql = "UPDATE products SET name = :name, price = :price, sale_price = :salePrice, " +
-                "quantity = :quantity, short_description = :description, image = :image, category_id = :categoryId " +
+        String sql = "UPDATE products SET name = :name, product_code = :productCode, price = :price, sale_price = :salePrice, " +
+                "quantity = :quantity, short_description = :description, image = :image, category_id = :categoryId, status = :status " +
                 "WHERE id = :id";
 
         return DBContext.get().withHandle(handle ->

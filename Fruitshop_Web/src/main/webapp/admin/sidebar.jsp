@@ -12,40 +12,40 @@
             <a href="${pageContext.request.contextPath}/admin/index.jsp"><i class='bx bxs-dashboard'></i>Tổng quan</a>
         </li>
         <li class="${param.activePage == 'products' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/products.jsp"><i class='bx bx-basket'></i>Quản lý sản phẩm</a>
+            <a href="${pageContext.request.contextPath}/admin/products"><i class='bx bx-basket'></i>Quản lý sản phẩm</a>
         </li>
         <li class="${param.activePage == 'categories' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/Categories.jsp"><i class='bx bx-category'></i>Quản lý danh mục</a>
+            <a href="${pageContext.request.contextPath}/admin/categories"><i class='bx bx-category'></i>Quản lý danh mục</a>
         </li>
         <li class="${param.activePage == 'orders' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/orders.jsp"><i class='bx bx-receipt'></i>Quản lý đơn hàng</a>
+            <a href="${pageContext.request.contextPath}/admin/orders"><i class='bx bx-receipt'></i>Quản lý đơn hàng</a>
         </li>
         <li class="${param.activePage == 'users' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/users.jsp"><i class='bx bx-group'></i>Quản lý khách hàng</a>
+            <a href="${pageContext.request.contextPath}/admin/users"><i class='bx bx-group'></i>Quản lý khách hàng</a>
         </li>
         <li class="${param.activePage == 'banners' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/banners.jsp"><i class='bx bx-images'></i>Quản lý Banner</a>
+            <a href="${pageContext.request.contextPath}/admin/banners"><i class='bx bx-images'></i>Quản lý Banner</a>
         </li>
         <li class="${param.activePage == 'coupons' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/coupons.jsp"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
+            <a href="${pageContext.request.contextPath}/admin/coupons"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
         </li>
         <li class="${param.activePage == 'reviews' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/reviews.jsp"><i class='bx bx-star'></i>Đánh giá</a>
         </li>
         <li class="${param.activePage == 'posts' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/posts.jsp"><i class='bx bx-news'></i>Tin tức / Blog</a>
+            <a href="${pageContext.request.contextPath}/admin/posts"><i class='bx bx-news'></i>Tin tức / Blog</a>
         </li>
         <li class="${param.activePage == 'notifications' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/notifications.jsp"><i class='bx bx-bell'></i>Lịch sử Thông báo</a>
+            <a href="${pageContext.request.contextPath}/admin/notifications"><i class='bx bx-bell'></i>Lịch sử Thông báo</a>
         </li>
         <li class="${param.activePage == 'messages' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/Contact.jsp"><i class='bx bx-message-detail'></i>Tin nhắn</a>
+            <a href="${pageContext.request.contextPath}/admin/contact"><i class='bx bx-message-detail'></i>Tin nhắn</a>
         </li>
         <li class="${param.activePage == 'reports' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/reports.jsp"><i class='bx bx-line-chart'></i>Thống kê</a>
         </li>
         <li class="${param.activePage == 'settings' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/Settings.jsp"><i class='bx bx-cog'></i>Cài đặt</a>
+            <a href="${pageContext.request.contextPath}/admin/settings"><i class='bx bx-cog'></i>Cài đặt</a>
         </li>
     </ul>
 </div>
