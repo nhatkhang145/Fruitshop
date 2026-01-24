@@ -1,6 +1,8 @@
 package controller;
 
+import dal.AddressDAO;
 import dal.UserDAO;
+import model.Address;
 import model.User;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -8,6 +10,7 @@ import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import java.io.IOException;
+import java.util.List;
 
 @WebServlet(name = "AdminUserDetailServlet", urlPatterns = {"/admin/user-detail"})
 public class AdminUserDetailServlet extends HttpServlet {
@@ -20,14 +23,24 @@ public class AdminUserDetailServlet extends HttpServlet {
 
         try {
             int id = Integer.parseInt(idRaw);
-            User user = userDAO.getUserById(id); // Hàm này bạn đã thêm ở Giai đoạn 1
 
+            // 1. Lấy thông tin User từ Database (DÒNG BẠN BỊ THIẾU)
+            User user = userDAO.getUserById(id);
+
+            // Kiểm tra xem user có tồn tại không trước khi làm việc khác
             if (user == null) {
-                resp.sendRedirect("users"); // Không tìm thấy thì quay lại danh sách
+                resp.sendRedirect("users");
                 return;
             }
 
-            req.setAttribute("user", user);
+            // 2. Lấy danh sách địa chỉ
+            AddressDAO addressDAO = new AddressDAO();
+            List<Address> addresses = addressDAO.getAddressesByUserId(id);
+
+            // 3. Đẩy dữ liệu sang JSP
+            req.setAttribute("user", user);       // Bây giờ biến 'user' đã được khai báo ở trên nên sẽ hết lỗi
+            req.setAttribute("addresses", addresses);
+
             req.getRequestDispatcher("/admin/user-detail.jsp").forward(req, resp);
 
         } catch (NumberFormatException e) {
