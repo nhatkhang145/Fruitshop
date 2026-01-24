@@ -39,14 +39,33 @@ public class AdminOrderDetailServlet extends HttpServlet {
     }
 
     @Override
-    protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Xử lý cập nhật trạng thái đơn hàng
-        int orderId = Integer.parseInt(req.getParameter("orderId"));
-        int status = Integer.parseInt(req.getParameter("status")); // Ví dụ: 1=Đã duyệt, 2=Đang giao, 3=Đã giao, 4=Hủy
+    protected void doPost(HttpServletRequest request, HttpServletResponse response)
+            throws ServletException, IOException {
+        try {
+            // 1. Lấy ID đơn hàng (vẫn là số)
+            int orderId = Integer.parseInt(request.getParameter("orderId"));
 
-        orderDAO.updateStatus(orderId, status); // Cần viết method này trong DAO
+            // 2. Lấy Status là CHUỖI (Sửa dòng này)
+            // CŨ (Sai): int status = Integer.parseInt(request.getParameter("status"));
+            // MỚI (Đúng):
+            String status = request.getParameter("status");
 
-        // Quay lại trang chi tiết
-        resp.sendRedirect("order-detail?id=" + orderId);
+            // 3. Gọi hàm update trong DAO
+            OrderDAO orderDAO = new OrderDAO();
+
+            // Lưu ý: Gọi hàm updateOrderStatus (nhận String) chứ không phải updateStatus (nhận int)
+            boolean isUpdated = orderDAO.updateOrderStatus(orderId, status);
+
+            if (isUpdated) {
+                // Cập nhật thành công, load lại trang chi tiết
+                response.sendRedirect("order-detail?id=" + orderId + "&msg=success");
+            } else {
+                response.sendRedirect("order-detail?id=" + orderId + "&msg=error");
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+            response.sendRedirect("orders"); // Hoặc trang lỗi
+        }
     }
 }
