@@ -158,48 +158,113 @@
             <!-- -------------------------------------------------------------------------- -->
 
             <section id="weekend-deals">
-              <div class="deal-container">
-                <!-- Countdown -->
-                <div class="countdown">
-                  <div>
-                    <span>0</span>
-                    <p>Ngày</p>
-                  </div>
-                  <div>
-                    <span>19</span>
-                    <p>Giờ</p>
-                  </div>
-                  <div>
-                    <span>50</span>
-                    <p>Phút</p>
-                  </div>
-                  <div>
-                    <span>57</span>
-                    <p>Giây</p>
-                  </div>
+              <div class="container">
+                <div class="section-header">
+                  <h2>🔥 Ưu Đãi Cuối Tuần</h2>
+                  <p class="section-subtitle">Giảm giá đặc biệt - Số lượng có hạn</p>
                 </div>
 
-                <!-- Deal item -->
-                <div class="deal-item">
-                  <div class="deal-left">
-                    <p class="sub-title">Ưu đãi cuối tuần</p>
-                    <h2 class="product-title">Dừa sáp</h2>
-                    <p class="product-desc">Thơm ngon mọng nước</p>
-                    <p class="product-price">10.000 Đ</p>
-                    <a href="${pageContext.request.contextPath}#" class="shop-now">
-                      MUA NGAY <span class="arrow">→</span>
-                    </a>
-                  </div>
+                <div class="deal-wrapper">
+                  <c:choose>
+                    <c:when test="${not empty weekendDeals}">
+                      <c:forEach items="${weekendDeals}" var="deal" varStatus="status">
+                        <div class="deal-card ${status.first ? 'active' : ''}" data-index="${status.index}">
+                          <div class="deal-badge">
+                            <span class="badge-text">HOT DEAL</span>
+                            <span class="badge-discount">-${deal.discountPercent}%</span>
+                          </div>
 
-                  <div class="deal-right">
-                    <img src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png"
-                      alt="Fresh Coconut" />
-                  </div>
+                          <div class="deal-content">
+                            <div class="deal-info">
+                              <span class="deal-category">${deal.subtitle}</span>
+                              <h3 class="deal-title">${deal.product.name}</h3>
+                              <p class="deal-description">${deal.product.description}</p>
+                              
+                              <div class="deal-pricing">
+                                <div class="price-box">
+                                  <span class="sale-price"><fmt:formatNumber value="${deal.discountedPrice}" type="number" groupingUsed="true" />đ</span>
+                                  <c:if test="${deal.product.price > 0}">
+                                    <span class="original-price"><fmt:formatNumber value="${deal.product.price}" type="number" groupingUsed="true" />đ</span>
+                                  </c:if>
+                                </div>
+                                <span class="price-unit">/Kg</span>
+                              </div>
+
+                              <div class="deal-timer" data-end-time="${deal.endDate.time}">
+                                <div class="timer-label">⏰ Kết thúc sau:</div>
+                                <div class="timer-boxes">
+                                  <div class="timer-box">
+                                    <span class="timer-value days">0</span>
+                                    <span class="timer-unit">Ngày</span>
+                                  </div>
+                                  <div class="timer-box">
+                                    <span class="timer-value hours">0</span>
+                                    <span class="timer-unit">Giờ</span>
+                                  </div>
+                                  <div class="timer-box">
+                                    <span class="timer-value minutes">0</span>
+                                    <span class="timer-unit">Phút</span>
+                                  </div>
+                                  <div class="timer-box">
+                                    <span class="timer-value seconds">0</span>
+                                    <span class="timer-unit">Giây</span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <a href="${pageContext.request.contextPath}/product-detail?pid=${deal.product.id}" class="deal-button">
+                                <span>Mua Ngay</span>
+                                <i class="fas fa-arrow-right"></i>
+                              </a>
+                            </div>
+
+                            <div class="deal-image">
+                              <img src="${pageContext.request.contextPath}/${deal.product.image}" alt="${deal.product.name}" />
+                              <div class="image-decoration"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </c:forEach>
+
+                      <c:if test="${weekendDeals.size() > 1}">
+                        <button class="deal-nav prev" onclick="prevDeal()" aria-label="Previous deal">
+                          <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="deal-nav next" onclick="nextDeal()" aria-label="Next deal">
+                          <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <div class="deal-indicators">
+                          <c:forEach items="${weekendDeals}" var="deal" varStatus="status">
+                            <span class="indicator ${status.first ? 'active' : ''}" onclick="goToDeal(${status.index})"></span>
+                          </c:forEach>
+                        </div>
+                      </c:if>
+                    </c:when>
+                    
+                    <c:otherwise>
+                      <div class="deal-card active">
+                        <div class="deal-content">
+                          <div class="deal-info">
+                            <span class="deal-category">Ưu đãi cuối tuần</span>
+                            <h3 class="deal-title">Dừa sáp tươi ngon</h3>
+                            <p class="deal-description">Thơm ngon mọng nước</p>
+                            <div class="deal-pricing">
+                              <span class="sale-price">10.000đ</span>
+                            </div>
+                            <a href="${pageContext.request.contextPath}/shop" class="deal-button">
+                              <span>Xem sản phẩm</span>
+                              <i class="fas fa-arrow-right"></i>
+                            </a>
+                          </div>
+                          <div class="deal-image">
+                            <img src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png" alt="Deal" />
+                          </div>
+                        </div>
+                      </div>
+                    </c:otherwise>
+                  </c:choose>
                 </div>
-
-                <!-- Buttons -->
-                <button class="deal-btn prev-btn">❮</button>
-                <button class="deal-btn next-btn">❯</button>
               </div>
             </section>
             <section id="top-trending">

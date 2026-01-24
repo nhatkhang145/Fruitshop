@@ -3,6 +3,7 @@ package controller;
 import dal.BannerDAO;
 import dal.CategoryDAO;
 import dal.ProductDAO;
+import dal.WeekendDealDAO;
 import dal.WishlistDAO;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
@@ -14,6 +15,7 @@ import model.Banner;
 import model.Category;
 import model.Product;
 import model.User;
+import model.WeekendDeal;
 
 import java.io.IOException;
 import java.util.ArrayList;
@@ -26,6 +28,7 @@ public class HomeServlet extends HttpServlet {
     private ProductDAO productDAO = new ProductDAO();
     private CategoryDAO categoryDAO = new CategoryDAO();
     private WishlistDAO wishlistDAO = new WishlistDAO();
+    private WeekendDealDAO dealDAO = new WeekendDealDAO();
     
     @Override
     protected void doGet(HttpServletRequest request, HttpServletResponse response) 
@@ -47,7 +50,11 @@ public class HomeServlet extends HttpServlet {
         List<Product> trendingProducts = productDAO.getBestSellingProducts(12);
         request.setAttribute("trendingProducts", trendingProducts);
         
-        // 5. Load wishlist IDs và count nếu user đã đăng nhập
+        // 5. Load weekend deals
+        List<WeekendDeal> weekendDeals = dealDAO.getActiveDeals();
+        request.setAttribute("weekendDeals", weekendDeals);
+        
+        // 6. Load wishlist IDs và count nếu user đã đăng nhập
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");
         List<Integer> likedIds = new ArrayList<>();

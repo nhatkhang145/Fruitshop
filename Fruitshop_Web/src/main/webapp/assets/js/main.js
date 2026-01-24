@@ -509,3 +509,87 @@ style.textContent = `
     }
 `;
 document.head.appendChild(style);
+
+// ==================== WEEKEND DEALS CAROUSEL ====================
+let currentDealIndex = 0;
+const dealCards = document.querySelectorAll('.deal-card');
+const dealIndicators = document.querySelectorAll('.deal-indicators .indicator');
+
+function showDeal(index) {
+  if (dealCards.length === 0) return;
+  
+  currentDealIndex = index;
+  
+  // Update cards
+  dealCards.forEach((card, i) => {
+    card.classList.toggle('active', i === index);
+  });
+  
+  // Update indicators
+  dealIndicators.forEach((indicator, i) => {
+    indicator.classList.toggle('active', i === index);
+  });
+}
+
+function nextDeal() {
+  if (dealCards.length === 0) return;
+  const nextIndex = (currentDealIndex + 1) % dealCards.length;
+  showDeal(nextIndex);
+}
+
+function prevDeal() {
+  if (dealCards.length === 0) return;
+  const prevIndex = (currentDealIndex - 1 + dealCards.length) % dealCards.length;
+  showDeal(prevIndex);
+}
+
+function goToDeal(index) {
+  showDeal(index);
+}
+
+// Auto slide every 6 seconds
+if (dealCards.length > 1) {
+  setInterval(nextDeal, 6000);
+}
+
+// ==================== COUNTDOWN TIMER ====================
+function updateDealTimers() {
+  document.querySelectorAll('.deal-card.active .deal-timer').forEach(timer => {
+    const endTime = parseInt(timer.dataset.endTime);
+    if (!endTime) return;
+    
+    const now = new Date().getTime();
+    const timeRemaining = endTime - now;
+
+    if (timeRemaining > 0) {
+      const days = Math.floor(timeRemaining / (1000 * 60 * 60 * 24));
+      const hours = Math.floor((timeRemaining % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+      const minutes = Math.floor((timeRemaining % (1000 * 60 * 60)) / (1000 * 60));
+      const seconds = Math.floor((timeRemaining % (1000 * 60)) / 1000);
+
+      const daysEl = timer.querySelector('.days');
+      const hoursEl = timer.querySelector('.hours');
+      const minutesEl = timer.querySelector('.minutes');
+      const secondsEl = timer.querySelector('.seconds');
+
+      if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+      if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+      if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+      if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+    } else {
+      const daysEl = timer.querySelector('.days');
+      const hoursEl = timer.querySelector('.hours');
+      const minutesEl = timer.querySelector('.minutes');
+      const secondsEl = timer.querySelector('.seconds');
+
+      if (daysEl) daysEl.textContent = '00';
+      if (hoursEl) hoursEl.textContent = '00';
+      if (minutesEl) minutesEl.textContent = '00';
+      if (secondsEl) secondsEl.textContent = '00';
+    }
+  });
+}
+
+// Update timers every second
+setInterval(updateDealTimers, 1000);
+updateDealTimers(); // Initial call
