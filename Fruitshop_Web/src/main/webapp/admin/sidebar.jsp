@@ -14,6 +14,9 @@
         <li class="${param.activePage == 'products' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/products"><i class='bx bx-basket'></i>Quản lý sản phẩm</a>
         </li>
+        <li class="${param.activePage == 'weekend-deals' ? 'active' : ''}">
+            <a href="${pageContext.request.contextPath}/admin/weekend-deals"><i class='bx bxs-discount'></i>Weekend Deals</a>
+        </li>
         <li class="${param.activePage == 'categories' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/categories"><i class='bx bx-category'></i>Quản lý danh mục</a>
         </li>
