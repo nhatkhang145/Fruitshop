@@ -58,7 +58,7 @@
     <div class="bottom-data">
       <div class="orders">
         <div class="header">
-          <h3>Thông tin thành viên: ${user.fullname}</h3>
+          <h3>Thông tin thành viên: ${user.fullName}</h3>
         </div>
 
         <form action="user-detail" method="post" class="add-product-form">
@@ -74,7 +74,7 @@
           <div class="form-row">
             <div class="form-group">
               <label>Họ và Tên (Chỉ xem)</label>
-              <input type="text" value="${user.fullname}" readonly>
+              <input type="text" value="${user.fullName}" readonly>
             </div>
             <div class="form-group">
               <label>Email (Tên đăng nhập)</label>

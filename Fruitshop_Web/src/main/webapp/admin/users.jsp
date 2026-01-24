@@ -90,7 +90,7 @@
               <td>
                 <img src="${u.avatar != null ? u.avatar : pageContext.request.contextPath.concat('/assets/images/logo.jpg')}" alt="User Avatar">
               </td>
-              <td>${u.fullname}</td>
+              <td>${u.fullName}</td>
               <td>${u.email}</td>
               <td>${u.phone}</td>
               <td>
@@ -105,7 +105,7 @@
               </td>
               <td>
                 <c:choose>
-                  <c:when test="${u.status == 'banned'}">
+                  <c:when test="${u.status == 0}">
                     <span class="status pending">Đã khóa</span>
                   </c:when>
                   <c:otherwise>
