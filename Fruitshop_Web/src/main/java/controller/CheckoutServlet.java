@@ -57,10 +57,10 @@ public class CheckoutServlet extends HttpServlet {
         req.setAttribute("addresses", addresses);
         req.setAttribute("user", user);
 
-        // Tính toán
+        // Tính toán với giá đã có deal
         double totalProducts = 0;
         for (CartItem item : cart) {
-            totalProducts += item.getProduct().getSalePrice() * item.getQuantity();
+            totalProducts += item.getFinalPrice().doubleValue() * item.getQuantity();
         }
 
         double shippingFee = 30000; // Phí ship cố định
@@ -144,10 +144,10 @@ public class CheckoutServlet extends HttpServlet {
         }
 
         try {
-            // Tính toán
+            // Tính toán với giá đã có deal trong cart
             double totalProducts = 0;
             for (CartItem item : cart) {
-                totalProducts += item.getProduct().getSalePrice() * item.getQuantity();
+                totalProducts += item.getFinalPrice().doubleValue() * item.getQuantity();
             }
 
             double shippingFee = 30000;
@@ -157,7 +157,7 @@ public class CheckoutServlet extends HttpServlet {
             // Tạo Order
             Order order = new Order();
             order.setUserId(user.getId());
-            order.setCouponId(null); // Có thể thêm logic coupon sau
+            order.setCouponId(null); // Không dùng coupon nữa
             order.setFullname(fullname);
             order.setPhone(phone);
             order.setAddress(address);
@@ -174,16 +174,23 @@ public class CheckoutServlet extends HttpServlet {
             int orderId = orderDAO.createOrder(order);
 
             if (orderId > 0) {
-                // Tạo OrderItems
+                // Tạo OrderItems với thông tin DEAL
                 List<OrderItem> orderItems = new ArrayList<>();
                 for (CartItem cartItem : cart) {
                     OrderItem item = new OrderItem();
                     item.setOrderId(orderId);
                     item.setProductId(cartItem.getProduct().getId());
                     item.setProductName(cartItem.getProduct().getName());
-                    item.setPrice(cartItem.getProduct().getSalePrice());
+                    
+                    // LƯU THÔNG TIN DEAL
+                    item.setDealType(cartItem.getDealType());
+                    item.setDealId(cartItem.getDealId());
+                    item.setOriginalPrice(cartItem.getOriginalPrice());
+                    item.setDiscountAmount(cartItem.getDiscountAmount());
+                    item.setFinalPrice(cartItem.getFinalPrice());
+                    
                     item.setQuantity(cartItem.getQuantity());
-                    item.setTotal(cartItem.getProduct().getSalePrice() * cartItem.getQuantity());
+                    item.setTotal(cartItem.getTotalPrice());
                     orderItems.add(item);
                 }
 

@@ -23,13 +23,6 @@ public class WeekendDealsServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        
-        // Check admin authentication
-        if (session.getAttribute("admin") == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/login.jsp");
-            return;
-        }
-
         String path = request.getServletPath();
         
         if (path.equals("/admin/weekend-deal-edit")) {
@@ -60,13 +53,6 @@ public class WeekendDealsServlet extends HttpServlet {
             throws ServletException, IOException {
         
         HttpSession session = request.getSession();
-        
-        // Check admin authentication
-        if (session.getAttribute("admin") == null) {
-            response.sendRedirect(request.getContextPath() + "/admin/login.jsp");
-            return;
-        }
-
         handleSave(request, response, session);
     }
 
@@ -113,7 +99,7 @@ public class WeekendDealsServlet extends HttpServlet {
         try {
             String dealIdStr = request.getParameter("dealId");
             int productId = Integer.parseInt(request.getParameter("productId"));
-            String title = request.getParameter("title");
+            String tag = request.getParameter("tag");
             String subtitle = request.getParameter("subtitle");
             int discountPercent = Integer.parseInt(request.getParameter("discountPercent"));
             String startDateStr = request.getParameter("startDate");
@@ -127,7 +113,7 @@ public class WeekendDealsServlet extends HttpServlet {
 
             WeekendDeal deal = new WeekendDeal();
             deal.setProductId(productId);
-            deal.setTitle(title);
+            deal.setTag(tag);
             deal.setSubtitle(subtitle);
             deal.setDiscountPercent(discountPercent);
             deal.setStartDate(startDate);

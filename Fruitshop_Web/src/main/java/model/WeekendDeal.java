@@ -5,7 +5,7 @@ import java.sql.Timestamp;
 public class WeekendDeal {
     private int id;
     private int productId;
-    private String title;
+    private String tag;
     private String subtitle;
     private int discountPercent;
     private Timestamp startDate;
@@ -20,11 +20,11 @@ public class WeekendDeal {
     // Constructor
     public WeekendDeal() {}
 
-    public WeekendDeal(int id, int productId, String title, String subtitle, int discountPercent, 
+    public WeekendDeal(int id, int productId, String tag, String subtitle, int discountPercent, 
                        Timestamp startDate, Timestamp endDate, int status) {
         this.id = id;
         this.productId = productId;
-        this.title = title;
+        this.tag = tag;
         this.subtitle = subtitle;
         this.discountPercent = discountPercent;
         this.startDate = startDate;
@@ -39,8 +39,8 @@ public class WeekendDeal {
     public int getProductId() { return productId; }
     public void setProductId(int productId) { this.productId = productId; }
 
-    public String getTitle() { return title; }
-    public void setTitle(String title) { this.title = title; }
+    public String getTag() { return tag; }
+    public void setTag(String tag) { this.tag = tag; }
 
     public String getSubtitle() { return subtitle; }
     public void setSubtitle(String subtitle) { this.subtitle = subtitle; }

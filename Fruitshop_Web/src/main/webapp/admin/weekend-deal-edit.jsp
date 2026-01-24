@@ -7,213 +7,37 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>${empty deal ? 'Thêm' : 'Sửa'} Weekend Deal - Admin</title>
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css">
-    <style>
-        .deal-form-container {
-            background: white;
-            border-radius: 15px;
-            padding: 30px;
-            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
-        }
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 20px;
-            margin-bottom: 20px;
-        }
-        .form-group {
-            display: flex;
-            flex-direction: column;
-        }
-        .form-group.full-width {
-            grid-column: 1 / -1;
-        }
-        .form-group label {
-            font-weight: 600;
-            margin-bottom: 8px;
-            color: #2d3436;
-            display: flex;
-            align-items: center;
-            gap: 6px;
-        }
-        .form-group label i {
-            color: var(--primary-brand-color, #4CAF50);
-        }
-        .required {
-            color: #e74c3c;
-        }
-        .form-control {
-            padding: 12px 15px;
-            border: 2px solid #e0e0e0;
-            border-radius: 10px;
-            font-size: 14px;
-            transition: all 0.3s ease;
-        }
-        .form-control:focus {
-            outline: none;
-            border-color: var(--primary-brand-color, #4CAF50);
-            box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
-        }
-        .form-help {
-            font-size: 12px;
-            color: #7f8c8d;
-            margin-top: 4px;
-        }
-        .preview-card {
-            background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
-            border-radius: 20px;
-            padding: 30px;
-            box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-            margin-top: 30px;
-        }
-        .preview-card h3 {
-            color: #2d3436;
-            margin-bottom: 20px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-        }
-        .preview-content {
-            display: flex;
-            gap: 30px;
-            align-items: center;
-        }
-        .preview-image {
-            flex: 0 0 200px;
-        }
-        .preview-image img {
-            width: 100%;
-            border-radius: 15px;
-            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-        }
-        .preview-info h4 {
-            font-size: 24px;
-            color: #2d3436;
-            margin-bottom: 10px;
-        }
-        .preview-badge {
-            display: inline-block;
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-            color: white;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-weight: bold;
-            margin-bottom: 15px;
-        }
-        .preview-price {
-            font-size: 32px;
-            color: #ff6b6b;
-            font-weight: 800;
-            margin-bottom: 10px;
-        }
-        .preview-original {
-            text-decoration: line-through;
-            color: #b2bec3;
-            font-size: 18px;
-        }
-        .preview-timer {
-            background: #fff3cd;
-            padding: 12px;
-            border-radius: 10px;
-            margin-top: 15px;
-            display: inline-block;
-        }
-        .toggle-switch {
-            position: relative;
-            display: inline-block;
-            width: 60px;
-            height: 30px;
-        }
-        .toggle-switch input {
-            opacity: 0;
-            width: 0;
-            height: 0;
-        }
-        .toggle-slider {
-            position: absolute;
-            cursor: pointer;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background-color: #ccc;
-            transition: .4s;
-            border-radius: 30px;
-        }
-        .toggle-slider:before {
-            position: absolute;
-            content: "";
-            height: 22px;
-            width: 22px;
-            left: 4px;
-            bottom: 4px;
-            background-color: white;
-            transition: .4s;
-            border-radius: 50%;
-        }
-        .toggle-switch input:checked + .toggle-slider {
-            background-color: #4CAF50;
-        }
-        .toggle-switch input:checked + .toggle-slider:before {
-            transform: translateX(30px);
-        }
-        .btn-group {
-            display: flex;
-            gap: 15px;
-            margin-top: 30px;
-        }
-        .btn {
-            padding: 12px 30px;
-            border: none;
-            border-radius: 10px;
-            font-size: 16px;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.3s ease;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-        .btn-primary {
-            background: var(--primary-brand-color, #4CAF50);
-            color: white;
-        }
-        .btn-primary:hover {
-            background: #45a049;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-        }
-        .btn-secondary {
-            background: #6c757d;
-            color: white;
-        }
-        .btn-secondary:hover {
-            background: #5a6268;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/weekend-deal-edit.css">
 </head>
 <body>
-    <jsp:include page="sidebar.jsp" />
+    <jsp:include page="sidebar.jsp">
+        <jsp:param name="activePage" value="weekend-deals" />
+    </jsp:include>
 
-    <section id="content">
+    <div class="content">
         <jsp:include page="header.jsp" />
 
         <main>
-            <div class="head-title">
+            <div class="header">
                 <div class="left">
                     <h1>${empty deal ? '➕ Thêm' : '✏️ Sửa'} Weekend Deal</h1>
                     <ul class="breadcrumb">
                         <li><a href="${pageContext.request.contextPath}/admin/index.jsp">Dashboard</a></li>
-                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>/</li>
                         <li><a href="${pageContext.request.contextPath}/admin/weekend-deals">Weekend Deals</a></li>
-                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>/</li>
                         <li><a class="active" href="#">${empty deal ? 'Thêm mới' : 'Chỉnh sửa'}</a></li>
                     </ul>
                 </div>
             </div>
 
-            <div class="deal-form-container">
+            <div class="bottom-data">
+                <div class="deal-form-container">
+                <div class="deal-form-container">
                 <form action="${pageContext.request.contextPath}/admin/weekend-deal-edit" method="POST" id="dealForm">
                     <input type="hidden" name="dealId" value="${deal.id}">
 
@@ -239,15 +63,16 @@
                             <small class="form-help">Chọn sản phẩm muốn áp dụng deal</small>
                         </div>
 
-                        <!-- Tiêu đề -->
+                        <!-- Tag -->
                         <div class="form-group">
-                            <label for="title">
-                                <i class='bx bx-text'></i>
-                                Tiêu đề <span class="required">*</span>
+                            <label for="tag">
+                                <i class='bx bx-purchase-tag'></i>
+                                Tag <span class="required">*</span>
                             </label>
-                            <input type="text" name="title" id="title" class="form-control" 
-                                   value="${deal.title}" placeholder="VD: Ưu đãi cuối tuần" 
-                                   required maxlength="255" oninput="updatePreview()">
+                            <input type="text" name="tag" id="tag" class="form-control" 
+                                   value="${deal.tag}" placeholder="VD: Mùa Xuân, Mùa Hạ, Black Friday" 
+                                   required maxlength="100" oninput="updatePreview()">
+                            <small class="form-help">Tag ngắn gọn để hiển thị trên sản phẩm</small>
                         </div>
 
                         <!-- Phụ đề -->
@@ -334,7 +159,8 @@
                             </div>
                             <div class="preview-info">
                                 <span class="preview-badge" id="previewDiscount">-0%</span>
-                                <h4 id="previewTitle">Tiêu đề deal</h4>
+                                <span class="preview-tag" id="previewTag">Tag</span>
+                                <h4 id="previewTitle">Tên sản phẩm</h4>
                                 <p id="previewSubtitle">Phụ đề</p>
                                 <div>
                                     <span class="preview-price" id="previewSalePrice">0đ</span>
@@ -360,9 +186,10 @@
                         </a>
                     </div>
                 </form>
+                </div>
             </div>
         </main>
-    </section>
+    </div>
 
     <script src="${pageContext.request.contextPath}/assets/js/admin/script.js"></script>
     <script>
@@ -385,7 +212,7 @@
             const productPrice = parseFloat(selectedOption.dataset.price);
             const productImage = selectedOption.dataset.image;
             const discount = parseInt(document.getElementById('discountPercent').value) || 0;
-            const title = document.getElementById('title').value || 'Tiêu đề deal';
+            const tag = document.getElementById('tag').value || 'Tag';
             const subtitle = document.getElementById('subtitle').value || 'Phụ đề';
             const startDate = document.getElementById('startDate').value;
             const endDate = document.getElementById('endDate').value;
@@ -397,6 +224,7 @@
             document.getElementById('previewTitle').textContent = productName;
             document.getElementById('previewSubtitle').textContent = subtitle;
             document.getElementById('previewDiscount').textContent = '-' + discount + '%';
+            document.getElementById('previewTag').textContent = tag || 'Tag';
             document.getElementById('previewSalePrice').textContent = 
                 Math.round(salePrice).toLocaleString('vi-VN') + 'đ';
             document.getElementById('previewOriginalPrice').textContent = 

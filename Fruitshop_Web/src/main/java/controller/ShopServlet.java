@@ -3,9 +3,11 @@ package controller;
 import dal.ProductDAO;
 import dal.CategoryDAO;
 import dal.WishlistDAO;
+import dal.WeekendDealDAO;
 import jakarta.servlet.http.HttpSession;
 import model.Product;
 import model.Category;
+import model.WeekendDeal;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
@@ -102,7 +104,12 @@ public class ShopServlet extends HttpServlet {
         }
         request.setAttribute("likedIds", likedIds);
 
-        // 4. Gửi dữ liệu về JSP
+        // 4. Load weekend deals Map cho product cards
+        WeekendDealDAO dealDAO = new WeekendDealDAO();
+        java.util.Map<Integer, WeekendDeal> weekendDealMap = dealDAO.getActiveDealsByProductIds();
+        request.setAttribute("weekendDealMap", weekendDealMap);
+
+        // 5. Gửi dữ liệu về JSP
         request.setAttribute("listP", listP);
         request.getRequestDispatcher("shop.jsp").forward(request, response);
     }

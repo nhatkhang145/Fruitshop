@@ -751,6 +751,20 @@ margin-bottom: 20px;
   background-color: #ff4d4f; /* Màu đỏ nổi bật */
 }
 
+/* Tag sản phẩm (hiển thị dưới giá) */
+.product-tag {
+  display: inline-block;
+  background: linear-gradient(135deg, #ffd93d 0%, #ff9d00 100%);
+  color: #333;
+  padding: 3px 10px;
+  border-radius: 12px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+  box-shadow: 0 2px 4px rgba(255, 157, 0, 0.2);
+}
+
 /* 4. Các nút hành động (Ẩn mặc định, hiện khi hover) */
 .product-actions {
   position: absolute;

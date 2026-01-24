@@ -46,7 +46,7 @@ public class UpdateCartServlet extends HttpServlet {
                 // Tính lại tổng tiền sau khi thay đổi số lượng
                 double totalMoney = 0;
                 for (CartItem item : cart) {
-                    totalMoney += item.getTotalPrice();
+                    totalMoney += item.getTotalPrice().doubleValue();
                 }
                 session.setAttribute("totalMoney", totalMoney);
             }

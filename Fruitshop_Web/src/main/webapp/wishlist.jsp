@@ -53,9 +53,21 @@
                                             <a href="product-detail?pid=${item.product.id}">
                                                 <img src="${item.product.image}" alt="${item.product.name}">
                                             </a>
-                                            <c:if test="${item.product.salePrice > 0}">
-                                                <span class="badge-sale">Sale</span>
-                                            </c:if>
+                                            <%-- Check weekend deal first --%>
+                                            <c:set var="weekendDeal" value="${weekendDeals[item.product.id]}" />
+                                            <c:choose>
+                                                <c:when test="${not empty weekendDeal}">
+                                                    <span class="badge-sale">-${weekendDeal.discountPercent}%</span>
+                                                    <c:if test="${not empty weekendDeal.tag}">
+                                                        <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
+                                                            <span class="product-tag">${weekendDeal.tag}</span>
+                                                        </div>
+                                                    </c:if>
+                                                </c:when>
+                                                <c:when test="${item.product.salePrice > 0}">
+                                                    <span class="badge-sale">Sale</span>
+                                                </c:when>
+                                            </c:choose>
                                             <c:if test="${item.product.quantity == 0}">
                                                 <div class="overlay-out">Hết hàng</div>
                                             </c:if>
@@ -67,7 +79,16 @@
                                             </a>
 
                                             <div class="wishlist-price">
+                                                <%-- Priority: Weekend Deal > Sale > Original --%>
                                                 <c:choose>
+                                                    <c:when test="${not empty weekendDeal}">
+                                                        <span class="new" style="color: #ff6b6b;">
+                                                            <fmt:formatNumber value="${weekendDeal.discountedPrice}" pattern="#,###"/>đ
+                                                        </span>
+                                                        <span class="old">
+                                                            <fmt:formatNumber value="${item.product.price}" pattern="#,###"/>đ
+                                                        </span>
+                                                    </c:when>
                                                     <c:when test="${item.product.salePrice > 0}">
                                                         <span class="new">
                                                             <fmt:formatNumber value="${item.product.salePrice}" pattern="#,###"/>đ

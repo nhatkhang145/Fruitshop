@@ -138,6 +138,7 @@
                   <div class="home-product">
                     <div class="grid__row">
                       <c:forEach items="${listP}" var="p">
+                        <c:set var="weekendDeal" value="${weekendDealMap[p.id]}" />
                         <div class="grid__column-2-4">
                           <div class="product-card">
                             <div class="product-image">
@@ -145,7 +146,22 @@
                                 <img src="${p.image}" alt="${p.name}" loading="lazy" />
                               </a>
 
-                              <div class="product-badge sale">-10%</div>
+                              <%-- Hiển thị badge discount --%>
+                              <c:choose>
+                                <%-- Ưu tiên 1: Weekend Deal badge --%>
+                                <c:when test="${not empty weekendDeal}">
+                                  <div class="product-badge sale" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">-${weekendDeal.discountPercent}%</div>
+                                  <c:if test="${not empty weekendDeal.tag}">
+                                    <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
+                                      <span class="product-tag">${weekendDeal.tag}</span>
+                                    </div>
+                                  </c:if>
+                                </c:when>
+                                <%-- Ưu tiên 2: Sale thường badge --%>
+                                <c:when test="${p.salePrice > 0 && p.salePrice < p.price}">
+                                  <div class="product-badge sale">-<fmt:formatNumber value="${(p.price - p.salePrice) / p.price * 100}" maxFractionDigits="0" />%</div>
+                                </c:when>
+                              </c:choose>
 
                               <div class="product-actions">
                                 <c:set var="isLiked" value="${likedIds.contains(p.id)}" />
@@ -185,12 +201,33 @@
                               </div>
 
                               <div class="price">
-                                <span class="current">
-                                  <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
-                                </span>
-                                <span class="original">
-                                  <fmt:formatNumber value="${p.price * 1.1}" pattern="#,###" />đ
-                                </span>
+                                <c:choose>
+                                  <%-- Ưu tiên 1: Weekend Deal price --%>
+                                  <c:when test="${not empty weekendDeal}">
+                                    <c:set var="weekendPrice" value="${p.price * (1 - weekendDeal.discountPercent / 100.0)}" />
+                                    <span class="current" style="color: #ff6b6b;">
+                                      <fmt:formatNumber value="${weekendPrice}" pattern="#,###" />đ
+                                    </span>
+                                    <span class="original">
+                                      <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
+                                    </span>
+                                  </c:when>
+                                  <%-- Ưu tiên 2: Sale thường --%>
+                                  <c:when test="${p.salePrice > 0 && p.salePrice < p.price}">
+                                    <span class="current">
+                                      <fmt:formatNumber value="${p.salePrice}" pattern="#,###" />đ
+                                    </span>
+                                    <span class="original">
+                                      <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
+                                    </span>
+                                  </c:when>
+                                  <%-- Mặc định: Giá gốc --%>
+                                  <c:otherwise>
+                                    <span class="current">
+                                      <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
+                                    </span>
+                                  </c:otherwise>
+                                </c:choose>
                                 <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
                               </div>
                             </div>

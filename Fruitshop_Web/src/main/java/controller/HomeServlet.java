@@ -54,6 +54,10 @@ public class HomeServlet extends HttpServlet {
         List<WeekendDeal> weekendDeals = dealDAO.getActiveDeals();
         request.setAttribute("weekendDeals", weekendDeals);
         
+        // 5.1. Load weekend deals Map cho product cards
+        java.util.Map<Integer, WeekendDeal> weekendDealMap = dealDAO.getActiveDealsByProductIds();
+        request.setAttribute("weekendDealMap", weekendDealMap);
+        
         // 6. Load wishlist IDs và count nếu user đã đăng nhập
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute("account");

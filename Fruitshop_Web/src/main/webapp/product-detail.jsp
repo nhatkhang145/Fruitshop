@@ -43,7 +43,6 @@
                   </div>
                   <div class="product-gallery__main">
                     <img id="mainImage" src="${detail.image}" alt="${detail.name}">
-                    <div class="product-badge sale">Hot</div>
                   </div>
                 </div>
 
@@ -69,6 +68,21 @@
 
                   <div class="product-price-box">
                       <c:choose>
+                          <%-- Ưu tiên 1: Nếu có Weekend Deal đang active --%>
+                          <c:when test="${not empty weekendDeal}">
+                              <c:set var="weekendPrice" value="${detail.price * (1 - weekendDeal.discountPercent / 100.0)}" />
+                              <span class="current-price" style="color: #ff6b6b;">
+                                  <fmt:formatNumber value="${weekendPrice}" pattern="#,###" />₫
+                              </span>
+                              <span class="old-price">
+                                  <fmt:formatNumber value="${detail.price}" pattern="#,###" />₫
+                              </span>
+                              <span class="discount-percent" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">
+                                  -${weekendDeal.discountPercent}%
+                              </span>
+                          </c:when>
+                          
+                          <%-- Ưu tiên 2: Nếu có giá giảm sản phẩm --%>
                           <c:when test="${detail.salePrice > 0 && detail.salePrice < detail.price}">
                               <span class="current-price">
                                   <fmt:formatNumber value="${detail.salePrice}" pattern="#,###" />₫
@@ -81,6 +95,7 @@
                               </span>
                           </c:when>
 
+                          <%-- Mặc định: Hiển thị giá gốc --%>
                           <c:otherwise>
                               <span class="current-price">
                                   <fmt:formatNumber value="${detail.price}" pattern="#,###" />₫

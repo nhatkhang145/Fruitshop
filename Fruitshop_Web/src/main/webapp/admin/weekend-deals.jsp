@@ -7,225 +7,33 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Quản lý Weekend Deals - Admin</title>
+    
     <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css">
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css">
-    <style>
-        /* Weekend Deals Styles */
-        .btn-add {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            padding: 12px 24px;
-            background: var(--primary-brand-color, #4CAF50);
-            color: white;
-            text-decoration: none;
-            border-radius: 10px;
-            font-weight: 600;
-            transition: all 0.3s ease;
-        }
-        .btn-add:hover {
-            background: #45a049;
-            transform: translateY(-2px);
-            box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-        }
-        .alert {
-            padding: 15px 20px;
-            margin-bottom: 20px;
-            border-radius: 10px;
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            animation: slideDown 0.3s ease;
-        }
-        .alert i { font-size: 24px; }
-        .alert-success {
-            background: #d4edda;
-            color: #155724;
-            border-left: 4px solid #28a745;
-        }
-        .alert-error {
-            background: #f8d7da;
-            color: #721c24;
-            border-left: 4px solid #dc3545;
-        }
-        @keyframes slideDown {
-            from { opacity: 0; transform: translateY(-20px); }
-            to { opacity: 1; transform: translateY(0); }
-        }
-        .filter-select {
-            padding: 8px 16px;
-            border: 1px solid #ddd;
-            border-radius: 8px;
-            background: white;
-            cursor: pointer;
-            font-size: 14px;
-        }
-        .product-info {
-            display: flex;
-            align-items: center;
-            gap: 12px;
-        }
-        .product-info img {
-            width: 50px;
-            height: 50px;
-            object-fit: cover;
-            border-radius: 8px;
-        }
-        .product-name {
-            font-weight: 600;
-            margin: 0;
-        }
-        .product-code {
-            font-size: 12px;
-            color: #666;
-            margin: 4px 0 0 0;
-        }
-        .deal-title-cell .title {
-            font-weight: 600;
-            margin: 0 0 4px 0;
-        }
-        .deal-title-cell .subtitle {
-            font-size: 12px;
-            color: #666;
-            margin: 0;
-        }
-        .discount-badge {
-            background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-            color: white;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-weight: bold;
-            font-size: 14px;
-            display: inline-block;
-        }
-        .price-original {
-            text-decoration: line-through;
-            color: #999;
-            font-size: 13px;
-            margin: 4px 0;
-        }
-        .price-sale {
-            color: #d81e1e;
-            font-weight: 700;
-            font-size: 16px;
-            margin: 0;
-        }
-        .datetime-cell {
-            display: flex;
-            flex-direction: column;
-            gap: 6px;
-            font-size: 13px;
-        }
-        .datetime-cell p {
-            display: flex;
-            align-items: center;
-            gap: 6px;
-            margin: 0;
-        }
-        .countdown {
-            background: #fff3cd;
-            padding: 4px 8px;
-            border-radius: 6px;
-            color: #856404;
-            font-weight: 600;
-        }
-        .status {
-            display: inline-flex;
-            align-items: center;
-            gap: 6px;
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 13px;
-            font-weight: 600;
-        }
-        .status.active {
-            background: #d4edda;
-            color: #155724;
-        }
-        .status.inactive {
-            background: #f8d7da;
-            color: #721c24;
-        }
-        .status.upcoming {
-            background: #d1ecf1;
-            color: #0c5460;
-        }
-        .status.expired {
-            background: #e2e3e5;
-            color: #383d41;
-        }
-        .action-buttons {
-            display: flex;
-            gap: 8px;
-        }
-        .btn-action {
-            width: 36px;
-            height: 36px;
-            border: none;
-            border-radius: 8px;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            transition: all 0.3s ease;
-            text-decoration: none;
-        }
-        .btn-action i { font-size: 18px; }
-        .btn-edit {
-            background: #e3f2fd;
-            color: #1976d2;
-        }
-        .btn-edit:hover {
-            background: #1976d2;
-            color: white;
-        }
-        .btn-toggle {
-            background: #fff3cd;
-            color: #856404;
-        }
-        .btn-toggle:hover {
-            background: #ffc107;
-            color: white;
-        }
-        .btn-delete {
-            background: #ffebee;
-            color: #c62828;
-        }
-        .btn-delete:hover {
-            background: #c62828;
-            color: white;
-        }
-        .no-data {
-            text-align: center;
-            padding: 60px 20px !important;
-        }
-        .no-data i {
-            font-size: 64px;
-            color: #ccc;
-            display: block;
-            margin-bottom: 16px;
-        }
-    </style>
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/weekend-deals.css">
 </head>
 <body>
-    <jsp:include page="sidebar.jsp" />
+    <jsp:include page="sidebar.jsp">
+        <jsp:param name="activePage" value="weekend-deals" />
+    </jsp:include>
 
-    <section id="content">
+    <div class="content">
         <jsp:include page="header.jsp" />
 
         <main>
-            <div class="head-title">
+            <div class="header">
                 <div class="left">
                     <h1>🔥 Quản lý Weekend Deals</h1>
                     <ul class="breadcrumb">
                         <li><a href="${pageContext.request.contextPath}/admin/index.jsp">Dashboard</a></li>
-                        <li><i class='bx bx-chevron-right'></i></li>
+                        <li>/</li>
                         <li><a class="active" href="#">Weekend Deals</a></li>
                     </ul>
                 </div>
-                <a href="${pageContext.request.contextPath}/admin/weekend-deal-edit" class="btn-add">
+                <a href="${pageContext.request.contextPath}/admin/weekend-deal-edit" class="report">
                     <i class='bx bx-plus-circle'></i>
-                    <span class="text">Thêm Deal Mới</span>
+                    <span>Thêm Deal Mới</span>
                 </a>
             </div>
 
@@ -245,9 +53,9 @@
                 <c:remove var="errorMessage" scope="session" />
             </c:if>
 
-            <div class="table-data">
-                <div class="order">
-                    <div class="head">
+            <div class="bottom-data">
+                <div class="orders">
+                    <div class="header">
                         <h3>Danh sách Weekend Deals</h3>
                         <select class="filter-select" onchange="filterDeals(this.value)">
                             <option value="all">Tất cả trạng thái</option>
@@ -291,7 +99,7 @@
                                             </td>
                                             <td>
                                                 <div class="deal-title-cell">
-                                                    <p class="title">${deal.title}</p>
+                                                    <span class="tag-badge">${deal.tag}</span>
                                                     <p class="subtitle">${deal.subtitle}</p>
                                                 </div>
                                             </td>
@@ -371,8 +179,9 @@
                                         <td colspan="7" class="no-data">
                                             <i class='bx bx-error-circle'></i>
                                             <p>Chưa có deal nào</p>
-                                            <a href="${pageContext.request.contextPath}/admin/weekend-deal-edit" class="btn-add">
-                                                Thêm deal đầu tiên
+                                            <a href="${pageContext.request.contextPath}/admin/weekend-deal-edit" class="report">
+                                                <i class='bx bx-plus-circle'></i>
+                                                <span>Thêm deal đầu tiên</span>
                                             </a>
                                         </td>
                                     </tr>
@@ -382,7 +191,7 @@
                     </table>
                 </div>
             </div>
-        </main>
+      divn>
     </section>
 
     <script src="${pageContext.request.contextPath}/assets/js/admin/script.js"></script>

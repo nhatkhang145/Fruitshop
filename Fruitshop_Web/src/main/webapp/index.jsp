@@ -93,15 +93,29 @@
                     <c:choose>
                       <c:when test="${not empty newProducts}">
                         <c:forEach items="${newProducts}" var="product">
+                          <c:set var="weekendDeal" value="${weekendDealMap[product.id]}" />
                           <div class="product-card">
                             <div class="product-image">
                               <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">
                                 <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
                               </a>
 
-                              <c:if test="${product.salePrice > 0 && product.salePrice < product.price}">
-                                <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
-                              </c:if>
+                              <%-- Hiển thị badge discount --%>
+                              <c:choose>
+                                <%-- Ưu tiên 1: Weekend Deal badge --%>
+                                <c:when test="${not empty weekendDeal}">
+                                  <div class="product-badge sale" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">-${weekendDeal.discountPercent}%</div>
+                                  <c:if test="${not empty weekendDeal.tag}">
+                                    <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
+                                      <span class="product-tag">${weekendDeal.tag}</span>
+                                    </div>
+                                  </c:if>
+                                </c:when>
+                                <%-- Ưu tiên 2: Sale thường badge --%>
+                                <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
+                                  <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
+                                </c:when>
+                              </c:choose>
 
                               <div class="product-actions">
                                 <c:set var="isLiked" value="${likedIds.contains(product.id)}" />
@@ -132,10 +146,18 @@
 
                               <div class="price">
                                 <c:choose>
+                                  <%-- Ưu tiên 1: Weekend Deal price --%>
+                                  <c:when test="${not empty weekendDeal}">
+                                    <c:set var="weekendPrice" value="${product.price * (1 - weekendDeal.discountPercent / 100.0)}" />
+                                    <span class="current" style="color: #ff6b6b;"><fmt:formatNumber value="${weekendPrice}" type="number" groupingUsed="true" />đ</span>
+                                    <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
+                                  </c:when>
+                                  <%-- Ưu tiên 2: Sale thường --%>
                                   <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
                                     <span class="current"><fmt:formatNumber value="${product.salePrice}" type="number" groupingUsed="true" />đ</span>
                                     <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                   </c:when>
+                                  <%-- Mặc định: Giá gốc --%>
                                   <c:otherwise>
                                     <span class="current"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                   </c:otherwise>
@@ -280,15 +302,29 @@
                   <c:choose>
                     <c:when test="${not empty trendingProducts}">
                       <c:forEach items="${trendingProducts}" var="product">
+                        <c:set var="weekendDeal" value="${weekendDealMap[product.id]}" />
                         <div class="product-card">
                           <div class="product-image">
                             <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">
                               <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
                             </a>
 
-                            <c:if test="${product.salePrice > 0 && product.salePrice < product.price}">
-                              <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
-                            </c:if>
+                            <%-- Hiển thị badge discount --%>
+                            <c:choose>
+                              <%-- Ưu tiên 1: Weekend Deal badge --%>
+                              <c:when test="${not empty weekendDeal}">
+                                <div class="product-badge sale" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">-${weekendDeal.discountPercent}%</div>
+                                <c:if test="${not empty weekendDeal.tag}">
+                                  <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
+                                    <span class="product-tag">${weekendDeal.tag}</span>
+                                  </div>
+                                </c:if>
+                              </c:when>
+                              <%-- Ưu tiên 2: Sale thường badge --%>
+                              <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
+                                <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
+                              </c:when>
+                            </c:choose>
 
                             <div class="product-actions">
                               <c:set var="isLiked" value="${likedIds.contains(product.id)}" />
@@ -319,10 +355,18 @@
 
                             <div class="price">
                               <c:choose>
+                                <%-- Ưu tiên 1: Weekend Deal price --%>
+                                <c:when test="${not empty weekendDeal}">
+                                  <c:set var="weekendPrice" value="${product.price * (1 - weekendDeal.discountPercent / 100.0)}" />
+                                  <span class="current" style="color: #ff6b6b;"><fmt:formatNumber value="${weekendPrice}" type="number" groupingUsed="true" />đ</span>
+                                  <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
+                                </c:when>
+                                <%-- Ưu tiên 2: Sale thường --%>
                                 <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
                                   <span class="current"><fmt:formatNumber value="${product.salePrice}" type="number" groupingUsed="true" />đ</span>
                                   <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                 </c:when>
+                                <%-- Mặc định: Giá gốc --%>
                                 <c:otherwise>
                                   <span class="current"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                 </c:otherwise>
