@@ -28,14 +28,21 @@
               <c:choose>
                 <c:when test="${not empty banners}">
                   <c:forEach items="${banners}" var="banner">
-                    <div class="slide-item">
+                    <%-- Xác định URL cho banner --%>
+                    <c:set var="bannerUrl" value="#" />
+                    <c:if test="${not empty banner.linkType and banner.linkType != 'none'}">
+                      <c:set var="bannerUrl" value="${banner.getFullUrl(pageContext.request.contextPath)}" />
+                    </c:if>
+                    <c:if test="${empty banner.linkType and not empty banner.link}">
+                      <c:set var="bannerUrl" value="${banner.link}" />
+                    </c:if>
+                    
+                    <%-- Toàn bộ slide-item có thể click --%>
+                    <div class="slide-item" onclick="window.location.href='${bannerUrl}'" style="cursor: ${bannerUrl != '#' ? 'pointer' : 'default'};">
                       <img src="${pageContext.request.contextPath}/${banner.imageUrl}" alt="${banner.title}" />
                       <div class="slide-caption">
                         <h2>${banner.title}</h2>
                         <p>${banner.description}</p>
-                        <c:if test="${not empty banner.link}">
-                          <a href="${banner.link}" class="slide-btn" style="display: inline-block; padding: 10px 25px; background: #4CAF50; color: white; text-decoration: none; border-radius: 25px; margin-top: 15px; font-weight: 500;">Xem ngay →</a>
-                        </c:if>
                       </div>
                     </div>
                   </c:forEach>
@@ -125,9 +132,18 @@
                                 <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" title="Xem nhanh">
                                   <i class="far fa-eye"></i>
                                 </a>
-                                <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
-                                  <i class="fas fa-shopping-basket"></i>
-                                </button>
+                                <c:choose>
+                                  <c:when test="${product.quantity == 0}">
+                                    <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" style="opacity: 0.5; cursor: not-allowed;" title="Hết hàng">
+                                      <i class="fas fa-shopping-basket"></i>
+                                    </a>
+                                  </c:when>
+                                  <c:otherwise>
+                                    <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
+                                      <i class="fas fa-shopping-basket"></i>
+                                    </button>
+                                  </c:otherwise>
+                                </c:choose>
                               </div>
                             </div>
 
@@ -146,6 +162,10 @@
 
                               <div class="price">
                                 <c:choose>
+                                  <%-- Kiểm tra hết hàng trước --%>
+                                  <c:when test="${product.quantity == 0}">
+                                    <span class="current" style="color: #999; font-weight: 600;">Hết hàng</span>
+                                  </c:when>
                                   <%-- Ưu tiên 1: Weekend Deal price --%>
                                   <c:when test="${not empty weekendDeal}">
                                     <c:set var="weekendPrice" value="${product.price * (1 - weekendDeal.discountPercent / 100.0)}" />
@@ -162,7 +182,9 @@
                                     <span class="current"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                   </c:otherwise>
                                 </c:choose>
-                                <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                                <c:if test="${product.quantity > 0}">
+                                  <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                                </c:if>
                               </div>
                             </div>
                           </div>
@@ -334,9 +356,18 @@
                               <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" title="Xem nhanh">
                                 <i class="far fa-eye"></i>
                               </a>
-                              <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
-                                <i class="fas fa-shopping-basket"></i>
-                              </button>
+                              <c:choose>
+                                <c:when test="${product.quantity == 0}">
+                                  <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" style="opacity: 0.5; cursor: not-allowed;" title="Hết hàng">
+                                    <i class="fas fa-shopping-basket"></i>
+                                  </a>
+                                </c:when>
+                                <c:otherwise>
+                                  <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
+                                    <i class="fas fa-shopping-basket"></i>
+                                  </button>
+                                </c:otherwise>
+                              </c:choose>
                             </div>
                           </div>
 
@@ -355,6 +386,10 @@
 
                             <div class="price">
                               <c:choose>
+                                <%-- Kiểm tra hết hàng trước --%>
+                                <c:when test="${product.quantity == 0}">
+                                  <span class="current" style="color: #999; font-weight: 600;">Hết hàng</span>
+                                </c:when>
                                 <%-- Ưu tiên 1: Weekend Deal price --%>
                                 <c:when test="${not empty weekendDeal}">
                                   <c:set var="weekendPrice" value="${product.price * (1 - weekendDeal.discountPercent / 100.0)}" />
@@ -371,7 +406,9 @@
                                   <span class="current"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                 </c:otherwise>
                               </c:choose>
-                              <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                              <c:if test="${product.quantity > 0}">
+                                <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                              </c:if>
                             </div>
                           </div>
                         </div>

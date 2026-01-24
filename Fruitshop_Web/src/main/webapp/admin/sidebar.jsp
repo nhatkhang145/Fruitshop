@@ -29,9 +29,6 @@
         <li class="${param.activePage == 'banners' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/banners"><i class='bx bx-images'></i>Quản lý Banner</a>
         </li>
-        <li class="${param.activePage == 'coupons' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/coupons"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
-        </li>
         <li class="${param.activePage == 'reviews' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/reviews.jsp"><i class='bx bx-star'></i>Đánh giá</a>
         </li>

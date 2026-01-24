@@ -178,9 +178,18 @@
                                   <i class="far fa-eye"></i>
                                 </a>
 
-                                <button class="action-btn add-to-cart-btn" data-id="${p.id}" title="Thêm vào giỏ">
-                                  <i class="fas fa-shopping-basket"></i>
-                                </button>
+                                <c:choose>
+                                  <c:when test="${p.quantity == 0}">
+                                    <a href="product-detail?pid=${p.id}" class="action-btn" style="opacity: 0.5; cursor: not-allowed;" title="Hết hàng">
+                                      <i class="fas fa-shopping-basket"></i>
+                                    </a>
+                                  </c:when>
+                                  <c:otherwise>
+                                    <button class="action-btn add-to-cart-btn" data-id="${p.id}" title="Thêm vào giỏ">
+                                      <i class="fas fa-shopping-basket"></i>
+                                    </button>
+                                  </c:otherwise>
+                                </c:choose>
                               </div>
                             </div>
 
@@ -202,6 +211,10 @@
 
                               <div class="price">
                                 <c:choose>
+                                  <%-- Kiểm tra hết hàng trước --%>
+                                  <c:when test="${p.quantity == 0}">
+                                    <span class="current" style="color: #999; font-weight: 600;">Hết hàng</span>
+                                  </c:when>
                                   <%-- Ưu tiên 1: Weekend Deal price --%>
                                   <c:when test="${not empty weekendDeal}">
                                     <c:set var="weekendPrice" value="${p.price * (1 - weekendDeal.discountPercent / 100.0)}" />
@@ -228,7 +241,9 @@
                                     </span>
                                   </c:otherwise>
                                 </c:choose>
-                                <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                                <c:if test="${p.quantity > 0}">
+                                  <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                                </c:if>
                               </div>
                             </div>
                           </div>

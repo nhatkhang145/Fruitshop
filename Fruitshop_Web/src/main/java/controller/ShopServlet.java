@@ -53,9 +53,25 @@ public class ShopServlet extends HttpServlet {
         }
         // Priority 2: Lọc và phân trang (có filter hoặc pagination)
         else {
-            // Parse parameters
-            int index = (indexPage == null || indexPage.isEmpty()) ? 1 : Integer.parseInt(indexPage);
-            Integer cid = (categoryId == null || categoryId.isEmpty()) ? null : Integer.parseInt(categoryId);
+            // Parse parameters với validation
+            int index = 1;
+            try {
+                if (indexPage != null && !indexPage.isEmpty()) {
+                    index = Integer.parseInt(indexPage);
+                }
+            } catch (NumberFormatException e) {
+                index = 1; // Default nếu parse lỗi
+            }
+            
+            Integer cid = null;
+            try {
+                if (categoryId != null && !categoryId.isEmpty()) {
+                    cid = Integer.parseInt(categoryId);
+                }
+            } catch (NumberFormatException e) {
+                // categoryId không phải số, set null để hiển thị tất cả
+                cid = null;
+            }
 
             Double minPrice = null, maxPrice = null;
             // Tách chuỗi giá (ví dụ: "100000-500000")
