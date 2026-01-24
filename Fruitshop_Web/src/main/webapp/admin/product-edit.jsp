@@ -48,122 +48,155 @@
                   </li>
                 </ul>
               </div>
-              <a href="#" class="report" id="saveProductBtnHeader">
-                <i class="bx bx-save"></i>
-                <span>Lưu sản phẩm</span>
-              </a>
             </div>
 
             <div class="bottom-data">
               <div class="product-edit">
-                <form id="productForm" action="product-save" method="post" enctype="multipart/form-data"
-                  class="product-edit__form">
-
+                <form id="productForm" action="${pageContext.request.contextPath}/admin/product-save" method="post" enctype="multipart/form-data">
+                  
                   <input type="hidden" name="id" value="${product.id > 0 ? product.id : 0}">
                   <input type="hidden" name="currentImage" value="${product.image}">
 
-                  <div class="product-edit__main">
-                    <div class="product-edit__card">
-                      <div class="product-edit__group">
-                        <label for="productName" class="product-edit__label">Tên sản phẩm</label>
-                        <input type="text" id="productName" name="name" class="product-edit__input"
-                          value="${product.name}" placeholder="Ví dụ: Táo Envy New Zealand" required />
+                  <!-- Left Column: Form Inputs -->
+                  <div class="product-edit__form-left">
+                    
+                    <!-- Tên sản phẩm -->
+                    <div class="form-input">
+                      <label class="form-label" for="productName">Tên sản phẩm</label>
+                      <input type="text" id="productName" name="name" class="form-control"
+                        value="${product.name}" placeholder="Ví dụ: Táo Fuji Nhật Bản" required autocomplete="off" />
+                    </div>
+
+                    <!-- Danh mục -->
+                    <div class="form-input">
+                      <label class="form-label" for="category">Danh mục</label>
+                      <select id="category" name="categoryId" class="form-control">
+                        <option value="">-- Chọn Danh mục --</option>
+                        <c:forEach items="${categories}" var="c">
+                          <option value="${c.id}" ${product.categoryId==c.id ? 'selected' : '' }>
+                            ${c.name}
+                          </option>
+                        </c:forEach>
+                      </select>
+                    </div>
+
+                    <!-- Giá bán & Giá khuyến mãi -->
+                    <div class="form-input-row">
+                      <div class="form-input">
+                        <label class="form-label" for="regularPrice">Giá bán (VNĐ)</label>
+                        <input type="number" id="regularPrice" name="price" class="form-control"
+                          value="<fmt:formatNumber value='${product.price}' pattern='#'/>" 
+                          placeholder="Ví dụ: 125000" required autocomplete="off" />
+                      </div>
+                      <div class="form-input">
+                        <label class="form-label" for="salePrice">Giá khuyến mãi (VNĐ)</label>
+                        <input type="number" id="salePrice" name="salePrice" class="form-control"
+                          value="<fmt:formatNumber value='${product.salePrice}' pattern='#'/>" 
+                          placeholder="Ví dụ: 100000" autocomplete="off" />
                       </div>
                     </div>
 
-                    <div class="product-edit__card">
-                      <div class="product-edit__group">
-                        <label for="productDesc" class="product-edit__label">Mô tả chi tiết</label>
-                        <textarea id="productDesc" name="description" class="product-edit__textarea"
-                          rows="10">${product.description}</textarea>
+                    <!-- Mã sản phẩm (SKU) & Số lượng -->
+                    <div class="form-input-row">
+                      <div class="form-input">
+                        <label class="form-label" for="productCode">Mã sản phẩm</label>
+                        <input type="text" id="productCode" name="productCode" class="form-control" 
+                          value="${product.productCode}" 
+                          placeholder="Ví dụ: TAOFU01" autocomplete="off" />
+                      </div>
+                      <div class="form-input">
+                        <label class="form-label" for="productStock">Số lượng tồn kho</label>
+                        <input type="number" id="productStock" name="quantity" class="form-control"
+                          value="${product.quantity}" placeholder="Ví dụ: 20" required autocomplete="off" />
                       </div>
                     </div>
 
-                    <div class="product-edit__card">
-                      <legend class="product-edit__legend">Giá bán</legend>
-                      <div class="product-edit__price-row">
-                        <div class="product-edit__group">
-                          <label for="regularPrice" class="product-edit__label">Giá gốc (VNĐ)</label>
-                          <input type="number" id="regularPrice" name="price" class="product-edit__input"
-                            value="<fmt:formatNumber value='${product.price}' pattern='#'/>" placeholder="0" required />
-                        </div>
-                        <div class="product-edit__group">
-                          <label for="salePrice" class="product-edit__label">Giá khuyến mãi (VNĐ)</label>
-                          <input type="number" id="salePrice" name="salePrice" class="product-edit__input"
-                            value="<fmt:formatNumber value='${product.salePrice}' pattern='#'/>" placeholder="0" />
-                        </div>
+                    <!-- Trạng thái hiển thị -->
+                    <div class="form-input">
+                      <label class="form-label">Trạng thái sản phẩm</label>
+                      <div class="status-toggle-wrapper">
+                        <label class="status-toggle">
+                          <input type="checkbox" name="status" value="1" id="statusCheckbox"
+                                 ${product.status == 1 ? 'checked' : ''} />
+                          <span class="status-slider"></span>
+                        </label>
+                        <span class="status-text" id="statusText">
+                          ${product.status == 1 ? 'Hiển thị' : 'Ẩn'}
+                        </span>
                       </div>
                     </div>
 
-                    <div class="product-edit__card">
-                      <legend class="product-edit__legend">Kho hàng</legend>
-                      <div class="product-edit__price-row">
-                        <div class="product-edit__group">
-                          <label for="productSKU" class="product-edit__label">Mã sản phẩm (ID)</label>
-                          <input type="text" id="productSKU" class="product-edit__input"
-                            value="${product.id > 0 ? product.id : 'Tự động tạo'}" readonly
-                            style="background-color: #f0f0f0;" />
-                        </div>
-                        <div class="product-edit__group">
-                          <label for="productStock" class="product-edit__label">Số lượng tồn kho</label>
-                          <input type="number" id="productStock" name="quantity" class="product-edit__input"
-                            value="${product.quantity}" placeholder="0" required />
-                        </div>
-                      </div>
+                    <!-- Mô tả sản phẩm -->
+                    <div class="form-input form-input-full">
+                      <label class="form-label" for="productDesc">Mô tả sản phẩm</label>
+                      <textarea id="productDesc" name="description" class="form-textarea" 
+                        rows="6" autocomplete="off">${product.description}</textarea>
                     </div>
+
                   </div>
 
-                  <div class="product-edit__sidebar">
-                    <div class="product-edit__card">
-                      <legend class="product-edit__legend">Hành động</legend>
-                      <div class="product-edit__group">
-                        <button type="submit" class="btn-submit product-edit__save-btn"
-                          style="width: 100%; margin-top: 10px;">
-                          <i class='bx bx-save'></i> Lưu thay đổi
-                        </button>
-                        <a href="products"
-                          style="display: block; text-align: center; margin-top: 10px; color: #666;">Hủy bỏ</a>
-                      </div>
-                    </div>
-
-                    <div class="product-edit__card">
-                      <legend class="product-edit__legend">Danh mục</legend>
-                      <div class="product-edit__group">
-                        <select name="categoryId" class="product-edit__input" style="padding: 10px;">
-                          <c:forEach items="${categories}" var="c">
-                            <option value="${c.id}" ${product.categoryId==c.id ? 'selected' : '' }>
-                              ${c.name}
-                            </option>
-                          </c:forEach>
-                        </select>
-                      </div>
-                    </div>
-
-                    <div class="product-edit__card">
-                      <legend class="product-edit__legend">Ảnh đại diện</legend>
-                      <div class="product-edit__image-uploader">
+                  <!-- Right Column: Images -->
+                  <div class="product-edit__form-right">
+                    <p class="section-title">Thêm ảnh cho sản phẩm</p>
+                    
+                    <!-- Main Image -->
+                    <div class="image-group">
+                      <p class="image-group-title">1. Chọn ảnh chính cho sản phẩm (Tối đa 1)</p>
+                      <div class="main-image-wrapper">
                         <c:choose>
                           <c:when test="${not empty product.image}">
-                            <img src="${pageContext.request.contextPath}/${product.image}" alt="Ảnh sản phẩm"
-                              id="mainImagePreview" />
+                            <img src="${pageContext.request.contextPath}/${product.image}" 
+                                 alt="Ảnh sản phẩm" id="mainImagePreview" class="main-image" />
                           </c:when>
                           <c:otherwise>
-                            <img src="https://via.placeholder.com/150" alt="Chưa có ảnh" id="mainImagePreview" />
+                            <img src="https://via.placeholder.com/200x200?text=Ch%C6%B0a+c%C3%B3+%E1%BA%A3nh" 
+                                 alt="Chưa có ảnh" id="mainImagePreview" class="main-image" />
                           </c:otherwise>
                         </c:choose>
-
-                        <input type="file" name="image" id="mainImage" accept="image/*" style="display: none;"
-                          onchange="previewImage(this);" />
-
-                        <label for="mainImage" id="setMainImageLink"
-                          style="cursor: pointer; color: blue; display: block; text-align: center; margin-top: 10px;">
+                        <input type="file" name="image" id="mainImage" accept="image/*" 
+                               style="display: none;" onchange="previewImage(this);" />
+                        <label for="mainImage" class="upload-label">
                           <i class='bx bx-upload'></i> Tải ảnh lên
                         </label>
                       </div>
                     </div>
 
+                    <!-- Secondary Images -->
+                    <div class="image-group">
+                      <p class="image-group-title">2. Chọn ảnh phụ cho sản phẩm (Tối đa 4)</p>
+                      <div class="secondary-images-wrapper">
+                        <div class="secondary-image-item">
+                          <img src="https://via.placeholder.com/80x80" alt="Ảnh phụ 1" />
+                        </div>
+                        <div class="secondary-image-item">
+                          <img src="https://via.placeholder.com/80x80" alt="Ảnh phụ 2" />
+                        </div>
+                        <div class="secondary-image-item">
+                          <img src="https://via.placeholder.com/80x80" alt="Ảnh phụ 3" />
+                        </div>
+                        <div class="add-image-btn">
+                          <i class='bx bx-plus'></i>
+                        </div>
+                      </div>
+                    </div>
+
                   </div>
+
                 </form>
+
+                <!-- Bottom Actions -->
+                <div class="product-edit__bottom">
+                  <p class="bottom-notice">Đảm bảo rằng sản phẩm của bạn là hợp pháp và không gây hậu quả nào</p>
+                  <div class="bottom-buttons">
+                    <a href="products" class="btn-cancel">
+                      <i class='bx bx-x'></i> Hủy
+                    </a>
+                    <button type="submit" form="productForm" class="btn-save">
+                      <i class='bx bx-check'></i> ${product.id > 0 ? 'Cập nhật' : 'Đưa vào danh sách'}
+                    </button>
+                  </div>
+                </div>
+
               </div>
             </div>
           </main>
@@ -183,11 +216,15 @@
             }
           }
 
-          // 2. Script để nút Lưu ở Header hoạt động như nút Submit form
-          document.getElementById('saveProductBtnHeader').addEventListener('click', function (e) {
-            e.preventDefault(); // Ngăn chặn hành vi mặc định của thẻ a
-            document.getElementById('productForm').submit(); // Submit form
-          });
+          // 2. Script toggle status text
+          const statusCheckbox = document.querySelector('input[type="checkbox"][name="status"]');
+          const statusText = document.querySelector('.status-text');
+          
+          if (statusCheckbox && statusText) {
+            statusCheckbox.addEventListener('change', function() {
+              statusText.textContent = this.checked ? 'Hiển thị' : 'Ẩn';
+            });
+          }
         </script>
       </body>
 

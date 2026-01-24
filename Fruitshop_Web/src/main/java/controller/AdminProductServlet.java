@@ -99,11 +99,16 @@ public class AdminProductServlet extends HttpServlet {
         // Lấy thông tin từ form
         String idStr = req.getParameter("id"); // Nếu id = 0 hoặc null -> Insert, ngược lại -> Update
         String name = req.getParameter("name");
+        String productCode = req.getParameter("productCode");
         double price = Double.parseDouble(req.getParameter("price"));
         double salePrice = Double.parseDouble(req.getParameter("salePrice"));
         int quantity = Integer.parseInt(req.getParameter("quantity"));
         int categoryId = Integer.parseInt(req.getParameter("categoryId"));
         String description = req.getParameter("description");
+        
+        // Xử lý status: Checkbox checked -> gửi value="1", unchecked -> không gửi gì
+        String statusStr = req.getParameter("status");
+        int status = (statusStr != null && statusStr.equals("1")) ? 1 : 0;
 
         // Xử lý upload ảnh
         Part filePart = req.getPart("image");
@@ -129,12 +134,14 @@ public class AdminProductServlet extends HttpServlet {
 
         Product p = new Product();
         p.setName(name);
+        p.setProductCode(productCode);
         p.setPrice(price);
         p.setSalePrice(salePrice);
         p.setQuantity(quantity);
         p.setCategoryId(categoryId);
         p.setDescription(description);
         p.setImage(fileName);
+        p.setStatus(status);
 
         if (idStr == null || idStr.isEmpty() || idStr.equals("0")) {
             // INSERT

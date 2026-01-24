@@ -2,11 +2,13 @@ package controller;
 
 import dal.UserDAO;
 import util.PasswordUtils;
+import util.EmailUtils;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
 import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
+import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
 
 @WebServlet(name = "RegisterServlet", urlPatterns = {"/register"})
@@ -63,13 +65,36 @@ public class RegisterServlet extends HttpServlet {
             request.setAttribute("regEmail", email);
             request.getRequestDispatcher("login.jsp").forward(request, response);
             return;
-        } else {
-            // Mã hóa mật khẩu trước khi lưu
-            String hashedPassword = PasswordUtils.hashMD5(pass);
-            dao.signup(fullname, email, hashedPassword);
-            request.setAttribute("registerSuccess", "Đăng ký thành công! Vui lòng đăng nhập.");
-            request.getRequestDispatcher("login.jsp").forward(request, response);
         }
+
+        // Generate OTP (6 số)
+        String otp = String.format("%06d", (int)(Math.random() * 1000000));
+        
+        // Gửi OTP qua email với template đồng bộ
+        try {
+            EmailUtils.sendOTPEmail(email, fullname, otp, "register");
+            
+        } catch (Exception e) {
+            e.printStackTrace();
+            request.setAttribute("registerError", "Không thể gửi email xác thực. Vui lòng thử lại!");
+            request.setAttribute("regFullname", fullname);
+            request.setAttribute("regEmail", email);
+            request.getRequestDispatcher("login.jsp").forward(request, response);
+            return;
+        }
+
+        // Lưu thông tin vào session (chưa lưu vào database)
+        HttpSession session = request.getSession();
+        session.setAttribute("registerOTP", otp);
+        session.setAttribute("otpExpiry", System.currentTimeMillis() + 5 * 60 * 1000); // 5 phút
+        session.setAttribute("registerFullname", fullname);
+        session.setAttribute("registerEmail", email);
+        session.setAttribute("registerPassword", PasswordUtils.hashMD5(pass)); // Lưu đã hash
+        session.setAttribute("otpType", "register");
+        session.setAttribute("otpEmail", email);
+
+        // Redirect đến trang nhập OTP chung
+        response.sendRedirect("verify-otp.jsp");
     }
 
 }
