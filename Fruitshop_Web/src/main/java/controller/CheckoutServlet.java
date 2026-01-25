@@ -7,7 +7,6 @@ import model.CartItem;
 import model.Order;
 import model.OrderItem;
 import model.User;
-
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -35,9 +34,23 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
-        // Kiểm tra giỏ hàng
+        // Kiểm tra giỏ hàng - ưu tiên buyNowCart nếu đang trong chế độ "Mua ngay"
         @SuppressWarnings("unchecked")
-        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+        List<CartItem> cart;
+        Boolean isBuyNow = (Boolean) session.getAttribute("isBuyNow");
+        
+        // Kiểm tra xem có buyNowCart hợp lệ không
+        List<CartItem> buyNowCart = (List<CartItem>) session.getAttribute("buyNowCart");
+        
+        if (isBuyNow != null && isBuyNow && buyNowCart != null && !buyNowCart.isEmpty()) {
+            // Dùng buyNowCart nếu có và hợp lệ
+            cart = buyNowCart;
+        } else {
+            // Nếu không có buyNowCart hợp lệ, clear flags và dùng cart thông thường
+            session.removeAttribute("isBuyNow");
+            session.removeAttribute("buyNowCart");
+            cart = (List<CartItem>) session.getAttribute("cart");
+        }
 
         if (cart == null || cart.isEmpty()) {
             resp.sendRedirect(req.getContextPath() + "/cart.jsp");
@@ -50,6 +63,7 @@ public class CheckoutServlet extends HttpServlet {
         // Nếu không có địa chỉ → redirect đến trang addresses
         if (addresses == null || addresses.isEmpty()) {
             session.setAttribute("checkoutMessage", "Vui lòng thêm địa chỉ giao hàng trước khi thanh toán.");
+            session.setAttribute("returnToCheckout", true); // Lưu flag để quay lại checkout sau khi thêm địa chỉ
             resp.sendRedirect(req.getContextPath() + "/addresses");
             return;
         }
@@ -134,9 +148,23 @@ public class CheckoutServlet extends HttpServlet {
             return;
         }
 
-        // Lấy giỏ hàng
+        // Lấy giỏ hàng - ưu tiên buyNowCart nếu đang trong chế độ "Mua ngay"
         @SuppressWarnings("unchecked")
-        List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
+        List<CartItem> cart;
+        Boolean isBuyNow = (Boolean) session.getAttribute("isBuyNow");
+        
+        // Kiểm tra xem có buyNowCart hợp lệ không
+        List<CartItem> buyNowCart = (List<CartItem>) session.getAttribute("buyNowCart");
+        
+        if (isBuyNow != null && isBuyNow && buyNowCart != null && !buyNowCart.isEmpty()) {
+            // Dùng buyNowCart nếu có và hợp lệ
+            cart = buyNowCart;
+        } else {
+            // Nếu không có buyNowCart hợp lệ, clear flags và dùng cart thông thường
+            session.removeAttribute("isBuyNow");
+            session.removeAttribute("buyNowCart");
+            cart = (List<CartItem>) session.getAttribute("cart");
+        }
 
         if (cart == null || cart.isEmpty()) {
             resp.sendRedirect(req.getContextPath() + "/cart.jsp");
@@ -197,8 +225,13 @@ public class CheckoutServlet extends HttpServlet {
                 // Lưu OrderItems
                 orderDAO.addOrderDetails(orderId, orderItems);
 
-                // Xóa giỏ hàng
-                session.removeAttribute("cart");
+                // Xóa giỏ hàng hoặc buyNowCart tùy vào chế độ
+                if (isBuyNow != null && isBuyNow) {
+                    session.removeAttribute("buyNowCart");
+                    session.removeAttribute("isBuyNow");
+                } else {
+                    session.removeAttribute("cart");
+                }
 
                 // Chuyển đến trang thành công
                 session.setAttribute("successMessage", "Đặt hàng thành công! Mã đơn hàng: #" + orderId);

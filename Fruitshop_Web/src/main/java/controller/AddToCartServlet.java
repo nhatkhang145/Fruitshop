@@ -67,6 +67,41 @@ public class AddToCartServlet extends HttpServlet {
                 }
                 
                 HttpSession session = request.getSession();
+                
+                // === KIỂM TRA NẾU LÀ "MUA NGAY" ===
+                if ("buy".equals(action)) {
+                    // Nếu nhấn "Mua ngay", tạo giỏ hàng riêng chỉ có sản phẩm này
+                    List<CartItem> buyNowCart = new ArrayList<>();
+                    CartItem buyNowItem = new CartItem(product, quantity);
+                    buyNowItem.setOriginalPrice(originalPrice);
+                    buyNowItem.setDiscountAmount(discountAmount);
+                    buyNowItem.setFinalPrice(finalPrice);
+                    buyNowItem.setDealType(dealType);
+                    buyNowItem.setDealId(dealId);
+                    buyNowCart.add(buyNowItem);
+                    
+                    // Lưu vào session với key riêng
+                    session.setAttribute("buyNowCart", buyNowCart);
+                    session.setAttribute("isBuyNow", true);
+                    
+                    // Tính tổng tiền cho buyNow (không cập nhật badge "size")
+                    BigDecimal buyNowTotal = buyNowItem.getTotalPrice();
+                    session.setAttribute("totalMoney", buyNowTotal.doubleValue());
+                    
+                    System.out.println("=== Buy Now ===");
+                    System.out.println("Product: " + product.getName() + " x " + quantity);
+                    System.out.println("Total: " + buyNowTotal);
+                    
+                    // Redirect đến checkout servlet (không phải JSP) để load addresses
+                    response.sendRedirect("checkout");
+                    return;
+                }
+                
+                // === LOGIC THÊM VÀO GIỎ HÀNG BÌNH THƯỜNG ===
+                // Xóa flag buyNow nếu có
+                session.removeAttribute("isBuyNow");
+                session.removeAttribute("buyNowCart");
+                
                 // 2. Lấy giỏ hàng từ session
                 List<CartItem> cart = (List<CartItem>) session.getAttribute("cart");
                 if (cart == null) {
@@ -100,13 +135,24 @@ public class AddToCartServlet extends HttpServlet {
 
                 // Tính tổng tiền toàn bộ giỏ hàng
                 BigDecimal totalMoney = BigDecimal.ZERO;
+                int totalQuantity = 0;
                 for (CartItem item : cart) {
                     totalMoney = totalMoney.add(item.getTotalPrice());
+                    totalQuantity += item.getQuantity();
                 }
                 session.setAttribute("totalMoney", totalMoney.doubleValue());
 
-                // Đếm tổng số lượng sản phẩm
-                session.setAttribute("size", cart.size());
+                // Đếm TỔNG SỐ LƯỢNG tất cả sản phẩm (theo số lượng, không phải số loại)
+                session.setAttribute("size", totalQuantity);
+                
+                // Debug log
+                System.out.println("=== AddToCart Debug ===");
+                System.out.println("Product ID: " + pid + ", Quantity added: " + quantity);
+                System.out.println("Total items quantity: " + totalQuantity);
+                for (CartItem item : cart) {
+                    System.out.println("  - Product #" + item.getProduct().getId() + " x " + item.getQuantity());
+                }
+                System.out.println("=======================");
             }
 
         } catch (NumberFormatException e) {
@@ -123,17 +169,12 @@ public class AddToCartServlet extends HttpServlet {
             return;
         }
         
-        if ("buy".equals(action)) {
-            // Nếu nhấn "Mua ngay" -> Chuyển thẳng đến trangcheckout
-            response.sendRedirect("checkout.jsp");
+        // Nếu nhấn "Thêm vào giỏ" -> Quay lại trang hiện tại
+        String referer = request.getHeader("Referer");
+        if (referer != null) {
+            response.sendRedirect(referer);
         } else {
-            // Nếu nhấn "Thêm vào giỏ" -> Quay lại trang hiện tại
-            String referer = request.getHeader("Referer");
-            if (referer != null) {
-                response.sendRedirect(referer);
-            } else {
-                response.sendRedirect("shop");
-            }
+            response.sendRedirect("shop");
         }
     }
 

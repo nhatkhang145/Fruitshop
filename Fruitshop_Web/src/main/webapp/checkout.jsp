@@ -17,6 +17,9 @@
 
       <body>
         <jsp:include page="header.jsp"></jsp:include>
+        
+        <%-- Xác định giỏ hàng sẽ dùng: buyNowCart (nếu Mua ngay) hoặc cart (nếu từ giỏ hàng) --%>
+        <c:set var="checkoutCart" value="${sessionScope.isBuyNow ? sessionScope.buyNowCart : sessionScope.cart}" />
 
         <div class="breadcrumb">
           <div class="grid">
@@ -107,24 +110,7 @@
                       </div>
                     </c:when>
                     <c:otherwise>
-                      <!-- Manual input form -->
-                      <div class="billing-form__group">
-                        <label class="billing-form__label" for="fullname">Họ và tên *</label>
-                        <input class="billing-form__input" type="text" id="fullname" name="fullname"
-                          value="${user.fullName}" required>
-                      </div>
-                      <div class="billing-form__group">
-                        <label class="billing-form__label" for="phone">Số điện thoại *</label>
-                        <input class="billing-form__input" type="tel" id="phone" name="phone" value="${user.phone}"
-                          required>
-                      </div>
-                      <div class="billing-form__group">
-                        <label class="billing-form__label" for="address">Địa chỉ nhận hàng
-                          *</label>
-                        <textarea class="billing-form__input billing-form__input--textarea" id="address" name="address"
-                          rows="3" placeholder="Số nhà, tên đường, phường/xã, quận/huyện, tỉnh/thành phố"
-                          required></textarea>
-                      </div>
+                      <!-- Nếu chưa có địa chỉ, không hiển thị gì vì CheckoutServlet đã redirect về addresses.jsp -->
                     </c:otherwise>
                   </c:choose>
 
@@ -151,7 +137,7 @@
                       </tr>
                     </thead>
                     <tbody>
-                      <c:forEach items="${sessionScope.cart}" var="item">
+                      <c:forEach items="${checkoutCart}" var="item">
                         <tr class="order-summary__row__item">
                           <td class="order-summary__cell">
                             <span class="order-summary__product-name">${item.product.name}</span>
