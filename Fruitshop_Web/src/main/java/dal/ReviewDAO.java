@@ -125,4 +125,29 @@ public class ReviewDAO {
         return DBContext.get().withHandle(handle ->
                 handle.createUpdate(query).bind("id", reviewId).execute() > 0);
     }
+
+    // Lấy tổng số lượng đánh giá
+    public int getTotalReviews() {
+        String query = "SELECT COUNT(*) FROM reviews";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(query).mapTo(Integer.class).findFirst().orElse(0));
+    }
+
+    // Lấy số lượng đánh giá chưa được admin trả lời
+    public int getUnrepliedReviews() {
+        String query = "SELECT COUNT(*) FROM reviews WHERE admin_reply IS NULL OR admin_reply = ''";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(query).mapTo(Integer.class).findFirst().orElse(0));
+    }
+
+    // Tính điểm đánh giá trung bình
+    public double getAverageRating() {
+        String query = "SELECT AVG(CAST(rating AS DECIMAL(10,2))) FROM reviews";
+        return DBContext.get().withHandle(handle -> {
+            Double avg = handle.createQuery(query)
+                    .mapTo(Double.class)
+                    .one();
+            return (avg != null) ? avg : 0.0; // Trả về 0.0 nếu không có dữ liệu
+        });
+    }
 }

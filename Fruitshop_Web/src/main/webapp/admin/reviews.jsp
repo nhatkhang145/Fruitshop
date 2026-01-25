@@ -8,7 +8,14 @@
 <%
     ReviewDAO reviewDAO = new ReviewDAO();
     List<Review> reviews = reviewDAO.getAllReviews();
+    int totalReviews = reviewDAO.getTotalReviews();
+    int unrepliedCount = reviewDAO.getUnrepliedReviews();
+    double avgRating = reviewDAO.getAverageRating();
+
     request.setAttribute("reviews", reviews);
+    request.setAttribute("totalReviews", totalReviews);
+    request.setAttribute("unrepliedCount", unrepliedCount);
+    request.setAttribute("avgRating", avgRating);
 %>
 
   <!DOCTYPE html>
@@ -50,21 +57,21 @@
           <li>
             <i class='bx bx-message-square-dots'></i>
             <span class="info">
-              <h3>1,024</h3>
+              <h3>${totalReviews}</h3>
               <p>Tổng đánh giá</p>
             </span>
           </li>
           <li>
             <i class='bx bx-chat'></i>
             <span class="info">
-              <h3>5</h3>
+              <h3>${unrepliedCount}</h3>
               <p>Chưa trả lời</p>
             </span>
           </li>
           <li>
             <i class='bx bxs-star'></i>
             <span class="info">
-              <h3>4.8</h3>
+              <h3><fmt:formatNumber value="${avgRating}" maxFractionDigits="1"/></h3>
               <p>Điểm trung bình</p>
             </span>
           </li>
@@ -107,7 +114,7 @@
                 <c:forEach items="${reviews}" var="r">
                   <tr>
                     <td class="user-cell">
-                      <img src="${r.user.avatar != null ? pageContext.request.contextPath.concat('/').concat(r.user.avatar) : 'https://via.placeholder.com/40'}" alt="Avatar">
+                      <img src="${(not empty userAvatar) ? (userAvatar.startsWith('http') ? userAvatar : pageContext.request.contextPath += '/' += userAvatar) : 'https://via.placeholder.com/40'}" alt="Avatar">
                       <div>
                         <p>${r.user.fullName}</p>
                         <small>${r.user.email}</small>
@@ -158,7 +165,7 @@
                     <td>
                       <div class="action-group">
                         <button class="action-btn reply"
-                                onclick="openReplyModal('${r.id}', '${r.user.fullname}', '${r.product.name}')"
+                                onclick="openReplyModal('${r.id}', '${r.user.fullName}', '${r.product.name}')"
                                 title="Trả lời/Sửa">
                             <i class='bx bx-reply'></i>
                         </button>
