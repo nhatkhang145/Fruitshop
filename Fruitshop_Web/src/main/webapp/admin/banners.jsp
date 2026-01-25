@@ -83,8 +83,17 @@
                                         </c:choose>
                                     </td>
                                     <td>
-                                        <a href="javascript:void(0)" class="action-btn edit"
-                                           onclick="openEditModal(${b.id}, '${b.title}', '${b.description}', '${b.link}', ${b.displayOrder}, ${b.status}, '${pageContext.request.contextPath}/${b.imageUrl}')">
+                                        <a href="#" class="action-btn edit"
+                                           data-id="${b.id}"
+                                           data-title="${b.title}"
+                                           data-desc="${b.description}"
+                                           data-link="${b.link}"
+                                           data-linktype="${not empty b.linkType ? b.linkType : 'none'}"
+                                           data-linktarget="${not empty b.linkTarget ? b.linkTarget : ''}"
+                                           data-order="${b.displayOrder}"
+                                           data-status="${b.status}"
+                                           data-img="${pageContext.request.contextPath}/${b.imageUrl}"
+                                           data-imageurl="${b.imageUrl}">
                                             <i class="bx bx-edit"></i>
                                         </a>
                                         <a href="banners?action=delete&id=${b.id}" class="action-btn delete"
@@ -122,9 +131,24 @@
                 </div>
 
                 <div class="form-group">
-                    <label>Link liên kết</label>
-                    <input type="text" name="link" id="link" class="form-control" placeholder="shop?cid=1">
+                    <label>Loại liên kết</label>
+                    <select name="linkType" id="linkType" class="form-control" onchange="handleLinkTypeChange()">
+                        <option value="none">Không có link (Chỉ hiển thị)</option>
+                        <option value="internal">Trang nội bộ</option>
+                        <option value="product">Sản phẩm cụ thể</option>
+                        <option value="category">Danh mục sản phẩm</option>
+                        <option value="external">Link bên ngoài</option>
+                    </select>
                 </div>
+
+                <div class="form-group" id="linkTargetGroup">
+                    <label id="linkTargetLabel">Đường dẫn</label>
+                    <input type="text" name="linkTarget" id="linkTarget" class="form-control" placeholder="">
+                    <small id="linkTargetHint" style="color: #666; font-size: 12px; margin-top: 5px; display: block;"></small>
+                </div>
+
+                <!-- Giữ field link cũ để backward compatibility -->
+                <input type="hidden" name="link" id="link" value="">
 
                 <div class="form-group-row" style="display:flex; gap:20px; margin-top:15px;">
                     <div class="form-group">

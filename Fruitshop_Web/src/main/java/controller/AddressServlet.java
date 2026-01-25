@@ -54,6 +54,14 @@ public class AddressServlet extends HttpServlet {
                 case "add":
                     addAddress(request, user);
                     request.setAttribute("message", "Thêm địa chỉ thành công!");
+                    
+                    // Kiểm tra xem có cần quay lại checkout không
+                    Boolean returnToCheckout = (Boolean) session.getAttribute("returnToCheckout");
+                    if (returnToCheckout != null && returnToCheckout) {
+                        session.removeAttribute("returnToCheckout");
+                        response.sendRedirect("checkout");
+                        return;
+                    }
                     break;
                 case "update":
                     updateAddress(request, user);
@@ -89,6 +97,14 @@ public class AddressServlet extends HttpServlet {
         String city = request.getParameter("city");
         String isDefaultStr = request.getParameter("isDefault");
         boolean isDefault = "on".equals(isDefaultStr) || "1".equals(isDefaultStr);
+
+        // Kiểm tra xem user có địa chỉ nào chưa
+        List<Address> existingAddresses = addressDAO.getAddressesByUserId(user.getId());
+        
+        // Nếu chưa có địa chỉ nào, địa chỉ đầu tiên tự động là mặc định
+        if (existingAddresses == null || existingAddresses.isEmpty()) {
+            isDefault = true;
+        }
 
         Address address = new Address();
         address.setUserId(user.getId());
@@ -139,11 +155,7 @@ public class AddressServlet extends HttpServlet {
             throw new RuntimeException("Không có quyền xóa địa chỉ này!");
         }
 
-        // Không cho xóa địa chỉ mặc định
-        if (existingAddress.isDefault()) {
-            throw new RuntimeException("Không thể xóa địa chỉ mặc định!");
-        }
-
+        // Cho phép xóa bất kỳ địa chỉ nào, kể cả mặc định
         addressDAO.deleteAddress(addressId);
     }
 

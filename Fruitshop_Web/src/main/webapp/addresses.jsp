@@ -212,11 +212,19 @@
                   placeholder="Địa chỉ cụ thể (Số nhà, tên đường...)" rows="2" required></textarea>
               </div>
 
-              <div class="form-group">
-                <label class="checkbox-label">
-                  <input type="checkbox" name="isDefault" id="isDefault" /> Đặt làm địa chỉ mặc định
-                </label>
-              </div>
+              <c:if test="${not empty addresses}">
+                <div class="form-group">
+                  <label class="checkbox-label">
+                    <input type="checkbox" name="isDefault" id="isDefault" /> Đặt làm địa chỉ mặc định
+                  </label>
+                </div>
+              </c:if>
+              <c:if test="${empty addresses}">
+                <input type="hidden" name="isDefault" value="1" />
+                <p style="color: #666; font-size: 14px; margin-bottom: 15px;">
+                  <i class="fa-solid fa-info-circle"></i> Địa chỉ đầu tiên sẽ tự động là mặc định
+                </p>
+              </c:if>
 
               <div class="modal-footer">
                 <button type="button" class="btn btn-outline close-modal-btn">Trở lại</button>
@@ -245,7 +253,12 @@
           document.getElementById("phoneNumber").value = "";
           document.getElementById("city").value = "";
           document.getElementById("address").value = "";
-          document.getElementById("isDefault").checked = false;
+          
+          // Chỉ reset checkbox nếu nó tồn tại
+          const isDefaultCheckbox = document.getElementById("isDefault");
+          if (isDefaultCheckbox) {
+            isDefaultCheckbox.checked = false;
+          }
         }
 
         // Mở modal thêm mới
@@ -278,7 +291,13 @@
             document.getElementById("phoneNumber").value = this.dataset.phone;
             document.getElementById("city").value = this.dataset.city;
             document.getElementById("address").value = this.dataset.address;
-            document.getElementById("isDefault").checked = this.dataset.default === "true";
+            
+            // Chỉ set checkbox nếu nó tồn tại
+            const isDefaultCheckbox = document.getElementById("isDefault");
+            if (isDefaultCheckbox) {
+              isDefaultCheckbox.checked = this.dataset.default === "true";
+            }
+            
             modal.style.display = "flex";
           };
         });

@@ -5,21 +5,47 @@ public class Banner {
     private String title;
     private String description;
     private String imageUrl;
-    private String link;
+    private String link; // Deprecated - giữ để backward compatibility
+    private String linkType; // 'internal', 'external', 'product', 'category', 'none'
+    private String linkTarget; // Giá trị tùy theo linkType
     private int displayOrder;
     private int status;
 
     public Banner() {
     }
 
-    public Banner(int id, String title, String description, String imageUrl, String link, int displayOrder, int status) {
+    public Banner(int id, String title, String description, String imageUrl, String link, String linkType, String linkTarget, int displayOrder, int status) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.imageUrl = imageUrl;
         this.link = link;
+        this.linkType = linkType;
+        this.linkTarget = linkTarget;
         this.displayOrder = displayOrder;
         this.status = status;
+    }
+    
+    /**
+     * Tạo URL đầy đủ dựa trên linkType và linkTarget
+     */
+    public String getFullUrl(String contextPath) {
+        if (linkType == null || linkType.equals("none")) {
+            return "#";
+        }
+        
+        switch (linkType) {
+            case "internal":
+                return contextPath + linkTarget;
+            case "external":
+                return linkTarget;
+            case "product":
+                return contextPath + "/product-detail?pid=" + linkTarget;
+            case "category":
+                return contextPath + "/shop?cid=" + linkTarget;
+            default:
+                return link != null ? link : "#";
+        }
     }
 
     // Getters and Setters
@@ -56,6 +82,20 @@ public class Banner {
     }
     public void setLink(String link) {
         this.link = link;
+    }
+
+    public String getLinkType() {
+        return linkType;
+    }
+    public void setLinkType(String linkType) {
+        this.linkType = linkType;
+    }
+
+    public String getLinkTarget() {
+        return linkTarget;
+    }
+    public void setLinkTarget(String linkTarget) {
+        this.linkTarget = linkTarget;
     }
 
     public int getDisplayOrder() {

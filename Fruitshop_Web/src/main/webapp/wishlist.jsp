@@ -9,7 +9,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Danh sách yêu thích</title>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
     <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
 
@@ -53,9 +53,21 @@
                                             <a href="product-detail?pid=${item.product.id}">
                                                 <img src="${item.product.image}" alt="${item.product.name}">
                                             </a>
-                                            <c:if test="${item.product.salePrice > 0}">
-                                                <span class="badge-sale">Sale</span>
-                                            </c:if>
+                                            <%-- Check weekend deal first --%>
+                                            <c:set var="weekendDeal" value="${weekendDeals[item.product.id]}" />
+                                            <c:choose>
+                                                <c:when test="${not empty weekendDeal}">
+                                                    <span class="badge-sale">-${weekendDeal.discountPercent}%</span>
+                                                    <c:if test="${not empty weekendDeal.tag}">
+                                                        <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
+                                                            <span class="product-tag">${weekendDeal.tag}</span>
+                                                        </div>
+                                                    </c:if>
+                                                </c:when>
+                                                <c:when test="${item.product.salePrice > 0}">
+                                                    <span class="badge-sale">Sale</span>
+                                                </c:when>
+                                            </c:choose>
                                             <c:if test="${item.product.quantity == 0}">
                                                 <div class="overlay-out">Hết hàng</div>
                                             </c:if>
@@ -67,7 +79,19 @@
                                             </a>
 
                                             <div class="wishlist-price">
+                                                <%-- Priority: Weekend Deal > Sale > Original --%>
                                                 <c:choose>
+                                                    <c:when test="${item.product.quantity == 0}">
+                                                        <span class="new" style="color: #999; font-weight: 600;">Hết hàng</span>
+                                                    </c:when>
+                                                    <c:when test="${not empty weekendDeal}">
+                                                        <span class="new" style="color: #ff6b6b;">
+                                                            <fmt:formatNumber value="${weekendDeal.discountedPrice}" pattern="#,###"/>đ
+                                                        </span>
+                                                        <span class="old">
+                                                            <fmt:formatNumber value="${item.product.price}" pattern="#,###"/>đ
+                                                        </span>
+                                                    </c:when>
                                                     <c:when test="${item.product.salePrice > 0}">
                                                         <span class="new">
                                                             <fmt:formatNumber value="${item.product.salePrice}" pattern="#,###"/>đ
@@ -93,14 +117,18 @@
                                                 </c:if>
                                             </div>
 
-                                            <c:if test="${item.product.quantity > 0}">
-                                                <button class="btn-cart add-to-cart-btn" data-id="${item.product.id}">
-                                                    <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
-                                                </button>
-                                            </c:if>
-                                            <c:if test="${item.product.quantity == 0}">
-                                                <button class="btn-cart" disabled>Tạm hết hàng</button>
-                                            </c:if>
+                                            <c:choose>
+                                                <c:when test="${item.product.quantity > 0}">
+                                                    <button class="btn-cart add-to-cart-btn" data-id="${item.product.id}">
+                                                        <i class="fa-solid fa-cart-plus"></i> Mua ngay
+                                                    </button>
+                                                </c:when>
+                                                <c:otherwise>
+                                                    <button class="btn-cart" style="background: #999; cursor: not-allowed;" disabled>
+                                                        <i class="fa-solid fa-ban"></i> Hết hàng
+                                                    </button>
+                                                </c:otherwise>
+                                            </c:choose>
                                         </div>
                                     </div>
                                 </c:forEach>

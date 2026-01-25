@@ -15,7 +15,8 @@ $(document).ready(function() {
             "zeroRecords": "Không tìm thấy kết quả"
         },
         "drawCallback": function() {
-            // Style lại nút phân trang sau khi bảng vẽ lại (nếu cần)
+            // Re-attach click handlers sau khi DataTables re-draw
+            attachEditHandlers();
         }
     });
 
@@ -31,7 +32,77 @@ $(document).ready(function() {
             reader.readAsDataURL(file);
         }
     });
+    
+    // 3. Khởi tạo link type change handler
+    handleLinkTypeChange();
+    
+    // 4. Attach edit button handlers
+    attachEditHandlers();
 });
+
+// =========================================
+// ATTACH EVENT HANDLERS CHO BUTTON EDIT
+// =========================================
+function attachEditHandlers() {
+    $('.action-btn.edit').off('click').on('click', function(e) {
+        e.preventDefault();
+        
+        const id = $(this).data('id');
+        const title = $(this).data('title');
+        const desc = $(this).data('desc');
+        const link = $(this).data('link');
+        const linkType = $(this).data('linktype');
+        const linkTarget = $(this).data('linktarget');
+        const order = $(this).data('order');
+        const status = $(this).data('status');
+        const imgUrl = $(this).data('img');
+        const imageUrl = $(this).data('imageurl');
+        
+        openEditModal(id, title, desc, link, linkType, linkTarget, order, status, imgUrl, imageUrl);
+    });
+}
+
+// =========================================
+// XỬ LÝ THAY ĐỔI LOẠI LINK
+// =========================================
+function handleLinkTypeChange() {
+    const linkType = document.getElementById('linkType').value;
+    const linkTargetGroup = document.getElementById('linkTargetGroup');
+    const linkTargetLabel = document.getElementById('linkTargetLabel');
+    const linkTargetInput = document.getElementById('linkTarget');
+    const linkTargetHint = document.getElementById('linkTargetHint');
+    
+    if (linkType === 'none') {
+        linkTargetGroup.style.display = 'none';
+        linkTargetInput.required = false;
+    } else {
+        linkTargetGroup.style.display = 'block';
+        linkTargetInput.required = true;
+        
+        switch(linkType) {
+            case 'internal':
+                linkTargetLabel.innerText = 'Đường dẫn nội bộ';
+                linkTargetInput.placeholder = '/shop hoặc /about';
+                linkTargetHint.innerText = 'Ví dụ: /shop, /contact, /blog';
+                break;
+            case 'product':
+                linkTargetLabel.innerText = 'ID Sản phẩm';
+                linkTargetInput.placeholder = '123';
+                linkTargetHint.innerText = 'Nhập ID của sản phẩm (VD: 5, 12, 25)';
+                break;
+            case 'category':
+                linkTargetLabel.innerText = 'ID Danh mục';
+                linkTargetInput.placeholder = '5';
+                linkTargetHint.innerText = 'Nhập ID của danh mục (VD: 1, 2, 3)';
+                break;
+            case 'external':
+                linkTargetLabel.innerText = 'URL bên ngoài';
+                linkTargetInput.placeholder = 'https://example.com';
+                linkTargetHint.innerText = 'Nhập URL đầy đủ (bắt đầu với http:// hoặc https://)';
+                break;
+        }
+    }
+}
 
 // =========================================
 // CÁC HÀM XỬ LÝ MODAL (POPUP)
@@ -47,6 +118,10 @@ function openAddModal() {
 
     modalTitle.innerText = "Thêm Banner Mới";
     formAction.value = "add";
+    
+    // Reset link type về mặc định
+    document.getElementById('linkType').value = 'none';
+    handleLinkTypeChange();
 
     // Mặc định hiển thị
     document.getElementById("status").checked = true;
@@ -59,20 +134,26 @@ function openAddModal() {
 }
 
 // Mở Modal Sửa (Đổ dữ liệu cũ vào form)
-// Lưu ý: imgUrl là đường dẫn ảnh
-function openEditModal(id, title, desc, link, order, status, imgUrl) {
+// Lưu ý: imgUrl là đường dẫn ảnh có contextPath để hiển thị, imageUrl là đường dẫn thuần túy để lưu
+function openEditModal(id, title, desc, link, linkType, linkTarget, order, status, imgUrl, imageUrl) {
     modalTitle.innerText = "Cập nhật Banner #" + id;
     formAction.value = "update";
 
     document.getElementById("bannerId").value = id;
     document.getElementById("title").value = title;
     document.getElementById("description").value = desc;
-    document.getElementById("link").value = link;
+    document.getElementById("link").value = link || "";
+    
+    // Set linkType và linkTarget
+    document.getElementById("linkType").value = linkType || "none";
+    document.getElementById("linkTarget").value = linkTarget || "";
+    handleLinkTypeChange();
+    
     document.getElementById("displayOrder").value = order;
     document.getElementById("status").checked = (status == 1);
 
-    // Xử lý ảnh cũ
-    document.getElementById("oldImage").value = imgUrl;
+    // Xử lý ảnh cũ - lưu imageUrl thuần túy (không có contextPath)
+    document.getElementById("oldImage").value = imageUrl || imgUrl;
 
     // Hiển thị ảnh cũ để user biết
     const contextPath = window.location.pathname.substring(0, window.location.pathname.indexOf("/", 1));

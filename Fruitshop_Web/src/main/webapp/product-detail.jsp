@@ -10,7 +10,7 @@
         <title>${detail.name} — Organic Harvest</title>
 
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product-detail.css" />
@@ -37,13 +37,22 @@
 
                 <div class="product-gallery">
                   <div class="product-gallery__thumbs">
+                    <!-- Ảnh chính -->
                     <div class="thumb-item active" onclick="changeImage(this)">
                       <img src="${detail.image}" alt="${detail.name}">
                     </div>
+                    
+                    <!-- Các ảnh phụ (chỉ hiển thị nếu có) -->
+                    <c:forEach var="img" items="${detail.productImages}">
+                      <c:if test="${not empty img.imageUrl}">
+                        <div class="thumb-item" onclick="changeImage(this)">
+                          <img src="${img.imageUrl}" alt="${detail.name}">
+                        </div>
+                      </c:if>
+                    </c:forEach>
                   </div>
                   <div class="product-gallery__main">
                     <img id="mainImage" src="${detail.image}" alt="${detail.name}">
-                    <div class="product-badge sale">Hot</div>
                   </div>
                 </div>
 
@@ -69,6 +78,21 @@
 
                   <div class="product-price-box">
                       <c:choose>
+                          <%-- Ưu tiên 1: Nếu có Weekend Deal đang active --%>
+                          <c:when test="${not empty weekendDeal}">
+                              <c:set var="weekendPrice" value="${detail.price * (1 - weekendDeal.discountPercent / 100.0)}" />
+                              <span class="current-price" style="color: #ff6b6b;">
+                                  <fmt:formatNumber value="${weekendPrice}" pattern="#,###" />₫
+                              </span>
+                              <span class="old-price">
+                                  <fmt:formatNumber value="${detail.price}" pattern="#,###" />₫
+                              </span>
+                              <span class="discount-percent" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">
+                                  -${weekendDeal.discountPercent}%
+                              </span>
+                          </c:when>
+                          
+                          <%-- Ưu tiên 2: Nếu có giá giảm sản phẩm --%>
                           <c:when test="${detail.salePrice > 0 && detail.salePrice < detail.price}">
                               <span class="current-price">
                                   <fmt:formatNumber value="${detail.salePrice}" pattern="#,###" />₫
@@ -81,6 +105,7 @@
                               </span>
                           </c:when>
 
+                          <%-- Mặc định: Hiển thị giá gốc --%>
                           <c:otherwise>
                               <span class="current-price">
                                   <fmt:formatNumber value="${detail.price}" pattern="#,###" />₫
@@ -93,27 +118,38 @@
                     <p>${detail.description}</p>
                   </div>
 
-                  <hr class="product-divider">
+                  <c:choose>
+                    <c:when test="${detail.quantity == 0}">
+                      <div style="text-align: center; padding: 15px; background: #f8f9fa; border-radius: 5px; margin: 20px 0;">
+                        <span style="color: #999; font-size: 16px; font-weight: 600;">
+                          <i class="fa-solid fa-ban"></i> Hết hàng
+                        </span>
+                      </div>
+                    </c:when>
+                    <c:otherwise>
+                      <hr class="product-divider">
 
-                  <form action="add-to-cart" method="post" class="product-actions-wrapper">
-                    <input type="hidden" name="pid" value="${detail.id}">
+                      <form action="add-to-cart" method="post" class="product-actions-wrapper">
+                        <input type="hidden" name="pid" value="${detail.id}">
 
-                    <div class="qty-wrapper">
-                      <button type="button" class="qty-btn" onclick="decreaseQty()">-</button>
-                      <input type="number" name="quantity" value="1" min="1" id="qtyInput" class="qty-input">
-                      <button type="button" class="qty-btn" onclick="increaseQty()">+</button>
-                    </div>
+                        <div class="qty-wrapper">
+                          <button type="button" class="qty-btn" onclick="decreaseQty()">-</button>
+                          <input type="number" name="quantity" value="1" min="1" id="qtyInput" class="qty-input">
+                          <button type="button" class="qty-btn" onclick="increaseQty()">+</button>
+                        </div>
 
-                    <div class="action-buttons">
-                        <button type="submit" name="btAction" value="add" class="btn btn-add-cart">
-                            <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
-                        </button>
+                        <div class="action-buttons">
+                            <button type="submit" name="btAction" value="add" class="btn btn-add-cart">
+                                <i class="fa-solid fa-cart-plus"></i> Thêm vào giỏ
+                            </button>
 
-                        <button type="submit" name="btAction" value="buy" class="btn btn-buy-now">
-                            Mua ngay
-                        </button>
-                    </div>
-                  </form>
+                            <button type="submit" name="btAction" value="buy" class="btn btn-buy-now">
+                                Mua ngay
+                            </button>
+                        </div>
+                      </form>
+                    </c:otherwise>
+                  </c:choose>
 
                   <div class="product-policies">
                     <div class="policy-item">

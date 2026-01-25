@@ -3,8 +3,10 @@ package controller;
 import dal.CategoryDAO;
 import dal.ProductDAO;
 import dal.ReviewDAO;
+import dal.WeekendDealDAO;
 import model.Category;
 import model.Product;
+import model.WeekendDeal;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.annotation.WebServlet;
 import jakarta.servlet.http.HttpServlet;
@@ -25,6 +27,7 @@ public class ProductDetailServlet extends HttpServlet {
         String idRaw = request.getParameter("pid"); // Lấy id từ URL
         ProductDAO pDao = new ProductDAO();
         CategoryDAO cDao = new CategoryDAO();
+        WeekendDealDAO wdDao = new WeekendDealDAO();
 
         try {
             int id = Integer.parseInt(idRaw);
@@ -32,10 +35,16 @@ public class ProductDetailServlet extends HttpServlet {
             // 1. Lấy thông tin chi tiết sản phẩm
             Product p = pDao.getProductByID(id);
             
-            // 2. Lấy danh sách sản phẩm liên quan (Cùng category)
+            // 2. Check xem sản phẩm có weekend deal đang active không
+            WeekendDeal activeDeal = wdDao.getActiveDealByProductId(id);
+            if (activeDeal != null) {
+                request.setAttribute("weekendDeal", activeDeal);
+            }
+            
+            // 3. Lấy danh sách sản phẩm liên quan (Cùng category)
             List<Product> relatedP = pDao.getProductsByCategoryID(p.getCategoryId());
             
-            // 3. (Tuỳ chọn) Lấy danh mục để hiển thị header/menu nếu cần
+            // 4. (Tuỳ chọn) Lấy danh mục để hiển thị header/menu nếu cần
             List<Category> listC = cDao.getAllCategories(); 
             request.setAttribute("listC", listC);
 

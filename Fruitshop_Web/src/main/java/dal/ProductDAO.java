@@ -1,6 +1,7 @@
 package dal;
 
 import model.Product;
+import model.ProductImage;
 import java.util.List;
 
 public class ProductDAO {
@@ -39,12 +40,35 @@ public class ProductDAO {
                 "       image, " +
                 "       category_id AS categoryId, " +
                 "       status " +
-                "FROM products WHERE id = ?";        return DBContext.get().withHandle(handle ->
+                "FROM products WHERE id = ?";        
+        
+        Product product = DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind(0, id)
                         .mapToBean(Product.class)
                         .findFirst()
                         .orElse(null)
+        );
+        
+        // Load ảnh phụ nếu product tồn tại
+        if (product != null) {
+            List<ProductImage> images = getProductImages(id);
+            product.setProductImages(images);
+        }
+        
+        return product;
+    }
+    
+    // Lấy danh sách ảnh phụ của sản phẩm
+    public List<ProductImage> getProductImages(int productId) {
+        String sql = "SELECT id, product_id AS productId, image_url AS imageUrl, sort_order AS sortOrder " +
+                     "FROM product_images WHERE product_id = ? ORDER BY sort_order ASC";
+        
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind(0, productId)
+                        .mapToBean(ProductImage.class)
+                        .list()
         );
     }
 

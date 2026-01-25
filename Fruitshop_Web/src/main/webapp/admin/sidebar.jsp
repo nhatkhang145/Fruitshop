@@ -14,6 +14,9 @@
         <li class="${param.activePage == 'products' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/products"><i class='bx bx-basket'></i>Quản lý sản phẩm</a>
         </li>
+        <li class="${param.activePage == 'weekend-deals' ? 'active' : ''}">
+            <a href="${pageContext.request.contextPath}/admin/weekend-deals"><i class='bx bxs-discount'></i>Weekend Deals</a>
+        </li>
         <li class="${param.activePage == 'categories' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/categories"><i class='bx bx-category'></i>Quản lý danh mục</a>
         </li>
@@ -25,9 +28,6 @@
         </li>
         <li class="${param.activePage == 'banners' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/banners"><i class='bx bx-images'></i>Quản lý Banner</a>
-        </li>
-        <li class="${param.activePage == 'coupons' ? 'active' : ''}">
-            <a href="${pageContext.request.contextPath}/admin/coupons"><i class='bx bx-purchase-tag-alt'></i>Mã giảm giá</a>
         </li>
         <li class="${param.activePage == 'reviews' ? 'active' : ''}">
             <a href="${pageContext.request.contextPath}/admin/reviews.jsp"><i class='bx bx-star'></i>Đánh giá</a>

@@ -1,7 +1,9 @@
 package controller;
 
+import dal.WeekendDealDAO;
 import dal.WishlistDAO;
 import model.User;
+import model.WeekendDeal;
 import model.WishlistItem;
 
 import jakarta.servlet.ServletException;
@@ -11,7 +13,9 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import jakarta.servlet.http.HttpSession;
 import java.io.IOException;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 @WebServlet(name = "WishlistServlet", urlPatterns = {"/wishlist"})
 public class WishlistServlet extends HttpServlet {
@@ -36,7 +40,19 @@ public class WishlistServlet extends HttpServlet {
         if (action == null || action.equals("view")) {
             // --- VIEW: Hiển thị danh sách ---
             List<WishlistItem> list = dao.getWishlistByUserId(user.getId());
+            
+            // Lấy weekend deals cho các sản phẩm trong wishlist
+            WeekendDealDAO dealDAO = new WeekendDealDAO();
+            Map<Integer, WeekendDeal> dealsMap = new HashMap<>();
+            for (WishlistItem item : list) {
+                WeekendDeal deal = dealDAO.getActiveDealByProductId(item.getProduct().getId());
+                if (deal != null) {
+                    dealsMap.put(item.getProduct().getId(), deal);
+                }
+            }
+            
             request.setAttribute("wishlist", list);
+            request.setAttribute("weekendDeals", dealsMap);
             request.getRequestDispatcher("wishlist.jsp").forward(request, response);
 
         } else if (action.equals("add")) {

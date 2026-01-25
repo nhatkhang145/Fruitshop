@@ -39,7 +39,7 @@ public class RemoveCartServlet extends HttpServlet {
                 // Tính lại tổng tiền
                 double totalMoney = 0;
                 for (CartItem item : cart) {
-                    totalMoney += item.getTotalPrice();
+                    totalMoney += item.getTotalPrice().doubleValue();
                 }
                 session.setAttribute("totalMoney", totalMoney);
                 session.setAttribute("size", cart.size()); // Cập nhật số lượng item trên icon giỏ
