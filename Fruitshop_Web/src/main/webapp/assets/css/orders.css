@@ -1,336 +1,147 @@
-/* =========================================
-   ORDER HISTORY STYLES
-   ========================================= */
+/* ========================================================= */
+/* === FILE CSS: Order.css (Đã sửa lỗi mất màu Header) === */
+/* ========================================================= */
 
-/* Reset Padding cho trang đơn hàng để full width */
-.order-content {
-  padding: 0;
-  background: transparent;
-  box-shadow: none;
-}
-
-/* --- 1. TABS --- */
-.order-tabs {
-  display: flex;
-  background: #fff;
-  margin-bottom: 12px;
-  border-radius: 2px;
-  overflow-x: auto; /* Cho phép cuộn ngang trên mobile */
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.05);
-}
-
-.order-tab {
-  flex: 1;
-  text-align: center;
-  padding: 16px 0;
-  font-size: 1.4rem;
-  color: var(--text-dark);
-  border-bottom: 2px solid transparent;
-  transition: color 0.3s, border-color 0.3s;
-  white-space: nowrap;
-  padding: 16px 20px;
-}
-
-.order-tab:hover,
-.order-tab.active {
-  color: var(--primary-color);
-  border-bottom-color: var(--primary-color);
-}
-
-/* --- 2. SEARCH BAR --- */
-.order-search-bar {
-  position: relative;
-  background: #eaeaea;
-  padding: 12px;
-  margin-bottom: 12px;
-  border-radius: 2px;
-}
-
-.order-search-bar i {
-  position: absolute;
-  left: 25px;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #999;
-  font-size: 1.4rem;
-}
-
-.order-search-bar input {
-  width: 100%;
-  padding: 10px 10px 10px 45px;
-  border: 1px solid transparent;
-  border-radius: 2px;
-  outline: none;
-  font-size: 1.4rem;
-}
-
-.order-search-bar input:focus {
-  border-color: #ccc;
-}
-
-/* --- 3. ORDER CARD (Từng đơn hàng) --- */
-.order-card {
-  background: #fff;
-  margin-bottom: 12px;
-  border-radius: 2px;
-  box-shadow: 0 1px 1px 0 rgba(0,0,0,0.05);
-}
-
-/* Header Card */
-.order-card__header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 20px 24px;
-  border-bottom: 1px solid #eaeaea;
-}
-
-.shop-info {
-  display: flex;
-  align-items: center;
-  gap: 10px;
-}
-
-.shop-name {
+/* 1. Ép cứng màu xanh cho Header bảng Order */
+/* Sử dụng ID #ordersTable để trỏ đích danh bảng này */
+#ordersTable thead th {
+  background-color: #37878d !important; /* Mã màu xanh cổ vịt giống trang Product */
+  color: #ffffff !important;             /* Chữ màu trắng */
+  padding: 15px 10px !important;
   font-weight: 600;
-  font-size: 1.4rem;
-}
-
-.btn-chat {
-  background: #3d8b91;
-  color: #fff;
-  border: none;
-  padding: 4px 10px;
-  border-radius: 2px;
-  font-size: 1.2rem;
-  cursor: pointer;
-}
-
-.order-status {
-  font-size: 1.4rem;
   text-transform: uppercase;
+  font-size: 13px;
+  border-bottom: none !important;
+  white-space: nowrap; /* Không xuống dòng tiêu đề */
 }
 
-/* Màu sắc trạng thái */
-.status-completed { color: #2fb45a; } /* Xanh lá */
-.status-shipping { color: #26aa99; }  /* Xanh ngọc */
-.status-cancelled { color: #ee4d2d; } /* Đỏ cam */
-
-/* Body Card */
-.order-card__body {
-  padding: 0 24px;
+/* Bo tròn góc trái và phải của header */
+#ordersTable thead th:first-child {
+  border-top-left-radius: 10px;
+}
+#ordersTable thead th:last-child {
+  border-top-right-radius: 10px;
 }
 
-.order-item {
-  display: flex;
-  padding: 15px 0;
-  border-bottom: 1px solid #eaeaea;
-  align-items: center;
+/* 2. Cấu hình chung cho DataTables */
+.dataTables_wrapper {
+  padding: 10px 0;
+  font-family: 'Roboto', sans-serif;
+  color: #333;
 }
 
-.order-item:last-child {
-  border-bottom: none;
-}
-
-.item-thumb {
-  width: 80px;
-  height: 80px;
-  object-fit: cover;
-  border: 1px solid #e1e1e1;
-  margin-right: 15px;
-}
-
-.item-info {
-  flex: 1;
-}
-
-.item-name {
-  font-size: 1.5rem;
-  color: var(--text-dark);
-  margin: 0 0 5px;
-  font-weight: 500;
-  line-height: 1.4;
-}
-
-.item-variant {
-  font-size: 1.3rem;
-  color: #888;
-  margin: 0 0 5px;
-}
-
-.item-qty {
-  font-size: 1.3rem;
-  color: var(--text-dark);
-  margin: 0;
-}
-
-.item-price {
-  text-align: right;
-}
-
-.old-price {
-  display: block;
-  text-decoration: line-through;
-  color: #888;
-  font-size: 1.3rem;
-  margin-bottom: 4px;
-}
-
-.new-price {
-  display: block;
-  color: var(--primary-brand-color);
-  font-size: 1.4rem;
-  font-weight: 600;
-}
-
-/* Footer Card */
-.order-card__footer {
-  padding: 24px;
-  background: #fffdf8; /* Màu nền nhẹ cho footer */
-  border-top: 1px solid #eaeaea;
-}
-
-.total-money {
-  text-align: right;
-  font-size: 1.4rem;
+/* Thanh tìm kiếm và chọn số lượng dòng */
+.dataTables_length,
+.dataTables_filter {
   margin-bottom: 20px;
 }
 
-.total-money span {
-  font-size: 2rem;
-  color: var(--primary-brand-color);
-  font-weight: 600;
+.dataTables_length select {
+  padding: 6px 10px;
+  border: 1px solid #ddd;
+  border-radius: 8px;
+  background: #f9f9f9;
+  outline: none;
+}
+
+.dataTables_filter input {
+  padding: 8px 15px;
+  border: 1px solid #ddd;
+  border-radius: 20px; /* Bo tròn ô tìm kiếm */
+  outline: none;
   margin-left: 10px;
 }
 
-.action-buttons {
+.dataTables_filter input:focus {
+  border-color: #37878d;
+  box-shadow: 0 0 5px rgba(55, 135, 141, 0.2);
+}
+
+/* 3. Dữ liệu trong bảng (Tbody) */
+table.dataTable {
+  border-collapse: collapse !important;
+  width: 100% !important;
+  margin-top: 0 !important;
+  border-bottom: 1px solid #eee;
+}
+
+table.dataTable tbody td {
+  padding: 15px 10px !important;
+  vertical-align: middle;
+  font-size: 14px;
+  color: #333;
+  border-bottom: 1px solid #eee;
+}
+
+/* Hiệu ứng di chuột vào dòng */
+table.dataTable tbody tr:hover {
+  background-color: #f1f8ff !important;
+  cursor: default;
+}
+
+/* 4. Phân trang (Pagination) */
+.dataTables_paginate {
+  margin-top: 20px;
   display: flex;
   justify-content: flex-end;
-  gap: 10px;
+  gap: 5px;
 }
 
-/* Buttons Styles (Ghi đè hoặc thêm mới) */
-.btn {
-  min-width: 140px;
-  padding: 10px 0;
-  text-align: center;
-  border-radius: 4px;
-  font-size: 1.4rem;
+.dataTables_paginate .paginate_button {
+  padding: 6px 12px !important;
+  border-radius: 6px !important;
+  border: 1px solid transparent !important;
+  font-size: 13px;
+  color: #333 !important;
   cursor: pointer;
-  text-decoration: none;
-  display: inline-block;
-  transition: all 0.2s;
+  background: transparent !important;
 }
 
-.btn-primary {
-  background-color: var(--primary-color);
-  color: #fff;
-  border: 1px solid var(--primary-color);
-}
-.btn-primary:hover {
-  opacity: 0.9;
+.dataTables_paginate .paginate_button:hover {
+  background: #eee !important;
+  color: #000 !important;
 }
 
-.btn-outline {
-  background-color: #fff;
-  color: #555;
-  border: 1px solid #dbdbdb;
-}
-.btn-outline:hover {
-  background-color: #f8f8f8;
-  border-color: #ccc;
-}
-
-.btn-disabled {
-  background-color: #ccc;
-  color: #fff;
+/* Trang đang chọn (Active) */
+.dataTables_paginate .paginate_button.current,
+.dataTables_paginate .paginate_button.current:hover {
+  background: #37878d !important; /* Màu xanh trùng header */
+  color: #fff !important;
   border: none;
-  cursor: not-allowed;
+  font-weight: bold;
 }
 
-/* Responsive */
-@media (max-width: 768px) {
-  .order-item {
-    flex-direction: column;
-    align-items: flex-start;
-    position: relative;
-  }
-  
-  .item-thumb {
-    width: 60px;
-    height: 60px;
-    margin-bottom: 10px;
-  }
-
-  .item-price {
-    text-align: left;
-    margin-top: 5px;
-  }
-
-  .action-buttons {
-    flex-direction: column;
-  }
-  
-  .btn {
-    width: 100%;
-  }
-}
-
-/* =========================================
-   ORDERS TABS (Cho trang orders.jsp)
-   ========================================= */
-.orders-tabs {
-  display: flex;
-  background: #fff;
-  margin-bottom: 20px;
-  border-radius: 4px;
-  overflow-x: auto;
-  box-shadow: 0 1px 2px rgba(0,0,0,0.1);
-  border-bottom: 2px solid #f0f0f0;
-}
-
-.orders-tabs .tab-item {
-  flex: 1;
-  text-align: center;
-  padding: 16px 20px;
-  font-size: 14px;
-  color: #666;
-  text-decoration: none;
-  border-bottom: 3px solid transparent;
-  transition: all 0.3s ease;
-  white-space: nowrap;
-  position: relative;
-  font-weight: 500;
-}
-
-.orders-tabs .tab-item:hover {
-  color: var(--primary-color);
-  background: #f8f8f8;
-}
-
-.orders-tabs .tab-item.active {
-  color: var(--primary-color);
-  border-bottom-color: var(--primary-color);
+/* 5. Badge Trạng thái (Màu sắc từng loại) */
+.status {
+  padding: 6px 12px;
+  border-radius: 20px;
+  font-size: 12px;
   font-weight: 600;
-}
-
-.orders-tabs .tab-item .badge {
   display: inline-block;
-  background: #ee4d2d;
-  color: #fff;
-  font-size: 11px;
-  padding: 2px 6px;
-  border-radius: 10px;
-  margin-left: 5px;
-  font-weight: 600;
-  min-width: 18px;
-  text-align: center;
 }
+.status.pending { background: #fef3c7; color: #b45309; }     /* Chờ xử lý: Vàng */
+.status.processing { background: #e0f2fe; color: #0369a1; }  /* Đang xử lý: Xanh dương */
+.status.shipped { background: #ddd6fe; color: #6d28d9; }     /* Đang giao: Tím */
+.status.completed { background: #d1fae5; color: #047857; }   /* Hoàn thành: Xanh lá */
+.status.cancelled { background: #fee2e2; color: #b91c1c; }   /* Hủy: Đỏ */
 
-/* Responsive cho tabs */
-@media (max-width: 768px) {
-  .orders-tabs .tab-item {
-    padding: 12px 10px;
-    font-size: 13px;
-  }
+/* 6. Nút Hành động (Action Buttons) */
+.action-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 35px;
+  height: 35px;
+  border-radius: 5px;
+  font-size: 18px;
+  text-decoration: none;
+  transition: 0.3s;
+}
+.action-btn.view {
+  background-color: #e0f2fe;
+  color: #0369a1;
+}
+.action-btn.view:hover {
+  background-color: #0369a1;
+  color: #fff;
 }

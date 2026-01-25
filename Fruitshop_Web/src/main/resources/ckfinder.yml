@@ -1,0 +1,89 @@
+enabled: true
+licenseName: localhost
+licenseKey: ~
+roleSessionAttribute: 'CKFinder_UserRole'
+serveStaticResources: true
+checkSizeAfterScaling: true
+secureImageUploads: true
+csrfProtection: true
+
+backends:
+  - name: 'default'
+    adapter: 'local'
+    baseUrl: '/Fruitshop_Web/uploads/'
+    root: 'c:/Users/Admin/Documents/LTW/Fruitshop/Fruitshop_Web/src/main/webapp/uploads'
+    disallowUnsafeCharacters: true
+    forceAscii: false
+    hideFolders: ['.*', 'CVS', '__thumbs']
+    hideFiles: ['.*']
+    htmlExtensions: ['html', 'htm', 'xml', 'js']
+    overwriteOnUpload: false
+    useProxyCommand: false
+
+resourceTypes:
+  - name: 'Files'
+    backend: 'default'
+    directory: '/files'
+    allowedExtensions: 7z,aiff,asf,avi,bmp,csv,doc,docx,fla,flv,gif,gz,gzip,jpeg,jpg,mid,mov,mp3,mp4,mpc,mpeg,mpg,ods,odt,pdf,png,ppt,pptx,pxd,qt,ram,rar,rm,rmi,rmvb,rtf,sdc,sitd,swf,sxc,sxw,tar,tgz,tif,tiff,txt,vsd,wav,wma,wmv,xls,xlsx,zip
+    deniedExtensions: ~
+    maxSize: 0
+  - name: 'Images'
+    backend: 'default'
+    directory: '/images'
+    allowedExtensions: bmp,gif,jpeg,jpg,png,webp
+    deniedExtensions: ~
+    maxSize: 0
+  - name: 'Products'
+    backend: 'default'
+    directory: '/products'
+    allowedExtensions: jpg,jpeg,png,webp
+    deniedExtensions: ~
+    maxSize: 5242880
+  - name: 'Reviews'
+    backend: 'default'
+    directory: '/reviews'
+    allowedExtensions: jpg,jpeg,png
+    deniedExtensions: ~
+    maxSize: 3145728
+  - name: 'Avatars'
+    backend: 'default'
+    directory: '/avatars'
+    allowedExtensions: jpg,jpeg,png
+    deniedExtensions: ~
+    maxSize: 2097152
+
+privateDir:
+  backend: 'default'
+  path: '.ckfinder/'
+
+thumbnails:
+  enabled: true
+  sizes:
+    - width: 150
+      height: 150
+      quality: 80
+
+images:
+  maxWidth: 1600
+  maxHeight: 1200
+  quality: 80
+
+cache:
+  imagePreview: 86400
+  thumbnails: 31536000
+  proxyCommand: 0
+
+accessControl:
+  - role: '*'
+    resourceType: '*'
+    folder: /
+    FOLDER_VIEW: true
+    FOLDER_CREATE: true
+    FOLDER_RENAME: true
+    FOLDER_DELETE: true
+    FILE_VIEW: true
+    FILE_CREATE: true
+    FILE_RENAME: true
+    FILE_DELETE: true
+    IMAGE_RESIZE: true
+    IMAGE_RESIZE_CUSTOM: true
