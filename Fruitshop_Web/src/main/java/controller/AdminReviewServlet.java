@@ -26,7 +26,7 @@ public class AdminReviewServlet extends HttpServlet {
             } else if ("hide".equals(action)) {
                 dao.updateStatus(id, "hidden");
             } else if ("show".equals(action)) {
-                dao.updateStatus(id, "visible");
+                dao.updateStatus(id, "approved");
             } else if ("delete".equals(action)) {
                 dao.deleteReview(id);
             }
