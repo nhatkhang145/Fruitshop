@@ -309,4 +309,14 @@ public class ProductDAO {
                 handle.createQuery("SELECT COUNT(*) FROM products").mapTo(Integer.class).one()
         );
     }
+
+    public List<Product> getLowStockProducts(int threshold) {
+        String sql = "SELECT * FROM products WHERE quantity <= :threshold AND status = 1 ORDER BY quantity ASC LIMIT 5";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .bind("threshold", threshold)
+                        .mapToBean(Product.class)
+                        .list()
+        );
+    }
 }

@@ -4,6 +4,8 @@ import model.Order;
 import model.OrderItem;
 import model.Product;
 
+import java.time.LocalDate;
+import java.time.temporal.ChronoUnit;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -224,23 +226,6 @@ public class OrderDAO {
     }
 
     /**
-     * Cập nhật trạng thái đơn hàng
-     * @param orderId ID đơn hàng
-     * @param status Trạng thái mới
-     * @return true nếu thành công
-     */
-    public boolean updateOrderStatus(int orderId, String status) {
-        String sql = "UPDATE orders SET status = :status WHERE id = :orderId";
-
-        return DBContext.get().withHandle(handle ->
-                handle.createUpdate(sql)
-                        .bind("orderId", orderId)
-                        .bind("status", status)
-                        .execute() > 0
-        );
-    }
-
-    /**
      * Hủy đơn hàng
      * @param orderId ID đơn hàng
      * @param userId ID user (để verify quyền)
@@ -288,12 +273,12 @@ public class OrderDAO {
 
 
     // 3. Cập nhật trạng thái đơn hàng (cho chức năng Duyệt/Hủy đơn)
-    public void updateStatus(int orderId, int status) {
-        String sql = "UPDATE orders SET status = ? WHERE id = ?";
-        DBContext.get().withHandle(handle ->
+    public void updateStatus(int orderId, String status) {
+        String sql = "UPDATE orders SET status = :status WHERE id = :id";
+        DBContext.get().useHandle(handle ->
                 handle.createUpdate(sql)
-                        .bind(0, status)
-                        .bind(1, orderId)
+                        .bind("status", status)
+                        .bind("id", orderId)
                         .execute()
         );
     }
@@ -312,9 +297,10 @@ public class OrderDAO {
     // Thống kê: Tính tổng doanh thu (chỉ tính đơn đã hoàn thành)
     public double getTotalRevenue() {
         String sql = "SELECT SUM(final_amount) FROM orders WHERE status = 'completed'";
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(sql).mapTo(Double.class).findFirst().orElse(0.0)
-        );
+        return DBContext.get().withHandle(handle -> {
+            Double total = handle.createQuery(sql).mapTo(Double.class).findFirst().orElse(0.0);
+            return total != null ? total : 0.0;
+        });
     }
 
     // Thống kê: Đếm tổng số đơn hàng
@@ -375,4 +361,68 @@ public class OrderDAO {
                         ))
         );
     }
+
+    // Lấy 5 đơn hàng gần nhất
+    public List<Order> getTop5RecentOrders() {
+        String sql = "SELECT * FROM orders ORDER BY created_at DESC LIMIT 5";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql)
+                        .map((rs, ctx) -> {
+                            Order o = new Order();
+                            o.setId(rs.getInt("id"));
+                            o.setFullname(rs.getString("fullname"));
+                            o.setFinalAmount(rs.getDouble("final_amount"));
+                            o.setStatus(rs.getString("status"));
+                            o.setCreatedAt(rs.getTimestamp("created_at"));
+                            return o;
+                        }).list()
+        );
+    }
+
+    // Đếm khách hàng
+    public int countTotalUsers() {
+        String sql = "SELECT COUNT(*) FROM users WHERE role = 0";
+        return DBContext.get().withHandle(handle ->
+                handle.createQuery(sql).mapTo(Integer.class).one()
+        );
+    }
+
+    // Lấy doanh thu theo thời gian
+    public List<Double> getRevenueByPeriod(String startDate, String endDate) {
+        List<Double> revenues = new ArrayList<>();
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+
+        // Tính số ngày giữa 2 khoảng để chạy vòng lặp
+        long daysBetween = ChronoUnit.DAYS.between(start, end);
+
+        for (int i = 0; i <= daysBetween; i++) {
+            LocalDate current = start.plusDays(i);
+            String sql = "SELECT SUM(final_amount) FROM orders " +
+                    "WHERE status = 'completed' AND DATE(created_at) = :date";
+
+            Double dayTotal = DBContext.get().withHandle(handle ->
+                    handle.createQuery(sql)
+                            .bind("date", current.toString())
+                            .mapTo(Double.class)
+                            .findFirst().orElse(0.0));
+
+            revenues.add(dayTotal != null ? dayTotal : 0.0);
+        }
+        return revenues;
+    }
+
+    public List<String> getLabelsByPeriod(String startDate, String endDate) {
+        List<String> labels = new ArrayList<>();
+        LocalDate start = LocalDate.parse(startDate);
+        LocalDate end = LocalDate.parse(endDate);
+        long daysBetween = ChronoUnit.DAYS.between(start, end);
+
+        for (int i = 0; i <= daysBetween; i++) {
+            labels.add(start.plusDays(i).format(java.time.format.DateTimeFormatter.ofPattern("dd/MM")));
+        }
+        return labels;
+    }
+
+
 }
