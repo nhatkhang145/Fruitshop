@@ -34,6 +34,14 @@ public class AdminOrderDetailServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        // Xử lý cập nhật trạng thái đơn hàng
+        int orderId = Integer.parseInt(req.getParameter("orderId"));
+        String status = req.getParameter("status");
+
+        orderDAO.updateStatus(orderId, status);
+
+        // Quay lại trang chi tiết
+        resp.sendRedirect("order-detail?id=" + orderId);
         try {
             // Lấy ID đơn hàng
             int orderId = Integer.parseInt(req.getParameter("orderId"));

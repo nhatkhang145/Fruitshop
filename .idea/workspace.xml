@@ -5,8 +5,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccecc6d3-cfa5-459e-bf2a-f514fca24552" name="Changes" comment="">
+      <change afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/controller/AdminDashboardServlet.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/FruitShop_Web/src/main/webapp/shop.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/FruitShop_Web/src/main/webapp/shop.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/controller/AdminOrderDetailServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/controller/AdminOrderDetailServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/dal/OrderDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/dal/OrderDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/dal/ProductDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/dal/ProductDAO.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/admin/index.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/admin/index.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

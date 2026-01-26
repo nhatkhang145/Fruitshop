@@ -85,4 +85,9 @@ public class Address {
     public void setDefault(boolean isDefault) {
         this.isDefault = isDefault;
     }
+
+    // Chỉ dùng cách này nếu biến isDefault là kiểu int (số)
+    public boolean getIsDefault() {
+        return isDefault;
+    }
 }
