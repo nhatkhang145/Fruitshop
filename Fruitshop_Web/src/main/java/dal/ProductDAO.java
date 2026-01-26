@@ -10,22 +10,18 @@ public class ProductDAO {
     public List<Product> getAllProducts() {
         // SỬA: short_description AS description (để khớp với file Model)
         String sql = "SELECT id, name, price,sale_price, quantity, short_description AS description, image, category_id AS categoryId FROM products";
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(sql)
-                        .mapToBean(Product.class)
-                        .list()
-        );
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
+                .mapToBean(Product.class)
+                .list());
     }
 
     // 2. Lấy sản phẩm theo Category ID
     public List<Product> getProductsByCategoryID(int cid) {
         String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products WHERE category_id = ?";
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind(0, cid)
-                        .mapToBean(Product.class)
-                        .list()
-        );
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
+                .bind(0, cid)
+                .mapToBean(Product.class)
+                .list());
     }
 
     // 3. Lấy chi tiết 1 sản phẩm
@@ -40,36 +36,32 @@ public class ProductDAO {
                 "       image, " +
                 "       category_id AS categoryId, " +
                 "       status " +
-                "FROM products WHERE id = ?";        
-        
-        Product product = DBContext.get().withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind(0, id)
-                        .mapToBean(Product.class)
-                        .findFirst()
-                        .orElse(null)
-        );
-        
+                "FROM products WHERE id = ?";
+
+        Product product = DBContext.get().withHandle(handle -> handle.createQuery(sql)
+                .bind(0, id)
+                .mapToBean(Product.class)
+                .findFirst()
+                .orElse(null));
+
         // Load ảnh phụ nếu product tồn tại
         if (product != null) {
             List<ProductImage> images = getProductImages(id);
             product.setProductImages(images);
         }
-        
+
         return product;
     }
-    
+
     // Lấy danh sách ảnh phụ của sản phẩm
     public List<ProductImage> getProductImages(int productId) {
         String sql = "SELECT id, product_id AS productId, image_url AS imageUrl, sort_order AS sortOrder " +
-                     "FROM product_images WHERE product_id = ? ORDER BY sort_order ASC";
-        
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind(0, productId)
-                        .mapToBean(ProductImage.class)
-                        .list()
-        );
+                "FROM product_images WHERE product_id = ? ORDER BY sort_order ASC";
+
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
+                .bind(0, productId)
+                .mapToBean(ProductImage.class)
+                .list());
     }
 
     // ================== PHẦN PHÂN TRANG ==================
@@ -77,11 +69,9 @@ public class ProductDAO {
     // 4. Đếm tổng số lượng sản phẩm (Giữ nguyên)
     public int countAll() {
         String sql = "SELECT COUNT(*) FROM products";
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(sql)
-                        .mapTo(Integer.class)
-                        .one()
-        );
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
+                .mapTo(Integer.class)
+                .one());
     }
 
     // 5. Phân trang
@@ -89,49 +79,81 @@ public class ProductDAO {
         String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products ORDER BY id LIMIT ?, 6";
         int offset = (index - 1) * 6;
 
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind(0, offset)
-                        .mapToBean(Product.class)
-                        .list()
-        );
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
+                .bind(0, offset)
+                .mapToBean(Product.class)
+                .list());
     }
-// ================== PHẦN ADMIN CRUD ==================
+    // ================== PHẦN ADMIN CRUD ==================
 
     // 6. Thêm sản phẩm mới (Create)
     public int insert(Product p) {
-        String sql = "INSERT INTO products (name, product_code, price, sale_price, quantity, short_description, image, category_id, status) " +
+        String sql = "INSERT INTO products (name, product_code, price, sale_price, quantity, short_description, image, category_id, status) "
+                +
                 "VALUES (:name, :productCode, :price, :salePrice, :quantity, :description, :image, :categoryId, :status)";
 
-        return DBContext.get().withHandle(handle ->
-                handle.createUpdate(sql)
-                        .bindBean(p) // Tự động map các getter trong Product với param :name, :price...
-                        .execute()
-        );
+        return DBContext.get().withHandle(handle -> handle.createUpdate(sql)
+                .bindBean(p) // Tự động map các getter trong Product với param :name, :price...
+                .executeAndReturnGeneratedKeys("id")
+                .mapTo(Integer.class)
+                .one());
     }
 
     // 7. Cập nhật sản phẩm (Update)
     public int update(Product p) {
-        String sql = "UPDATE products SET name = :name, product_code = :productCode, price = :price, sale_price = :salePrice, " +
-                "quantity = :quantity, short_description = :description, image = :image, category_id = :categoryId, status = :status " +
+        String sql = "UPDATE products SET name = :name, product_code = :productCode, price = :price, sale_price = :salePrice, "
+                +
+                "quantity = :quantity, short_description = :description, image = :image, category_id = :categoryId, status = :status "
+                +
                 "WHERE id = :id";
 
-        return DBContext.get().withHandle(handle ->
-                handle.createUpdate(sql)
-                        .bindBean(p)
-                        .execute()
-        );
+        return DBContext.get().withHandle(handle -> handle.createUpdate(sql)
+                .bindBean(p)
+                .execute());
     }
 
     // 8. Xóa sản phẩm (Delete)
     public int delete(int id) {
         String sql = "DELETE FROM products WHERE id = ?";
 
-        return DBContext.get().withHandle(handle ->
-                handle.createUpdate(sql)
-                        .bind(0, id)
-                        .execute()
-        );
+        return DBContext.get().withHandle(handle -> handle.createUpdate(sql)
+                .bind(0, id)
+                .execute());
+    }
+
+    public void deleteProductImages(int productId) {
+        String sql = "DELETE FROM product_images WHERE product_id = ?";
+        DBContext.get().useHandle(handle -> handle.createUpdate(sql)
+                .bind(0, productId)
+                .execute());
+    }
+
+    public int getMaxProductImageOrder(int productId) {
+        String sql = "SELECT COALESCE(MAX(sort_order), 0) FROM product_images WHERE product_id = ?";
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
+                .bind(0, productId)
+                .mapTo(Integer.class)
+                .one());
+    }
+
+    public void insertProductImages(int productId, List<String> imageUrls, int startOrder) {
+        if (imageUrls == null || imageUrls.isEmpty()) {
+            return;
+        }
+
+        String sql = "INSERT INTO product_images (product_id, image_url, sort_order) VALUES (:productId, :imageUrl, :sortOrder)";
+
+        DBContext.get().useHandle(handle -> {
+            var batch = handle.prepareBatch(sql);
+            int order = startOrder;
+            for (String url : imageUrls) {
+                batch.bind("productId", productId)
+                        .bind("imageUrl", url)
+                        .bind("sortOrder", order++)
+                        .add();
+            }
+            batch.execute();
+        });
     }
 
     // Đếm tổng số sản phẩm sau khi lọc
@@ -151,9 +173,12 @@ public class ProductDAO {
 
         return DBContext.get().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
-            if (cid != null) query.bind("cid", cid);
-            if (minPrice != null) query.bind("min", minPrice);
-            if (maxPrice != null) query.bind("max", maxPrice);
+            if (cid != null)
+                query.bind("cid", cid);
+            if (minPrice != null)
+                query.bind("min", minPrice);
+            if (maxPrice != null)
+                query.bind("max", maxPrice);
             return query.mapTo(Integer.class).one();
         });
     }
@@ -165,7 +190,8 @@ public class ProductDAO {
         // 1. SELECT CƠ BẢN
         sql.append("SELECT p.id, p.name, p.product_code AS productCode, p.price, ")
                 .append("p.sale_price AS salePrice, p.quantity, p.short_description AS description, ")
-                .append("p.image, p.category_id AS categoryId, p.status, p.created_at, p.views ") // Thêm created_at, views để sort
+                .append("p.image, p.category_id AS categoryId, p.status, p.created_at, p.views ") // Thêm created_at,
+                                                                                                  // views để sort
                 .append("FROM products p ");
 
         // 2. JOIN NẾU CẦN (Cho chức năng Bán chạy)
@@ -190,7 +216,8 @@ public class ProductDAO {
 
         // 4. GOM NHÓM (GROUP BY) - Bắt buộc nếu có JOIN
         if ("best_sell".equals(sortType)) {
-            sql.append(" GROUP BY p.id, p.name, p.product_code, p.price, p.sale_price, p.quantity, p.short_description, p.image, p.category_id, p.status, p.created_at, p.views ");
+            sql.append(
+                    " GROUP BY p.id, p.name, p.product_code, p.price, p.sale_price, p.quantity, p.short_description, p.image, p.category_id, p.status, p.created_at, p.views ");
         }
 
         // 5. SẮP XẾP (ORDER BY) - Đầy đủ các trường hợp
@@ -200,13 +227,13 @@ public class ProductDAO {
                     sql.append(" ORDER BY SUM(od.quantity) DESC "); // Tổng số lượng bán giảm dần
                     break;
                 case "new":
-                    sql.append(" ORDER BY p.created_at DESC ");     // Mới nhất
+                    sql.append(" ORDER BY p.created_at DESC "); // Mới nhất
                     break;
                 case "old":
-                    sql.append(" ORDER BY p.created_at ASC ");      // Cũ nhất
+                    sql.append(" ORDER BY p.created_at ASC "); // Cũ nhất
                     break;
                 case "popular":
-                    sql.append(" ORDER BY p.views DESC ");          // Xem nhiều nhất
+                    sql.append(" ORDER BY p.views DESC "); // Xem nhiều nhất
                     break;
                 case "price_asc":
                     sql.append(" ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) ASC ");
@@ -232,9 +259,12 @@ public class ProductDAO {
         return DBContext.get().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
 
-            if (cid != null) query.bind("cid", cid);
-            if (minPrice != null) query.bind("min", minPrice);
-            if (maxPrice != null) query.bind("max", maxPrice);
+            if (cid != null)
+                query.bind("cid", cid);
+            if (minPrice != null)
+                query.bind("min", minPrice);
+            if (maxPrice != null)
+                query.bind("max", maxPrice);
 
             query.bind("offset", (index - 1) * 6);
 
@@ -242,13 +272,12 @@ public class ProductDAO {
         });
     }
 
-
     // Tìm kiếm sản phẩm theo từ khóa và danh mục
     public List<Product> searchProducts(String keyword, String category) {
         StringBuilder sql = new StringBuilder(
-            "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
-            "FROM products WHERE status = 1"
-        );
+                "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId "
+                        +
+                        "FROM products WHERE status = 1");
 
         // Tìm kiếm theo từ khóa (tên sản phẩm hoặc mô tả)
         if (keyword != null && !keyword.trim().isEmpty()) {
@@ -284,55 +313,50 @@ public class ProductDAO {
 
     // Lấy sản phẩm mới nhất
     public List<Product> getNewestProducts(int limit) {
-        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
-                     "FROM products WHERE status = 1 ORDER BY id DESC LIMIT ?";
-        
-        return DBContext.get().withHandle(handle ->
-            handle.createQuery(sql)
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId "
+                +
+                "FROM products WHERE status = 1 ORDER BY id DESC LIMIT ?";
+
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
                 .bind(0, limit)
                 .mapToBean(Product.class)
-                .list()
-        );
+                .list());
     }
 
     // Lấy sản phẩm bán chạy
     public List<Product> getBestSellingProducts(int limit) {
         String sql = "SELECT p.id, p.name, p.price, p.sale_price AS salePrice, p.quantity, " +
-                     "p.short_description AS description, p.image, p.category_id AS categoryId " +
-                     "FROM products p " +
-                     "WHERE p.status = 1 " +
-                     "ORDER BY p.id DESC " +
-                     "LIMIT ?";
-        
-        return DBContext.get().withHandle(handle ->
-            handle.createQuery(sql)
+                "p.short_description AS description, p.image, p.category_id AS categoryId " +
+                "FROM products p " +
+                "WHERE p.status = 1 " +
+                "ORDER BY p.id DESC " +
+                "LIMIT ?";
+
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
                 .bind(0, limit)
                 .mapToBean(Product.class)
-                .list()
-        );
+                .list());
     }
 
     // Lấy sản phẩm có giảm giá
     public List<Product> getDiscountProducts(int limit) {
-        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId " +
-                     "FROM products " +
-                     "WHERE status = 1 AND sale_price > 0 AND sale_price < price " +
-                     "ORDER BY (price - sale_price) / price DESC " +
-                     "LIMIT ?";
-        
-        return DBContext.get().withHandle(handle ->
-            handle.createQuery(sql)
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId "
+                +
+                "FROM products " +
+                "WHERE status = 1 AND sale_price > 0 AND sale_price < price " +
+                "ORDER BY (price - sale_price) / price DESC " +
+                "LIMIT ?";
+
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
                 .bind(0, limit)
                 .mapToBean(Product.class)
-                .list()
-        );
+                .list());
     }
 
     // Thống kê: Đếm tổng số sản phẩm
     public int countTotalProducts() {
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery("SELECT COUNT(*) FROM products").mapTo(Integer.class).one()
-        );
+        return DBContext.get()
+                .withHandle(handle -> handle.createQuery("SELECT COUNT(*) FROM products").mapTo(Integer.class).one());
     }
 
     public List<Product> getLowStockProducts(int threshold) {

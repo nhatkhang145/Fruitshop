@@ -1,27 +1,31 @@
 package com.ckfinder.authentication;
 
 import com.cksource.ckfinder.authentication.Authenticator;
-import com.ckfinder.config.CustomConfig;
-import org.springframework.context.ApplicationContext;
-
 import jakarta.inject.Inject;
 import jakarta.inject.Named;
+import jakarta.servlet.http.HttpServletRequest;
+import jakarta.servlet.http.HttpSession;
+import model.User;
 
-/**
- * WARNING: Your authenticator should never simply return true. By doing so,
- * you are allowing "anyone" to upload and list the files on your server.
- * You should implement some kind of session validation mechanism to make
- * sure that only trusted users can upload or delete your files.
- */
 @Named
 public class ConfigBasedAuthenticator implements Authenticator {
+
     @Inject
-    private ApplicationContext applicationContext;
+    private HttpServletRequest request;
 
     @Override
     public boolean authenticate() {
-        CustomConfig config = applicationContext.getBean(CustomConfig.class);
+        HttpSession session = request.getSession(false);
+        if (session == null) {
+            return false;
+        }
 
-        return config.isEnabled();
+        Object userObj = session.getAttribute("user");
+        if (userObj instanceof User user) {
+            // Only allow admins into CKFinder.
+            return user.getRole() == 1;
+        }
+
+        return false;
     }
 }
