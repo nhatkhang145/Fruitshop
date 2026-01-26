@@ -19,12 +19,14 @@ public class VerifyOTPServlet extends HttpServlet {
         if (sessionOTP != null && sessionOTP.equals(enteredOTP)) {
             // Xóa OTP để không dùng được nữa
             session.removeAttribute("otp");
+            session.removeAttribute("otpType");
+            session.removeAttribute("otpEmail");
 
             session.setAttribute("isVerified", true);
             response.sendRedirect("reset_pass.jsp");
         } else {
             request.setAttribute("error", "Mã xác thực không đúng!");
-            request.getRequestDispatcher("OTP.jsp").forward(request, response);
+            request.getRequestDispatcher("verify-otp.jsp").forward(request, response);
         }
     }
 }

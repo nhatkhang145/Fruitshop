@@ -55,12 +55,21 @@ public class AdminBannerServlet extends HttpServlet {
         } catch (NumberFormatException e) { order = 0; }
 
         int status = request.getParameter("status") != null ? 1 : 0;
+        
+        // Lấy linkType và linkTarget
+        String linkType = request.getParameter("linkType");
+        String linkTarget = request.getParameter("linkTarget");
+        
+        // Nếu không có linkType, fallback về "none"
+        if (linkType == null || linkType.isEmpty()) {
+            linkType = "none";
+        }
 
         if ("add".equals(action)) {
             String fileName = uploadFile(request);
             String imageUrl = (fileName != null) ? UPLOAD_DIR + "/" + fileName : "";
 
-            Banner b = new Banner(0, title, description, imageUrl, link, order, status);
+            Banner b = new Banner(0, title, description, imageUrl, link, linkType, linkTarget, order, status);
             dao.insert(b);
 
         } else if ("update".equals(action)) {
@@ -71,7 +80,7 @@ public class AdminBannerServlet extends HttpServlet {
             // Nếu có upload ảnh mới thì dùng ảnh mới, không thì giữ ảnh cũ
             String finalImageUrl = (fileName != null && !fileName.isEmpty()) ? UPLOAD_DIR + "/" + fileName : oldImage;
 
-            Banner b = new Banner(id, title, description, finalImageUrl, link, order, status);
+            Banner b = new Banner(id, title, description, finalImageUrl, link, linkType, linkTarget, order, status);
             dao.update(b);
         }
 

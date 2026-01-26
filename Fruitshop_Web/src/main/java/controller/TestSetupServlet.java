@@ -66,7 +66,7 @@ public class TestSetupServlet extends HttpServlet {
         // 5. Tính tổng tiền
         double totalMoney = 0;
         for (CartItem item : mockCart) {
-            totalMoney += item.getTotalPrice();
+            totalMoney += item.getTotalPrice().doubleValue();
         }
         session.setAttribute("totalMoney", totalMoney);
         session.setAttribute("size", mockCart.size());

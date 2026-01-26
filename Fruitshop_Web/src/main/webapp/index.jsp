@@ -28,14 +28,21 @@
               <c:choose>
                 <c:when test="${not empty banners}">
                   <c:forEach items="${banners}" var="banner">
-                    <div class="slide-item">
+                    <%-- Xác định URL cho banner --%>
+                    <c:set var="bannerUrl" value="#" />
+                    <c:if test="${not empty banner.linkType and banner.linkType != 'none'}">
+                      <c:set var="bannerUrl" value="${banner.getFullUrl(pageContext.request.contextPath)}" />
+                    </c:if>
+                    <c:if test="${empty banner.linkType and not empty banner.link}">
+                      <c:set var="bannerUrl" value="${banner.link}" />
+                    </c:if>
+                    
+                    <%-- Toàn bộ slide-item có thể click --%>
+                    <div class="slide-item" onclick="window.location.href='${bannerUrl}'" style="cursor: ${bannerUrl != '#' ? 'pointer' : 'default'};">
                       <img src="${pageContext.request.contextPath}/${banner.imageUrl}" alt="${banner.title}" />
                       <div class="slide-caption">
                         <h2>${banner.title}</h2>
                         <p>${banner.description}</p>
-                        <c:if test="${not empty banner.link}">
-                          <a href="${banner.link}" class="slide-btn" style="display: inline-block; padding: 10px 25px; background: #4CAF50; color: white; text-decoration: none; border-radius: 25px; margin-top: 15px; font-weight: 500;">Xem ngay →</a>
-                        </c:if>
                       </div>
                     </div>
                   </c:forEach>
@@ -93,15 +100,29 @@
                     <c:choose>
                       <c:when test="${not empty newProducts}">
                         <c:forEach items="${newProducts}" var="product">
+                          <c:set var="weekendDeal" value="${weekendDealMap[product.id]}" />
                           <div class="product-card">
                             <div class="product-image">
                               <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">
                                 <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
                               </a>
 
-                              <c:if test="${product.salePrice > 0 && product.salePrice < product.price}">
-                                <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
-                              </c:if>
+                              <%-- Hiển thị badge discount --%>
+                              <c:choose>
+                                <%-- Ưu tiên 1: Weekend Deal badge --%>
+                                <c:when test="${not empty weekendDeal}">
+                                  <div class="product-badge sale" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">-${weekendDeal.discountPercent}%</div>
+                                  <c:if test="${not empty weekendDeal.tag}">
+                                    <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
+                                      <span class="product-tag">${weekendDeal.tag}</span>
+                                    </div>
+                                  </c:if>
+                                </c:when>
+                                <%-- Ưu tiên 2: Sale thường badge --%>
+                                <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
+                                  <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
+                                </c:when>
+                              </c:choose>
 
                               <div class="product-actions">
                                 <c:set var="isLiked" value="${likedIds.contains(product.id)}" />
@@ -111,9 +132,18 @@
                                 <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" title="Xem nhanh">
                                   <i class="far fa-eye"></i>
                                 </a>
-                                <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
-                                  <i class="fas fa-shopping-basket"></i>
-                                </button>
+                                <c:choose>
+                                  <c:when test="${product.quantity == 0}">
+                                    <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" style="opacity: 0.5; cursor: not-allowed;" title="Hết hàng">
+                                      <i class="fas fa-shopping-basket"></i>
+                                    </a>
+                                  </c:when>
+                                  <c:otherwise>
+                                    <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
+                                      <i class="fas fa-shopping-basket"></i>
+                                    </button>
+                                  </c:otherwise>
+                                </c:choose>
                               </div>
                             </div>
 
@@ -132,15 +162,29 @@
 
                               <div class="price">
                                 <c:choose>
+                                  <%-- Kiểm tra hết hàng trước --%>
+                                  <c:when test="${product.quantity == 0}">
+                                    <span class="current" style="color: #999; font-weight: 600;">Hết hàng</span>
+                                  </c:when>
+                                  <%-- Ưu tiên 1: Weekend Deal price --%>
+                                  <c:when test="${not empty weekendDeal}">
+                                    <c:set var="weekendPrice" value="${product.price * (1 - weekendDeal.discountPercent / 100.0)}" />
+                                    <span class="current" style="color: #ff6b6b;"><fmt:formatNumber value="${weekendPrice}" type="number" groupingUsed="true" />đ</span>
+                                    <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
+                                  </c:when>
+                                  <%-- Ưu tiên 2: Sale thường --%>
                                   <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
                                     <span class="current"><fmt:formatNumber value="${product.salePrice}" type="number" groupingUsed="true" />đ</span>
                                     <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                   </c:when>
+                                  <%-- Mặc định: Giá gốc --%>
                                   <c:otherwise>
                                     <span class="current"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                   </c:otherwise>
                                 </c:choose>
-                                <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                                <c:if test="${product.quantity > 0}">
+                                  <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                                </c:if>
                               </div>
                             </div>
                           </div>
@@ -158,48 +202,113 @@
             <!-- -------------------------------------------------------------------------- -->
 
             <section id="weekend-deals">
-              <div class="deal-container">
-                <!-- Countdown -->
-                <div class="countdown">
-                  <div>
-                    <span>0</span>
-                    <p>Ngày</p>
-                  </div>
-                  <div>
-                    <span>19</span>
-                    <p>Giờ</p>
-                  </div>
-                  <div>
-                    <span>50</span>
-                    <p>Phút</p>
-                  </div>
-                  <div>
-                    <span>57</span>
-                    <p>Giây</p>
-                  </div>
+              <div class="container">
+                <div class="section-header">
+                  <h2>🔥 Ưu Đãi Cuối Tuần</h2>
+                  <p class="section-subtitle">Giảm giá đặc biệt - Số lượng có hạn</p>
                 </div>
 
-                <!-- Deal item -->
-                <div class="deal-item">
-                  <div class="deal-left">
-                    <p class="sub-title">Ưu đãi cuối tuần</p>
-                    <h2 class="product-title">Dừa sáp</h2>
-                    <p class="product-desc">Thơm ngon mọng nước</p>
-                    <p class="product-price">10.000 Đ</p>
-                    <a href="${pageContext.request.contextPath}#" class="shop-now">
-                      MUA NGAY <span class="arrow">→</span>
-                    </a>
-                  </div>
+                <div class="deal-wrapper">
+                  <c:choose>
+                    <c:when test="${not empty weekendDeals}">
+                      <c:forEach items="${weekendDeals}" var="deal" varStatus="status">
+                        <div class="deal-card ${status.first ? 'active' : ''}" data-index="${status.index}">
+                          <div class="deal-badge">
+                            <span class="badge-text">HOT DEAL</span>
+                            <span class="badge-discount">-${deal.discountPercent}%</span>
+                          </div>
 
-                  <div class="deal-right">
-                    <img src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png"
-                      alt="Fresh Coconut" />
-                  </div>
+                          <div class="deal-content">
+                            <div class="deal-info">
+                              <span class="deal-category">${deal.subtitle}</span>
+                              <h3 class="deal-title">${deal.product.name}</h3>
+                              <p class="deal-description">${deal.product.description}</p>
+                              
+                              <div class="deal-pricing">
+                                <div class="price-box">
+                                  <span class="sale-price"><fmt:formatNumber value="${deal.discountedPrice}" type="number" groupingUsed="true" />đ</span>
+                                  <c:if test="${deal.product.price > 0}">
+                                    <span class="original-price"><fmt:formatNumber value="${deal.product.price}" type="number" groupingUsed="true" />đ</span>
+                                  </c:if>
+                                </div>
+                                <span class="price-unit">/Kg</span>
+                              </div>
+
+                              <div class="deal-timer" data-end-time="${deal.endDate.time}">
+                                <div class="timer-label">⏰ Kết thúc sau:</div>
+                                <div class="timer-boxes">
+                                  <div class="timer-box">
+                                    <span class="timer-value days">0</span>
+                                    <span class="timer-unit">Ngày</span>
+                                  </div>
+                                  <div class="timer-box">
+                                    <span class="timer-value hours">0</span>
+                                    <span class="timer-unit">Giờ</span>
+                                  </div>
+                                  <div class="timer-box">
+                                    <span class="timer-value minutes">0</span>
+                                    <span class="timer-unit">Phút</span>
+                                  </div>
+                                  <div class="timer-box">
+                                    <span class="timer-value seconds">0</span>
+                                    <span class="timer-unit">Giây</span>
+                                  </div>
+                                </div>
+                              </div>
+
+                              <a href="${pageContext.request.contextPath}/product-detail?pid=${deal.product.id}" class="deal-button">
+                                <span>Mua Ngay</span>
+                                <i class="fas fa-arrow-right"></i>
+                              </a>
+                            </div>
+
+                            <div class="deal-image">
+                              <img src="${pageContext.request.contextPath}/${deal.product.image}" alt="${deal.product.name}" />
+                              <div class="image-decoration"></div>
+                            </div>
+                          </div>
+                        </div>
+                      </c:forEach>
+
+                      <c:if test="${weekendDeals.size() > 1}">
+                        <button class="deal-nav prev" onclick="prevDeal()" aria-label="Previous deal">
+                          <i class="fas fa-chevron-left"></i>
+                        </button>
+                        <button class="deal-nav next" onclick="nextDeal()" aria-label="Next deal">
+                          <i class="fas fa-chevron-right"></i>
+                        </button>
+
+                        <div class="deal-indicators">
+                          <c:forEach items="${weekendDeals}" var="deal" varStatus="status">
+                            <span class="indicator ${status.first ? 'active' : ''}" onclick="goToDeal(${status.index})"></span>
+                          </c:forEach>
+                        </div>
+                      </c:if>
+                    </c:when>
+                    
+                    <c:otherwise>
+                      <div class="deal-card active">
+                        <div class="deal-content">
+                          <div class="deal-info">
+                            <span class="deal-category">Ưu đãi cuối tuần</span>
+                            <h3 class="deal-title">Dừa sáp tươi ngon</h3>
+                            <p class="deal-description">Thơm ngon mọng nước</p>
+                            <div class="deal-pricing">
+                              <span class="sale-price">10.000đ</span>
+                            </div>
+                            <a href="${pageContext.request.contextPath}/shop" class="deal-button">
+                              <span>Xem sản phẩm</span>
+                              <i class="fas fa-arrow-right"></i>
+                            </a>
+                          </div>
+                          <div class="deal-image">
+                            <img src="https://botanica.risingbamboo.com/wp-content/uploads/2023/06/bn6-1.png" alt="Deal" />
+                          </div>
+                        </div>
+                      </div>
+                    </c:otherwise>
+                  </c:choose>
                 </div>
-
-                <!-- Buttons -->
-                <button class="deal-btn prev-btn">❮</button>
-                <button class="deal-btn next-btn">❯</button>
               </div>
             </section>
             <section id="top-trending">
@@ -215,15 +324,29 @@
                   <c:choose>
                     <c:when test="${not empty trendingProducts}">
                       <c:forEach items="${trendingProducts}" var="product">
+                        <c:set var="weekendDeal" value="${weekendDealMap[product.id]}" />
                         <div class="product-card">
                           <div class="product-image">
                             <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">
                               <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
                             </a>
 
-                            <c:if test="${product.salePrice > 0 && product.salePrice < product.price}">
-                              <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
-                            </c:if>
+                            <%-- Hiển thị badge discount --%>
+                            <c:choose>
+                              <%-- Ưu tiên 1: Weekend Deal badge --%>
+                              <c:when test="${not empty weekendDeal}">
+                                <div class="product-badge sale" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">-${weekendDeal.discountPercent}%</div>
+                                <c:if test="${not empty weekendDeal.tag}">
+                                  <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
+                                    <span class="product-tag">${weekendDeal.tag}</span>
+                                  </div>
+                                </c:if>
+                              </c:when>
+                              <%-- Ưu tiên 2: Sale thường badge --%>
+                              <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
+                                <div class="product-badge sale">-<fmt:formatNumber value="${(product.price - product.salePrice) / product.price * 100}" maxFractionDigits="0" />%</div>
+                              </c:when>
+                            </c:choose>
 
                             <div class="product-actions">
                               <c:set var="isLiked" value="${likedIds.contains(product.id)}" />
@@ -233,9 +356,18 @@
                               <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" title="Xem nhanh">
                                 <i class="far fa-eye"></i>
                               </a>
-                              <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
-                                <i class="fas fa-shopping-basket"></i>
-                              </button>
+                              <c:choose>
+                                <c:when test="${product.quantity == 0}">
+                                  <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}" class="action-btn" style="opacity: 0.5; cursor: not-allowed;" title="Hết hàng">
+                                    <i class="fas fa-shopping-basket"></i>
+                                  </a>
+                                </c:when>
+                                <c:otherwise>
+                                  <button class="action-btn add-to-cart-btn" data-id="${product.id}" title="Thêm vào giỏ">
+                                    <i class="fas fa-shopping-basket"></i>
+                                  </button>
+                                </c:otherwise>
+                              </c:choose>
                             </div>
                           </div>
 
@@ -254,15 +386,29 @@
 
                             <div class="price">
                               <c:choose>
+                                <%-- Kiểm tra hết hàng trước --%>
+                                <c:when test="${product.quantity == 0}">
+                                  <span class="current" style="color: #999; font-weight: 600;">Hết hàng</span>
+                                </c:when>
+                                <%-- Ưu tiên 1: Weekend Deal price --%>
+                                <c:when test="${not empty weekendDeal}">
+                                  <c:set var="weekendPrice" value="${product.price * (1 - weekendDeal.discountPercent / 100.0)}" />
+                                  <span class="current" style="color: #ff6b6b;"><fmt:formatNumber value="${weekendPrice}" type="number" groupingUsed="true" />đ</span>
+                                  <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
+                                </c:when>
+                                <%-- Ưu tiên 2: Sale thường --%>
                                 <c:when test="${product.salePrice > 0 && product.salePrice < product.price}">
                                   <span class="current"><fmt:formatNumber value="${product.salePrice}" type="number" groupingUsed="true" />đ</span>
                                   <span class="original"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                 </c:when>
+                                <%-- Mặc định: Giá gốc --%>
                                 <c:otherwise>
                                   <span class="current"><fmt:formatNumber value="${product.price}" type="number" groupingUsed="true" />đ</span>
                                 </c:otherwise>
                               </c:choose>
-                              <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                              <c:if test="${product.quantity > 0}">
+                                <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
+                              </c:if>
                             </div>
                           </div>
                         </div>

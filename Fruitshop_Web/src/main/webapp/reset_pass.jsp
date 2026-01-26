@@ -1,169 +1,179 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <!DOCTYPE html>
-<html lang="en">
-
+<html lang="vi">
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>The Organic Harvest</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-
-    <head>
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reset_pass.css" />
-    </head>
+    <title>Đặt lại mật khẩu - Organic Harvest</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/reset_pass.css" />
 </head>
-
 <body>
-    <div class="main">
-        <jsp:include page="header.jsp"></jsp:include>
-        <div class="app-content">
-            <div class="find-account-box reset-box">
-                <div class="find-account-header">
-                    <h3>Đặt lại mật khẩu của bạn</h3>
-                </div>
-
-                <div class="reset-body">
-                    <div class="reset-content-left" style="width: 100%;">
-                        <c:if test="${not empty error}">
-                            <p style="color: red;">${error}</p>
-                        </c:if>
-
-                        <form action="resetPassword" method="post">
-                            <h4 style="margin-bottom: 20px;">Tạo mật khẩu mới</h4>
-
-                            <div class="reset-option">
-                                <label class="reset-label-content">Mật khẩu mới:</label>
-                                <input type="password" name="password" class="find-account-input" required style="width: 100%; margin-top: 5px;">
-                            </div>
-
-                            <div class="reset-option">
-                                <label class="reset-label-content">Nhập lại mật khẩu:</label>
-                                <input type="password" name="confirmPassword" class="find-account-input" required style="width: 100%; margin-top: 5px;">
-                            </div>
-
-                            <div class="find-account-footer reset-footer">
-                                <div class="reset-actions">
-                                    <button type="submit" class="btn-action btn-search">Hoàn tất</button>
-                                </div>
-                            </div>
-                        </form>
-                    </div>
-                </div>
-            </div>
+    <div class="reset-container">
+        <div class="reset-icon">
+            <i class="fas fa-lock"></i>
         </div>
-        <footer class="footer">
-            <div class="footer__main">
-                <div class="footer__grid">
-                    <div class="footer__company">
-                        <div class="footer__brand">
-                            <a href="/">
-                                <img class="navbar__menu-logo-img"
-                                    src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508"
-                                    alt="Organic Harvest Logo" />
-                            </a>
-                        </div>
-                        <p class="footer__description">
-                            Địa chỉ: khu phố 6, Thủ Đức, Thành phố Hồ Chí Minh, Việt Nam
-                        </p>
-                        <div class="footer__social">
-                            <a href="#" class="footer__social-link footer__social-link--facebook">
-                                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                                    <path
-                                        d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z" />
-                                </svg>
-                            </a>
-                            <a href="#" class="footer__social-link footer__social-link--twitter">
-                                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                                    <path
-                                        d="M23.953 4.57a10 10 0 01-2.825.775 4.958 4.958 0 002.163-2.723c-.951.555-2.005.959-3.127 1.184a4.92 4.92 0 00-8.384 4.482C7.69 8.095 4.067 6.13 1.64 3.162a4.822 4.822 0 00-.666 2.475c0 1.71.87 3.213 2.188 4.096a4.904 4.904 0 01-2.228-.616v.06a4.923 4.923 0 003.946 4.827 4.996 4.996 0 01-2.212.085 4.936 4.936 0 004.604 3.417 9.867 9.867 0 01-6.102 2.105c-.39 0-.779-.023-1.17-.067a13.995 13.995 0 007.557 2.209c9.053 0 13.998-7.496 13.998-13.985 0-.21 0-.42-.015-.63A9.935 9.935 0 0024 4.59z" />
-                                </svg>
-                            </a>
-                            <a href="#" class="footer__social-link footer__social-link--telegram">
-                                <svg class="footer__social-icon" viewBox="0 0 24 24">
-                                    <path
-                                        d="M12 0C5.373 0 0 5.373 0 12s5.373 12 12 12 12-5.373 12-12S18.627 0 12 0zm5.894 8.221l-1.97 9.28c-.145.658-.537.818-1.084.508l-3-2.21-1.446 1.394c-.16.16-.295.295-.605.295l.213-3.053 5.56-5.023c.242-.213-.054-.333-.373-.121l-6.871 4.326-2.962-.924c-.643-.204-.657-.643.136-.953l11.56-4.458c.538-.196 1.006.128.832.941z" />
-                                </svg>
-                            </a>
-                        </div>
-                    </div>
+        
+        <h2>Đặt lại mật khẩu</h2>
+        <p class="subtitle">Tạo mật khẩu mới an toàn cho tài khoản của bạn</p>
 
-                    <div class="footer__section">
-                        <h3 class="footer__title">Chính sách</h3>
-                        <ul class="footer__links">
-                            <li class="footer__link-item">
-                                <div class="footer__link-dot"></div>
-                                <a href="index.jsp" class="footer__link">Trang chủ</a>
-                            </li>
-                            <li class="footer__link-item">
-                                <div class="footer__link-dot"></div>
-                                <a href="shop.jsp" class="footer__link">Sản phẩm</a>
-                            </li>
-                            <li class="footer__link-item">
-                                <div class="footer__link-dot"></div>
-                                <a href="about.jsp" class="footer__link">Giới thiệu</a>
-                            </li>
-                            <li class="footer__link-item">
-                                <div class="footer__link-dot"></div>
-                                <a href="blog.jsp" class="footer__link">Bài viết</a>
-                            </li>
-                        </ul>
-                    </div>
+        <c:if test="${not empty error}">
+            <div class="error-message">
+                <i class="fas fa-exclamation-circle"></i>
+                <span>${error}</span>
+            </div>
+        </c:if>
 
-                    <div class="footer__section">
-                        <h3 class="footer__title">Hỗ trợ khách hàng</h3>
-                        <ul class="footer__links">
-                            <li class="footer__link-item">
-                                <div class="footer__link-dot"></div>
-                                <a href="#" class="footer__link">Tìm kiếm</a>
-                            </li>
-                            <li class="footer__link-item">
-                                <div class="footer__link-dot"></div>
-                                <a href="#" class="footer__link">Chính sách bảo mật</a>
-                            </li>
-                            <li class="footer__link-item">
-                                <div class="footer__link-dot"></div>
-                                <a href="#" class="footer__link">Điều khoản dịch vụ</a>
-                            </li>
-                            <li class="footer__link-item">
-                                <div class="footer__link-dot"></div>
-                                <a href="#" class="footer__link">Hướng dẫn kiểm tra đơn hàng</a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div class="footer__section">
-                        <h3 class="footer__title">Đăng kí nhận tin</h3>
-                        <form class="footer__newsletter-form">
-                            <input type="email" placeholder="Nhập địa chỉ email" class="footer__newsletter-input"
-                                required />
-                            <button type="submit" class="footer__newsletter-button">
-                                Đăng kí
-                            </button>
-                        </form>
-                    </div>
+        <form action="${pageContext.request.contextPath}/resetPassword" method="post" id="resetForm">
+            <div class="form-group">
+                <label class="form-label" for="password">
+                    <i class="fas fa-key"></i> Mật khẩu mới
+                </label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input 
+                        type="password" 
+                        id="password"
+                        name="password" 
+                        class="form-input" 
+                        placeholder="Nhập mật khẩu mới" 
+                        required
+                        minlength="8"
+                    >
+                    <i class="fas fa-eye toggle-password" data-target="password"></i>
                 </div>
             </div>
 
-            <div class="footer__bottom">
-                <div class="footer__bottom-content">
-                    <p class="footer__copyright">
-                        &copy; 2025 Company. All rights reserved.
-                    </p>
-                    <ul class="footer__bottom-links">
-                        <li><a href="about.jsp" class="footer__bottom-link">About us</a></li>
-                        <li><a href="#" class="footer__bottom-link">Terms</a></li>
-                        <li><a href="#" class="footer__bottom-link">Privacy</a></li>
-                    </ul>
+            <div class="form-group">
+                <label class="form-label" for="confirmPassword">
+                    <i class="fas fa-check-circle"></i> Xác nhận mật khẩu
+                </label>
+                <div class="input-wrapper">
+                    <i class="fas fa-lock input-icon"></i>
+                    <input 
+                        type="password" 
+                        id="confirmPassword"
+                        name="confirmPassword" 
+                        class="form-input" 
+                        placeholder="Nhập lại mật khẩu mới" 
+                        required
+                        minlength="8"
+                    >
+                    <i class="fas fa-eye toggle-password" data-target="confirmPassword"></i>
                 </div>
+                <span class="password-match" id="matchMessage"></span>
             </div>
-        </footer>
+
+            <div class="password-requirements">
+                <p class="requirements-title"><i class="fas fa-info-circle"></i> Yêu cầu mật khẩu:</p>
+                <ul class="requirements-list">
+                    <li id="req-length"><i class="fas fa-circle"></i> Ít nhất 8 ký tự</li>
+                    <li id="req-uppercase"><i class="fas fa-circle"></i> Chứa chữ in hoa</li>
+                    <li id="req-letter"><i class="fas fa-circle"></i> Chứa chữ cái</li>
+                    <li id="req-number"><i class="fas fa-circle"></i> Chứa số</li>
+                    <li id="req-special"><i class="fas fa-circle"></i> Chứa ký tự đặc biệt (!@#$%^&*)</li>
+                </ul>
+            </div>
+
+            <div class="btn-group">
+                <a href="${pageContext.request.contextPath}/login.jsp" class="btn btn-cancel">
+                    <i class="fas fa-times"></i> Hủy
+                </a>
+                <button type="submit" class="btn btn-submit" id="submitBtn">
+                    <i class="fas fa-check"></i> Đặt lại mật khẩu
+                </button>
+            </div>
+        </form>
+
+        <div class="divider">
+            <span>hoặc</span>
+        </div>
+
+        <div class="back-login">
+            <a href="${pageContext.request.contextPath}/login.jsp">
+                <i class="fas fa-arrow-left"></i> Quay lại đăng nhập
+            </a>
+        </div>
     </div>
 
-    <script src="assets/js/tabs.js"></script>
-    <script src="assets/js/auth.js"></script>
+    <script>
+        // Toggle password visibility
+        document.querySelectorAll('.toggle-password').forEach(icon => {
+            icon.addEventListener('click', function() {
+                const targetId = this.getAttribute('data-target');
+                const input = document.getElementById(targetId);
+                
+                if (input.type === 'password') {
+                    input.type = 'text';
+                    this.classList.remove('fa-eye');
+                    this.classList.add('fa-eye-slash');
+                } else {
+                    input.type = 'password';
+                    this.classList.remove('fa-eye-slash');
+                    this.classList.add('fa-eye');
+                }
+            });
+        });
+
+        // Password match validation
+        const passwordInput = document.getElementById('password');
+        const confirmInput = document.getElementById('confirmPassword');
+        const matchMessage = document.getElementById('matchMessage');
+
+        function checkPasswordRequirements(password) {
+            const requirements = {
+                length: password.length >= 8,
+                uppercase: /[A-Z]/.test(password),
+                letter: /[a-zA-Z]/.test(password),
+                number: /[0-9]/.test(password),
+                special: /[!@#$%^&*]/.test(password)
+            };
+
+            // Update requirements UI
+            document.getElementById('req-length').className = requirements.length ? 'valid' : '';
+            document.getElementById('req-uppercase').className = requirements.uppercase ? 'valid' : '';
+            document.getElementById('req-letter').className = requirements.letter ? 'valid' : '';
+            document.getElementById('req-number').className = requirements.number ? 'valid' : '';
+            document.getElementById('req-special').className = requirements.special ? 'valid' : '';
+
+            return requirements;
+        }
+
+        function checkPasswordMatch() {
+            if (confirmInput.value.length === 0) {
+                matchMessage.textContent = '';
+                matchMessage.className = 'password-match';
+                return;
+            }
+
+            if (passwordInput.value === confirmInput.value) {
+                matchMessage.innerHTML = '<i class="fas fa-check-circle"></i> Mật khẩu khớp';
+                matchMessage.className = 'password-match match';
+            } else {
+                matchMessage.innerHTML = '<i class="fas fa-times-circle"></i> Mật khẩu không khớp';
+                matchMessage.className = 'password-match no-match';
+            }
+        }
+
+        passwordInput.addEventListener('input', function() {
+            checkPasswordRequirements(this.value);
+            checkPasswordMatch();
+        });
+        confirmInput.addEventListener('input', checkPasswordMatch);
+
+        // Form validation
+        document.getElementById('resetForm').addEventListener('submit', function(e) {
+            if (passwordInput.value !== confirmInput.value) {
+                e.preventDefault();
+                matchMessage.innerHTML = '<i class="fas fa-times-circle"></i> Mật khẩu không khớp';
+                matchMessage.className = 'password-match no-match';
+                confirmInput.focus();
+                return false;
+            }
+        });
+    </script>
 </body>
 
 </html>

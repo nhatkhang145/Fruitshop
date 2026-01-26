@@ -7,7 +7,7 @@ public class BannerDAO {
 
     // 1. Lấy tất cả banner
     public List<Banner> getAllBanners() {
-        String sql = "SELECT id, title, description, image_url AS imageUrl, link, display_order AS displayOrder, status FROM banners ORDER BY display_order ASC";
+        String sql = "SELECT id, title, description, image_url AS imageUrl, link, link_type AS linkType, link_target AS linkTarget, display_order AS displayOrder, status FROM banners ORDER BY display_order ASC";
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .mapToBean(Banner.class)
@@ -17,7 +17,7 @@ public class BannerDAO {
 
     // 2. Lấy banner theo ID
     public Banner getBannerById(int id) {
-        String sql = "SELECT id, title, description, image_url AS imageUrl, link, display_order AS displayOrder, status FROM banners WHERE id = ?";
+        String sql = "SELECT id, title, description, image_url AS imageUrl, link, link_type AS linkType, link_target AS linkTarget, display_order AS displayOrder, status FROM banners WHERE id = ?";
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .bind(0, id)
@@ -29,7 +29,7 @@ public class BannerDAO {
 
     // 3. Lấy banner active cho trang chủ
     public List<Banner> getActiveBanners() {
-        String sql = "SELECT id, title, description, image_url AS imageUrl, link, display_order AS displayOrder, status FROM banners WHERE status = 1 ORDER BY display_order ASC";
+        String sql = "SELECT id, title, description, image_url AS imageUrl, link, link_type AS linkType, link_target AS linkTarget, display_order AS displayOrder, status FROM banners WHERE status = 1 ORDER BY display_order ASC";
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(sql)
                         .mapToBean(Banner.class)
@@ -39,7 +39,7 @@ public class BannerDAO {
 
     // 4. Thêm mới
     public int insert(Banner b) {
-        String sql = "INSERT INTO banners (title, description, image_url, link, display_order, status) VALUES (:title, :description, :imageUrl, :link, :displayOrder, :status)";
+        String sql = "INSERT INTO banners (title, description, image_url, link, link_type, link_target, display_order, status) VALUES (:title, :description, :imageUrl, :link, :linkType, :linkTarget, :displayOrder, :status)";
         return DBContext.get().withHandle(handle ->
                 handle.createUpdate(sql)
                         .bindBean(b)
@@ -49,7 +49,7 @@ public class BannerDAO {
 
     // 5. Cập nhật
     public int update(Banner b) {
-        String sql = "UPDATE banners SET title=:title, description=:description, image_url=:imageUrl, link=:link, display_order=:displayOrder, status=:status WHERE id=:id";
+        String sql = "UPDATE banners SET title=:title, description=:description, image_url=:imageUrl, link=:link, link_type=:linkType, link_target=:linkTarget, display_order=:displayOrder, status=:status WHERE id=:id";
         return DBContext.get().withHandle(handle ->
                 handle.createUpdate(sql)
                         .bindBean(b)

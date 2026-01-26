@@ -1,5 +1,8 @@
 package model;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Product {
     private int id;
     private String name;
@@ -10,13 +13,16 @@ public class Product {
     private String image;
     private int categoryId;
     private String productCode;
+    private int status; // 1 = hiển thị, 0 = ẩn
+    private List<ProductImage> productImages; // Danh sách ảnh phụ
 
     // Constructor không tham số
     public Product() {
+        this.productImages = new ArrayList<>();
     }
 
     // Constructor đầy đủ tham số
-    public Product(int id, String name, double price, double salePrice, int quantity, String description, String image, int categoryId, String productCode) {
+    public Product(int id, String name, double price, double salePrice, int quantity, String description, String image, int categoryId, String productCode, int status) {
         this.id = id;
         this.name = name;
         this.price = price;
@@ -26,6 +32,7 @@ public class Product {
         this.image = image;
         this.categoryId = categoryId;
         this.productCode = productCode;
+        this.status = status;
     }
 
     // Getter và Setter (Bạn tự generate trong IDE nhé, ở đây mình viết gọn)
@@ -87,5 +94,21 @@ public class Product {
 
     public void setProductCode(String productCode) {
         this.productCode = productCode;
+    }
+
+    public int getStatus() {
+        return status;
+    }
+
+    public void setStatus(int status) {
+        this.status = status;
+    }
+
+    public List<ProductImage> getProductImages() {
+        return productImages;
+    }
+
+    public void setProductImages(List<ProductImage> productImages) {
+        this.productImages = productImages;
     }
 }

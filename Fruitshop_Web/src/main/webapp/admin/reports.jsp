@@ -199,47 +199,55 @@
 <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
 <script>
-  // Cấu hình Biểu đồ Doanh thu (Bar Chart)
+  // 1. BIỂU ĐỒ DOANH THU (Dữ liệu thật từ Java)
   const ctxSales = document.getElementById('salesChart').getContext('2d');
+
+  // Nhận chuỗi JSON từ Servlet (Ví dụ: [0.0, 150000.0, ...])
+  // Lưu ý: Dùng dấu '' bao quanh biến EL nếu là chuỗi, nhưng ở đây là mảng số nên để trần cũng được
+  // Tuy nhiên cách an toàn nhất là in thẳng giá trị vào
+  const salesData = ${chartRevenueData};
+
   new Chart(ctxSales, {
     type: 'bar',
     data: {
-      labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8'],
+      labels: ['T1', 'T2', 'T3', 'T4', 'T5', 'T6', 'T7', 'T8', 'T9', 'T10', 'T11', 'T12'],
       datasets: [{
-        label: 'Doanh thu',
-        data: [12, 19, 3, 5, 2, 3, 15, 10],
+        label: 'Doanh thu (VNĐ)',
+        data: salesData, // <-- Nạp dữ liệu thật vào đây
         backgroundColor: '#3C91E6',
         borderRadius: 4,
-        barPercentage: 0.5
+        barPercentage: 0.6
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false, // Quan trọng để khớp height 350px
-      plugins: {
-        legend: { display: false }
-      }
+      maintainAspectRatio: false,
+      plugins: { legend: { display: false } },
+      scales: { y: { beginAtZero: true } }
     }
   });
 
-  // Cấu hình Biểu đồ Tròn (Doughnut)
+  // 2. BIỂU ĐỒ DANH MỤC (Dữ liệu thật từ Java)
   const ctxCategory = document.getElementById('categoryChart').getContext('2d');
+
+  // Nhận dữ liệu danh mục
+  const catLabels = ${pieLabels}; // Ví dụ: ['Trái cây', 'Rau củ']
+  const catData = ${pieData};     // Ví dụ: [500000, 200000]
+
   new Chart(ctxCategory, {
     type: 'doughnut',
     data: {
-      labels: ['Trái cây', 'Rau củ', 'Hạt', 'Khác'],
+      labels: catLabels, // <-- Nạp nhãn thật
       datasets: [{
-        data: [55, 30, 10, 5],
-        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0'],
+        data: catData, // <-- Nạp số liệu thật
+        backgroundColor: ['#FF6384', '#36A2EB', '#FFCE56', '#4BC0C0', '#9966FF', '#FF9F40'],
         borderWidth: 0
       }]
     },
     options: {
       responsive: true,
-      maintainAspectRatio: false, // Quan trọng
-      plugins: {
-        legend: { position: 'bottom' }
-      }
+      maintainAspectRatio: false,
+      plugins: { legend: { position: 'bottom' } }
     }
   });
 </script>

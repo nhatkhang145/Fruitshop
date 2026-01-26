@@ -1,19 +1,75 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-
 <!DOCTYPE html>
-<html lang="en">
+<html lang="vi">
+
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Quản lý đơn hàng</title>
+  <title>Quản lý Đơn hàng</title>
 
   <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
   <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/style.css" />
-  <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/admin/Order.css" />
-  <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
+
+  <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
+  <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+
+  <style>
+    /* === BẮT BUỘC HEADER MÀU XANH === */
+    /* Dùng selector cực mạnh để đè tất cả CSS khác */
+    table.dataTable thead th,
+    #ordersTable thead th {
+      background-color: #37878d !important; /* Màu xanh cổ vịt */
+      color: #ffffff !important;             /* Chữ trắng */
+      border-bottom: none !important;
+      padding: 15px 10px !important;
+      font-weight: 600;
+      text-transform: uppercase;
+      font-size: 13px;
+      white-space: nowrap;
+    }
+
+    /* Bo tròn góc header */
+    table.dataTable thead th:first-child { border-top-left-radius: 10px; }
+    table.dataTable thead th:last-child { border-top-right-radius: 10px; }
+
+    /* Hover dòng */
+    table.dataTable tbody tr:hover {
+      background-color: #f1f8ff !important;
+    }
+
+    /* Chỉnh lại phân trang cho khớp màu */
+    .dataTables_paginate .paginate_button.current,
+    .dataTables_paginate .paginate_button.current:hover {
+      background: #37878d !important;
+      color: #fff !important;
+      border: none;
+    }
+
+    /* Badge trạng thái */
+    .status { padding: 6px 12px; border-radius: 20px; font-size: 12px; font-weight: 600; display: inline-block; }
+    .status.pending { background: #fef3c7; color: #b45309; }
+    .status.processing { background: #e0f2fe; color: #0369a1; }
+    .status.shipped { background: #ddd6fe; color: #6d28d9; }
+    .status.completed { background: #d1fae5; color: #047857; }
+    .status.cancelled { background: #fee2e2; color: #b91c1c; }
+
+    /* Nút hành động */
+    .action-btn { display: inline-flex; width: 35px; height: 35px; border-radius: 5px; align-items: center; justify-content: center; font-size: 18px; }
+    .action-btn.view { background: #e0f2fe; color: #0369a1; }
+    .action-btn.view:hover { background: #0369a1; color: #fff; }
+
+    /* Filter Box góc phải */
+    .filter-box select { padding: 8px 12px; border: 1px solid #ccc; border-radius: 5px; outline: none; cursor: pointer; }
+
+    /* Wrapper DataTables font */
+    .dataTables_wrapper { font-family: 'Roboto', sans-serif; font-size: 14px; margin-top: 10px;}
+    .dataTables_filter input { border-radius: 20px; padding: 5px 10px; border: 1px solid #ddd; outline: none;}
+  </style>
 </head>
 
 <body>
@@ -23,7 +79,6 @@
 </jsp:include>
 
 <div class="content">
-
   <jsp:include page="header.jsp" />
 
   <main>
@@ -36,48 +91,41 @@
           <li><a href="#" class="active">Đơn hàng</a></li>
         </ul>
       </div>
+      <div class="filter-box">
+        <select id="statusFilter" onchange="filterOrders(this)">
+          <option value="all">Tất cả trạng thái</option>
+          <option value="pending" ${currentStatus == 'pending' ? 'selected' : ''}>Chờ xử lý</option>
+          <option value="processing" ${currentStatus == 'processing' ? 'selected' : ''}>Đang xử lý</option>
+          <option value="shipped" ${currentStatus == 'shipped' ? 'selected' : ''}>Đang giao</option>
+          <option value="completed" ${currentStatus == 'completed' ? 'selected' : ''}>Hoàn thành</option>
+          <option value="cancelled" ${currentStatus == 'cancelled' ? 'selected' : ''}>Đã hủy</option>
+        </select>
+      </div>
     </div>
 
     <ul class="insights">
-      <li>
-        <i class="bx bx-loader-circle"></i>
-        <span class="info"><h3>15</h3><p>Chờ xử lý</p></span>
-      </li>
-      <li>
-        <i class="bx bx-package"></i>
-        <span class="info"><h3>8</h3><p>Đang xử lý</p></span>
-      </li>
-      <li>
-        <i class="bx bxs-truck"></i>
-        <span class="info"><h3>22</h3><p>Đang giao</p></span>
-      </li>
-      <li>
-        <i class="bx bx-check-circle"></i>
-        <span class="info"><h3>1,020</h3><p>Đã hoàn thành</p></span>
-      </li>
+      <li><i class="bx bx-loader-circle"></i><span class="info"><h3>15</h3><p>Chờ xử lý</p></span></li>
+      <li><i class="bx bx-package"></i><span class="info"><h3>8</h3><p>Đang xử lý</p></span></li>
+      <li><i class="bx bxs-truck"></i><span class="info"><h3>22</h3><p>Đang giao</p></span></li>
+      <li><i class="bx bx-check-circle"></i><span class="info"><h3>1,020</h3><p>Hoàn thành</p></span></li>
     </ul>
 
     <div class="bottom-data">
       <div class="orders">
         <div class="header">
           <h3>Danh sách đơn hàng</h3>
-          <div class="filters">
-            <i class="bx bx-filter"></i>
-            <select id="statusFilter" onchange="filterOrders(this)">
-              <option value="all">Tất cả trạng thái</option>
-              <option value="pending" ${currentStatus == 'pending' ? 'selected' : ''}>Chờ xử lý</option>
-              <option value="processing" ${currentStatus == 'processing' ? 'selected' : ''}>Đang xử lý</option>
-              <option value="shipped" ${currentStatus == 'shipped' ? 'selected' : ''}>Đang giao</option>
-              <option value="completed" ${currentStatus == 'completed' ? 'selected' : ''}>Hoàn thành</option>
-              <option value="cancelled" ${currentStatus == 'cancelled' ? 'selected' : ''}>Đã hủy</option>
-            </select>
-          </div>
         </div>
 
         <table id="ordersTable">
           <thead>
           <tr>
-            <th>Mã Đơn</th>      <th>Khách hàng</th>   <th>Ngày đặt</th>     <th>Tổng tiền</th>    <th>Trạng thái</th>   <th>Hành động</th>    </tr>
+            <th>Mã Đơn</th>
+            <th>Khách hàng</th>
+            <th>Ngày đặt</th>
+            <th>Tổng tiền</th>
+            <th>Trạng thái</th>
+            <th>Hành động</th>
+          </tr>
           </thead>
           <tbody>
           <c:forEach items="${orders}" var="o">
@@ -85,16 +133,12 @@
               <td>#${o.id}</td>
               <td>
                 <div class="user-info">
-                  <p>${o.fullname}</p>
-                  <small>${o.phone}</small>
+                  <strong>${o.fullname}</strong><br>
+                  <small style="color: #777">${o.phone}</small>
                 </div>
               </td>
-              <td>
-                <fmt:formatDate value="${o.createdAt}" pattern="dd-MM-yyyy HH:mm"/>
-              </td>
-              <td>
-                <fmt:formatNumber value="${o.finalAmount}" type="currency" currencySymbol="đ"/>
-              </td>
+              <td><fmt:formatDate value="${o.createdAt}" pattern="dd-MM-yyyy HH:mm"/></td>
+              <td><fmt:formatNumber value="${o.finalAmount}" type="currency" currencySymbol="đ"/></td>
               <td>
                 <span class="status ${o.status}">
                     <c:choose>
@@ -108,11 +152,12 @@
                 </span>
               </td>
               <td>
-                <a href="order-detail?id=${o.id}" class="action-btn view"><i class="bx bx-show"></i> Xem</a>
+                <a href="order-detail?id=${o.id}" class="action-btn view" title="Xem">
+                  <i class="bx bx-show"></i>
+                </a>
               </td>
             </tr>
           </c:forEach>
-          <%-- Đã xóa đoạn c:if kiểm tra rỗng để tránh lỗi DataTables --%>
           </tbody>
         </table>
       </div>
@@ -122,32 +167,22 @@
 
 <script src="${pageContext.request.contextPath}/assets/js/admin/main.js"></script>
 
-<script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
-<script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
-
 <script>
-  // Hàm lọc khi chọn Dropdown
   function filterOrders(selectObject) {
     var value = selectObject.value;
     window.location.href = "orders?status=" + value;
   }
 
-  // Cấu hình DataTables
   $(document).ready(function() {
     $('#ordersTable').DataTable({
-      "order": [[ 0, "desc" ]], // Sắp xếp cột ID (cột đầu tiên) giảm dần
-      "pageLength": 10,         // Mặc định hiện 10 dòng
+      "order": [[ 0, "desc" ]],
+      "pageLength": 10,
       "language": {
-        "search": "Tìm kiếm nhanh:",
-        "lengthMenu": "Hiển thị _MENU_ đơn hàng",
-        "info": "Đang xem _START_ đến _END_ trong tổng số _TOTAL_ đơn",
-        "zeroRecords": "Không tìm thấy đơn hàng nào",
-        "infoEmpty": "Chưa có đơn hàng",
-        "infoFiltered": "(lọc từ _MAX_ đơn)",
-        "paginate": {
-          "next": "Sau",
-          "previous": "Trước"
-        }
+        "search": "Tìm kiếm:",
+        "lengthMenu": "Hiển thị _MENU_ dòng",
+        "info": "Trang _PAGE_ / _PAGES_",
+        "paginate": { "first": "«", "last": "»", "next": ">", "previous": "<" },
+        "zeroRecords": "Không tìm thấy đơn hàng nào"
       }
     });
   });
