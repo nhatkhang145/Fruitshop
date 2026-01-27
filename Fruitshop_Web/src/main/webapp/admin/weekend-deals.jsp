@@ -191,7 +191,6 @@
                     </table>
                 </div>
             </div>
-      divn>
     </section>
 
     <script src="${pageContext.request.contextPath}/assets/js/admin/script.js"></script>
