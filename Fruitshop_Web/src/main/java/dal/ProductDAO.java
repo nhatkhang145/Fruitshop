@@ -9,7 +9,7 @@ public class ProductDAO {
     // 1. Lấy tất cả sản phẩm
     public List<Product> getAllProducts() {
         // SỬA: short_description AS description (để khớp với file Model)
-        String sql = "SELECT id, name, price,sale_price, quantity, short_description AS description, image, category_id AS categoryId FROM products";
+        String sql = "SELECT id, name, price, sale_price, quantity, short_description AS description, image, category_id AS categoryId, status FROM products";
         return DBContext.get().withHandle(handle -> handle.createQuery(sql)
                 .mapToBean(Product.class)
                 .list());
@@ -361,11 +361,9 @@ public class ProductDAO {
 
     public List<Product> getLowStockProducts(int threshold) {
         String sql = "SELECT * FROM products WHERE quantity <= :threshold AND status = 1 ORDER BY quantity ASC LIMIT 5";
-        return DBContext.get().withHandle(handle ->
-                handle.createQuery(sql)
-                        .bind("threshold", threshold)
-                        .mapToBean(Product.class)
-                        .list()
-        );
+        return DBContext.get().withHandle(handle -> handle.createQuery(sql)
+                .bind("threshold", threshold)
+                .mapToBean(Product.class)
+                .list());
     }
 }

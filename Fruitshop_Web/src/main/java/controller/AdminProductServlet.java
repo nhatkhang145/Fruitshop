@@ -95,100 +95,110 @@ public class AdminProductServlet extends HttpServlet {
 
     // 4. Xử lý Lưu (Thêm mới hoặc Cập nhật)
     private void saveProduct(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8"); // Để nhận tiếng Việt
+        try {
+            req.setCharacterEncoding("UTF-8"); // Để nhận tiếng Việt
 
-        // Lấy thông tin từ form
-        String idStr = req.getParameter("id"); // Nếu id = 0 hoặc null -> Insert, ngược lại -> Update
-        String name = req.getParameter("name");
-        String productCode = req.getParameter("productCode");
-        double price = Double.parseDouble(req.getParameter("price"));
-        String salePriceStr = req.getParameter("salePrice");
-        double salePrice = (salePriceStr == null || salePriceStr.isEmpty()) ? 0 : Double.parseDouble(salePriceStr);
-        int quantity = Integer.parseInt(req.getParameter("quantity"));
-        int categoryId = Integer.parseInt(req.getParameter("categoryId"));
-        String description = req.getParameter("description");
+            // Lấy thông tin từ form
+            String idStr = req.getParameter("id"); // Nếu id = 0 hoặc null -> Insert, ngược lại -> Update
+            String name = req.getParameter("name");
+            String productCode = req.getParameter("productCode");
+            double price = Double.parseDouble(req.getParameter("price"));
+            String salePriceStr = req.getParameter("salePrice");
+            double salePrice = (salePriceStr == null || salePriceStr.isEmpty()) ? 0 : Double.parseDouble(salePriceStr);
+            int quantity = Integer.parseInt(req.getParameter("quantity"));
+            int categoryId = Integer.parseInt(req.getParameter("categoryId"));
+            String description = req.getParameter("description");
 
-        // Xử lý status: Checkbox checked -> gửi value="1", unchecked -> không gửi gì
-        String statusStr = req.getParameter("status");
-        int status = (statusStr != null && statusStr.equals("1")) ? 1 : 0;
+            // Xử lý status: Checkbox checked -> gửi value="1", unchecked -> không gửi gì
+            String statusStr = req.getParameter("status");
+            int status = (statusStr != null && statusStr.equals("1")) ? 1 : 0;
 
-        // Xử lý upload ảnh
-        Part filePart = req.getPart("image");
-        String fileName = null;
-        String uploadBasePath = req.getServletContext().getRealPath("") + File.separator + "assets" + File.separator
-                + "images";
-        File uploadBaseDir = new File(uploadBasePath);
-        if (!uploadBaseDir.exists())
-            uploadBaseDir.mkdirs();
+            // Xử lý upload ảnh
+            Part filePart = req.getPart("image");
+            String fileName = null;
+            String uploadBasePath = req.getServletContext().getRealPath("") + File.separator + "assets" + File.separator
+                    + "images";
+            File uploadBaseDir = new File(uploadBasePath);
+            if (!uploadBaseDir.exists())
+                uploadBaseDir.mkdirs();
 
-        if (filePart != null && filePart.getSize() > 0) {
-            // Có chọn file mới
-            String originalName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
-            String storedName = System.currentTimeMillis() + "_" + originalName;
+            if (filePart != null && filePart.getSize() > 0) {
+                // Có chọn file mới
+                String originalName = Paths.get(filePart.getSubmittedFileName()).getFileName().toString();
+                String storedName = System.currentTimeMillis() + "_" + originalName;
 
-            filePart.write(uploadBasePath + File.separator + storedName);
+                filePart.write(uploadBasePath + File.separator + storedName);
 
-            // Lưu đường dẫn tương đối để lưu vào DB
-            fileName = "assets/images/" + storedName;
-        } else {
-            // Không chọn file mới -> Giữ lại ảnh cũ (được gửi từ input hidden trong form)
-            fileName = req.getParameter("currentImage");
-        }
-
-        // Upload các ảnh phụ (nếu có chọn mới)
-        String subImageUploadPath = uploadBasePath + File.separator + "products";
-        File subImageDir = new File(subImageUploadPath);
-        if (!subImageDir.exists())
-            subImageDir.mkdirs();
-
-        List<String> subImageUrls = new ArrayList<>();
-        int subIndex = 1;
-        for (Part part : req.getParts()) {
-            if (!"subImages".equals(part.getName()) || part.getSize() == 0) {
-                continue;
+                // Lưu đường dẫn tương đối để lưu vào DB
+                fileName = "assets/images/" + storedName;
+            } else {
+                // Không chọn file mới -> Giữ lại ảnh cũ (được gửi từ input hidden trong form)
+                fileName = req.getParameter("currentImage");
             }
 
-            String submittedName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
-            if (submittedName == null || submittedName.isBlank()) {
-                continue;
+            // Upload các ảnh phụ (nếu có chọn mới)
+            String subImageUploadPath = uploadBasePath + File.separator + "products";
+            File subImageDir = new File(subImageUploadPath);
+            if (!subImageDir.exists())
+                subImageDir.mkdirs();
+
+            List<String> subImageUrls = new ArrayList<>();
+            int subIndex = 1;
+            for (Part part : req.getParts()) {
+                if (!"subImages".equals(part.getName()) || part.getSize() == 0) {
+                    continue;
+                }
+
+                String submittedName = Paths.get(part.getSubmittedFileName()).getFileName().toString();
+                if (submittedName == null || submittedName.trim().isEmpty()) {
+                    continue;
+                }
+
+                String storedName = System.currentTimeMillis() + "_" + subIndex++ + "_" + submittedName;
+                part.write(subImageUploadPath + File.separator + storedName);
+                subImageUrls.add("assets/images/products/" + storedName);
             }
 
-            String storedName = System.currentTimeMillis() + "_" + subIndex++ + "_" + submittedName;
-            part.write(subImageUploadPath + File.separator + storedName);
-            subImageUrls.add("assets/images/products/" + storedName);
-        }
+            Product p = new Product();
+            p.setName(name);
+            p.setProductCode(productCode);
+            p.setPrice(price);
+            p.setSalePrice(salePrice);
+            p.setQuantity(quantity);
+            p.setCategoryId(categoryId);
+            p.setDescription(description);
+            p.setImage(fileName);
+            p.setStatus(status);
 
-        Product p = new Product();
-        p.setName(name);
-        p.setProductCode(productCode);
-        p.setPrice(price);
-        p.setSalePrice(salePrice);
-        p.setQuantity(quantity);
-        p.setCategoryId(categoryId);
-        p.setDescription(description);
-        p.setImage(fileName);
-        p.setStatus(status);
-
-        int productId;
-        if (idStr == null || idStr.isEmpty() || idStr.equals("0")) {
-            // INSERT
-            productId = productDAO.insert(p);
-        } else {
-            // UPDATE
-            p.setId(Integer.parseInt(idStr));
-            productDAO.update(p);
-            productId = p.getId();
-        }
-
-        // Chỉ thay danh sách ảnh phụ khi có upload mới
-        if (!subImageUrls.isEmpty()) {
-            int startOrder = 1;
-            if (productId > 0 && (idStr != null && !idStr.isEmpty() && !idStr.equals("0"))) {
-                startOrder = productDAO.getMaxProductImageOrder(productId) + 1;
+            int productId;
+            if (idStr == null || idStr.isEmpty() || idStr.equals("0")) {
+                // INSERT
+                productId = productDAO.insert(p);
+            } else {
+                // UPDATE
+                p.setId(Integer.parseInt(idStr));
+                productDAO.update(p);
+                productId = p.getId();
             }
-            productDAO.insertProductImages(productId, subImageUrls, startOrder);
-        }
 
-        resp.sendRedirect(req.getContextPath() + "/admin/products");
+            // Chỉ thay danh sách ảnh phụ khi có upload mới
+            if (!subImageUrls.isEmpty()) {
+                int startOrder = 1;
+                if (productId > 0 && (idStr != null && !idStr.isEmpty() && !idStr.equals("0"))) {
+                    startOrder = productDAO.getMaxProductImageOrder(productId) + 1;
+                }
+                productDAO.insertProductImages(productId, subImageUrls, startOrder);
+            }
+
+            resp.sendRedirect(req.getContextPath() + "/admin/products");
+        } catch (Exception e) {
+            e.printStackTrace();
+            req.setAttribute("errorMessage", "Lỗi khi lưu sản phẩm: " + e.getMessage());
+            try {
+                req.getRequestDispatcher("/admin/product-edit.jsp").forward(req, resp);
+            } catch (Exception ex) {
+                resp.sendRedirect(req.getContextPath() + "/admin/products");
+            }
+        }
     }
 }

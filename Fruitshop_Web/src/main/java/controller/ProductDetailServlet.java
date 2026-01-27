@@ -15,6 +15,7 @@ import jakarta.servlet.http.HttpServletResponse;
 import model.Review;
 
 import java.io.IOException;
+import java.util.ArrayList;
 import java.util.List;
 
 @WebServlet(name = "ProductDetailServlet", urlPatterns = {"/product-detail"})
@@ -28,12 +29,17 @@ public class ProductDetailServlet extends HttpServlet {
         ProductDAO pDao = new ProductDAO();
         CategoryDAO cDao = new CategoryDAO();
         WeekendDealDAO wdDao = new WeekendDealDAO();
+        ReviewDAO rDao = new ReviewDAO();
 
         try {
             int id = Integer.parseInt(idRaw);
             
             // 1. Lấy thông tin chi tiết sản phẩm
             Product p = pDao.getProductByID(id);
+            if(p == null) {
+                response.sendRedirect("index.jsp");
+                return;
+            }
             
             // 2. Check xem sản phẩm có weekend deal đang active không
             WeekendDeal activeDeal = wdDao.getActiveDealByProductId(id);
@@ -49,8 +55,14 @@ public class ProductDetailServlet extends HttpServlet {
             request.setAttribute("listC", listC);
 
             // Lấy danh sách đánh giá sản phẩm
-            ReviewDAO rDao = new ReviewDAO();
-            List<Review> listR = rDao.getReviewsByProductId(id);
+
+            List<Review> listR = new ArrayList<>();
+            try {
+                listR = rDao.getReviewsByProductId(id);
+            } catch (Exception e) {
+                System.out.println("Lỗi tải đánh giá sản phẩm ID " + id + ": " + e.getMessage());
+                e.printStackTrace();
+            }
             request.setAttribute("listR", listR);
 
             request.setAttribute("detail", p);       // Biến 'detail' chứa thông tin 1 sản phẩm
