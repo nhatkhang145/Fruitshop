@@ -30,7 +30,7 @@ public class UserDAO {
 
     // 3. Đăng nhập
     public User checkLogin(String email, String password) {
-        String query = "SELECT id, fullname, email, password, phone, role, avatar, gender, birthdate FROM users WHERE email = ? AND password = ? AND status = 1";
+        String query = "SELECT id, fullname, email, password, phone, role, avatar, gender, birthdate, status, login_type, social_id FROM users WHERE email = ? AND password = ? AND status = 1";
 
         return DBContext.get().withHandle(handle -> handle.createQuery(query)
                 .bind(0, email)
@@ -46,6 +46,9 @@ public class UserDAO {
                     user.setAvatar(rs.getString("avatar"));
                     user.setGender(rs.getString("gender"));
                     user.setBirthDate(rs.getDate("birthdate"));
+                    user.setStatus(rs.getInt("status"));
+                    user.setLoginType(rs.getString("login_type"));
+                    user.setSocialId(rs.getString("social_id"));
                     return user;
                 })
                 .findFirst()

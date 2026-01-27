@@ -142,13 +142,14 @@ public class AddToCartServlet extends HttpServlet {
                 }
                 session.setAttribute("totalMoney", totalMoney.doubleValue());
 
-                // Đếm TỔNG SỐ LƯỢNG tất cả sản phẩm (theo số lượng, không phải số loại)
-                session.setAttribute("size", totalQuantity);
+                // Đếm số mục (items) trong giỏ hàng - không phải tổng số lượng
+                session.setAttribute("size", cart.size());
                 
                 // Debug log
                 System.out.println("=== AddToCart Debug ===");
                 System.out.println("Product ID: " + pid + ", Quantity added: " + quantity);
-                System.out.println("Total items quantity: " + totalQuantity);
+                System.out.println("Total cart items: " + cart.size());
+                System.out.println("Total quantity: " + totalQuantity);
                 for (CartItem item : cart) {
                     System.out.println("  - Product #" + item.getProduct().getId() + " x " + item.getQuantity());
                 }
@@ -162,10 +163,14 @@ public class AddToCartServlet extends HttpServlet {
         // Kiểm tra nếu là AJAX request (từ JavaScript)
         String ajaxHeader = request.getHeader("X-Requested-With");
         if ("XMLHttpRequest".equals(ajaxHeader)) {
-            // Trả về response JSON cho AJAX
+            // Trả về response JSON cho AJAX với size (số mục trong giỏ)
+            HttpSession session = request.getSession();
+            Integer cartSize = (Integer) session.getAttribute("size");
+            if (cartSize == null) cartSize = 0;
+            
             response.setContentType("application/json");
             response.setCharacterEncoding("UTF-8");
-            response.getWriter().write("{\"success\": true, \"message\": \"Đã thêm vào giỏ hàng\"}");
+            response.getWriter().write("{\"success\": true, \"message\": \"Đã thêm vào giỏ hàng\", \"size\": " + cartSize + "}");
             return;
         }
         

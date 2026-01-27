@@ -95,6 +95,6 @@ public class EmailUtils {
         message.setContent(htmlContent, "text/html; charset=UTF-8");
 
         Transport.send(message);
-        System.out.println("✅ Đã gửi email thành công tới: " + toEmail);
+        System.out.println(" Đã gửi email thành công tới: " + toEmail);
     }
 }

@@ -44,7 +44,7 @@
         <div class="navbar__menu">
             <div class="navbar__menu-inner">
                 <div class="navbar__menu-logo">
-                    <a href="${pageContext.request.contextPath}/index.jsp">
+                    <a href="${pageContext.request.contextPath}/">
                         <img class="navbar__menu-logo-img" 
                              src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508" 
                              alt="Organic Harvest Logo" />
@@ -106,8 +106,13 @@
                                     </div>
                                     <ul class="account-menu">
                                         <li><a href="profile"><i class="fa-solid fa-id-card"></i> Hồ sơ cá nhân</a></li>
-                                        <li><a href="orders.jsp"><i class="fa-solid fa-box-open"></i> Đơn hàng</a></li>
-                                        <li><a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a></li>
+                                        <li><a href="orders"><i class="fa-solid fa-box-open"></i> Đơn hàng</a></li>
+                                        
+                                        <%-- Chỉ hiển thị đổi mật khẩu nếu là tài khoản local --%>
+                                        <c:if test="${empty sessionScope.account.loginType or sessionScope.account.loginType == 'local'}">
+                                            <li><a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a></li>
+                                        </c:if>
+                                        
                                         <c:if test="${sessionScope.account.role == 1}">
                                             <li><a href="${pageContext.request.contextPath}/admin/index.jsp" style="color: #007bff;"><i class="fa-solid fa-user-shield"></i> Trang quản trị</a></li>
                                         </c:if>

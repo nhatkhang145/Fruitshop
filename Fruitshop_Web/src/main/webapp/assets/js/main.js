@@ -415,13 +415,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .then(response => {
-                if (response.ok) {
-                    // Cập nhật badge giỏ hàng
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // ✅ Cập nhật badge từ giá trị size trả về từ server
                     const cartBadge = document.querySelector('.cart-btn .badge');
-                    if (cartBadge) {
-                        const currentCount = parseInt(cartBadge.textContent) || 0;
-                        cartBadge.textContent = currentCount + 1;
+                    if (cartBadge && data.size !== undefined) {
+                        cartBadge.textContent = data.size;
                         
                         // Hiệu ứng animation
                         cartBadge.style.animation = 'pulse 0.5s ease-in-out';

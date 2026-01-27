@@ -200,8 +200,9 @@
               <div class="form-row">
                 <input type="text" name="receiverName" id="receiverName" class="form-input" placeholder="Họ và tên"
                   required />
-                <input type="text" name="phoneNumber" id="phoneNumber" class="form-input" placeholder="Số điện thoại"
-                  required />
+                <input type="tel" name="phoneNumber" id="phoneNumber" class="form-input" placeholder="Số điện thoại"
+                  pattern="[0-9]{10}" inputmode="numeric" maxlength="10"
+                  title="Vui lòng nhập số điện thoại" required />
               </div>
               <div class="form-group">
                 <input type="text" name="city" id="city" class="form-input"
@@ -243,6 +244,12 @@
         const btnAdd = document.getElementById("btnAddAddress");
         const spanClose = document.getElementsByClassName("close-modal")[0];
         const btnClose = document.getElementsByClassName("close-modal-btn")[0];
+        const phoneInput = document.getElementById("phoneNumber");
+
+        // Validate input số điện thoại - chỉ cho phép số
+        phoneInput.addEventListener('input', function(e) {
+          this.value = this.value.replace(/[^0-9]/g, '');
+        });
 
         // Reset form
         function resetForm() {

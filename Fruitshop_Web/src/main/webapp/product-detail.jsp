@@ -114,9 +114,9 @@
                       </c:choose>
                   </div>
 
-                  <div class="product-description-short">
+                  <!-- <div class="product-description-short">
                     <p>${detail.description}</p>
-                  </div>
+                  </div> -->
 
                   <c:choose>
                     <c:when test="${detail.quantity == 0}">

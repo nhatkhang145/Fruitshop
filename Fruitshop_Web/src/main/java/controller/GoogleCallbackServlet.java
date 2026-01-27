@@ -85,10 +85,22 @@ public class GoogleCallbackServlet extends HttpServlet {
                     return;
                 }
                 
-                // Update social info nếu chưa có
-                if (user.getSocialId() == null || user.getSocialId().isEmpty()) {
-                    user.setSocialId(googleId);
+                // Kiểm tra login type
+                if ("local".equals(user.getLoginType())) {
+                    // Tài khoản đăng ký thủ công → Link account
                     user.setLoginType("google");
+                    user.setSocialId(googleId);
+                    if (picture != null && (user.getAvatar() == null || user.getAvatar().isEmpty())) {
+                        user.setAvatar(picture);
+                    }
+                    userDAO.updateSocialInfo(user);
+                    
+                    // Thông báo cho user
+                    request.getSession().setAttribute("message", 
+                        "Tài khoản của bạn đã được liên kết với Google thành công!");
+                } else if ("google".equals(user.getLoginType())) {
+                    // Đã đăng nhập Google trước đó → Cập nhật thông tin
+                    user.setFullName(name);
                     if (picture != null && (user.getAvatar() == null || user.getAvatar().contains("default-user"))) {
                         user.setAvatar(picture);
                     }
