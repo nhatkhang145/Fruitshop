@@ -103,14 +103,17 @@
                       <div class="status-toggle-wrapper">
                         <span class="status-label-text">Cho phép hiển thị trên web</span>
                         <label class="status-toggle">
-                          <input type="checkbox" name="status" value="1" id="statusCheckbox" ${product.status==1
-                            ? 'checked' : '' } />
+                          <input type="checkbox" name="status" value="1" id="statusCheckbox" <c:if
+                            test="${product.status == 1}">checked</c:if> />
                           <span class="status-slider"></span>
                         </label>
                       </div>
                       <div style="margin-top: 5px; font-size: 13px; text-align: right;">
                         Trạng thái hiện tại: <span id="statusText"
-                          style="font-weight: bold; color: ${product.status == 1 ? 'var(--success)' : 'var(--dark-grey)'}">
+                          style="font-weight: bold; color: <c:choose><c:when test=" ${product.status==1}">var(--success)
+                          </c:when>
+                          <c:otherwise>var(--dark-grey)</c:otherwise>
+                          </c:choose>">
                           ${product.status == 1 ? 'Đang hiển thị' : 'Đang ẩn'}
                         </span>
                       </div>
