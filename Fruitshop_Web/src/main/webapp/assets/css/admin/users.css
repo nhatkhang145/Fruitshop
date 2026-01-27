@@ -141,3 +141,7 @@
 .content main .bottom-data .orders table td img.avatar {
   border-radius: 50%;
 }
+
+.dataTables_wrapper .dataTables_paginate .paginate_button.current, .dataTables_wrapper .dataTables_paginate .paginate_button.current:hover {
+ background: var(--primary);
+}
