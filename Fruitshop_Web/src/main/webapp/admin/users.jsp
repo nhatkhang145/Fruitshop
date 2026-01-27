@@ -150,6 +150,21 @@
               </a>
             </div>
 
+            <c:set var="adminCount" value="0" />
+            <c:set var="customerCount" value="0" />
+            <c:set var="bannedCount" value="0" />
+            <c:forEach items="${users}" var="u">
+              <c:if test="${u.role == 1}">
+                <c:set var="adminCount" value="${adminCount + 1}" />
+              </c:if>
+              <c:if test="${u.role == 0}">
+                <c:set var="customerCount" value="${customerCount + 1}" />
+              </c:if>
+              <c:if test="${u.status == 0}">
+                <c:set var="bannedCount" value="${bannedCount + 1}" />
+              </c:if>
+            </c:forEach>
+
             <ul class="insights">
               <li>
                 <i class="bx bx-group"></i>
@@ -161,21 +176,21 @@
               <li>
                 <i class="bx bx-user-plus"></i>
                 <span class="info">
-                  <h3>120</h3>
-                  <p>Khách hàng mới</p>
+                  <h3>${customerCount}</h3>
+                  <p>Khách hàng</p>
                 </span>
               </li>
               <li>
-                <i class="bx bx-star"></i>
+                <i class="bx bx-shield-alt"></i>
                 <span class="info">
-                  <h3>85</h3>
-                  <p>Khách hàng VIP</p>
+                  <h3>${adminCount}</h3>
+                  <p>Quản trị viên</p>
                 </span>
               </li>
               <li>
                 <i class="bx bx-user-x"></i>
                 <span class="info">
-                  <h3>12</h3>
+                  <h3>${bannedCount}</h3>
                   <p>Tài khoản bị khóa</p>
                 </span>
               </li>
