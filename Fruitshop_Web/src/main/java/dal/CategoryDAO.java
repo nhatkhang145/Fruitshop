@@ -10,7 +10,7 @@ import java.util.List;
 
 public class CategoryDAO {
     public List<Category> getAllCategories() {
-        String query = "SELECT * FROM Categories WHERE status = 1";
+        String query = "SELECT id, name, description, parent_id AS parentId, status FROM categories";
 
         return DBContext.get().withHandle(handle ->
                 handle.createQuery(query)
@@ -30,7 +30,7 @@ public class CategoryDAO {
 
     // Thêm vào trong class CategoryDAO
     public void insert(Category c) {
-        String sql = "INSERT INTO Categories (name, description, parent_id, status) VALUES (?, ?, ?, ?)";
+        String sql = "INSERT INTO categories (name, description, parent_id, status) VALUES (?, ?, ?, ?)";
         DBContext.get().withHandle(handle ->
                 handle.createUpdate(sql)
                         .bind(0, c.getName())
@@ -42,7 +42,7 @@ public class CategoryDAO {
     }
 
     public void update(Category c) {
-        String sql = "UPDATE Categories SET name=?, description=?, parent_id=?, status=? WHERE id=?";
+        String sql = "UPDATE categories SET name=?, description=?, parent_id=?, status=? WHERE id=?";
         DBContext.get().withHandle(handle ->
                 handle.createUpdate(sql)
                         .bind(0, c.getName())
@@ -56,7 +56,7 @@ public class CategoryDAO {
 
     public void delete(int id) {
         // Xóa mềm (ẩn đi) hoặc xóa cứng tùy logic của bạn. Ở đây ví dụ xóa cứng.
-        String sql = "DELETE FROM Categories WHERE id=?";
+        String sql = "UPDATE categories SET status = 0 WHERE id = ?";
         DBContext.get().withHandle(handle ->
                 handle.createUpdate(sql)
                         .bind(0, id)

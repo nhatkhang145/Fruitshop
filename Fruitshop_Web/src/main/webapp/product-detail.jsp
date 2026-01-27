@@ -1,25 +1,25 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
-  <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-    <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
-      <!DOCTYPE html>
-      <html lang="vi">
+<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<!DOCTYPE html>
+<html lang="vi">
 
-      <head>
-        <meta charset="utf-8" />
-        <meta name="viewport" content="width=device-width,initial-scale=1" />
-        <title>${detail.name} — Organic Harvest</title>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <title>${detail.name} — Organic Harvest</title>
 
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
-        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product-detail.css" />
-      </head>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/normalize/8.0.1/normalize.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
+    <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/product-detail.css" />
+</head>
 
-      <body>
+<body>
 
-        <main class="main product-detail-page">
-          <jsp:include page="header.jsp"></jsp:include>
+<main class="main product-detail-page">
+<jsp:include page="header.jsp"></jsp:include>
 
           <div class="breadcrumb">
             <div class="container">
@@ -66,7 +66,7 @@
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star"></i>
                       <i class="fa-solid fa-star-half-stroke"></i>
-                      <span>(12 đánh giá)</span>
+                      <span>(${listR.size()} đánh giá)</span>
                     </div>
                     <span class="divider">|</span>
                     <span class="product-sku">Mã SP: <strong>${detail.productCode}</strong></span>
@@ -179,11 +179,11 @@
               <div class="product-detail__bottom">
                 <div class="product-tabs">
                   <button class="tab-btn active" onclick="openTab(event, 'desc')">Mô tả chi tiết</button>
-                  <button class="tab-btn" onclick="openTab(event, 'reviews')">Đánh giá (12)</button>
+                  <button class="tab-btn" onclick="openTab(event, 'reviews')">Đánh giá (${listR.size()})</button>
                   <button class="tab-btn" onclick="openTab(event, 'shipping')">Chính sách giao hàng</button>
                 </div>
 
-                <div id="desc" class="tab-content" style="display: block;">
+                <div id="desc" class="tab-content">
                   <div class="content-inner">
                     <h3>Thông tin chi tiết</h3>
                     <p>${detail.description}</p>
@@ -219,7 +219,7 @@
                                             <input type="radio" id="star1" name="rating" value="1" />
                                             <label for="star1" title="1 sao">1 star</label>
                                         </div>
-                                        </div>
+                                    </div>
 
                                     <div class="form-group" style="margin-bottom: 15px;">
                                         <textarea name="comment" rows="4" placeholder="Chia sẻ cảm nhận của bạn về sản phẩm..." required style="width: 100%; padding: 10px; border: 1px solid #ddd; border-radius: 4px;"></textarea>
@@ -265,7 +265,7 @@
                     </div>
                 </div>
 
-                <div id="shipping" class="tab-content" style="display: none;">
+                <div id="shipping" class="tab-content">
                   <p>Nội dung chính sách giao hàng...</p>
                 </div>
               </div>
@@ -302,13 +302,13 @@
             </div>
           </div>
 
-        </main>
+</main>
 
-        <jsp:include page="footer.jsp"></jsp:include>
+<jsp:include page="footer.jsp"></jsp:include>
 
-        <script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
+<script src="${pageContext.request.contextPath}/assets/js/main.js"></script>
 
-        <script>
+<script>
           // 1. Đổi ảnh gallery
           function changeImage(element) {
             document.querySelectorAll('.thumb-item').forEach(el => el.classList.remove('active'));
@@ -330,19 +330,43 @@
 
           // 3. Chuyển Tabs
           function openTab(evt, tabName) {
-            let i, tabcontent, tablinks;
-            tabcontent = document.getElementsByClassName("tab-content");
-            for (i = 0; i < tabcontent.length; i++) {
-              tabcontent[i].style.display = "none";
-            }
-            tablinks = document.getElementsByClassName("tab-btn");
-            for (i = 0; i < tablinks.length; i++) {
-              tablinks[i].className = tablinks[i].className.replace(" active", "");
-            }
-            document.getElementById(tabName).style.display = "block";
-            evt.currentTarget.className += " active";
-          }
-        </script>
-      </body>
+              const tabcontents = document.getElementsByClassName("tab-content");
+              for (let i = 0; i < tabcontents.length; i++) {
+                  tabcontents[i].style.display = "none";
+              }
 
-      </html>
+              const tablinks = document.getElementsByClassName("tab-btn");
+              for (let i = 0; i < tablinks.length; i++) {
+                  tablinks[i].classList.remove("active");
+              }
+
+              const targetTab = document.getElementById(tabName);
+              if (targetTab) {
+                  targetTab.style.display = "block";
+                  evt.currentTarget.classList.add("active");
+              }
+          }
+
+          // 4. KHỞI TẠO TAB KHI LOAD TRANG (CÁI BẠN HỎI)
+          document.addEventListener("DOMContentLoaded", function () {
+              // Ẩn toàn bộ tab trước (phòng trường hợp CSS chưa ăn)
+              document.querySelectorAll(".tab-content").forEach(tab => {
+                  tab.style.display = "none";
+              });
+
+              // Hiện tab mô tả
+              const defaultTab = document.getElementById("desc");
+              if (defaultTab) {
+                  defaultTab.style.display = "block";
+              }
+
+              // Active nút tab đầu tiên
+              const firstTabBtn = document.querySelector(".tab-btn");
+              if (firstTabBtn) {
+                  firstTabBtn.classList.add("active");
+              }
+          });
+</script>
+</body>
+
+</html>
