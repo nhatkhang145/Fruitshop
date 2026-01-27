@@ -270,14 +270,14 @@ public class OrderDAO {
 
 
 
-    // 3. Cập nhật trạng thái đơn hàng (cho chức năng Duyệt/Hủy đơn)
-    public void updateStatus(int orderId, String status) {
+    public boolean updateStatus(int orderId, String status) {
         String sql = "UPDATE orders SET status = :status WHERE id = :id";
-        DBContext.get().useHandle(handle ->
+        // Sử dụng withHandle để có thể return giá trị
+        return DBContext.get().withHandle(handle ->
                 handle.createUpdate(sql)
                         .bind("status", status)
                         .bind("id", orderId)
-                        .execute()
+                        .execute() > 0 // Trả về true nếu có ít nhất 1 dòng bị thay đổi
         );
     }
 

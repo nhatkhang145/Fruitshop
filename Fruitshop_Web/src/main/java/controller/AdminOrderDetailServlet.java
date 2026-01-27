@@ -20,7 +20,6 @@ public class AdminOrderDetailServlet extends HttpServlet {
         if (idStr != null) {
             try {
                 int orderId = Integer.parseInt(idStr);
-                // 1. Lấy thông tin đơn hàng
                 Order order = orderDAO.getOrderById(orderId);
                 req.setAttribute("order", order);
                 req.getRequestDispatcher("/admin/order-detail.jsp").forward(req, resp);
@@ -34,30 +33,27 @@ public class AdminOrderDetailServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        // Xử lý cập nhật trạng thái đơn hàng
-        int orderId = Integer.parseInt(req.getParameter("orderId"));
-        String status = req.getParameter("status");
-
-        orderDAO.updateStatus(orderId, status);
-
-        // Quay lại trang chi tiết
-        resp.sendRedirect("order-detail?id=" + orderId);
         try {
-            // Lấy ID đơn hàng
-            int orderId = Integer.parseInt(req.getParameter("orderId"));
-
-            // --- SỬA LỖI TẠI ĐÂY ---
-            // Nhận status là String (vì JSP gửi lên chữ "shipped", "pending"...)
+            // 1. Lấy tham số từ form (đảm bảo name trong JSP là "orderId" và "status")
+            String orderIdStr = req.getParameter("orderId");
             String status = req.getParameter("status");
 
-            // Gọi hàm updateOrderStatus (nhận String) trong OrderDAO
-            boolean success = orderDAO.updateOrderStatus(orderId, status);
-            // -----------------------
+            if (orderIdStr != null && status != null) {
+                int orderId = Integer.parseInt(orderIdStr);
 
-            if (success) {
-                resp.sendRedirect("order-detail?id=" + orderId + "&msg=success");
+                // 2. Gọi hàm updateStatus (đã sửa ở DAO để trả về boolean)
+                boolean success = orderDAO.updateStatus(orderId, status);
+
+                // 3. Điều hướng dựa trên kết quả
+                if (success) {
+                    // Thêm msg=success để hiển thị thông báo bên JSP nếu cần
+                    resp.sendRedirect("order-detail?id=" + orderId + "&msg=success");
+                } else {
+                    resp.sendRedirect("order-detail?id=" + orderId + "&msg=error");
+                }
             } else {
-                resp.sendRedirect("order-detail?id=" + orderId + "&msg=error");
+                // Trường hợp thiếu tham số
+                resp.sendRedirect("orders");
             }
 
         } catch (Exception e) {
