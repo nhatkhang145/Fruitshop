@@ -44,6 +44,7 @@
     background-color: var(--primary-color);
     color: white;
     font-size: 1.6rem;
+    font-weight: 600;
     padding: 12px 16px;
     margin-top: 10px;
     border-bottom: 1x solid rgba(0, 0, 0, 0.974);
@@ -70,66 +71,195 @@
     position: relative;
     padding: 4px 10px;
     font-size: 1.4rem;
+    margin-bottom: 0;
+}
+
+/* Custom styling for details/summary tag */
+.category-details {
+    display: block;
+    width: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+.category-summary {
+    cursor: pointer;
+    list-style: none;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 0;
+    transition: color 0.2s;
+    user-select: none;
+    color: #333;
+    font-size: 1.4rem;
+    font-weight: 600;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+}
+
+/* Ẩn marker mặc định của <summary> */
+.category-summary::marker {
+    content: none;
+    display: none;
+}
+
+.category-summary::-webkit-details-marker {
+    content: none;
+    display: none;
+}
+
+/* Custom marker icon for details */
+.category-toggle {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 1.5em;
+    min-width: 1.5em;
+    height: 1.5em;
+    font-weight: bold;
+    font-size: 1.2em;
+    flex-shrink: 0;
+    color: #333;
+}
+
+.category-summary a {
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+    display: inline;
+    padding: 0;
+    font-size: 1.4rem;
+}
+
+.category-summary:hover {
+    color: #0d4a42;
 }
 
 .subcategory-list {
-    font-size: 3.0rem;
+    font-size: 1.3rem;
     color: var(--text-color);
-    padding: 3px 35px;
+    padding: 5px 0 5px 35px;
     transition: all 0.4s ease;
     display: block;
+    list-style: none;
+    margin: 0;
+}
+
+.subcategory-list li {
+    padding: 4px 0;
+    margin: 0;
+}
+
+.subcategory-list a {
+    font-size: 1.3rem;
+    color: #333;
 }
 
 details[open] .subcategory-list {
     max-height: 500px;
     opacity: 1;
-    font-size: 1.0rem;
 }
 
 .category-item a {
     text-decoration: none;
     color: #333;
-    display: block;
     padding: 5px 0;
     transition: color 0.2s;
-    font-size: 12px;
+    font-size: 1.3rem;
 }
 
+/* Override cho link bên trong summary */
+.category-summary a {
+    flex: 1;
+    text-decoration: none;
+    color: inherit;
+    display: inline;
+    padding: 0;
+    font-size: 1.4rem;
+}
 
 .subcategory-list a {
-    font-size: 14px;
+    font-size: 1.3rem;
     line-height: 1.6;
     color: #333;
 }
 
 .category-item a:hover {
     color: #0d4a42;
-    right: -4px;
 }
 
-
-details summary {
+/* === FILTER PRICE STYLES === */
+.filter-summary {
+    font-size: 1.4rem;
+    font-weight: 600;
+    color: #333;
+    padding: 6px 6px;
     cursor: pointer;
+}
+
+.filter-price-list {
+    list-style: none;
+    padding: 6px;
+    margin: 0;
+}
+
+.filter-price-list li {
+    padding:  0;
+    margin: 20px 0;
+}
+
+.filter-link {
+    display: block;
+    font-size: 1.3rem;
+    color: #333;
+    text-decoration: none;
+    padding: 12px 15px;
+    border-radius: 4px;
+    transition: all 0.2s;
+    white-space: nowrap;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.filter-link:hover {
+    background-color: #f5f5f5;
+    color: var(--primary-color);
+}
+
+.filter-link.active {
     font-weight: bold;
-    position: relative;
-    padding-left: 20px;
-    transition: color 0.2s;
+    color: var(--primary-color);
+    background-color: rgba(13, 74, 66, 0.1);
 }
 
-details summary:hover {
-    color: #0d4a42;
+.clear-filter {
+    margin-top: 10px;
+    padding-top: 10px;
+    border-top: 1px solid #eee;
 }
 
-details summary::before {
-    content: "+";
-    position: absolute;
-    left: 0;
-    top: 0;
-    font-weight: bold;
+.clear-filter-btn {
+    display: block;
+    text-align: center;
+    font-size: 1.3rem;
+    color: #fff;
+    background-color: var(--primary-color);
+    padding: 10px 15px;
+    border-radius: 4px;
+    text-decoration: none;
+    font-weight: 500;
+    transition: all 0.2s;
 }
 
-details[open] summary::before {
-    content: "-";
+.clear-filter-btn:hover {
+    background-color: #c82333;
+    color: #fff;
+}
+
+.clear-filter-btn i {
+    margin-right: 5px;
 }
 
 .btn {
