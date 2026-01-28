@@ -44,7 +44,7 @@
         <div class="navbar__menu">
             <div class="navbar__menu-inner">
                 <div class="navbar__menu-logo">
-                    <a href="${pageContext.request.contextPath}/index.jsp">
+                    <a href="${pageContext.request.contextPath}/">
                         <img class="navbar__menu-logo-img" 
                              src="https://ik.imagekit.io/8tm3umulk/image/logonew_fG_70DXF8?updatedAt=1762866381508" 
                              alt="Organic Harvest Logo" />
