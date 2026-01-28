@@ -12,7 +12,8 @@ import java.io.IOException;
 import java.util.List;
 
 // Map URL khớp với form action trong Categories.jsp và các link xóa
-@WebServlet(name = "AdminCategoryServlet", urlPatterns = {"/admin/categories", "/admin/category-servlet", "/admin/delete-category"})
+@WebServlet(name = "AdminCategoryServlet", urlPatterns = { "/admin/categories", "/admin/category-servlet",
+        "/admin/delete-category" })
 public class AdminCategoryServlet extends HttpServlet {
 
     private CategoryDAO categoryDAO = new CategoryDAO();
@@ -50,7 +51,9 @@ public class AdminCategoryServlet extends HttpServlet {
     // 1. Hiển thị danh sách danh mục
     private void listCategories(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         List<Category> list = categoryDAO.getAllCategories();
+        List<Category> parentCategories = categoryDAO.getParentCategories();
         req.setAttribute("listC", list);
+        req.setAttribute("parentC", parentCategories);
         req.getRequestDispatcher("/admin/Categories.jsp").forward(req, resp);
     }
 

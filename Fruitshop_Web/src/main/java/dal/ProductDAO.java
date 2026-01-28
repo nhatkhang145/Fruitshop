@@ -53,7 +53,6 @@ public class ProductDAO {
         return product;
     }
 
-    // Lấy danh sách ảnh phụ của sản phẩm
     public List<ProductImage> getProductImages(int productId) {
         String sql = "SELECT id, product_id AS productId, image_url AS imageUrl, sort_order AS sortOrder " +
                 "FROM product_images WHERE product_id = ? ORDER BY sort_order ASC";
@@ -365,5 +364,144 @@ public class ProductDAO {
                 .bind("threshold", threshold)
                 .mapToBean(Product.class)
                 .list());
+    }
+
+
+    // Đếm sản phẩm với danh sách category IDs
+    public int countProductsByFilterWithCategoryList(List<Integer> categoryIds, Double minPrice, Double maxPrice) {
+        if (categoryIds == null || categoryIds.isEmpty()) {
+            // Nếu không có category, dùng logic cũ (không filter category)
+            return countProductsByFilter(null, minPrice, maxPrice);
+        }
+
+        StringBuilder sql = new StringBuilder("SELECT COUNT(*) FROM products p WHERE p.status = 1 ");
+
+        // Xây dựng IN clause
+        sql.append(" AND p.category_id IN (");
+        for (int i = 0; i < categoryIds.size(); i++) {
+            if (i > 0)
+                sql.append(", ");
+            sql.append("?");
+        }
+        sql.append(") ");
+
+        if (minPrice != null) {
+            sql.append(" AND COALESCE(NULLIF(p.sale_price, 0), p.price) >= ? ");
+        }
+        if (maxPrice != null) {
+            sql.append(" AND COALESCE(NULLIF(p.sale_price, 0), p.price) <= ? ");
+        }
+
+        return DBContext.get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            // Bind category IDs
+            int paramIndex = 0;
+            for (Integer cid : categoryIds) {
+                query.bind(paramIndex++, cid);
+            }
+
+            if (minPrice != null) {
+                query.bind(paramIndex++, minPrice);
+            }
+            if (maxPrice != null) {
+                query.bind(paramIndex++, maxPrice);
+            }
+
+            return query.mapTo(Integer.class).one();
+        });
+    }
+
+    // Lọc sản phẩm với danh sách category IDs
+    public List<Product> filterProductsWithCategoryList(List<Integer> categoryIds, Double minPrice, Double maxPrice,
+            String sortType, int index) {
+        if (categoryIds == null || categoryIds.isEmpty()) {
+            // Nếu không có category, dùng logic cũ
+            return filterProducts(null, minPrice, maxPrice, sortType, index);
+        }
+
+        StringBuilder sql = new StringBuilder();
+        sql.append("SELECT p.id, p.name, p.product_code AS productCode, p.price, ")
+                .append("p.sale_price AS salePrice, p.quantity, p.short_description AS description, ")
+                .append("p.image, p.category_id AS categoryId, p.status, p.created_at, p.views ")
+                .append("FROM products p ");
+
+        if ("best_sell".equals(sortType)) {
+            sql.append("LEFT JOIN order_details od ON p.id = od.product_id ");
+        }
+
+        sql.append("WHERE p.status = 1 ");
+
+        // Xây dựng IN clause
+        sql.append(" AND p.category_id IN (");
+        for (int i = 0; i < categoryIds.size(); i++) {
+            if (i > 0)
+                sql.append(", ");
+            sql.append("?");
+        }
+        sql.append(") ");
+
+        if (minPrice != null) {
+            sql.append(" AND COALESCE(NULLIF(p.sale_price, 0), p.price) >= ? ");
+        }
+        if (maxPrice != null) {
+            sql.append(" AND COALESCE(NULLIF(p.sale_price, 0), p.price) <= ? ");
+        }
+
+        if ("best_sell".equals(sortType)) {
+            sql.append(
+                    " GROUP BY p.id, p.name, p.product_code, p.price, p.sale_price, p.quantity, p.short_description, p.image, p.category_id, p.status, p.created_at, p.views ");
+        }
+
+        if (sortType != null) {
+            switch (sortType) {
+                case "best_sell":
+                    sql.append(" ORDER BY SUM(od.quantity) DESC ");
+                    break;
+                case "new":
+                    sql.append(" ORDER BY p.created_at DESC ");
+                    break;
+                case "old":
+                    sql.append(" ORDER BY p.created_at ASC ");
+                    break;
+                case "popular":
+                    sql.append(" ORDER BY p.views DESC ");
+                    break;
+                case "price_asc":
+                    sql.append(" ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) ASC ");
+                    break;
+                case "price_desc":
+                    sql.append(" ORDER BY COALESCE(NULLIF(p.sale_price, 0), p.price) DESC ");
+                    break;
+                case "name_asc":
+                    sql.append(" ORDER BY p.name ASC ");
+                    break;
+                default:
+                    sql.append(" ORDER BY p.id DESC ");
+                    break;
+            }
+        } else {
+            sql.append(" ORDER BY p.id DESC ");
+        }
+
+        sql.append(" LIMIT 6 OFFSET ? ");
+
+        return DBContext.get().withHandle(handle -> {
+            var query = handle.createQuery(sql.toString());
+
+            int paramIndex = 0;
+            for (Integer cid : categoryIds) {
+                query.bind(paramIndex++, cid);
+            }
+            if (minPrice != null) {
+                query.bind(paramIndex++, minPrice);
+            }
+            if (maxPrice != null) {
+                query.bind(paramIndex++, maxPrice);
+            }
+            query.bind(paramIndex++, (index - 1) * 6);
+
+            return query.mapToBean(Product.class).list();
+        });
     }
 }

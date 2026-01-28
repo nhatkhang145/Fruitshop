@@ -18,7 +18,7 @@ import jakarta.servlet.http.HttpServletRequest;
 import jakarta.servlet.http.HttpServletResponse;
 import model.User;
 
-@WebServlet(name = "ShopServlet", urlPatterns = {"/shop"})
+@WebServlet(name = "ShopServlet", urlPatterns = { "/shop" })
 public class ShopServlet extends HttpServlet {
 
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
@@ -62,7 +62,7 @@ public class ShopServlet extends HttpServlet {
             } catch (NumberFormatException e) {
                 index = 1; // Default nếu parse lỗi
             }
-            
+
             Integer cid = null;
             try {
                 if (categoryId != null && !categoryId.isEmpty()) {
@@ -73,21 +73,41 @@ public class ShopServlet extends HttpServlet {
                 cid = null;
             }
 
+            // Nếu chọn danh mục cha, lấy tất cả category con để filter sản phẩm
+            List<Integer> categoryIds = new ArrayList<>();
+            if (cid != null) {
+                categoryIds = cDao.getCategoryIdsIncludingChildren(cid);
+            }
+
             Double minPrice = null, maxPrice = null;
             // Tách chuỗi giá (ví dụ: "100000-500000")
             if (priceRaw != null && !priceRaw.isEmpty()) {
                 String[] parts = priceRaw.split("-");
-                if (parts.length >= 1) minPrice = Double.parseDouble(parts[0]);
-                if (parts.length >= 2 && !parts[1].equals("max")) maxPrice = Double.parseDouble(parts[1]);
+                if (parts.length >= 1)
+                    minPrice = Double.parseDouble(parts[0]);
+                if (parts.length >= 2 && !parts[1].equals("max"))
+                    maxPrice = Double.parseDouble(parts[1]);
             }
 
             // Tính toán số trang dựa trên filter
-            int count = pDao.countProductsByFilter(cid, minPrice, maxPrice);
-            int endPage = count / 6;
-            if (count % 6 != 0) endPage++;
+            int count;
+            List<Product> listP_temp;
 
-            // Lấy danh sách sản phẩm (Lọc + Phân trang + Sắp xếp)
-            listP = pDao.filterProducts(cid, minPrice, maxPrice, sortRaw, index);
+            if (!categoryIds.isEmpty()) {
+                // Nếu có danh sách category, dùng method mới
+                count = pDao.countProductsByFilterWithCategoryList(categoryIds, minPrice, maxPrice);
+                listP_temp = pDao.filterProductsWithCategoryList(categoryIds, minPrice, maxPrice, sortRaw, index);
+            } else {
+                // Nếu không có category, dùng method cũ
+                count = pDao.countProductsByFilter(null, minPrice, maxPrice);
+                listP_temp = pDao.filterProducts(null, minPrice, maxPrice, sortRaw, index);
+            }
+
+            listP = listP_temp;
+
+            int endPage = count / 6;
+            if (count % 6 != 0)
+                endPage++;
 
             // Truyền dữ liệu phân trang
             request.setAttribute("endP", endPage);

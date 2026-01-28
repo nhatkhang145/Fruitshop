@@ -36,34 +36,49 @@
                 <!-- CỘT 2 -->
                 <div class="grid__column-2">
                   <nav class="category">
-                      <h3 class="category_heading">
-                          <i class="category__heading-icon fas fa-list"></i>
-                          Danh Mục
-                      </h3>
+                    <h3 class="category_heading">
+                      <i class="category__heading-icon fas fa-list"></i>
+                      Danh Mục
+                    </h3>
 
-                      <ul class="category-list">
-                          <c:forEach items="${listC}" var="c">
-                              <c:if test="${c.parentId == 0}">
-                                  <li class="category-item">
-                                      <details>
-                                          <summary>${c.name}</summary>
-                                          <ul class="subcategory-list">
-                                              <c:forEach items="${listC}" var="sub">
-                                                  <c:if test="${sub.parentId == c.id}">
-                                                      <li>
-                                                          <a href="shop?cid=${sub.id}&price=${priceTag}&sort=${sortTag}"
-                                                             style="${tag == sub.id ? 'color: var(--primary-color); font-weight: bold;' : ''}">
-                                                              ${sub.name}
-                                                          </a>
-                                                      </li>
-                                                  </c:if>
-                                              </c:forEach>
-                                          </ul>
-                                      </details>
-                                  </li>
+                    <ul class="category-list">
+                      <c:forEach items="${listC}" var="c">
+                        <c:if test="${c.parentId == 0}">
+                          <li class="category-item">
+                            <!-- Kiểm tra xem có danh mục con nào được chọn không -->
+                            <c:set var="isChildSelected" value="false" />
+                            <c:forEach items="${listC}" var="sub">
+                              <c:if test="${sub.parentId == c.id && tag == sub.id}">
+                                <c:set var="isChildSelected" value="true" />
                               </c:if>
-                          </c:forEach>
-                      </ul>
+                            </c:forEach>
+
+                            <details class="category-details" ${tag==c.id || isChildSelected ? 'open' : '' }
+                              ontoggle="toggleCategoryIcon(this)">
+                              <summary class="category-summary">
+                                <span class="category-toggle">${tag == c.id || isChildSelected ? '-' : '+'}</span>
+                                <a href="shop?cid=${c.id}&price=${priceTag}&sort=${sortTag}"
+                                  style="${tag == c.id ? 'color: var(--primary-color); font-weight: bold; text-decoration: none;' : 'text-decoration: none; color: inherit;'}">
+                                  ${c.name}
+                                </a>
+                              </summary>
+                              <ul class="subcategory-list">
+                                <c:forEach items="${listC}" var="sub">
+                                  <c:if test="${sub.parentId == c.id}">
+                                    <li>
+                                      <a href="shop?cid=${sub.id}&price=${priceTag}&sort=${sortTag}"
+                                        style="${tag == sub.id ? 'color: var(--primary-color); font-weight: bold;' : ''}">
+                                        ${sub.name}
+                                      </a>
+                                    </li>
+                                  </c:if>
+                                </c:forEach>
+                              </ul>
+                            </details>
+                          </li>
+                        </c:if>
+                      </c:forEach>
+                    </ul>
                   </nav>
 
                   <!-- BỘ LỌC -->
@@ -72,15 +87,27 @@
                       <i class="fa-solid fa-filter"></i>
                       Bộ Lọc Tìm Kiếm
                     </h3>
-                    <ul class="category-list">
+                    <ul class="category-list filter-list">
                       <li class="category-item">
-                        <details open> <summary>Mức giá</summary>
-                          <ul class="subcategory-list">
-                            <li><a href="shop?cid=${cid}&price=0-200000&sort=${sortTag}" style="${priceTag == '0-200000' ? 'font-weight:bold; color:var(--primary-color)' : ''}">Dưới 200.000đ</a></li>
-                            <li><a href="shop?cid=${cid}&price=200000-500000&sort=${sortTag}" style="${priceTag == '200000-500000' ? 'font-weight:bold; color:var(--primary-color)' : ''}">200.000đ - 500.000đ</a></li>
-                            <li><a href="shop?cid=${cid}&price=500000-1000000&sort=${sortTag}" style="${priceTag == '500000-1000000' ? 'font-weight:bold; color:var(--primary-color)' : ''}">500.000đ - 1.000.000đ</a></li>
-                            <li><a href="shop?cid=${cid}&price=1000000-max&sort=${sortTag}" style="${priceTag == '1000000-max' ? 'font-weight:bold; color:var(--primary-color)' : ''}">Trên 1.000.000đ</a></li>
-                            <li><a href="shop?cid=${cid}&sort=${sortTag}" style="color: #999; font-size: 0.9rem;"><i class="fa-solid fa-xmark"></i> Xóa lọc giá</a></li>
+                        <details open>
+                          <summary class="filter-summary">Mức giá</summary>
+                          <ul class="filter-price-list">
+                            <li><a href="shop?cid=${cid}&price=0-200000&sort=${sortTag}"
+                                class="filter-link ${priceTag == '0-200000' ? 'active' : ''}">Dưới 200.000đ</a></li>
+                            <li><a href="shop?cid=${cid}&price=200000-500000&sort=${sortTag}"
+                                class="filter-link ${priceTag == '200000-500000' ? 'active' : ''}">200.000đ -
+                                500.000đ</a></li>
+                            <li><a href="shop?cid=${cid}&price=500000-1000000&sort=${sortTag}"
+                                class="filter-link ${priceTag == '500000-1000000' ? 'active' : ''}">500.000đ -
+                                1.000.000đ</a></li>
+                            <li><a href="shop?cid=${cid}&price=1000000-max&sort=${sortTag}"
+                                class="filter-link ${priceTag == '1000000-max' ? 'active' : ''}">Trên 1.000.000đ</a>
+                            </li>
+                            <li class="clear-filter">
+                              <a href="shop?cid=${cid}&sort=${sortTag}" class="clear-filter-btn">
+                                <i class="fa-solid fa-xmark"></i> Xóa lọc giá
+                              </a>
+                            </li>
                           </ul>
                         </details>
                       </li>
@@ -93,45 +120,51 @@
                 <div class="grid__column-10">
                   <!-- Hiển thị thông báo tìm kiếm -->
                   <c:if test="${isSearch}">
-                    <div style="padding: 15px; background: #f8f9fa; border-left: 4px solid #28a745; margin-bottom: 20px;">
-                      <strong>Kết quả tìm kiếm:</strong> "<em>${searchKeyword}</em>" - Tìm thấy <strong>${listP.size()}</strong> sản phẩm
+                    <div
+                      style="padding: 15px; background: #f8f9fa; border-left: 4px solid #28a745; margin-bottom: 20px;">
+                      <strong>Kết quả tìm kiếm:</strong> "<em>${searchKeyword}</em>" - Tìm thấy
+                      <strong>${listP.size()}</strong> sản phẩm
                     </div>
                   </c:if>
-                  
-                  <div class="sort-filter" style="display: flex; justify-content: space-between; align-items: center; padding: 12px 22px; border-radius: 2px; background-color: rgba(0, 0, 0, 0.03);">
-                      <div style="display: flex; align-items: center;">
-                          <span class="sort-filter__label" style="margin-right: 15px;">Sắp xếp theo:</span>
 
-                          <form action="shop" method="get" id="sortForm">
+                  <div class="sort-filter"
+                    style="display: flex; justify-content: space-between; align-items: center; padding: 12px 22px; border-radius: 2px; background-color: rgba(0, 0, 0, 0.03);">
+                    <div style="display: flex; align-items: center;">
+                      <span class="sort-filter__label" style="margin-right: 15px;">Sắp xếp theo:</span>
 
-                              <c:if test="${not empty param.cid}">
-                                  <input type="hidden" name="cid" value="${param.cid}">
-                              </c:if>
-                              <c:if test="${not empty param.q}">
-                                  <input type="hidden" name="q" value="${param.q}">
-                              </c:if>
-                              <c:if test="${not empty priceTag}">
-                                  <input type="hidden" name="price" value="${priceTag}">
-                              </c:if>
+                      <form action="shop" method="get" id="sortForm">
 
-                              <select name="sort" onchange="this.form.submit()"
-                                      style="height: 34px; padding: 0 12px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); background-color: #fff; min-width: 200px; cursor: pointer;">
+                        <c:if test="${not empty param.cid}">
+                          <input type="hidden" name="cid" value="${param.cid}">
+                        </c:if>
+                        <c:if test="${not empty param.q}">
+                          <input type="hidden" name="q" value="${param.q}">
+                        </c:if>
+                        <c:if test="${not empty priceTag}">
+                          <input type="hidden" name="price" value="${priceTag}">
+                        </c:if>
 
-                                  <option value="new" ${sortTag == 'new' ? 'selected' : ''}>Mới nhất</option>
-                                  <option value="best_sell" ${sortTag == 'best_sell' ? 'selected' : ''}>Bán chạy nhất</option>
-                                  <option value="popular" ${sortTag == 'popular' ? 'selected' : ''}>Phổ biến (Lượt xem)</option>
-                                  <option value="price_asc" ${sortTag == 'price_asc' ? 'selected' : ''}>Giá: Thấp đến Cao</option>
-                                  <option value="price_desc" ${sortTag == 'price_desc' ? 'selected' : ''}>Giá: Cao đến Thấp</option>
-                                  <option value="old" ${sortTag == 'old' ? 'selected' : ''}>Cũ nhất</option>
+                        <select name="sort" onchange="this.form.submit()"
+                          style="height: 34px; padding: 0 12px; border-radius: 2px; border: 1px solid rgba(0,0,0,0.1); background-color: #fff; min-width: 200px; cursor: pointer;">
 
-                              </select>
-                          </form>
-                      </div>
+                          <option value="new" ${sortTag=='new' ? 'selected' : '' }>Mới nhất</option>
+                          <option value="best_sell" ${sortTag=='best_sell' ? 'selected' : '' }>Bán chạy nhất</option>
+                          <option value="popular" ${sortTag=='popular' ? 'selected' : '' }>Phổ biến (Lượt xem)</option>
+                          <option value="price_asc" ${sortTag=='price_asc' ? 'selected' : '' }>Giá: Thấp đến Cao
+                          </option>
+                          <option value="price_desc" ${sortTag=='price_desc' ? 'selected' : '' }>Giá: Cao đến Thấp
+                          </option>
+                          <option value="old" ${sortTag=='old' ? 'selected' : '' }>Cũ nhất</option>
 
-                      <div class="sort-filter__page">
-                          <span class="sort-filter__page-current" style="color: var(--primary-color)">${tag != null ? tag : 1}</span>
-                          <span class="sort-filter__page-total">/${endP}</span>
-                      </div>
+                        </select>
+                      </form>
+                    </div>
+
+                    <div class="sort-filter__page">
+                      <span class="sort-filter__page-current" style="color: var(--primary-color)">${tag != null ? tag :
+                        1}</span>
+                      <span class="sort-filter__page-total">/${endP}</span>
+                    </div>
                   </div>
 
                   <!-- Product item -->
@@ -147,50 +180,55 @@
                               </a>
 
                               <%-- Hiển thị badge discount --%>
-                              <c:choose>
-                                <%-- Ưu tiên 1: Weekend Deal badge --%>
-                                <c:when test="${not empty weekendDeal}">
-                                  <div class="product-badge sale" style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">-${weekendDeal.discountPercent}%</div>
-                                  <c:if test="${not empty weekendDeal.tag}">
-                                    <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
-                                      <span class="product-tag">${weekendDeal.tag}</span>
-                                    </div>
-                                  </c:if>
-                                </c:when>
-                                <%-- Ưu tiên 2: Sale thường badge --%>
-                                <c:when test="${p.salePrice > 0 && p.salePrice < p.price}">
-                                  <div class="product-badge sale">-<fmt:formatNumber value="${(p.price - p.salePrice) / p.price * 100}" maxFractionDigits="0" />%</div>
-                                </c:when>
-                              </c:choose>
+                                <c:choose>
+                                  <%-- Ưu tiên 1: Weekend Deal badge --%>
+                                    <c:when test="${not empty weekendDeal}">
+                                      <div class="product-badge sale"
+                                        style="background: linear-gradient(135deg, #ff6b6b, #ee5a6f);">
+                                        -${weekendDeal.discountPercent}%</div>
+                                      <c:if test="${not empty weekendDeal.tag}">
+                                        <div style="position: absolute; top: 45px; left: 10px; z-index: 10;">
+                                          <span class="product-tag">${weekendDeal.tag}</span>
+                                        </div>
+                                      </c:if>
+                                    </c:when>
+                                    <%-- Ưu tiên 2: Sale thường badge --%>
+                                      <c:when test="${p.salePrice > 0 && p.salePrice < p.price}">
+                                        <div class="product-badge sale">-
+                                          <fmt:formatNumber value="${(p.price - p.salePrice) / p.price * 100}"
+                                            maxFractionDigits="0" />%
+                                        </div>
+                                      </c:when>
+                                </c:choose>
 
-                              <div class="product-actions">
-                                <c:set var="isLiked" value="${likedIds.contains(p.id)}" />
+                                <div class="product-actions">
+                                  <c:set var="isLiked" value="${likedIds.contains(p.id)}" />
 
-                                <a href="wishlist?action=${isLiked ? 'remove' : 'add'}&pid=${p.id}"
-                                   class="action-btn"
-                                   title="${isLiked ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}">
+                                  <a href="wishlist?action=${isLiked ? 'remove' : 'add'}&pid=${p.id}" class="action-btn"
+                                    title="${isLiked ? 'Bỏ yêu thích' : 'Thêm vào yêu thích'}">
 
                                     <i class="${isLiked ? 'fas fa-heart' : 'far fa-heart'}"
-                                       style="${isLiked ? 'color: red;' : ''}"></i>
-                                </a>
+                                      style="${isLiked ? 'color: red;' : ''}"></i>
+                                  </a>
 
-                                <a href="product-detail?pid=${p.id}" class="action-btn" title="Xem nhanh">
-                                  <i class="far fa-eye"></i>
-                                </a>
+                                  <a href="product-detail?pid=${p.id}" class="action-btn" title="Xem nhanh">
+                                    <i class="far fa-eye"></i>
+                                  </a>
 
-                                <c:choose>
-                                  <c:when test="${p.quantity == 0}">
-                                    <a href="product-detail?pid=${p.id}" class="action-btn" style="opacity: 0.5; cursor: not-allowed;" title="Hết hàng">
-                                      <i class="fas fa-shopping-basket"></i>
-                                    </a>
-                                  </c:when>
-                                  <c:otherwise>
-                                    <button class="action-btn add-to-cart-btn" data-id="${p.id}" title="Thêm vào giỏ">
-                                      <i class="fas fa-shopping-basket"></i>
-                                    </button>
-                                  </c:otherwise>
-                                </c:choose>
-                              </div>
+                                  <c:choose>
+                                    <c:when test="${p.quantity == 0}">
+                                      <a href="product-detail?pid=${p.id}" class="action-btn"
+                                        style="opacity: 0.5; cursor: not-allowed;" title="Hết hàng">
+                                        <i class="fas fa-shopping-basket"></i>
+                                      </a>
+                                    </c:when>
+                                    <c:otherwise>
+                                      <button class="action-btn add-to-cart-btn" data-id="${p.id}" title="Thêm vào giỏ">
+                                        <i class="fas fa-shopping-basket"></i>
+                                      </button>
+                                    </c:otherwise>
+                                  </c:choose>
+                                </div>
                             </div>
 
                             <div class="product-info">
@@ -212,34 +250,35 @@
                               <div class="price">
                                 <c:choose>
                                   <%-- Kiểm tra hết hàng trước --%>
-                                  <c:when test="${p.quantity == 0}">
-                                    <span class="current" style="color: #999; font-weight: 600;">Hết hàng</span>
-                                  </c:when>
-                                  <%-- Ưu tiên 1: Weekend Deal price --%>
-                                  <c:when test="${not empty weekendDeal}">
-                                    <c:set var="weekendPrice" value="${p.price * (1 - weekendDeal.discountPercent / 100.0)}" />
-                                    <span class="current" style="color: #ff6b6b;">
-                                      <fmt:formatNumber value="${weekendPrice}" pattern="#,###" />đ
-                                    </span>
-                                    <span class="original">
-                                      <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
-                                    </span>
-                                  </c:when>
-                                  <%-- Ưu tiên 2: Sale thường --%>
-                                  <c:when test="${p.salePrice > 0 && p.salePrice < p.price}">
-                                    <span class="current">
-                                      <fmt:formatNumber value="${p.salePrice}" pattern="#,###" />đ
-                                    </span>
-                                    <span class="original">
-                                      <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
-                                    </span>
-                                  </c:when>
-                                  <%-- Mặc định: Giá gốc --%>
-                                  <c:otherwise>
-                                    <span class="current">
-                                      <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
-                                    </span>
-                                  </c:otherwise>
+                                    <c:when test="${p.quantity == 0}">
+                                      <span class="current" style="color: #999; font-weight: 600;">Hết hàng</span>
+                                    </c:when>
+                                    <%-- Ưu tiên 1: Weekend Deal price --%>
+                                      <c:when test="${not empty weekendDeal}">
+                                        <c:set var="weekendPrice"
+                                          value="${p.price * (1 - weekendDeal.discountPercent / 100.0)}" />
+                                        <span class="current" style="color: #ff6b6b;">
+                                          <fmt:formatNumber value="${weekendPrice}" pattern="#,###" />đ
+                                        </span>
+                                        <span class="original">
+                                          <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
+                                        </span>
+                                      </c:when>
+                                      <%-- Ưu tiên 2: Sale thường --%>
+                                        <c:when test="${p.salePrice > 0 && p.salePrice < p.price}">
+                                          <span class="current">
+                                            <fmt:formatNumber value="${p.salePrice}" pattern="#,###" />đ
+                                          </span>
+                                          <span class="original">
+                                            <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
+                                          </span>
+                                        </c:when>
+                                        <%-- Mặc định: Giá gốc --%>
+                                          <c:otherwise>
+                                            <span class="current">
+                                              <fmt:formatNumber value="${p.price}" pattern="#,###" />đ
+                                            </span>
+                                          </c:otherwise>
                                 </c:choose>
                                 <c:if test="${p.quantity > 0}">
                                   <span class="unit" style="font-size: 12px; color: #666;">/ Kg</span>
@@ -419,6 +458,16 @@
           </div>
         </footer>
         <script src="./assets/js/main.js"></script>
+        <script>
+          function toggleCategoryIcon(detailsElement) {
+            const toggle = detailsElement.querySelector('.category-toggle');
+            if (detailsElement.open) {
+              toggle.textContent = '-';
+            } else {
+              toggle.textContent = '+';
+            }
+          }
+        </script>
         </div>
       </body>
 
