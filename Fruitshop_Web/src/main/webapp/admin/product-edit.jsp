@@ -121,9 +121,20 @@
 
                     <div class="form-input">
                       <label class="form-label" for="productDesc">Mô tả chi tiết</label>
-                      <textarea id="productDesc" name="description" class="form-textarea"
-                        placeholder="Nhập mô tả sản phẩm tại đây...">${product.description}</textarea>
+                      <textarea id="productDesc" name="description"
+                        class="form-textarea">${product.description}</textarea>
                     </div>
+                    <script src="${pageContext.request.contextPath}/assets/ckeditor/ckeditor.js"></script>
+                    <script src="${pageContext.request.contextPath}/assets/ckfinder/ckfinder/ckfinder.js"></script>
+                    <script>
+                      var connectorUrl = '${pageContext.request.contextPath}/ckfinder/core/connector/java/connector';
+                      CKEDITOR.replace('productDesc', {
+                        filebrowserBrowseUrl: '${pageContext.request.contextPath}/assets/ckfinder/ckfinder/ckfinder.html',
+                        filebrowserImageBrowseUrl: '${pageContext.request.contextPath}/assets/ckfinder/ckfinder/ckfinder.html?type=Images',
+                        filebrowserUploadUrl: connectorUrl + '?command=QuickUpload&type=Files',
+                        filebrowserImageUploadUrl: connectorUrl + '?command=QuickUpload&type=Images'
+                      });
+                    </script>
 
                   </div>
 
