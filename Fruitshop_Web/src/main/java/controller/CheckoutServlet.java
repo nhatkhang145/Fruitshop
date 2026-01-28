@@ -225,6 +225,21 @@ public class CheckoutServlet extends HttpServlet {
                 // Lưu OrderItems
                 orderDAO.addOrderDetails(orderId, orderItems);
 
+                try {
+                    dal.NotificationDAO notificationDAO = new dal.NotificationDAO();
+                    // Tạo link để Admin click vào xem chi tiết đơn hàng ngay
+                    String notifLink = "/admin/orders" + orderId;
+
+                    notificationDAO.insert(
+                            "order",                                     // Type
+                            "Đơn hàng mới #" + orderId,                  // Title
+                            "Khách hàng " + fullname + " vừa đặt hàng.", // Message
+                            notifLink                                    // Link
+                    );
+                } catch (Exception e) {
+                    e.printStackTrace(); // Log lỗi nếu có để không ảnh hưởng luồng chính
+                }
+
                 // Xóa giỏ hàng hoặc buyNowCart tùy vào chế độ
                 if (isBuyNow != null && isBuyNow) {
                     session.removeAttribute("buyNowCart");
