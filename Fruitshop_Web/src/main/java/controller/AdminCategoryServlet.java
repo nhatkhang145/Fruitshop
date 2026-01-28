@@ -69,19 +69,28 @@ public class AdminCategoryServlet extends HttpServlet {
 
     // 3. Thêm danh mục mới
     private void addCategory(HttpServletRequest req, HttpServletResponse resp) throws IOException {
-        String name = req.getParameter("name");
-        String desc = req.getParameter("description");
-        int parentId = Integer.parseInt(req.getParameter("parentId"));
-        int status = Integer.parseInt(req.getParameter("status"));
+        try {
+            req.setCharacterEncoding("UTF-8");
+            String name = req.getParameter("name");
+            String desc = req.getParameter("description");
+            // Kiểm tra null/trống trước khi ép kiểu để tránh lỗi NumberFormatException
+            int parentId = Integer.parseInt(req.getParameter("parentId") == null ? "0" : req.getParameter("parentId"));
+            int status = Integer.parseInt(req.getParameter("status") == null ? "1" : req.getParameter("status"));
 
-        Category c = new Category();
-        c.setName(name);
-        c.setDescription(desc);
-        c.setParentId(parentId);
-        c.setStatus(status);
+            Category c = new Category();
+            c.setName(name);
+            c.setDescription(desc);
+            c.setParentId(parentId);
+            c.setStatus(status);
 
-        categoryDAO.insert(c); // Cần bổ sung method insert trong CategoryDAO
-        resp.sendRedirect("categories");
+            categoryDAO.insert(c);
+
+            // Phải dùng đường dẫn tuyệt đối hoặc context path để đảm bảo load lại đúng trang
+            resp.sendRedirect(req.getContextPath() + "/admin/categories");
+        } catch (Exception e) {
+            e.printStackTrace();
+            resp.sendRedirect(req.getContextPath() + "/admin/categories?error=1");
+        }
     }
 
     // 4. Cập nhật danh mục

@@ -301,8 +301,6 @@
 }
 .product-share a:hover { color: var(--primary-color); }
 
-
-/* --- BOTTOM TABS --- */
 .product-detail__bottom {
   margin-bottom: 50px;
 }
@@ -333,6 +331,7 @@
   line-height: 1.7;
   color: #444;
   animation: fadeIn 0.3s;
+  display: none;
 }
 .content-inner p { margin-bottom: 15px; }
 

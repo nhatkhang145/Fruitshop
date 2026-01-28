@@ -149,6 +149,7 @@
             </c:if>
 
           </div>
+          <div id="pagination" class="pagination" style="display: flex; justify-content: center; gap: 10px; margin-top: 20px;"></div>
         </main>
       </div>
 
@@ -169,15 +170,16 @@
               </div>
 
               <div class="form-group">
-                <label>Danh mục cha</label>
-                <select name="parentId" id="catParent">
-                  <option value="0">-- Là Danh Mục Gốc --</option>
-                  <c:forEach items="${listC}" var="parent">
-                    <c:if test="${parent.parentId == 0}">
-                      <option value="${parent.id}">${parent.name}</option>
-                    </c:if>
-                  </c:forEach>
-                </select>
+                  <label>Danh mục cha</label>
+                  <select name="parentId" id="catParent">
+                      <option value="0">-- Là Danh Mục Gốc --</option>
+                      <c:forEach items="${listC}" var="parent">
+                          <%-- Chỉ hiển thị những danh mục là gốc (id cha = 0) để chọn làm cha --%>
+                          <c:if test="${parent.parentId == 0}">
+                              <option value="${parent.id}">${parent.name}</option>
+                          </c:if>
+                      </c:forEach>
+                  </select>
               </div>
 
               <div class="form-group">
@@ -309,28 +311,22 @@
           // --- CẬP NHẬT LOGIC TÌM KIẾM ---
           // Khi tìm kiếm thì phải Reset lại phân trang (hoặc ẩn phân trang đi)
           window.searchCategory = function () {
-            let input = document.getElementById('searchInput').value.toLowerCase();
-            let hasResult = false;
+              let input = document.getElementById('searchInput').value.toLowerCase();
+              const pagination = document.getElementById('pagination');
+              const items = document.getElementsByClassName('category-card');
 
-            // Nếu ô tìm kiếm trống -> Quay lại chế độ phân trang
-            if (input === "") {
-              showPage(1);
-              pagination.style.display = "flex";
-              return;
-            }
-
-            // Nếu đang tìm kiếm -> Ẩn thanh phân trang, hiện tất cả kết quả khớp
-            pagination.style.display = "none";
-
-            for (let i = 0; i < items.length; i++) {
-              let name = items[i].getElementsByClassName('cate-name')[0].innerText.toLowerCase();
-              if (name.includes(input)) {
-                items[i].style.display = "flex";
-                hasResult = true;
-              } else {
-                items[i].style.display = "none";
+              if (input === "") {
+                  showPage(1); // Nếu xóa hết ô tìm kiếm thì hiện lại trang 1
+                  if(pagination) pagination.style.display = "flex";
+                  return;
               }
-            }
+
+              // Nếu đang gõ tìm kiếm
+              if(pagination) pagination.style.display = "none";
+              for (let i = 0; i < items.length; i++) {
+                  let name = items[i].querySelector('.cate-name').innerText.toLowerCase();
+                  items[i].style.display = name.includes(input) ? "flex" : "none";
+              }
           }
         });
       </script>

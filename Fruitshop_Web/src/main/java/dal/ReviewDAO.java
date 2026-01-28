@@ -24,8 +24,10 @@ public class ReviewDAO {
 
     // Lấy đánh giá theo Product ID (kèm thông tin User)
     public List<Review> getReviewsByProductId(int productId) {
-        String query = "SELECT r.*, u.fullname, u.avatar " +
-                "FROM reviews r JOIN users u ON r.user_id = u.id " +
+        String query = "SELECT r.id, r.user_id, r.product_id, r.rating, r.comment, r.created_at, " +
+                "u.fullname AS u_fullname, u.avatar AS u_avatar " +
+                "FROM reviews r " +
+                "LEFT JOIN users u ON r.user_id = u.id " +
                 "WHERE r.product_id = :pid AND r.status = 'approved' " +
                 "ORDER BY r.created_at DESC";
 
@@ -43,11 +45,14 @@ public class ReviewDAO {
 
                             // Map User info
                             User u = new User();
-                            u.setFullName(rs.getString("fullname"));
-                            u.setAvatar(rs.getString("avatar"));
-                            r.setUser(u);
+                            String name = rs.getString("user_fullname");
+                            String avatar = rs.getString("user_avatar");
 
+                            u.setFullName(name != null ? name : "Người dùng ẩn danh");
+                            u.setAvatar(avatar != null ? avatar : "assets/images/default-user.png");
+                            r.setUser(u);
                             return r;
+
                         }).list());
     }
 
@@ -67,8 +72,8 @@ public class ReviewDAO {
     public List<Review> getAllReviews() {
         String query = "SELECT r.*, u.fullname, u.email, u.avatar, p.name as product_name " +
                 "FROM reviews r " +
-                "JOIN users u ON r.user_id = u.id " +
-                "JOIN products p ON r.product_id = p.id " +
+                "LEFT JOIN users u ON r.user_id = u.id " +
+                "LEFT JOIN products p ON r.product_id = p.id " +
                 "ORDER BY r.created_at DESC";
 
         return DBContext.get().withHandle(handle ->
