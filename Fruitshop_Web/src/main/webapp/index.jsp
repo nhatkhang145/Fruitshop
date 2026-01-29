@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
     <!DOCTYPE html>
     <html lang="vi">
@@ -104,7 +105,14 @@
                           <div class="product-card">
                             <div class="product-image">
                               <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">
-                                <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
+                                <c:choose>
+                                  <c:when test="${fn:startsWith(product.image, 'http')}">
+                                    <img src="${product.image}" alt="${product.name}" loading="lazy" />
+                                  </c:when>
+                                  <c:otherwise>
+                                    <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
+                                  </c:otherwise>
+                                </c:choose>
                               </a>
 
                               <%-- Hiển thị badge discount --%>
@@ -204,7 +212,7 @@
             <section id="weekend-deals">
               <div class="container">
                 <div class="section-header">
-                  <h2>🔥 Ưu Đãi Cuối Tuần</h2>
+                  <h2>🔥 Ưu Đãi </h2>
                   <p class="section-subtitle">Giảm giá đặc biệt - Số lượng có hạn</p>
                 </div>
 
@@ -263,7 +271,14 @@
                             </div>
 
                             <div class="deal-image">
-                              <img src="${pageContext.request.contextPath}/${deal.product.image}" alt="${deal.product.name}" />
+                              <c:choose>
+                                <c:when test="${fn:startsWith(deal.product.image, 'http')}">
+                                  <img src="${deal.product.image}" alt="${deal.product.name}" />
+                                </c:when>
+                                <c:otherwise>
+                                  <img src="${pageContext.request.contextPath}/${deal.product.image}" alt="${deal.product.name}" />
+                                </c:otherwise>
+                              </c:choose>
                               <div class="image-decoration"></div>
                             </div>
                           </div>
@@ -314,7 +329,7 @@
             <section id="top-trending">
               <div class="container">
                 <div class="section-header">
-                  <h2>Sản phẩm bán chạy</h2>
+                  <h2>Sản phẩm đề xuất</h2>
                   <div class="header-icons">
                     <button class="home-icon"><i class="fas fa-fire"></i></button>
                   </div>
@@ -328,7 +343,14 @@
                         <div class="product-card">
                           <div class="product-image">
                             <a href="${pageContext.request.contextPath}/product-detail?pid=${product.id}">
-                              <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
+                              <c:choose>
+                                <c:when test="${fn:startsWith(product.image, 'http')}">
+                                  <img src="${product.image}" alt="${product.name}" loading="lazy" />
+                                </c:when>
+                                <c:otherwise>
+                                  <img src="${pageContext.request.contextPath}/${product.image}" alt="${product.name}" loading="lazy" />
+                                </c:otherwise>
+                              </c:choose>
                             </a>
 
                             <%-- Hiển thị badge discount --%>

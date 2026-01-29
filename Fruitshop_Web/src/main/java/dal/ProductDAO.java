@@ -75,8 +75,8 @@ public class ProductDAO {
 
     // 5. Phân trang
     public List<Product> pagingProduct(int index) {
-        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products ORDER BY id LIMIT ?, 6";
-        int offset = (index - 1) * 6;
+        String sql = "SELECT id, name, price, sale_price AS salePrice, quantity, short_description AS description, image, category_id AS categoryId FROM products ORDER BY id LIMIT ?, 16";
+        int offset = (index - 1) * 16;
 
         return DBContext.get().withHandle(handle -> handle.createQuery(sql)
                 .bind(0, offset)
@@ -252,7 +252,7 @@ public class ProductDAO {
         }
 
         // 6. PHÂN TRANG (LIMIT OFFSET)
-        sql.append(" LIMIT 6 OFFSET :offset ");
+        sql.append(" LIMIT 16 OFFSET :offset ");
 
         // 7. THỰC THI
         return DBContext.get().withHandle(handle -> {
@@ -265,7 +265,7 @@ public class ProductDAO {
             if (maxPrice != null)
                 query.bind("max", maxPrice);
 
-            query.bind("offset", (index - 1) * 6);
+            query.bind("offset", (index - 1) * 16);
 
             return query.mapToBean(Product.class).list();
         });
@@ -322,13 +322,13 @@ public class ProductDAO {
                 .list());
     }
 
-    // Lấy sản phẩm bán chạy
+    // Lấy sản phẩm đề xuất (ngẫu nhiên)
     public List<Product> getBestSellingProducts(int limit) {
         String sql = "SELECT p.id, p.name, p.price, p.sale_price AS salePrice, p.quantity, " +
                 "p.short_description AS description, p.image, p.category_id AS categoryId " +
                 "FROM products p " +
                 "WHERE p.status = 1 " +
-                "ORDER BY p.id DESC " +
+                "ORDER BY RAND() " +
                 "LIMIT ?";
 
         return DBContext.get().withHandle(handle -> handle.createQuery(sql)
@@ -484,7 +484,7 @@ public class ProductDAO {
             sql.append(" ORDER BY p.id DESC ");
         }
 
-        sql.append(" LIMIT 6 OFFSET ? ");
+        sql.append(" LIMIT 16 OFFSET ? ");
 
         return DBContext.get().withHandle(handle -> {
             var query = handle.createQuery(sql.toString());
@@ -499,7 +499,7 @@ public class ProductDAO {
             if (maxPrice != null) {
                 query.bind(paramIndex++, maxPrice);
             }
-            query.bind(paramIndex++, (index - 1) * 6);
+            query.bind(paramIndex++, (index - 1) * 16);
 
             return query.mapToBean(Product.class).list();
         });

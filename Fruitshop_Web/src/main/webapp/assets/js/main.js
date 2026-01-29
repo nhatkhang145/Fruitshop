@@ -1,4 +1,4 @@
-// // ================================
+
 //         // STICKY MENU ON SCROLL
 //         // ================================
 //         const header = document.querySelector('.header');
@@ -257,6 +257,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.carousel-container');
     const prevBtn = document.querySelector('.arrow.prev');
     const nextBtn = document.querySelector('.arrow.next');
+    
+    // Kiểm tra xem các element có tồn tại không
+    if (!container || !prevBtn || !nextBtn) {
+        return; // Thoát nếu không tìm thấy carousel
+    }
+    
     let currentPosition = 0;
     let products = [];
 
@@ -415,13 +421,13 @@ document.addEventListener('DOMContentLoaded', function() {
                     'X-Requested-With': 'XMLHttpRequest'
                 }
             })
-            .then(response => {
-                if (response.ok) {
-                    // Cập nhật badge giỏ hàng
+            .then(response => response.json())
+            .then(data => {
+                if (data.success) {
+                    // ✅ Cập nhật badge từ giá trị size trả về từ server
                     const cartBadge = document.querySelector('.cart-btn .badge');
-                    if (cartBadge) {
-                        const currentCount = parseInt(cartBadge.textContent) || 0;
-                        cartBadge.textContent = currentCount + 1;
+                    if (cartBadge && data.size !== undefined) {
+                        cartBadge.textContent = data.size;
                         
                         // Hiệu ứng animation
                         cartBadge.style.animation = 'pulse 0.5s ease-in-out';

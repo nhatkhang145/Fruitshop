@@ -73,8 +73,10 @@ public class CheckoutServlet extends HttpServlet {
 
         // Tính toán với giá đã có deal
         double totalProducts = 0;
+        double totalOriginalPrice = 0; // Tổng giá gốc (chưa giảm)
         for (CartItem item : cart) {
             totalProducts += item.getFinalPrice().doubleValue() * item.getQuantity();
+            totalOriginalPrice += item.getOriginalPrice().doubleValue() * item.getQuantity();
         }
 
         double shippingFee = 30000; // Phí ship cố định
@@ -83,7 +85,8 @@ public class CheckoutServlet extends HttpServlet {
 
         // Debug
         System.out.println("=== CHECKOUT DEBUG ===");
-        System.out.println("Total Products: " + totalProducts);
+        System.out.println("Total Products (after discount): " + totalProducts);
+        System.out.println("Total Original Price: " + totalOriginalPrice);
         System.out.println("Shipping Fee: " + shippingFee);
         System.out.println("Discount: " + discount);
         System.out.println("Final Amount: " + finalAmount);
@@ -91,6 +94,7 @@ public class CheckoutServlet extends HttpServlet {
         System.out.println("Addresses size: " + addresses.size());
 
         req.setAttribute("totalProducts", totalProducts);
+        req.setAttribute("totalOriginalPrice", totalOriginalPrice);
         req.setAttribute("shippingFee", shippingFee);
         req.setAttribute("discount", discount);
         req.setAttribute("finalAmount", finalAmount);
@@ -247,6 +251,10 @@ public class CheckoutServlet extends HttpServlet {
                 } else {
                     session.removeAttribute("cart");
                 }
+                
+                // Xóa badge và tổng tiền
+                session.removeAttribute("size");
+                session.removeAttribute("totalMoney");
 
                 // Chuyển đến trang thành công
                 session.setAttribute("successMessage", "Đặt hàng thành công! Mã đơn hàng: #" + orderId);

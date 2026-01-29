@@ -30,15 +30,16 @@
         <div class="container">
             <div class="profile-container">
                 <aside class="profile-sidebar">
-                    <div class="profile-user-brief">
-                        <img src="https://cdn-icons-png.flaticon.com/512/149/149071.png" alt="Avatar" class="brief-avatar" />
-                        <div class="brief-info">
-                            <span class="brief-name">${sessionScope.account.fullName}</span>
-                            <a href="profile.jsp" class="brief-edit"><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a>
-                        </div>
+                  <div class="profile-user-brief">
+                    <img src="${sessionScope.account.avatar != null ? sessionScope.account.avatar : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}" alt="Avatar" class="brief-avatar"
+                      id="briefAvatar" />
+                    <div class="brief-info">
+                      <span class="brief-name">${sessionScope.account.fullName}</span>
+                      <a href="#" class="brief-edit"><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a>
                     </div>
+                  </div>
 
-                    <ul class="profile-menu">
+                  <ul class="profile-menu">
                     <li class="profile-menu-item ">
                       <a href="profile"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
                     </li>

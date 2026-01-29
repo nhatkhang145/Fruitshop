@@ -105,8 +105,8 @@ public class ShopServlet extends HttpServlet {
 
             listP = listP_temp;
 
-            int endPage = count / 6;
-            if (count % 6 != 0)
+            int endPage = count / 16;
+            if (count % 16 != 0)
                 endPage++;
 
             // Truyền dữ liệu phân trang

@@ -174,8 +174,8 @@
 }
 
 .order-summary__price--total {
-    font-size: 1.3rem;
-    color: #49a474;
+    font-size: 1.6rem;
+    color: var(--primary-color);
     /* Màu xanh lá cây cho tổng tiền */
 }
 

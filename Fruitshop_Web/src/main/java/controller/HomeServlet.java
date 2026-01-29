@@ -43,7 +43,7 @@ public class HomeServlet extends HttpServlet {
         request.setAttribute("listC", categories);
         
         // 3. Load sản phẩm mới nhất (Top Offers - thay vì hardcode)
-        List<Product> newProducts = productDAO.getNewestProducts(10);
+        List<Product> newProducts = productDAO.getNewestProducts(16);
         request.setAttribute("newProducts", newProducts);
         
         // 4. Load sản phẩm bán chạy (Trending)
