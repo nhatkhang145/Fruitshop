@@ -14,6 +14,7 @@
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/base.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/main.css" />
         <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/shop.css" />
+        <link rel="stylesheet" href="${pageContext.request.contextPath}/assets/css/pagination.css" />
       </head>
 
       <body>
@@ -290,13 +291,55 @@
                       </c:forEach>
                     </div>
                     <div class="col-12">
-                      <div class="pagination d-flex justify-content-center mt-5">
+                      <div class="pagination-wrapper">
                         <c:if test="${endP > 1}">
-                          <c:forEach begin="1" end="${endP}" var="i">
-                            <a href="shop?index=${i}" class="rounded ${tag == i ? 'active' : ''}">
-                              ${i}
-                            </a>
-                          </c:forEach>
+                          <c:set var="currentPage" value="${empty param.index ? 1 : param.index}" />
+                          
+                          <!-- Previous Button -->
+                          <c:choose>
+                            <c:when test="${currentPage > 1}">
+                              <a href="shop?index=${currentPage - 1}&cid=${cid}&price=${priceTag}&sort=${sortTag}" class="pagination-btn pagination-prev">
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Trang Trước</span>
+                              </a>
+                            </c:when>
+                            <c:otherwise>
+                              <button class="pagination-btn pagination-prev" disabled>
+                                <i class="fas fa-chevron-left"></i>
+                                <span>Trang Trước</span>
+                              </button>
+                            </c:otherwise>
+                          </c:choose>
+                          
+                          <!-- Page Numbers -->
+                          <div class="pagination-pages">
+                            <c:forEach begin="1" end="${endP}" var="i">
+                              <c:choose>
+                                <c:when test="${i == currentPage}">
+                                  <span class="page-number active">${i}</span>
+                                </c:when>
+                                <c:otherwise>
+                                  <a href="shop?index=${i}&cid=${cid}&price=${priceTag}&sort=${sortTag}" class="page-number">${i}</a>
+                                </c:otherwise>
+                              </c:choose>
+                            </c:forEach>
+                          </div>
+                          
+                          <!-- Next Button -->
+                          <c:choose>
+                            <c:when test="${currentPage < endP}">
+                              <a href="shop?index=${currentPage + 1}&cid=${cid}&price=${priceTag}&sort=${sortTag}" class="pagination-btn pagination-next">
+                                <span>Trang Sau</span>
+                                <i class="fas fa-chevron-right"></i>
+                              </a>
+                            </c:when>
+                            <c:otherwise>
+                              <button class="pagination-btn pagination-next" disabled>
+                                <span>Trang Sau</span>
+                                <i class="fas fa-chevron-right"></i>
+                              </button>
+                            </c:otherwise>
+                          </c:choose>
                         </c:if>
                       </div>
                     </div>
