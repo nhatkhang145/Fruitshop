@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -66,9 +67,17 @@
                                     <tr>
                                         <td>
                                             <div class="item-product">
-                                                <img src="${pageContext.request.contextPath}/${item.product.image}"
-                                                     alt="${item.productName}"
-                                                     onerror="this.src='https://via.placeholder.com/40x40'"/>
+                                                <c:choose>
+                                                  <c:when test="${fn:startsWith(item.product.image, 'http')}">
+                                                    <img src="${item.product.image}" alt="${item.productName}"
+                                                         onerror="this.src='https://via.placeholder.com/40x40'"/>
+                                                  </c:when>
+                                                  <c:otherwise>
+                                                    <img src="${pageContext.request.contextPath}/${item.product.image}"
+                                                         alt="${item.productName}"
+                                                         onerror="this.src='https://via.placeholder.com/40x40'"/>
+                                                  </c:otherwise>
+                                                </c:choose>
                                                 <div class="item-info">
                                                     <p>${item.productName}</p>
                                                     <small>ID: ${item.productId}</small>

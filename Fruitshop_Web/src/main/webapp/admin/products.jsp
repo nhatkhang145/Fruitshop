@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
       <!DOCTYPE html>
       <html lang="vi">
 
@@ -131,8 +132,14 @@
                         <td>
                           <c:choose>
                             <c:when test="${not empty p.image}">
-                              <img src="${pageContext.request.contextPath}/${p.image}" alt="${p.name}"
-                                class="product-img" />
+                              <c:choose>
+                                <c:when test="${fn:startsWith(p.image, 'http')}">
+                                  <img src="${p.image}" alt="${p.name}" class="product-img" />
+                                </c:when>
+                                <c:otherwise>
+                                  <img src="${pageContext.request.contextPath}/${p.image}" alt="${p.name}" class="product-img" />
+                                </c:otherwise>
+                              </c:choose>
                             </c:when>
                             <c:otherwise>
                               <img src="https://via.placeholder.com/50" alt="No Image" class="product-img" />

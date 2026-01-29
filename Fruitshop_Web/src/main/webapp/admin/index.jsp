@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <%@ page import="dal.ProductDAO" %>
 <%@ page import="model.Order" %>
 <%@ page import="model.Product" %>
@@ -125,7 +126,14 @@
               <c:forEach items="${lowStockProducts}" var="p">
                 <li class="low-stock">
                   <div class="task-title">
-                    <img src="${pageContext.request.contextPath}/${p.image}" alt="${p.name}" />
+                    <c:choose>
+                      <c:when test="${fn:startsWith(p.image, 'http')}">
+                        <img src="${p.image}" alt="${p.name}" />
+                      </c:when>
+                      <c:otherwise>
+                        <img src="${pageContext.request.contextPath}/${p.image}" alt="${p.name}" />
+                      </c:otherwise>
+                    </c:choose>
                     <p>${p.name}</p>
                   </div>
                   <span class="stock-count" style="color: var(--danger);">Còn ${p.quantity}</span>
