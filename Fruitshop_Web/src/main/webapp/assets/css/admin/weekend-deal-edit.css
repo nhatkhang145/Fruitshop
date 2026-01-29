@@ -2,11 +2,19 @@
 /* === WEEKEND DEAL EDIT - ADMIN CUSTOM STYLES === */
 /* ================================================= */
 
+/* Override bottom-data to use full width */
+.content main .bottom-data {
+    display: block;
+}
+
 /* Form Container */
 .deal-form-container {
     background: var(--light, #f6f6f9);
     border-radius: 20px;
     padding: 30px;
+    width: 100%;
+    max-width: 100%;
+    margin: 0 auto;
 }
 
 /* Form Grid Layout */
@@ -107,11 +115,11 @@
     border-radius: 50%;
 }
 
-.toggle-switch input:checked + .toggle-slider {
+.toggle-switch input:checked+.toggle-slider {
     background-color: var(--success, #3d8b91);
 }
 
-.toggle-switch input:checked + .toggle-slider:before {
+.toggle-switch input:checked+.toggle-slider:before {
     transform: translateX(30px);
 }
 
@@ -119,23 +127,41 @@
 .preview-card {
     background: linear-gradient(135deg, #fff5f5 0%, #ffffff 100%);
     border: 2px solid #ff6b6b;
-    border-radius: 16px;
-    padding: 24px;
+    border-radius: 20px;
+    padding: 30px;
     margin-top: 24px;
+    box-shadow: 0 10px 30px rgba(255, 107, 107, 0.15);
+}
+
+.preview-card h3 {
+    color: var(--dark, #363949);
+    margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 20px;
+    font-weight: 600;
+}
+
+.preview-card h3 i {
+    color: #ff6b6b;
+    font-size: 24px;
 }
 
 .preview-content {
     display: flex;
-    gap: 20px;
-    align-items: center;
+    gap: 30px;
+    align-items: flex-start;
 }
 
 .preview-image {
-    width: 120px;
-    height: 120px;
-    border-radius: 12px;
+    flex: 0 0 180px;
+    width: 180px;
+    height: 180px;
+    border-radius: 16px;
     overflow: hidden;
-    flex-shrink: 0;
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.12);
+    background: #f0f0f0;
 }
 
 .preview-image img {
@@ -146,105 +172,85 @@
 
 .preview-info {
     flex: 1;
-}
-
-.preview-badge {
-    background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
-    color: white;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: bold;
-    font-size: 13px;
-    display: inline-block;
-    margin-right: 8px;
-}
-
-.preview-tag {
-    background: linear-gradient(135deg, #ffd93d 0%, #ff9d00 100%);
-    color: #333;
-    padding: 4px 12px;
-    border-radius: 20px;
-    font-weight: 600;
-    font-size: 12px;
-    display: inline-block;
-}
-    border-radius: 20px;
-    padding: 30px;
-    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
-    margin-top: 30px;
-}
-
-.preview-card h3 {
-    color: var(--dark, #363949);
-    margin-bottom: 20px;
     display: flex;
-    align-items: center;
-    gap: 10px;
-    font-size: 20px;
-}
-
-.preview-content {
-    display: flex;
-    gap: 30px;
-    align-items: center;
-}
-
-.preview-image {
-    flex: 0 0 200px;
-}
-
-.preview-image img {
-    width: 100%;
-    border-radius: 15px;
-    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
-}
-
-.preview-info {
-    flex: 1;
+    flex-direction: column;
+    gap: 12px;
 }
 
 .preview-info h4 {
-    font-size: 24px;
+    font-size: 22px;
     color: var(--dark, #363949);
-    margin-bottom: 10px;
+    margin: 8px 0;
+    font-weight: 700;
+}
+
+.preview-info>p {
+    color: #666;
+    font-size: 14px;
+    margin: 0;
+}
+
+.preview-badges {
+    display: flex;
+    gap: 10px;
+    flex-wrap: wrap;
 }
 
 .preview-badge {
     display: inline-block;
     background: linear-gradient(135deg, #ff6b6b, #ee5a6f);
     color: white;
-    padding: 6px 16px;
+    padding: 6px 14px;
     border-radius: 20px;
     font-weight: bold;
-    margin-bottom: 15px;
-    font-size: 14px;
+    font-size: 13px;
+}
+
+.preview-tag {
+    display: inline-block;
+    background: linear-gradient(135deg, #ffd93d 0%, #ff9d00 100%);
+    color: #333;
+    padding: 6px 14px;
+    border-radius: 20px;
+    font-weight: 600;
+    font-size: 12px;
+}
+
+.preview-prices {
+    display: flex;
+    align-items: baseline;
+    gap: 12px;
+    margin-top: 5px;
 }
 
 .preview-price {
-    font-size: 32px;
+    font-size: 28px;
     color: #ff6b6b;
     font-weight: 800;
-    margin-bottom: 10px;
 }
 
 .preview-original {
     text-decoration: line-through;
     color: #b2bec3;
-    font-size: 18px;
+    font-size: 16px;
 }
 
 .preview-timer {
-    background: #fff3cd;
-    padding: 12px;
-    border-radius: 10px;
-    margin-top: 15px;
-    display: inline-block;
+    background: linear-gradient(135deg, #fff3cd 0%, #ffe69c 100%);
+    padding: 12px 16px;
+    border-radius: 12px;
+    margin-top: 8px;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     color: #856404;
     font-weight: 600;
+    font-size: 13px;
+    border: 1px solid #ffc107;
 }
 
 .preview-timer i {
-    margin-right: 5px;
+    font-size: 18px;
 }
 
 /* Buttons - Using admin style.css patterns */

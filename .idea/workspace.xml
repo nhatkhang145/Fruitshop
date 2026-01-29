@@ -5,17 +5,13 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="ccecc6d3-cfa5-459e-bf2a-f514fca24552" name="Changes" comment="">
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.ask2agent.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/.idea/copilot.data.migration.edit.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/controller/AdminNotificationServlet.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/dal/NotificationDAO.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/model/Notification.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/controller/AdminCategoryServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/controller/AdminCategoryServlet.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/dal/CategoryDAO.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/dal/CategoryDAO.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/admin/Categories.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/admin/Categories.jsp" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/assets/css/main.css" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/assets/css/main.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/assets/css/product-detail.css" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/assets/css/product-detail.css" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/product-detail.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/product-detail.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/controller/CheckoutServlet.java" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/java/controller/CheckoutServlet.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/admin/notifications.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/admin/notifications.jsp" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/header.jsp" beforeDir="false" afterPath="$PROJECT_DIR$/Fruitshop_Web/src/main/webapp/header.jsp" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />

@@ -53,30 +53,27 @@
 
           <div class="category-list-container" id="categoryContainer">
 
-            <c:forEach items="${listC}" var="c">
-              <div class="category-card ${c.parentId == 0 ? 'root-card' : 'sub-card'}">
-
+            <!-- Hiển thị Danh mục Cha -->
+            <c:forEach items="${parentC}" var="parent">
+              <div class="category-card root-card">
                 <div class="card-info">
                   <div class="icon-box">
-                    <i class='bx ${c.parentId == 0 ? "bxs-folder-open" : "bx-subdirectory-right"}'></i>
+                    <i class='bx bxs-folder-open'></i>
                   </div>
                   <div class="text-content">
-                    <h3 class="cate-name">${c.name}</h3>
-                    <p class="cate-desc">${c.description != null && !c.description.isEmpty() ? c.description : '...'}
-                    </p>
+                    <h3 class="cate-name">${parent.name}</h3>
+                    <p class="cate-desc">${parent.description != null && !parent.description.isEmpty() ?
+                      parent.description : '...'}</p>
                   </div>
                 </div>
 
                 <div class="card-meta">
-                  <span class="meta-badge">ID: #${c.id}</span>
-                  <c:if test="${c.parentId != 0}">
-                    <span class="meta-badge parent-badge">Cha: ID #${c.parentId}</span>
-                  </c:if>
+                  <span class="meta-badge">ID: #${parent.id}</span>
                 </div>
 
                 <div class="card-status">
                   <c:choose>
-                    <c:when test="${c.status == 1}">
+                    <c:when test="${parent.status == 1}">
                       <span class="status-pill active">Hoạt động</span>
                     </c:when>
                     <c:otherwise>
@@ -86,16 +83,63 @@
                 </div>
 
                 <div class="card-actions">
-                  <button onclick="editCategory(${c.id}, '${c.name}', '${c.description}', ${c.status}, ${c.parentId})"
+                  <button
+                    onclick="editCategory(${parent.id}, '${parent.name}', '${parent.description}', ${parent.status}, ${parent.parentId})"
                     class="btn-icon edit" title="Sửa">
                     <i class='bx bx-edit-alt'></i>
                   </button>
-                  <a href="delete-category?id=${c.id}" onclick="return confirm('Bạn chắc chắn muốn xóa?')"
+                  <a href="delete-category?id=${parent.id}" onclick="return confirm('Bạn chắc chắn muốn xóa?')"
                     class="btn-icon delete" title="Xóa">
                     <i class='bx bx-trash'></i>
                   </a>
                 </div>
               </div>
+
+              <!-- Hiển thị Danh mục Con của Danh mục Cha này -->
+              <c:forEach items="${listC}" var="child">
+                <c:if test="${child.parentId == parent.id}">
+                  <div class="category-card sub-card">
+                    <div class="card-info">
+                      <div class="icon-box">
+                        <i class='bx bx-subdirectory-right'></i>
+                      </div>
+                      <div class="text-content">
+                        <h3 class="cate-name">${child.name}</h3>
+                        <p class="cate-desc">${child.description != null && !child.description.isEmpty() ?
+                          child.description : '...'}</p>
+                      </div>
+                    </div>
+
+                    <div class="card-meta">
+                      <span class="meta-badge">ID: #${child.id}</span>
+                      <span class="meta-badge parent-badge">Cha: ID #${child.parentId}</span>
+                    </div>
+
+                    <div class="card-status">
+                      <c:choose>
+                        <c:when test="${child.status == 1}">
+                          <span class="status-pill active">Hoạt động</span>
+                        </c:when>
+                        <c:otherwise>
+                          <span class="status-pill inactive">Đang ẩn</span>
+                        </c:otherwise>
+                      </c:choose>
+                    </div>
+
+                    <div class="card-actions">
+                      <button
+                        onclick="editCategory(${child.id}, '${child.name}', '${child.description}', ${child.status}, ${child.parentId})"
+                        class="btn-icon edit" title="Sửa">
+                        <i class='bx bx-edit-alt'></i>
+                      </button>
+                      <a href="delete-category?id=${child.id}" onclick="return confirm('Bạn chắc chắn muốn xóa?')"
+                        class="btn-icon delete" title="Xóa">
+                        <i class='bx bx-trash'></i>
+                      </a>
+                    </div>
+                  </div>
+                </c:if>
+              </c:forEach>
             </c:forEach>
 
             <c:if test="${empty listC}">
@@ -201,7 +245,7 @@
         }
         // --- LOGIC PHÂN TRANG (PAGINATION) ---
         document.addEventListener("DOMContentLoaded", function () {
-          const itemsPerPage = 5; // Bạn muốn hiện bao nhiêu danh mục 1 trang? (Ví dụ: 5)
+          const itemsPerPage = 100;
           const container = document.getElementById('categoryContainer');
           const items = container.getElementsByClassName('category-card');
           const pagination = document.getElementById('pagination');

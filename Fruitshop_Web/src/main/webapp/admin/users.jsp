@@ -7,7 +7,7 @@
       <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-        <title>Quản lý người dùng</title>
+        <title>Quản lý khách hàng</title>
 
         <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet" />
         <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/jquery.dataTables.min.css">
@@ -137,11 +137,11 @@
           <main>
             <div class="header">
               <div class="left">
-                <h1>Quản lý người dùng</h1>
+                <h1>Quản lý khách hàng</h1>
                 <ul class="breadcrumb">
                   <li><a href="#">Quản lý</a></li>
                   <li>/</li>
-                  <li><a href="#" class="active">Người dùng</a></li>
+                  <li><a href="#" class="active">Khách hàng</a></li>
                 </ul>
               </div>
               <a href="#" class="report" style="background: var(--primary);">
