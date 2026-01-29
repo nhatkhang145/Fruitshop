@@ -32,35 +32,36 @@
     <div class="container">
       <div class="profile-container">
         <aside class="profile-sidebar">
-          <div class="profile-user-brief">
-            <img src="${user.avatar != null ? pageContext.request.contextPath.concat('/').concat(user.avatar) : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}" 
-                 alt="Avatar" class="brief-avatar" />
-            <div class="brief-info">
-              <span class="brief-name">${user.fullname}</span>
-              <a href="${pageContext.request.contextPath}/profile" class="brief-edit">
-                <i class="fa-solid fa-pen"></i> Sửa hồ sơ
-              </a>
-            </div>
-          </div>
+                  <div class="profile-user-brief">
+                    <img src="${sessionScope.account.avatar != null ? sessionScope.account.avatar : 'https://cdn-icons-png.flaticon.com/512/149/149071.png'}" alt="Avatar" class="brief-avatar"
+                      id="briefAvatar" />
+                    <div class="brief-info">
+                      <span class="brief-name">${sessionScope.account.fullName}</span>
+                      <a href="#" class="brief-edit"><i class="fa-solid fa-pen"></i> Sửa hồ sơ</a>
+                    </div>
+                  </div>
 
-          <ul class="profile-menu">
-            <li class="profile-menu-item">
-              <a href="${pageContext.request.contextPath}/profile"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
-            </li>
-            <li class="profile-menu-item active">
-              <a href="${pageContext.request.contextPath}/orders"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
-            </li>
-            <li class="profile-menu-item">
-              <a href="${pageContext.request.contextPath}/addresses"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
-            </li>
-            <li class="profile-menu-item">
-              <a href="${pageContext.request.contextPath}/change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
-            </li>
-            <li class="profile-menu-item">
-              <a href="${pageContext.request.contextPath}/wishlist"><i class="fa-regular fa-heart"></i> Yêu thích</a>
-            </li>
-          </ul>
-        </aside>
+                  <ul class="profile-menu">
+                    <li class="profile-menu-item ">
+                      <a href="profile"><i class="fa-regular fa-user"></i> Hồ sơ của tôi</a>
+                    </li>
+                    <li class="profile-menu-item active">
+                      <a href="orders"><i class="fa-solid fa-box-open"></i> Đơn mua</a>
+                    </li>
+                    <li class="profile-menu-item">
+                      <a href="addresses"><i class="fa-solid fa-location-dot"></i> Địa chỉ</a>
+                    </li>
+                    <li class="profile-menu-item ">
+                      <a href="change-password.jsp"><i class="fa-solid fa-key"></i> Đổi mật khẩu</a>
+                    </li>
+                    <li class="profile-menu-item">
+                      <a href="wishlist"><i class="fa-regular fa-heart"></i> Yêu thích</a>
+                    </li>
+                    <li class="profile-menu-item">
+                      <a href="logout" style="color: red;"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</a>
+                    </li>
+                  </ul>
+                </aside>
 
         <main class="profile-content order-detail-content">
           <div class="detail-header">
@@ -184,8 +185,11 @@
 
           <div class="detail-actions">
             <a href="${pageContext.request.contextPath}/contact.jsp" class="btn btn-outline">Liên hệ Shop</a>
-            <c:if test="${order.status == 'completed'}">
-              <a href="${pageContext.request.contextPath}/shop" class="btn btn-primary">Mua lại</a>
+            <c:if test="${order.status == 'completed' || order.status == 'cancelled'}">
+              <form action="${pageContext.request.contextPath}/repurchase" method="POST" style="display: inline;">
+                <input type="hidden" name="orderId" value="${order.id}" />
+                <button type="submit" class="btn btn-primary">Mua lại</button>
+              </form>
             </c:if>
           </div>
         </main>

@@ -1,4 +1,4 @@
-// // ================================
+
 //         // STICKY MENU ON SCROLL
 //         // ================================
 //         const header = document.querySelector('.header');
@@ -257,6 +257,12 @@ document.addEventListener('DOMContentLoaded', function() {
     const container = document.querySelector('.carousel-container');
     const prevBtn = document.querySelector('.arrow.prev');
     const nextBtn = document.querySelector('.arrow.next');
+    
+    // Kiểm tra xem các element có tồn tại không
+    if (!container || !prevBtn || !nextBtn) {
+        return; // Thoát nếu không tìm thấy carousel
+    }
+    
     let currentPosition = 0;
     let products = [];
 

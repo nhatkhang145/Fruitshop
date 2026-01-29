@@ -155,6 +155,100 @@
   margin-bottom: 0;
   border-bottom: none; /* Để nối liền với phần tổng kết */
   border-radius: 4px 4px 0 0;
+  padding: 0;
+}
+
+.detail-product-list .order-card__body {
+  padding: 0 !important;
+  background: transparent !important;
+}
+
+/* --- Order Item (Sản phẩm trong đơn) --- */
+.order-item {
+  display: grid;
+  grid-template-columns: 80px 1fr 120px;
+  gap: 20px;
+  align-items: center;
+  padding: 15px 20px;
+  border-bottom: 1px solid #f0f0f0;
+  transition: background-color 0.2s ease;
+}
+
+.order-item:last-child {
+  border-bottom: none;
+}
+
+.order-item:hover {
+  background-color: #fafafa;
+}
+
+.item-thumb {
+  width: 80px;
+  height: 80px;
+  border-radius: 8px;
+  object-fit: cover;
+  border: 1px solid #f0f0f0;
+  flex-shrink: 0;
+}
+
+.item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.item-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  line-height: 1.4;
+  max-height: 42px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.item-qty {
+  font-size: 13px;
+  color: #888;
+  margin: 0;
+  font-weight: 500;
+}
+
+.item-price {
+  text-align: right;
+}
+
+.new-price {
+  display: block;
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--primary-brand-color);
+}
+
+/* Responsive - Mobile */
+@media (max-width: 768px) {
+  .order-item {
+    grid-template-columns: 70px 1fr;
+    gap: 15px;
+  }
+
+  .item-thumb {
+    width: 70px;
+    height: 70px;
+  }
+
+  .item-price {
+    grid-column: 2;
+    text-align: left;
+  }
+
+  .new-price {
+    font-size: 15px;
+  }
 }
 
 /* --- Summary (Tổng kết) --- */

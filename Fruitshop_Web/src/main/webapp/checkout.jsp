@@ -145,7 +145,7 @@
                           </td>
                           <td class="order-summary__cell">
                             <span class="order-summary__price">
-                              <fmt:formatNumber value="${item.product.salePrice * item.quantity}" type="number"
+                              <fmt:formatNumber value="${item.totalPrice}" type="number"
                                 groupingUsed="true" /> ₫
                             </span>
                           </td>
@@ -153,6 +153,25 @@
                       </c:forEach>
                     </tbody>
                     <tfoot>
+                      <tr class="order-summary__row order-summary__row--footer">
+                        <th class="order-summary__cell order-summary__cell--label">Giá gốc</th>
+                        <td class="order-summary__cell">
+                          <span class="order-summary__price" style="color: #999; text-decoration: line-through;">
+                            <fmt:formatNumber value="${totalOriginalPrice}" type="number" groupingUsed="true" /> ₫
+                          </span>
+                        </td>
+                      </tr>
+                      <c:if test="${totalOriginalPrice > totalProducts}">
+                        <tr class="order-summary__row order-summary__row--footer">
+                          <th class="order-summary__cell order-summary__cell--label">Tiền giảm</th>
+                          <td class="order-summary__cell">
+                            <span class="order-summary__price" style="color: #e74c3c;">
+                              -
+                              <fmt:formatNumber value="${totalOriginalPrice - totalProducts}" type="number" groupingUsed="true" /> ₫
+                            </span>
+                          </td>
+                        </tr>
+                      </c:if>
                       <tr class="order-summary__row order-summary__row--footer">
                         <th class="order-summary__cell order-summary__cell--label">Tạm tính</th>
                         <td class="order-summary__cell">

@@ -2,6 +2,107 @@
 /* === FILE CSS: Order.css (Đã sửa lỗi mất màu Header) === */
 /* ========================================================= */
 
+/* ========================================================= */
+/* 0. ORDERS HEADER (Tiêu đề trang) */
+/* ========================================================= */
+.orders-header {
+  margin-bottom: 30px;
+}
+
+.orders-header h2 {
+  font-size: 28px;
+  font-weight: 700;
+  color: #333;
+  margin: 0;
+  padding-bottom: 0;
+}
+
+/* ========================================================= */
+/* 1. TAB FILTER (Orders Tabs) */
+/* ========================================================= */
+.orders-tabs {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-bottom: 25px;
+  padding-bottom: 15px;
+  border-bottom: 2px solid #f0f0f0;
+}
+
+.tab-item {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background-color: #f9f9f9;
+  color: #666;
+  text-decoration: none;
+  border-radius: 6px;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.3s ease;
+  border: 1px solid #eee;
+  cursor: pointer;
+  position: relative; /* Thêm position relative để badge absolute hoạt động */
+}
+
+.tab-item:hover {
+  background-color: #f0f0f0;
+  color: #333;
+}
+
+.tab-item.active {
+  background-color: #37878d;
+  color: #ffffff;
+  border-color: #37878d;
+  font-weight: 600;
+  box-shadow: 0 2px 8px rgba(55, 135, 141, 0.2);
+}
+
+/* Badge trong tab - nằm ở góc trên phải */
+.tab-item .badge {
+  position: absolute;
+  top: -6px;
+  right: -6px;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 20px;
+  height: 20px;
+  padding: 0 5px;
+  background-color: #e74c3c;
+  color: #ffffff;
+  border-radius: 10px;
+  font-size: 11px;
+  font-weight: 600;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.15);
+}
+
+.tab-item.active .badge {
+  background-color: #ffffff;
+  color: #37878d;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+}
+
+/* Responsive: Stack tabs trên mobile */
+@media (max-width: 768px) {
+  .orders-tabs {
+    gap: 8px;
+  }
+
+  .tab-item {
+    padding: 8px 15px;
+    font-size: 13px;
+  }
+
+  .tab-item .badge {
+    min-width: 20px;
+    height: 20px;
+    font-size: 11px;
+  }
+}
+
+/* ========================================================= */
 /* 1. Ép cứng màu xanh cho Header bảng Order */
 /* Sử dụng ID #ordersTable để trỏ đích danh bảng này */
 #ordersTable thead th {
@@ -111,7 +212,41 @@ table.dataTable tbody tr:hover {
   font-weight: bold;
 }
 
-/* 5. Badge Trạng thái (Màu sắc từng loại) */
+/* 5. ORDER CARD BODY (Thông tin giao hàng) */
+.order-card__body {
+  padding: 12px 0;
+  background: #fafafa;
+  border-radius: 6px;
+  margin-bottom: 15px;
+}
+
+.order-address {
+  padding: 12px 15px;
+  display: flex;
+  gap: 12px;
+  color: #555;
+  font-size: 14px;
+  align-items: flex-start;
+}
+
+.order-address i {
+  color: #37878d;
+  margin-top: 2px;
+  flex-shrink: 0;
+  font-size: 16px;
+}
+
+.order-address div {
+  flex: 1;
+  line-height: 1.6;
+}
+
+.order-address strong {
+  color: #333;
+  font-weight: 600;
+}
+
+/* 6. Badge Trạng thái (Màu sắc từng loại) */
 .status {
   padding: 6px 12px;
   border-radius: 20px;

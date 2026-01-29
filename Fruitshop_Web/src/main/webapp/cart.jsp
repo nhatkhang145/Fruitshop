@@ -42,15 +42,6 @@
                 </c:if>
 
                 <c:if test="${not empty sessionScope.cart}">
-                  <div class="shipping-progress-bar">
-                    <p>
-                      Đơn hàng của bạn đang được xử lý!
-                    </p>
-                    <div class="progress-track">
-                      <div class="progress-filled" style="width: 50%"></div>
-                    </div>
-                  </div>
-
                   <table class="cart-table">
                     <thead>
                       <tr>
@@ -69,8 +60,27 @@
                             <img src="${item.product.image}" alt="${item.product.name}" />
                             <span>${item.product.name}</span>
                           </td>
-                          <td>
-                            <fmt:formatNumber value="${item.product.price}" pattern="#,###" />đ
+                          <td class="price-cell">
+                            <c:if test="${item.discountAmount > 0}">
+                              <div class="price-group">
+                                <span class="price-original">
+                                  <fmt:formatNumber value="${item.originalPrice}" pattern="#,###" />đ
+                                </span>
+                                <span class="price-sale">
+                                  <fmt:formatNumber value="${item.finalPrice}" pattern="#,###" />đ
+                                </span>
+                                <span class="discount-badge">
+                                  -<fmt:formatNumber value="${(item.discountAmount / item.originalPrice * 100)}" pattern="0" />%
+                                </span>
+                              </div>
+                            </c:if>
+                            <c:if test="${item.discountAmount <= 0}">
+                              <div class="price-group">
+                                <span class="price-normal">
+                                  <fmt:formatNumber value="${item.finalPrice}" pattern="#,###" />đ
+                                </span>
+                              </div>
+                            </c:if>
                           </td>
                           <td>
                             <div class="quantity-selector">
@@ -83,10 +93,22 @@
                                 onclick="location.href='update-cart?pid=${item.product.id}&mode=plus'">+</button>
                             </div>
                           </td>
-                          <td>
-                            <strong>
-                              <fmt:formatNumber value="${item.totalPrice}" pattern="#,###" />đ
-                            </strong>
+                          <td class="subtotal-cell">
+                            <c:if test="${item.discountAmount > 0}">
+                              <div class="subtotal-group">
+                                <span class="subtotal-original">
+                                  <fmt:formatNumber value="${item.originalPrice * item.quantity}" pattern="#,###" />đ
+                                </span>
+                                <strong class="subtotal-sale">
+                                  <fmt:formatNumber value="${item.totalPrice}" pattern="#,###" />đ
+                                </strong>
+                              </div>
+                            </c:if>
+                            <c:if test="${item.discountAmount <= 0}">
+                              <strong class="subtotal-normal">
+                                <fmt:formatNumber value="${item.totalPrice}" pattern="#,###" />đ
+                              </strong>
+                            </c:if>
                           </td>
                           <td>
                             <a href="remove-cart?pid=${item.product.id}" class="remove-btn"
@@ -100,10 +122,6 @@
                   </table>
 
                   <div class="cart-actions">
-                    <div class="coupon-area">
-                      <input type="text" class="coupon-input" placeholder="Mã giảm giá" />
-                      <button class="apply-coupon-btn">ÁP DỤNG MÃ GIẢM GIÁ</button>
-                    </div>
                     <a href="shop" class="update-cart-btn" style="text-decoration: none; text-align: center;">TIẾP TỤC
                       MUA HÀNG</a>
                   </div>
@@ -123,11 +141,7 @@
                     </div>
 
                     <div class="shipping-section">
-                      <h3>Phương Thức Vận Chuyển</h3>
-                      <label class="shipping-option">
-                        <input type="radio" name="shipping" checked />
-                        Tiêu chuẩn: <strong>Miễn phí</strong>
-                      </label>
+                      
                       <p class="shipping-note">
                         Phí vận chuyển thực tế sẽ được tính tại trang thanh toán.
                       </p>

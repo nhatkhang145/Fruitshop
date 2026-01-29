@@ -31,33 +31,7 @@
     /* Đảm bảo không bị co quá nhỏ */
 }
 
-/* --- THANH FREE SHIPPING --- */
-.shipping-progress-bar {
-    border: 2px solid #f0f0f0;
-    padding: 20px;
-    margin-bottom: 25px;
-    text-align: center;
-}
-
-.shipping-progress-bar p {
-    margin-top: 0;
-    font-size: 0.95rem;
-    color: #555;
-}
-
-.progress-track {
-    background-color: #f0f0f0;
-    height: 10px;
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.progress-filled {
-    background-color: #f59e0b;
-    /* Màu cam */
-    height: 100%;
-    border-radius: 5px;
-}
+/* --- CART TABLE --- */
 
 /* --- BẢNG GIỎ HÀNG --- */
 .cart-table {
@@ -75,8 +49,8 @@
 }
 
 .cart-table th {
-    font-size: 0.75rem;
-    /* 12px */
+    font-size: 1.4rem;
+    /* 15px */
     font-weight: 600;
     text-transform: uppercase;
     color: #777;
@@ -98,9 +72,80 @@
 .product-cell span {
     font-weight: 600;
     color: #222;
+    font-size: 1.2rem;
 }
 
-/* Cột số lượng */
+/* === CỘT GIÁ (SHOPEE STYLE) === */
+.price-cell {
+    min-width: 150px;
+    text-align: left;
+}
+
+.price-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+/* Giá bình thường (không giảm) */
+.price-normal {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #37878d;
+}
+
+/* Giá gốc (bị gạch) - khi có giảm giá */
+.price-original {
+    font-size: 0.85rem;
+    color: #999;
+    text-decoration: line-through;
+    font-weight: 500;
+}
+
+/* Giá sau giảm - nổi bật */
+.price-sale {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: #e74c3c;
+}
+
+/* Badge giảm giá % */
+.discount-badge {
+    display: none;
+}
+
+/* === CỘT THÀNH TIỀN (SHOPEE STYLE) === */
+.subtotal-cell {
+    min-width: 120px;
+    text-align: left;
+}
+
+.subtotal-group {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    align-items: flex-start;
+    justify-content: center;
+}
+
+.subtotal-original {
+    font-size: 0.85rem;
+    color: #999;
+    text-decoration: line-through;
+}
+
+.subtotal-sale {
+    font-size: 1.1rem;
+    color: #e74c3c;
+}
+
+.subtotal-normal {
+    font-size: 1.05rem;
+    color: #37878d;
+    font-weight: 700;
+}
 .quantity-selector {
     display: flex;
     border: 1px solid #e0e0e0;
@@ -164,46 +209,16 @@
     gap: 15px;
 }
 
-.coupon-area {
-    display: flex;
-}
-
-.coupon-input {
-    border: 1px solid #e0e0e0;
-    padding: 12px 15px;
-    font-size: 0.9rem;
-    outline: none;
-}
-
-.coupon-input:focus {
-    border-color: #555;
-}
-
-.apply-coupon-btn {
-    background-color: #333;
-    color: #fff;
-    border: none;
-    padding: 12px 20px;
-    font-size: 0.8rem;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.2s;
-}
-
-.apply-coupon-btn:hover {
-    background-color: #0c5a3e;
-    /* Màu xanh đậm khi hover */
-}
-
 .update-cart-btn {
     background-color: #f0f0f0;
     color: #555;
     border: 1px solid #e0e0e0;
     padding: 12px 20px;
-    font-size: 0.8rem;
+    font-size: 1rem;
     font-weight: 600;
     cursor: pointer;
     transition: background-color 0.2s;
+    margin-left: auto;
 }
 
 .update-cart-btn:hover {
@@ -222,7 +237,7 @@
 
 .cart-totals h2 {
     margin-top: 0;
-    font-size: 1.2rem;
+    font-size: 1.3rem;
     text-transform: uppercase;
     font-weight: 700;
     margin-bottom: 20px;
@@ -234,15 +249,17 @@
     align-items: center;
     padding: 15px 0;
     border-bottom: 1px solid #f0f0f0;
-    font-size: 0.95rem;
+    font-size: 1.05rem;
 }
 
 .totals-row span:first-child {
+    font-size: 1.3rem;
     color: #444;
     font-weight: 600;
 }
 
 .totals-row span:last-child {
+    font-size: 1.3rem;
     color: #555;
     font-weight: 600;
 }
@@ -262,7 +279,7 @@
 .shipping-option {
     display: block;
     margin-bottom: 10px;
-    font-size: 0.95rem;
+    font-size: 1rem;
     color: #555;
 }
 
@@ -271,7 +288,7 @@
 }
 
 .shipping-note {
-    font-size: 0.85rem;
+    font-size: 1.2rem;
     color: #777;
     margin-top: 15px;
 }
@@ -300,7 +317,7 @@
 }
 
 .checkout-btn {
-    background-color: #0c5a3e;
+    background-color: var(--primary-color);
     /* Màu xanh đậm */
     color: #fff;
     border: none;
@@ -314,6 +331,6 @@
 }
 
 .checkout-btn:hover {
-    background-color: #083b28;
+    background-color: #0f535f;
     /* Màu xanh đậm hơn */
 }
