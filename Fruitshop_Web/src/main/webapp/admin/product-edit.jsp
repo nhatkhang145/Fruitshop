@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
   <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
     <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+    <%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
       <jsp:useBean id="product" scope="request" class="model.Product" />
 
       <!DOCTYPE html>
@@ -150,8 +151,14 @@
                       <div class="upload-area" onclick="document.getElementById('mainImageInput').click();">
                         <c:choose>
                           <c:when test="${not empty product.image}">
-                            <img src="${pageContext.request.contextPath}/${product.image}" id="mainImagePreview"
-                              alt="Main Image" />
+                            <c:choose>
+                              <c:when test="${fn:startsWith(product.image, 'http')}">
+                                <img src="${product.image}" id="mainImagePreview" alt="Main Image" />
+                              </c:when>
+                              <c:otherwise>
+                                <img src="${pageContext.request.contextPath}/${product.image}" id="mainImagePreview" alt="Main Image" />
+                              </c:otherwise>
+                            </c:choose>
                             <div class="upload-placeholder" id="placeholderIcon" style="display: none;">
                               <i class='bx bx-cloud-upload'></i>
                               <span>Nhấn để tải ảnh lên</span>
@@ -182,7 +189,14 @@
                         <c:if test="${not empty product.productImages}">
                           <c:forEach items="${product.productImages}" var="img">
                             <div class="sub-image-item">
-                              <img src="${pageContext.request.contextPath}/${img.imageUrl}" alt="Ảnh chi tiết" />
+                              <c:choose>
+                                <c:when test="${fn:startsWith(img.imageUrl, 'http')}">
+                                  <img src="${img.imageUrl}" alt="Ảnh chi tiết" />
+                                </c:when>
+                                <c:otherwise>
+                                  <img src="${pageContext.request.contextPath}/${img.imageUrl}" alt="Ảnh chi tiết" />
+                                </c:otherwise>
+                              </c:choose>
                             </div>
                           </c:forEach>
                         </c:if>

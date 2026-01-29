@@ -1,6 +1,7 @@
 <%@page contentType="text/html" pageEncoding="UTF-8" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 <%@ taglib prefix="fmt" uri="http://java.sun.com/jsp/jstl/fmt" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="vi">
 <head>
@@ -90,7 +91,14 @@
                                             <td>${deal.id}</td>
                                             <td>
                                                 <div class="product-info">
-                                                    <img src="${pageContext.request.contextPath}/${deal.product.image}" alt="${deal.product.name}">
+                                                    <c:choose>
+                                                      <c:when test="${fn:startsWith(deal.product.image, 'http')}">
+                                                        <img src="${deal.product.image}" alt="${deal.product.name}">
+                                                      </c:when>
+                                                      <c:otherwise>
+                                                        <img src="${pageContext.request.contextPath}/${deal.product.image}" alt="${deal.product.name}">
+                                                      </c:otherwise>
+                                                    </c:choose>
                                                     <div>
                                                         <p class="product-name">${deal.product.name}</p>
                                                         <p class="product-code">${deal.product.productCode}</p>

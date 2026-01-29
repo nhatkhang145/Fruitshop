@@ -1,5 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ taglib prefix="fn" uri="http://java.sun.com/jsp/jstl/functions" %>
 <!DOCTYPE html>
 <html lang="vi">
 
@@ -67,8 +68,16 @@
                                 <tr>
                                     <td>#${b.id}</td>
                                     <td>
-                                        <img src="${pageContext.request.contextPath}/${b.imageUrl}" alt="banner" class="banner-img"
-                                             onerror="this.src='https://via.placeholder.com/120x60'"/>
+                                        <c:choose>
+                                          <c:when test="${fn:startsWith(b.imageUrl, 'http')}">
+                                            <img src="${b.imageUrl}" alt="banner" class="banner-img"
+                                                 onerror="this.src='https://via.placeholder.com/120x60'"/>
+                                          </c:when>
+                                          <c:otherwise>
+                                            <img src="${pageContext.request.contextPath}/${b.imageUrl}" alt="banner" class="banner-img"
+                                                 onerror="this.src='https://via.placeholder.com/120x60'"/>
+                                          </c:otherwise>
+                                        </c:choose>
                                     </td>
                                     <td>
                                         <strong>${b.title}</strong><br>
